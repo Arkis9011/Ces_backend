@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tableau de Bord | Administration CES</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
+  <style>
+    body { background: #f4f7fa; min-height: 100vh; display: flex; font-family: 'Inter', sans-serif; }
+    .admin-sidebar { width: 280px; background: #003366; color: #fff; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; transition: all 0.3s; }
+    .admin-brand { padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 15px; }
+    .admin-brand img { width: 50px; background: #fff; padding: 4px; border-radius: 8px; }
+    .admin-brand span { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; line-height: 1.2; }
+    .admin-nav { flex: 1; padding: 20px 0; overflow-y: auto; }
+    .admin-nav a, .admin-nav button { display: flex; align-items: center; gap: 12px; padding: 12px 24px; color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.2s; font-weight: 500; font-size: 0.95rem; border: none; background: none; width: 100%; text-align: left; }
+    .admin-nav a:hover, .admin-nav a.active { color: #ffcc00; background: rgba(255,255,255,0.05); border-left: 4px solid #ffcc00; }
+    .admin-main { flex: 1; margin-left: 280px; display: flex; flex-direction: column; min-height: 100vh; }
+    .admin-topbar { height: 70px; background: #fff; border-bottom: 1px solid #e5ebf4; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; position: sticky; top: 0; z-index: 90; }
+    .admin-user { display: flex; align-items: center; gap: 10px; font-weight: 600; color: #333; }
+    .admin-content { padding: 30px; flex: 1; }
+    .admin-card { background: #fff; border-radius: 12px; border: 1px solid #e5ebf4; padding: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 24px; }
+    .admin-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #e5ebf4; }
+    .admin-card-header h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #003366; margin: 0; }
+    .admin-section { display: none; animation: fadeIn 0.3s ease-in; }
+    .admin-section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 991px) { .admin-sidebar { transform: translateX(-100%); } .admin-sidebar.show { transform: translateX(0); } .admin-main { margin-left: 0; } .mobile-menu-btn { display: block; } }
+    .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: #003366; }
+    /* Style pour le menu trois points */
+.dropdown-item {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    font-weight: 500;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.btn-link:focus {
+    box-shadow: none;
+}
+  </style>
+</head>
+<body>
+
+  <aside class="admin-sidebar" id="sidebar">
+    <div class="admin-brand">
+      <img src="{{ asset('assets/images/LOGO.png') }}" alt="Logo CES">
+      <span>Dashboard<br>Administrateur</span>
+    </div>
+    <nav class="admin-nav">
+      @php
+          $activeTab = 'section-actus';
+          if(request()->has('agendas')) $activeTab = 'section-events';
+          elseif(request()->has('videos')) $activeTab = 'section-videos';
+          elseif(request()->has('avis')) $activeTab = 'section-avis';
+      @endphp
+      <a href="#actus" class="nav-btn {{ $activeTab == 'section-actus' ? 'active' : '' }}" data-target="section-actus"><i class="fas fa-newspaper"></i> Actualités</a>
+      <a href="#events" class="nav-btn {{ $activeTab == 'section-events' ? 'active' : '' }}" data-target="section-events"><i class="fas fa-calendar-alt"></i> Agenda</a>
+      <a href="#videos" class="nav-btn {{ $activeTab == 'section-videos' ? 'active' : '' }}" data-target="section-videos"><i class="fas fa-video"></i> Vidéos</a>
+      <a href="#avis" class="nav-btn {{ $activeTab == 'section-avis' ? 'active' : '' }}" data-target="section-avis"><i class="fas fa-balance-scale"></i> Avis rendus</a>
+      
+      <a href="{{ route('profile.edit') }}"><i class="fas fa-user-cog"></i> Mon Profil</a>
+      <a href="{{ url('/') }}" style="margin-top: 30px;"><i class="fas fa-globe"></i> Retour au site</a>
+      
+      <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="text-danger">
+          <i class="fas fa-sign-out-alt"></i> Déconnexion
+        </button>
+      </form>
+    </nav>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <button class="mobile-menu-btn" id="menuToggle"><i class="fas fa-bars"></i></button>
+      <div class="ms-auto admin-user">
+        <i class="fas fa-user-circle fs-4" style="color:#007fff"></i>
+        <span>{{ Auth::user()->name }}</span>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      
+      <section id="section-actus" class="admin-section {{ $activeTab == 'section-actus' ? 'active' : '' }}">
+        <div class="mb-2 text-uppercase fw-bold text-muted" style="font-size: 0.75rem; letter-spacing: 1px;">Gestion des contenus</div>
+
+
+        @if(session('success'))
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Succès',
+                    text: "{{ session('success') }}",
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+            </script>
+        @endif
+
+        @if(session('js_error'))
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erreur',
+                    text: "{!! session('js_error') !!}",
+                });
+            </script>
+        @endif
+
+        @if($errors->any())
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation',
+                    html: '<ul class="text-start">@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
+                });
+            </script>
+        @endif
+
+
+        <h2 class="h4 mb-4 fw-bold" style="color:#003366">Gérer les <span style="color:#007fff">Actualités</span></h2>
+        
+        <div class="admin-card mb-4">
+          <div class="admin-card-header">
+            <i class="fas fa-list fa-lg text-primary"></i>
+            <h3>Liste des publications récentes</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th style="cursor:pointer" onclick="window.location.href='{{ request()->fullUrlWithQuery(['sort' => 'date_publication', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}'">
+                    Date {!! request('sort') == 'date_publication' ? (request('direction') == 'asc' ? '<i class="fas fa-sort-up ms-1"></i>' : '<i class="fas fa-sort-down ms-1"></i>') : '<i class="fas fa-sort ms-1 opacity-25"></i>' !!}
+                  </th>
+                  <th style="cursor:pointer" onclick="window.location.href='{{ request()->fullUrlWithQuery(['sort' => 'titre', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}'">
+                    Titre {!! request('sort') == 'titre' ? (request('direction') == 'asc' ? '<i class="fas fa-sort-up ms-1"></i>' : '<i class="fas fa-sort-down ms-1"></i>') : '<i class="fas fa-sort ms-1 opacity-25"></i>' !!}
+                  </th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+        <tbody>
+    @forelse ($posts as $post)
+        <tr>
+            <td style="width: 120px;">
+                {{ \Carbon\Carbon::parse($post->date_publication)->translatedFormat('d M Y') }}
+            </td>
+            <td>
+                <div class="d-flex align-items-center">
+                    @if($post->image_url)
+                        <img src="{{ $post->image_url }}" alt="" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                    @endif
+                    <span class="fw-bold text-dark">{{ $post->titre }}</span>
+                </div>
+            </td>
+         <td class="text-end">
+    <div class="dropdown">
+        <button class="btn btn-link text-muted p-0" type="button" id="dropdownMenu{{ $post->id }}" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-ellipsis-v"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="dropdownMenu{{ $post->id }}">
+            <li>
+                <a class="dropdown-item text-dark" href="javascript:void(0)" onclick="openViewModal('post', {{ $post->id }})">
+                    <i class="fas fa-eye me-2 text-primary"></i> Voir
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item text-dark" href="javascript:void(0)" onclick="openEditModal('post', {{ $post->id }})">
+                    <i class="fas fa-edit me-2 text-warning"></i> Modifier
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <form action="{{ route('posts.destroy', $post->id) }}" method="POST" onsubmit="confirmDelete(event, this)">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="dropdown-item text-danger">
+                        <i class="fas fa-trash me-2"></i> Supprimer
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</td>
+        </tr>
+    @empty
+        <tr>
+            <td colspan="3" class="text-center py-4 text-muted">
+                <i class="fas fa-folder-open fa-2x mb-2"></i><br>
+                Aucune actualité publiée pour le moment.
+            </td>
+        </tr>
+    @endforelse
+</tbody>
+            </table>
+          </div>
+          <div class="mt-4 px-3">
+              {{ $posts->appends(request()->query())->links('pagination::bootstrap-5') }}
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <i class="fas fa-plus-circle fa-lg text-primary"></i>
+            <h3>Nouvelle publication</h3>
+          </div>
+          
+       <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf <div class="row g-3">
+        <div class="col-md-8">
+            <label class="form-label">Titre de l'actualité</label>
+            <input type="text" name="titre" class="form-control @error('titre') is-invalid @enderror" value="{{ old('titre') }}" placeholder="Entrez le titre principal..." required>
+            @error('titre') <div class="invalid-feedback">{{ $message }}</div> @enderror
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Date</label>
+            <input type="date" name="date_publication" class="form-control @error('date_publication') is-invalid @enderror" value="{{ old('date_publication', date('Y-m-d')) }}" required>
+            @error('date_publication') <div class="invalid-feedback">{{ $message }}</div> @enderror
+        </div>
+    </div>
+
+    <div class="row g-3 mt-1">
+        <div class="col-md-6">
+            <label class="form-label">Image de couverture</label>
+            <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
+            <small class="text-muted">L'image sera hébergée sur ImageKit</small>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Tag / Catégorie</label>
+            <select name="categorie" class="form-select">
+                <option value="Séance plénière">Séance plénière</option>
+                <option value="Audience">Audience</option>
+                <option value="Communiqué">Communiqué</option>
+                <option value="Partenariat">Partenariat</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Résumé de l'article</label>
+        <textarea name="resume" class="form-control @error('resume') is-invalid @enderror" rows="2" placeholder="Un court résumé pour la liste..." required>{{ old('resume') }}</textarea>
+        @error('resume') <div class="invalid-feedback">{{ $message }}</div> @enderror
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Contenu textuel</label>
+        <textarea name="contenu" class="form-control @error('contenu') is-invalid @enderror" rows="8" placeholder="Rédigez l'article complet ici..." required>{{ old('contenu') }}</textarea>
+        @error('contenu') <div class="invalid-feedback">{{ $message }}</div> @enderror
+    </div>
+
+<button type="submit" class="btn px-4 py-2 fw-bold text-white mt-5 " style="background: #003366; border-radius: 8px;">
+    <i class="fas fa-paper-plane me-2"></i> Publier l'actualité
+</button>
+</form>
+        </div>
+      </section>
+
+@include('admin.sections.agenda')
+      @include('admin.sections.videos')
+      @include('admin.sections.avis')
+
+    </div>
+  </main>
+
+  <!-- Modal de Visualisation -->
+  <div class="modal fade" id="viewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header bg-light">
+          <h5 class="modal-title fw-bold" id="viewModalLabel">Détails</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="viewModalBody">
+          <!-- Contenu injecté par JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal d'Édition -->
+  <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header bg-light">
+          <h5 class="modal-title fw-bold" id="editModalLabel">Modifier le contenu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="editModalBody">
+          <!-- Formulaire injecté par JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Navigation par onglets
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+        
+        this.classList.add('active');
+        const targetId = this.getAttribute('data-target');
+        document.getElementById(targetId).classList.add('active');
+
+        if (window.innerWidth <= 991) {
+          document.getElementById('sidebar').classList.remove('show');
+        }
+      });
+    });
+
+    // Toggle Mobile Sidebar
+    document.getElementById('menuToggle').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.toggle('show');
+    });
+
+    // Confirmation de suppression SweetAlert
+    function confirmDelete(event, form) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Êtes-vous sûr ?',
+            text: "Cette action est irréversible !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Oui, supprimer !',
+            cancelButtonText: 'Annuler'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    }
+
+    // --- Fonctions utilitaires pour les Modals ---
+
+    function openViewModal(type, id) {
+        const body = document.getElementById('viewModalBody');
+        body.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-primary" role="status"></div></div>';
+        const modal = new bootstrap.Modal(document.getElementById('viewModal'));
+        modal.show();
+
+        fetch(`/api/${type}s?id=${id}`) // On peut aussi faire une route dédiée show
+            .then(response => response.json())
+            .then(data => {
+                const item = Array.isArray(data) ? data.find(i => i.id == id) : data;
+                let html = '';
+                if (type === 'post') {
+                    html = `
+                        <div class="text-center mb-4">
+                            ${item.image_url ? `<img src="${item.image_url}" class="rounded shadow-sm mb-3" style="max-height: 300px; width: 100%; object-fit: cover;">` : ''}
+                            <h4 class="fw-bold">${item.titre}</h4>
+                            <span class="badge bg-primary mb-2">${item.categorie}</span>
+                            <div class="text-muted small">${item.date_publication}</div>
+                        </div>
+                        <div class="p-3 bg-light rounded mb-3"><strong>Résumé :</strong> ${item.resume}</div>
+                        <div>${item.contenu}</div>
+                    `;
+                } else if (type === 'agenda') {
+                    html = `
+                        <h4 class="fw-bold mb-3">${item.title}</h4>
+                        <div class="mb-3">
+                            <i class="fas fa-calendar me-2"></i> ${item.date} | <i class="fas fa-clock me-2"></i> ${item.heure || '--:--'}
+                        </div>
+                        <div class="mb-3"><i class="fas fa-map-marker-alt me-2"></i> ${item.lieu || 'Non spécifié'}</div>
+                        <div class="p-3 bg-light rounded">${item.summary}</div>
+                    `;
+                } else if (type === 'video') {
+                    html = `
+                        <h4 class="fw-bold mb-3">${item.title}</h4>
+                        <div class="ratio ratio-16x9 mb-3">
+                           <iframe src="${item.url.replace('watch?v=', 'embed/')}" allowfullscreen></iframe>
+                        </div>
+                        <p>${item.description || 'Aucune description'}</p>
+                    `;
+                } else if (type === 'avi') {
+                    html = `
+                        <h4 class="fw-bold mb-3">${item.titre}</h4>
+                        <div class="mb-3 text-muted">Commission : ${item.commission}</div>
+                        <div class="p-3 bg-light rounded mb-3">${item.resume}</div>
+                        <a href="${item.pdf_url}" target="_blank" class="btn btn-danger"><i class="fas fa-file-pdf me-2"></i> Voir le PDF</a>
+                    `;
+                }
+                body.innerHTML = html;
+            });
+    }
+
+    function openEditModal(type, id) {
+        const body = document.getElementById('editModalBody');
+        body.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-primary" role="status"></div></div>';
+        const modal = new bootstrap.Modal(document.getElementById('editModal'));
+        modal.show();
+
+        fetch(`/api/${type}s?id=${id}`)
+            .then(response => response.json())
+            .then(data => {
+                const item = Array.isArray(data) ? data.find(i => i.id == id) : data;
+                let formHtml = '';
+                
+                if (type === 'post') {
+                    formHtml = `
+                        <form action="/posts/${item.id}" method="POST" enctype="multipart/form-data">
+                            @csrf @method('PUT')
+                            <div class="mb-3">
+                                <label class="form-label">Titre</label>
+                                <input type="text" name="titre" class="form-control" value="${item.titre}" required>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Date</label>
+                                    <input type="date" name="date_publication" class="form-control" value="${item.date_publication}" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Catégorie</label>
+                                    <select name="categorie" class="form-select">
+                                        <option value="Séance plénière" ${item.categorie == 'Séance plénière' ? 'selected' : ''}>Séance plénière</option>
+                                        <option value="Audience" ${item.categorie == 'Audience' ? 'selected' : ''}>Audience</option>
+                                        <option value="Communiqué" ${item.categorie == 'Communiqué' ? 'selected' : ''}>Communiqué</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Résumé</label>
+                                <textarea name="resume" class="form-control" rows="2">${item.resume}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Contenu</label>
+                                <textarea name="contenu" class="form-control" rows="5">${item.contenu}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Changer l'image</label>
+                                <input type="file" name="image" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Enregistrer les modifications</button>
+                        </form>
+                    `;
+                } else if (type === 'agenda') {
+                    formHtml = `
+                        <form action="/agendas/${item.id}" method="POST">
+                            @csrf @method('PUT')
+                            <div class="mb-3">
+                                <label class="form-label">Titre</label>
+                                <input type="text" name="title" class="form-control" value="${item.title}" required>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Date</label>
+                                    <input type="date" name="date" class="form-control" value="${item.date}" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Heure</label>
+                                    <input type="time" name="heure" class="form-control" value="${item.heure}">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Lieu</label>
+                                <input type="text" name="lieu" class="form-control" value="${item.lieu}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Résumé</label>
+                                <textarea name="summary" class="form-control" rows="3">${item.summary}</textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Mettre à jour</button>
+                        </form>
+                    `;
+                } else if (type === 'video') {
+                    formHtml = `
+                        <form action="/videos/${item.id}" method="POST" enctype="multipart/form-data">
+                            @csrf @method('PUT')
+                            <div class="mb-3">
+                                <label class="form-label">Titre</label>
+                                <input type="text" name="title" class="form-control" value="${item.title}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">URL Vidéo</label>
+                                <input type="url" name="url" class="form-control" value="${item.url}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Description</label>
+                                <textarea name="description" class="form-control" rows="3">${item.description}</textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Mettre à jour</button>
+                        </form>
+                    `;
+                } else if (type === 'avi') {
+                    formHtml = `
+                        <form action="/avis/${item.id}" method="POST" enctype="multipart/form-data">
+                            @csrf @method('PUT')
+                            <div class="mb-3">
+                                <label class="form-label">Titre</label>
+                                <input type="text" name="titre" class="form-control" value="${item.titre}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Commission</label>
+                                <select name="commission" class="form-select">
+                                    <option value="Commission Économique" ${item.commission == 'Commission Économique' ? 'selected' : ''}>Commission Économique</option>
+                                    <option value="Commission Sociale" ${item.commission == 'Commission Sociale' ? 'selected' : ''}>Commission Sociale</option>
+                                    <option value="Commission Environnementale" ${item.commission == 'Commission Environnementale' ? 'selected' : ''}>Commission Environnementale</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Résumé</label>
+                                <textarea name="resume" class="form-control" rows="2">${item.resume}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Modifier le PDF</label>
+                                <input type="file" name="pdf_file" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
+                        </form>
+                    `;
+                }
+                body.innerHTML = formHtml;
+            });
+    }
+  </script>
+
+
+
+@if(session('js_error'))
+<script>
+    // Affiche une alerte Windows
+    alert("{!! session('js_error') !!}");
+    
+    // Affiche l'erreur en rouge dans la console (F12)
+    console.error("DEBUG LARAVEL : {!! session('js_error') !!}");
+</script>
+@endif
+
+@if(session('success'))
+<script>
+    console.log("SUCCÈS : {!! session('success') !!}");
+</script>
+@endif
+</body>
+</html>
