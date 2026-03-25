@@ -37,7 +37,7 @@
 
         <!-- Menu avec mega-dropdown -->
         <li class="site-nav-item has-mega">
-          <a href="#" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
+          <a href="{{ url('apercu') }}" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
             À propos du CES <i class="fas fa-chevron-down" aria-hidden="true"></i>
           </a>
           <div class="site-mega-dropdown" role="region" aria-label="Sous-menu À propos">
@@ -65,7 +65,7 @@
 
         <!-- Menu simple dropdown -->
         <li class="site-nav-item has-dropdown">
-          <a href="#" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
+          <a href="{{ url('avis') }}" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
             Travaux & Avis <i class="fas fa-chevron-down" aria-hidden="true"></i>
           </a>
           <ul class="site-dropdown" role="region" aria-label="Sous-menu Travaux">
@@ -75,7 +75,7 @@
         </li>
 
         <li class="site-nav-item has-dropdown">
-          <a href="#" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
+          <a href="{{ url('actualites') }}" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
             Actualités <i class="fas fa-chevron-down" aria-hidden="true"></i>
           </a>
           <ul class="site-dropdown" role="region" aria-label="Sous-menu Actualités">
@@ -87,7 +87,8 @@
 
         <li class="site-nav-item"><a href="{{ url('contact') }}" class="site-nav-link">Contact</a></li>
 
-        <!-- CTA recherche -->
+        <!-- CTA recherche commenté -->
+        {{-- 
         <li class="site-nav-item search-item">
           <button class="site-nav-link search-toggle" aria-label="Ouvrir la recherche" aria-expanded="false">
             <i class="fas fa-search" aria-hidden="true"></i>
@@ -100,6 +101,7 @@
             </form>
           </div>
         </li>
+        --}}
       </ul>
     </nav>
   </div>
@@ -207,7 +209,7 @@
         </div>
         <h2 class="section-title" style="font-family:'Playfair Display'; font-size:2.2rem; font-weight:700;">Nos <span style="color:var(--bleu);">Actualités</span></h2>
       </div>
-      <a href="#" class="see-all btn btn-outline-primary" style="border-color:var(--bleu-fonce); color:var(--bleu-fonce); font-weight:600;">Toutes les actualités <i class="fas fa-arrow-right"></i></a>
+      <a href="{{ url('actualites') }}" class="see-all btn btn-outline-primary" style="border-color:var(--bleu-fonce); color:var(--bleu-fonce); font-weight:600;">Toutes les actualités <i class="fas fa-arrow-right"></i></a>
     </div>
 
     <div class="row g-4">
@@ -235,7 +237,7 @@
                 {{ $post->titre }}
               </h3>
 
-              <a href="#" class="news-link text-primary fw-semibold">Lire l'article <i class="fas fa-arrow-right"></i></a>
+              <a href="{{ url('actualites') }}" class="news-link text-primary fw-semibold">Lire l'article <i class="fas fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -258,7 +260,7 @@
         </div>
         <h2 class="section-title" style="font-family:'Playfair Display', serif; font-size:2.2rem; font-weight:700;">Nos <span style="color:var(--bleu);">Avis</span></h2>
       </div>
-      <a href="#" class="btn btn-outline-primary" style="border-color:var(--bleu-fonce); color:var(--bleu-fonce); font-weight:600; border-width:2px; padding:8px 20px;">Tous les avis <i class="fas fa-arrow-right ms-2"></i></a>
+      <a href="{{ url('avis') }}" class="btn btn-outline-primary" style="border-color:var(--bleu-fonce); color:var(--bleu-fonce); font-weight:600; border-width:2px; padding:8px 20px;">Tous les avis <i class="fas fa-arrow-right ms-2"></i></a>
     </div>
 
     <div class="row g-4">
@@ -371,7 +373,7 @@
         </div>
         <h2 class="section-title" style="font-family:'Playfair Display', serif; font-size:2.2rem; font-weight:700;">Le <span style="color:var(--bleu);">Bureau</span></h2>
       </div>
-      <a href="{{ url('membre_bureau') }}" class="btn btn-outline-primary" style="border-color:var(--bleu-fonce); color:var(--bleu-fonce); border-width:2px; padding:8px 20px; font-weight:600;">Voir tous les membres <i class="fas fa-arrow-right ms-2"></i></a>
+      <a href="{{ url('bureau') }}" class="btn btn-outline-primary" style="border-color:var(--bleu-fonce); color:var(--bleu-fonce); border-width:2px; padding:8px 20px; font-weight:600;">Voir tous les membres <i class="fas fa-arrow-right ms-2"></i></a>
     </div>
 
     <!-- Grille des membres -->
@@ -485,7 +487,7 @@
     <div class="row g-4">
       <!-- Commission 1 -->
       <div class="col-md-3">
-        <a href="{{ url('commissions-du-ces') }}" class="commission-card d-block text-center p-4" style="background:var(--blanc); border:1px solid #e5ebf4; border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--blanc)'; this.style.borderColor='#e5ebf4'; this.querySelector('.commission-icon').style.background='var(--bleu-clair)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--texte)';">
+        <a href="{{ url('commissions') }}" class="commission-card d-block text-center p-4" style="background:var(--blanc); border:1px solid #e5ebf4; border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--blanc)'; this.style.borderColor='#e5ebf4'; this.querySelector('.commission-icon').style.background='var(--bleu-clair)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--texte)';">
           <div class="commission-icon mx-auto mb-3" style="width:64px; height:64px; border-radius:50%; background:var(--bleu-clair); display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--bleu-fonce); transition:all 0.7s ease;"><i class="fas fa-chart-line"></i></div>
           <h4 class="h6 fw-semibold" style="color:var(--texte); transition:color 0.7s ease;">Commission économique et financière</h4>
         </a>
@@ -493,7 +495,7 @@
 
       <!-- Commission 2 -->
       <div class="col-md-3">
-        <a href="{{ url('commissions-du-ces') }}" class="commission-card d-block text-center p-4" style="background:var(--blanc); border:1px solid #e5ebf4; border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--blanc)'; this.style.borderColor='#e5ebf4'; this.querySelector('.commission-icon').style.background='var(--bleu-clair)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--texte)';">
+        <a href="{{ url('commissions') }}" class="commission-card d-block text-center p-4" style="background:var(--blanc); border:1px solid #e5ebf4; border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--blanc)'; this.style.borderColor='#e5ebf4'; this.querySelector('.commission-icon').style.background='var(--bleu-clair)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--texte)';">
           <div class="commission-icon mx-auto mb-3" style="width:64px; height:64px; border-radius:50%; background:var(--bleu-clair); display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--bleu-fonce); transition:all 0.7s ease;"><i class="fas fa-tractor"></i></div>
           <h4 class="h6 fw-semibold" style="color:var(--texte); transition:color 0.7s ease;">Agriculture et développement rural</h4>
         </a>
@@ -501,7 +503,7 @@
 
       <!-- Commission 3 -->
       <div class="col-md-3">
-        <a href="{{ url('commissions-du-ces') }}" class="commission-card d-block text-center p-4" style="background:var(--blanc); border:1px solid #e5ebf4; border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--blanc)'; this.style.borderColor='#e5ebf4'; this.querySelector('.commission-icon').style.background='var(--bleu-clair)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--texte)';">
+        <a href="{{ url('commissions') }}" class="commission-card d-block text-center p-4" style="background:var(--blanc); border:1px solid #e5ebf4; border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--blanc)'; this.style.borderColor='#e5ebf4'; this.querySelector('.commission-icon').style.background='var(--bleu-clair)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--texte)';">
           <div class="commission-icon mx-auto mb-3" style="width:64px; height:64px; border-radius:50%; background:var(--bleu-clair); display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--bleu-fonce); transition:all 0.7s ease;"><i class="fas fa-heart-pulse"></i></div>
           <h4 class="h6 fw-semibold" style="color:var(--texte); transition:color 0.7s ease;">Santé, affaires sociales et culturelles</h4>
         </a>
@@ -509,7 +511,7 @@
 
       <!-- Commission 4 -->
       <div class="col-md-3">
-        <a href="{{ url('commissions-du-ces') }}" class="commission-card d-block text-center p-4" style="background:var(--blanc); border:1px solid #e5ebf4; border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--blanc)'; this.style.borderColor='#e5ebf4'; this.querySelector('.commission-icon').style.background='var(--bleu-clair)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--texte)';">
+        <a href="{{ url('commissions') }}" class="commission-card d-block text-center p-4" style="background:var(--blanc); border:1px solid #e5ebf4; border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--blanc)'; this.style.borderColor='#e5ebf4'; this.querySelector('.commission-icon').style.background='var(--bleu-clair)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--texte)';">
           <div class="commission-icon mx-auto mb-3" style="width:64px; height:64px; border-radius:50%; background:var(--bleu-clair); display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--bleu-fonce); transition:all 0.7s ease;"><i class="fas fa-scale-balanced"></i></div>
           <h4 class="h6 fw-semibold" style="color:var(--texte); transition:color 0.7s ease;">Relations extérieures, intégrations, questions juridiques et administratives</h4>
         </a>
@@ -517,7 +519,7 @@
 
       <!-- Commission 5 -->
       <div class="col-md-3">
-        <a href="{{ url('commissions-du-ces') }}" class="commission-card d-block text-center p-4" style="background:var(--blanc); border:1px solid #e5ebf4; border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--blanc)'; this.style.borderColor='#e5ebf4'; this.querySelector('.commission-icon').style.background='var(--bleu-clair)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--texte)';">
+        <a href="{{ url('commissions') }}" class="commission-card d-block text-center p-4" style="background:var(--blanc); border:1px solid #e5ebf4; border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--blanc)'; this.style.borderColor='#e5ebf4'; this.querySelector('.commission-icon').style.background='var(--bleu-clair)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--texte)';">
           <div class="commission-icon mx-auto mb-3" style="width:64px; height:64px; border-radius:50%; background:var(--bleu-clair); display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--bleu-fonce); transition:all 0.7s ease;"><i class="fas fa-leaf"></i></div>
           <h4 class="h6 fw-semibold" style="color:var(--texte); transition:color 0.7s ease;">Environnement et ressources naturelles</h4>
         </a>
@@ -525,7 +527,7 @@
 
       <!-- Commission 6 -->
       <div class="col-md-3">
-        <a href="{{ url('commissions-du-ces') }}" class="commission-card d-block text-center p-4" style="background:var(--blanc); border:1px solid #e5ebf4; border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--blanc)'; this.style.borderColor='#e5ebf4'; this.querySelector('.commission-icon').style.background='var(--bleu-clair)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--texte)';">
+        <a href="{{ url('commissions') }}" class="commission-card d-block text-center p-4" style="background:var(--blanc); border:1px solid #e5ebf4; border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--blanc)'; this.style.borderColor='#e5ebf4'; this.querySelector('.commission-icon').style.background='var(--bleu-clair)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--texte)';">
           <div class="commission-icon mx-auto mb-3" style="width:64px; height:64px; border-radius:50%; background:var(--bleu-clair); display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--bleu-fonce); transition:all 0.7s ease;"><i class="fas fa-road"></i></div>
           <h4 class="h6 fw-semibold" style="color:var(--texte); transition:color 0.7s ease;">Infrastructures et aménagement du territoire</h4>
         </a>
@@ -533,7 +535,7 @@
 
       <!-- Commission 7 -->
       <div class="col-md-3">
-        <a href="{{ url('commissions-du-ces') }}" class="commission-card d-block text-center p-4" style="background:var(--blanc); border:1px solid #e5ebf4; border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--blanc)'; this.style.borderColor='#e5ebf4'; this.querySelector('.commission-icon').style.background='var(--bleu-clair)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--texte)';">
+        <a href="{{ url('commissions') }}" class="commission-card d-block text-center p-4" style="background:var(--blanc); border:1px solid #e5ebf4; border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--blanc)'; this.style.borderColor='#e5ebf4'; this.querySelector('.commission-icon').style.background='var(--bleu-clair)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--texte)';">
           <div class="commission-icon mx-auto mb-3" style="width:64px; height:64px; border-radius:50%; background:var(--bleu-clair); display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--bleu-fonce); transition:all 0.7s ease;"><i class="fas fa-graduation-cap"></i></div>
           <h4 class="h6 fw-semibold" style="color:var(--texte); transition:color 0.7s ease;">Éducation, Formation et Emploi</h4>
         </a>
@@ -541,7 +543,7 @@
 
       <!-- Commission 8 (spéciale) -->
       <div class="col-md-3">
-        <a href="{{ url('commissions-du-ces') }}" class="commission-card d-block text-center p-4" style="border:2px dashed var(--bleu); background:var(--bleu-clair); border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--bleu-clair)'; this.style.borderColor='var(--bleu)'; this.querySelector('.commission-icon').style.background='var(--blanc)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--bleu-fonce)';">
+        <a href="{{ url('commissions') }}" class="commission-card d-block text-center p-4" style="border:2px dashed var(--bleu); background:var(--bleu-clair); border-radius:12px; transition:all 0.7s ease; text-decoration:none;" onmouseover="this.style.background='var(--bleu-fonce)'; this.style.borderColor='var(--bleu-fonce)'; this.querySelector('.commission-icon').style.background='rgba(255,255,255,0.15)'; this.querySelector('.commission-icon').style.color='var(--jaune)'; this.querySelector('h4').style.color='#fff';" onmouseout="this.style.background='var(--bleu-clair)'; this.style.borderColor='var(--bleu)'; this.querySelector('.commission-icon').style.background='var(--blanc)'; this.querySelector('.commission-icon').style.color='var(--bleu-fonce)'; this.querySelector('h4').style.color='var(--bleu-fonce)';">
           <div class="commission-icon mx-auto mb-3" style="width:64px; height:64px; border-radius:50%; background:var(--blanc); display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--bleu-fonce); transition:all 0.7s ease;"><i class="fas fa-plus"></i></div>
           <h4 class="h6 fw-semibold" style="color:var(--bleu-fonce); transition:color 0.7s ease;">Voir toutes les commissions</h4>
         </a>
@@ -550,75 +552,61 @@
   </div>
 </section>
 
-<!-- ===== AGENDA & ÉVÉNEMENTS ===== -->
-<section class="agenda-section py-5" style="background: #fdfdfe; border-top: 1px solid #f0f4f8;">
+<!-- ===== AGENDA ===== -->
+<section class="agenda-section py-5" style="background: #f8fafc; border-top: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
   <div class="container">
-    <!-- En-tête harmonisé -->
     <div class="d-flex flex-wrap align-items-end justify-content-between mb-5">
       <div>
         <div class="d-flex align-items-center gap-2 mb-2">
           <span style="width:24px; height:2px; background:var(--rouge);"></span>
-          <span style="color:var(--rouge); font-weight:700; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em;">Calendrier Institutionnel</span>
+          <span class="text-uppercase small fw-bold" style="color:var(--rouge); letter-spacing:0.15em;">Prochainement</span>
         </div>
-        <h2 class="section-title" style="font-family:'Playfair Display', serif; font-size:2.2rem; font-weight:700;">Notre <span>Agenda</span></h2>
+        <h2 class="section-title" style="font-family:'Playfair Display', serif; font-size:2.2rem; font-weight:700;">Notre <span style="color:var(--bleu);">Agenda</span></h2>
       </div>
-      <a href="{{ url('agenda') }}" class="btn btn-outline-primary" style="border-color:var(--bleu-fonce); color:var(--bleu-fonce); font-weight:600; border-width:2px; padding:8px 20px; border-radius:8px;">Voir tout l'agenda <i class="fas fa-arrow-right ms-2"></i></a>
+      <a href="{{ url('agenda') }}" class="btn btn-outline-primary" style="border-color:var(--bleu-fonce); color:var(--bleu-fonce); font-weight:600; border-width:2px; padding:8px 20px;">Tout l'agenda <i class="fas fa-arrow-right ms-2"></i></a>
     </div>
 
-    <!-- Contenu Agenda -->
-    <div class="row g-4 align-items-stretch">
-      <!-- Zone Texte/Description -->
-      <div class="col-lg-4">
-        <div class="p-4 h-100 d-flex flex-column justify-content-center" style="background:var(--bleu-clair); border-radius:16px; border:1px solid rgba(0, 127, 255, 0.1);">
-          <p class="text-muted mb-0" style="font-size:1.05rem; line-height:1.7;">
-            Suivez les activités du Conseil à travers ses séances plénières, ses réunions de commissions et ses événements publics.
-          </p>
-          <hr class="my-4 opacity-25">
-          <div class="d-flex align-items-center gap-3 text-primary fw-bold">
-            <i class="fas fa-circle-info fa-lg"></i>
-            <span style="font-size:0.9rem;">Mise à jour en temps réel</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Prochain Événement (Style Épuré) -->
+    <div class="row align-items-center g-4">
+      {{-- Colonne Carte --}}
       <div class="col-lg-8">
+        {{-- Affichage du prochain événement s'il y en a un --}}
         @if($agendas->count() > 0)
           @php $prochain = $agendas->first(); @endphp
-          <div class="agenda-card position-relative p-4 h-100" style="border:1px solid #e8eef6; border-radius:16px; background:#fff; box-shadow:0 4px 20px rgba(0,0,0,0.05); transition:all 0.3s ease; overflow:hidden;">
-            
-            <div class="row align-items-center g-4">
-              <!-- Date Badge -->
-              <div class="col-md-auto text-center">
-                <div class="d-inline-flex flex-column align-items-center justify-content-center shadow-sm" style="width:100px; height:100px; background:#fff; border:1px solid #eee; border-radius:20px;">
-                  <span class="fw-bold" style="font-size:2.2rem; line-height:1; color: var(--bleu-fonce);">{{ \Carbon\Carbon::parse($prochain->date)->translatedFormat('d') }}</span>
-                  <span class="text-muted text-uppercase fw-semibold" style="font-size:0.8rem; letter-spacing:1px;">{{ \Carbon\Carbon::parse($prochain->date)->translatedFormat('M') }}</span>
-                </div>
+          <div class="agenda-card-sober reveal" style="background:var(--blanc); border-radius:16px; border:1px solid #e2e8f0; overflow:hidden; transition:all 0.5s ease; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);" onmouseover="this.style.borderColor='var(--bleu)'; this.style.boxShadow='0 20px 25px -5px rgba(0,0,0,0.1)';" onmouseout="this.style.borderColor='#e2e8f0'; this.style.boxShadow='0 4px 6px -1px rgba(0,0,0,0.05)';">
+            <div class="row g-0">
+              <div class="col-md-3 d-flex flex-column align-items-center justify-content-center p-4 text-center" style="background: #f1f5f9; border-right: 1px solid #e2e8f0;">
+                <div class="fs-1 fw-light mb-0" style="color: var(--bleu-fonce); line-height: 1;">{{ \Carbon\Carbon::parse($prochain->date)->translatedFormat('d') }}</div>
+                <div class="text-uppercase fw-semibold" style="color: var(--bleu-fonce); letter-spacing: 2px; font-size: 0.9rem;">{{ \Carbon\Carbon::parse($prochain->date)->translatedFormat('F') }}</div>
+                <div class="mt-2 small text-muted">{{ \Carbon\Carbon::parse($prochain->date)->translatedFormat('Y') }}</div>
               </div>
-
-              <!-- Infos -->
-              <div class="col-md">
-                <div class="d-flex flex-wrap gap-3 mb-3">
-                  <span class="badge bg-light text-primary px-3 py-2" style="border-radius:12px; font-weight:600;">
-                    <i class="far fa-clock me-2"></i> {{ $prochain->heure ?? '--:--' }}
-                  </span>
-                  <span class="badge bg-light text-muted px-3 py-2" style="border-radius:12px; font-weight:600;">
-                    <i class="fas fa-location-dot me-2 text-primary"></i> {{ $prochain->lieu ?? 'Siège du CES' }}
-                  </span>
+              <div class="col-md-9 p-4 p-md-5 d-flex flex-column justify-content-center">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <span class="badge" style="background: var(--bleu-clair); color: var(--bleu-fonce); font-weight: 600; padding: 6px 12px; border-radius: 4px;">{{ \Carbon\Carbon::parse($prochain->date)->translatedFormat('H:i') }}</span>
+                  <span class="text-muted small"><i class="fas fa-location-dot me-1"></i> Siège du CES, Kinshasa</span>
                 </div>
-                <h3 class="h4 mb-0" style="font-family:'Playfair Display', serif; font-weight:700; color:var(--texte); line-height:1.4;">
-                  {{ $prochain->title }}
-                </h3>
-                <p class="text-muted mt-2 mb-0" style="font-size:0.95rem;">{{ Str::limit($prochain->summary, 120) }}</p>
+                <h3 class="h4 fw-bold mb-3" style="font-family:'Inter', sans-serif; color: var(--texte); line-height: 1.4;">{{ $prochain->title }}</h3>
+                <div class="mt-auto pt-3 border-top" style="border-color: #f1f5f9 !important;">
+                  <a href="{{ url('agenda') }}" class="d-inline-flex align-items-center gap-2 text-decoration-none fw-bold" style="color: var(--bleu-fonce);">
+                    En savoir plus <i class="fas fa-chevron-right small"></i>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         @else
-          <div class="empty-agenda p-5 text-center d-flex flex-column align-items-center justify-content-center h-100" style="background:#f8f9fa; border-radius:16px; border:2px dashed #ddd;">
-             <i class="fas fa-calendar-alt fa-3x mb-3 text-muted opacity-25"></i>
-             <p class="text-muted fw-semibold">Aucun événement spécial à l'horizon.</p>
+          <div class="text-center py-5 px-4" style="background:var(--blanc); border-radius:16px; border:1px solid #e2e8f0;">
+            <div class="mb-3"><i class="far fa-calendar-check" style="font-size: 2.5rem; color: #cbd5e1;"></i></div>
+            <h5 class="fw-semibold text-muted">Aucun événement à venir</h5>
+            <p class="text-muted small">Revenez bientôt pour consulter les prochaines plénières.</p>
           </div>
         @endif
+      </div>
+
+      {{-- Colonne Texte Informatif --}}
+      <div class="col-lg-4">
+        <div class="ps-lg-4 py-4" style="border-left: 1px solid #e2e8f0;">
+          <p class="mb-0 text-muted" style="font-size: 1.05rem; line-height: 1.6;">Consultez le programme des séances plénières, réunions et événements institutionnels du CES.</p>
+        </div>
       </div>
     </div>
   </div>

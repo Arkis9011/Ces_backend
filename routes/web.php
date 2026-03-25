@@ -20,6 +20,18 @@ Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/apercu', function () { return view('public.apercu'); })->name('apercu');
 Route::get('/missions', function () { return view('public.missions'); })->name('missions');
 Route::get('/contact', function () { return view('public.contact'); })->name('contact');
+Route::get('/partenaires', function () { return view('public.partenaires'); })->name('partenaires');
+Route::get('/textes', function () { return view('public.textes'); })->name('textes');
+Route::get('/bureau', function () { return view('public.bureau'); })->name('bureau');
+Route::get('/assemblee', function () { return view('public.assemblee'); })->name('assemblee');
+Route::get('/commissions', function () { return view('public.commissions'); })->name('commissions');
+Route::get('/fonctionnement', function () { return view('public.fonctionnement'); })->name('fonctionnement');
+Route::get('/avis', [PublicController::class, 'avis'])->name('avis');Route::get('/publications', function () { return view('public.publications'); })->name('publications');
+Route::get('/actualites', [PublicController::class, 'actualites'])->name('actualites');
+Route::get('/agenda', [PublicController::class, 'agenda'])->name('agenda');
+Route::get('/contact', function () { return view('public.contact'); })->name('contact');
+Route::get('/president', [PublicController::class, 'president'])->name('president');
+Route::get('/mediatheque', [PublicController::class, 'mediatheque'])->name('mediatheque');
 
 /**
  * ROUTES API PUBLIQUES

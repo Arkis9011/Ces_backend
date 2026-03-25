@@ -115,84 +115,82 @@
   <div class="hero-inner">
     <div class="breadcrumb">
       <a href="{{ url('/') }}">Accueil</a><i class="fas fa-chevron-right"></i>
-      Le CES <i class="fas fa-chevron-right"></i><span>Missions</span>
+      Organisation <i class="fas fa-chevron-right"></i><span>Commissions</span>
     </div>
-    <div class="hero-tag"><i class="fas fa-bullseye"></i> Rôle constitutionnel</div>
-    <h1>Missions</h1>
-    <p>Le CES conseille les pouvoirs publics sur les grandes orientations qui engagent l'avenir de la Nation congolaise.</p>
+    <h1>Nos <em>Commissions</em> permanentes</h1>
+    <p>Les 7 commissions permanentes du CES sont les organes techniques chargés d'examiner les questions relevant de leurs domaines de compétence.</p>
   </div>
 </div>
 
 <!-- CONTENU PRINCIPAL AVEC BOOTSTRAP -->
 <div class="content-wrap">
-  <div class="row g-5">
-    <!-- Colonne principale -->
-    <div class="col-lg-8">
-      <div class="s-tag">Attributions</div>
-      <h2 class="s-title">Ce que fait <span>le CES</span></h2>
-      <div class="prose">
-        <p>Tel que précisé par la Constitution et dans la loi organique, Le Conseil économique et social est une asseùblée consultative dotée de la personnalité juridique. Il a pour mission de donner des avis consultatifs sur les questions économiques et sociales lui soumises par le Président de la République, l’Assemblée nationale, le Sénat et le Gouvernement.Il peut, de sa propre initiative, appeler l’attention du Gouvernement et des provinces sur les réformes qui lui paraissent de nature à favoriser le développement économique et social du pays. <br> 
-        De ce fait, Le CES est chargé de :
-          <h4><strong>Analyse et Suivi</strong></h4>
-            <ul>
-              <li>Analyser la conjoncture économique et sociale du pays : Le CES examine de près les tendances actuelles du marché et du climat social pour anticiper les défis de demain.</li>
-              <li>Assurer le suivi des politiques économiques et sociales nationales, provinciales et internationales, ainsi que les répercussions sur la vie des Congolais.</li>
-            </ul>
-          <h4><strong>Information et Orientation</strong></h4>
-            <ul>
-              <li>Contribuer à l'information des citoyens sur l'évolution de la situation économique et sociale.</li>
-              <li>Donner son avis sur les orientations générales de l'économie nationale : Le CES émet des avis consultatifs sur les grandes directions stratégiques prises pour l'économie nationale.</li>
-            </ul>
-          <h4><strong>Propositions et Collaboration</strong></h4>
-          <ul>
-            <li>Formuler des propositions dans les divers domaines économique et social.</li>
-            <li>Favoriser la coopération entre les partenaires économiques et sociaux et contribuer à l'élaboration d'une charte sociale commune.</li>
-          </ul>
-          <h4><strong>Etudes et Transparence</strong></h4>
-          <ul>
-            <li>Publier un rapport annuel sur la situation économique et sociale</li>
-            <li>Collecter et constituer une banque des données sur la situation économique et sociale.</li>
-            <li>Réaliser des études et recherches dans le domaine relevant de l'exercice de ses attributions.</li>
-          </ul>
-        </p>
+  <div class="container">
+    <div class="s-tag">Organes techniques</div>
+    <h2 class="s-title">Les <span>7 Commissions</span></h2>
+    <p class="prose mb-5" style="max-width:700px;">Chaque commission est composée de conseillers spécialisés dans le domaine concerné. Elle désigne en son sein un président, un rapporteur et instruit les questions qui lui sont soumises par l'Assemblée ou dont elle s'autosaisit.</p>
+
+    <!-- Grille des commissions avec Bootstrap -->
+    <div class="row g-4">
+      <!-- Commission 1 -->
+      <div class="col-md-6">
+        <div class="comm-card reveal h-100">
+          <div class="comm-icon"><i class="fas fa-chart-line"></i></div>
+          <h4>Commission économique et financière</h4>
+          <p>Traite des questions relatives à la politique économique, fiscale, budgétaire, monétaire et financière. Elle suit l'évolution de la conjoncture nationale et internationale et formule des recommandations au gouvernement.</p>
+        </div>
+      </div>
+      <!-- Commission 2 -->
+      <div class="col-md-6">
+        <div class="comm-card reveal h-100">
+          <div class="comm-icon"><i class="fas fa-tractor"></i></div>
+          <h4>Agriculture et développement rural</h4>
+          <p>Examine les politiques agricoles, l'élevage, la pêche et le développement des zones rurales. Elle contribue à la sécurité alimentaire et à la valorisation du potentiel agricole immense de la RDC.</p>
+        </div>
+      </div>
+      <!-- Commission 3 -->
+      <div class="col-md-6">
+        <div class="comm-card reveal h-100">
+          <div class="comm-icon"><i class="fas fa-heart-pulse"></i></div>
+          <h4>Santé, affaires sociales et culturelles</h4>
+          <p>Couvre la santé publique, la protection sociale, le logement, la culture et les arts. Elle formule des avis sur les politiques sociales destinées à améliorer le bien-être des populations congolaises.</p>
+        </div>
+      </div>
+      <!-- Commission 4 -->
+      <div class="col-md-6">
+        <div class="comm-card reveal h-100">
+          <div class="comm-icon"><i class="fas fa-scale-balanced"></i></div>
+          <h4>Relations extérieures, intégrations, questions juridiques et administratives</h4>
+          <p>Suit les questions de droit, d'administration publique, de diplomatie et d'intégration régionale. Elle examine les traités et accords internationaux ayant un impact socio-économique.</p>
+        </div>
+      </div>
+      <!-- Commission 5 -->
+      <div class="col-md-6">
+        <div class="comm-card reveal h-100">
+          <div class="comm-icon"><i class="fas fa-leaf"></i></div>
+          <h4>Environnement, Ressources naturelles et Tourisme</h4>
+          <p>Traite de l'écologie, de la forêt équatoriale, des mines, du pétrole et du développement durable. La RDC étant dotée d'un patrimoine naturel exceptionnel, cette commission joue un rôle stratégique.</p>
+        </div>
+      </div>
+      <!-- Commission 6 -->
+      <div class="col-md-6">
+        <div class="comm-card reveal h-100">
+          <div class="comm-icon"><i class="fas fa-road"></i></div>
+          <h4>Infrastructures et aménagement du territoire</h4>
+          <p>Examine les politiques de transport, d'énergie, de télécommunications, d'urbanisme et d'aménagement du territoire national, essentielles au désenclavement du vaste territoire congolais.</p>
+        </div>
+      </div>
+      <!-- Commission 7 : centrée sur la ligne suivante -->
+      <div class="col-md-6 offset-md-3">
+        <div class="comm-card reveal h-100">
+          <div class="comm-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h4>Éducation, Formation, Travail et Emploi</h4>
+          <p>Couvre l'enseignement primaire, secondaire et supérieur, la formation professionnelle et la politique de l'emploi. Elle vise à renforcer le capital humain et à réduire le chômage en RDC.</p>
+        </div>
       </div>
     </div>
-
-    <!-- Sidebar droite -->
-    <aside class="col-lg-4">
-      <div class="sidebar-box">
-        <h4><i class="fas fa-gavel"></i> Base légale</h4>
-        <ul>
-          <li><i class="fas fa-file-alt"></i> Constitution du 18 février 2006</li>
-          <li><i class="fas fa-file-alt"></i> Loi organique n° 13-027 de 2013</li>
-          <li><i class="fas fa-file-alt"></i> Règlement intérieur du CES</li>
-        </ul>
-      </div>
-
-      <!-- Grille des stats -->
-      <div class="row g-3 mb-4">
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">7</div><div class="lbl">Commissions</div></div>
-        </div>
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">100+</div><div class="lbl">Avis rendus</div></div>
-        </div>
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">68</div><div class="lbl">Conseillers</div></div>
-        </div>
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">10+</div><div class="lbl">Partenaires int.</div></div>
-        </div>
-      </div>
-
-      <div class="sidebar-highlight">
-        <h4><i class="fas fa-scale-balanced"></i> Saisine du CES</h4>
-        <p>Toute institution peut soumettre une question au CES pour avis consultatif.</p>
-        <a href="{{ url('contact') }}">Nous contacter</a>
-      </div>
-    </aside>
   </div>
 </div>
+
 
 
 

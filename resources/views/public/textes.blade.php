@@ -115,82 +115,84 @@
   <div class="hero-inner">
     <div class="breadcrumb">
       <a href="{{ url('/') }}">Accueil</a><i class="fas fa-chevron-right"></i>
-      Le CES <i class="fas fa-chevron-right"></i><span>Missions</span>
+      Le CES <i class="fas fa-chevron-right"></i><span>Textes Légaux et Réglementaires</span>
     </div>
-    <div class="hero-tag"><i class="fas fa-bullseye"></i> Rôle constitutionnel</div>
-    <h1>Missions</h1>
-    <p>Le CES conseille les pouvoirs publics sur les grandes orientations qui engagent l'avenir de la Nation congolaise.</p>
+    <div class="hero-tag"><i class="fas fa-gavel"></i> Cadre légal</div>
+    <h1>Textes <em>fondateurs</em> et Lois</h1>
+    <p>L'ensemble des textes législatifs et réglementaires qui organisent et encadrent le fonctionnement du CES.</p>
   </div>
 </div>
 
 <!-- CONTENU PRINCIPAL AVEC BOOTSTRAP -->
 <div class="content-wrap">
-  <div class="row g-5">
-    <!-- Colonne principale -->
-    <div class="col-lg-8">
-      <div class="s-tag">Attributions</div>
-      <h2 class="s-title">Ce que fait <span>le CES</span></h2>
-      <div class="prose">
-        <p>Tel que précisé par la Constitution et dans la loi organique, Le Conseil économique et social est une asseùblée consultative dotée de la personnalité juridique. Il a pour mission de donner des avis consultatifs sur les questions économiques et sociales lui soumises par le Président de la République, l’Assemblée nationale, le Sénat et le Gouvernement.Il peut, de sa propre initiative, appeler l’attention du Gouvernement et des provinces sur les réformes qui lui paraissent de nature à favoriser le développement économique et social du pays. <br> 
-        De ce fait, Le CES est chargé de :
-          <h4><strong>Analyse et Suivi</strong></h4>
-            <ul>
-              <li>Analyser la conjoncture économique et sociale du pays : Le CES examine de près les tendances actuelles du marché et du climat social pour anticiper les défis de demain.</li>
-              <li>Assurer le suivi des politiques économiques et sociales nationales, provinciales et internationales, ainsi que les répercussions sur la vie des Congolais.</li>
-            </ul>
-          <h4><strong>Information et Orientation</strong></h4>
-            <ul>
-              <li>Contribuer à l'information des citoyens sur l'évolution de la situation économique et sociale.</li>
-              <li>Donner son avis sur les orientations générales de l'économie nationale : Le CES émet des avis consultatifs sur les grandes directions stratégiques prises pour l'économie nationale.</li>
-            </ul>
-          <h4><strong>Propositions et Collaboration</strong></h4>
-          <ul>
-            <li>Formuler des propositions dans les divers domaines économique et social.</li>
-            <li>Favoriser la coopération entre les partenaires économiques et sociaux et contribuer à l'élaboration d'une charte sociale commune.</li>
-          </ul>
-          <h4><strong>Etudes et Transparence</strong></h4>
-          <ul>
-            <li>Publier un rapport annuel sur la situation économique et sociale</li>
-            <li>Collecter et constituer une banque des données sur la situation économique et sociale.</li>
-            <li>Réaliser des études et recherches dans le domaine relevant de l'exercice de ses attributions.</li>
-          </ul>
-        </p>
+  <div class="container">
+    <div class="row g-5">
+      <!-- Colonne principale : documents -->
+      <div class="col-lg-8">
+        <div class="s-tag">Documents officiels</div>
+        <h2 class="s-title">Cadre <span>juridique</span></h2>
+        <div class="mt-4">
+          <!-- Doc 1 -->
+          <div class="doc-card reveal">
+            <div class="doc-icon"><i class="fas fa-file-pdf"></i></div>
+            <div class="doc-meta">
+              <span class="doc-tag">Constitution</span>
+              <h4>Constitution de la RDC du 18 février 2006 — Articles 208, 209 & 210 relatifs au CES</h4>
+              <div class="doc-date"><i class="fas fa-calendar"></i> 18 Février 2006</div>
+              <a href="https://ik.imagekit.io/ces/documents/Constitution%20de%20la%203me%20Republique.%2018%20Fev%202006.pdf" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
+            </div>
+          </div>
+          <!-- Doc 2 -->
+          <div class="doc-card reveal">
+            <div class="doc-icon"><i class="fas fa-gavel"></i></div>
+            <div class="doc-meta">
+              <span class="doc-tag">Loi organique</span>
+              <h4>Loi organique n° 13/027 du 30 octobre 2013 portant organisation et fonctionnement du CES </h4>
+              <div class="doc-date"><i class="fas fa-calendar"></i> 3O Octobre 2013</div>
+              <a href="https://ik.imagekit.io/ces/documents/LOI%20ORGANIQUE%20n%C2%B0%2013-027%20portant%20organisation%20et%20fonctionnement%20du%20Conseil%20%C3%A9conomique%20et%20social%20(J.O.RDC.,%209%20novembre%202013,%20n%C2%B0%20sp%C3%A9cial,%20col.%201).pdf?updatedAt=1774195742804" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
+            </div>
+          </div>
+          <!-- Doc 3 -->
+          <div class="doc-card reveal">
+            <div class="doc-icon"><i class="fas fa-book"></i></div>
+            <div class="doc-meta">
+              <span class="doc-tag">Règlement</span>
+              <h4>Règlement intérieur du CES — Dispositions relatives aux séances plénières et délibérations</h4>
+              <div class="doc-date"><i class="fas fa-calendar"></i> 2020</div>
+              <a href="{{ url('textes') }}" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
+            </div>
+          </div>
+          <!-- Doc 4 -->
+          <div class="doc-card reveal">
+            <div class="doc-icon"><i class="fas fa-earth-africa"></i></div>
+            <div class="doc-meta">
+              <span class="doc-tag">Charte internationale</span>
+              <h4>Charte de l'UCESA pour la durabilité du développement de l'Afrique — Engagement du CES-RDC</h4>
+              <div class="doc-date"><i class="fas fa-calendar"></i> 2022</div>
+              <a href="https://ik.imagekit.io/ces/documents/CHARTE%20DE%20L_UCESA%20POUR%20LA%20DURABILITE%20DU%20DEVELOPPEMENT%20DE%20L_AFRIQUE.pdf?updatedAt=1774195749498" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- Sidebar droite -->
+      <aside class="col-lg-4">
+        <div class="sidebar-highlight">
+          <h4><i class="fas fa-shield-halved"></i> Textes protégés</h4>
+          <p>Les documents mis à disposition sont officiels et protégés. Tout usage doit mentionner la source CES-RDC.</p>
+          <a href="{{ url('contact') }}">Demande officielle</a>
+        </div>
+        <div class="sidebar-box">
+          <h4><i class="fas fa-link"></i> Liens utiles</h4>
+          <ul>
+            <li><i class="fas fa-external-link-alt"></i> <a href="https://journalofficiel.cd" target="_blank">Journal Officiel RDC</a></li>
+            <li><i class="fas fa-external-link-alt"></i> <a href="https://www.senat.cd" target="_blank">Sénat — Textes législatifs</a></li>
+            <li><i class="fas fa-arrow-right"></i> <a href="{{ url('missions') }}">Missions du CES</a></li>
+            <li><i class="fas fa-arrow-right"></i> <a href="{{ url('fonctionnement') }}">Fonctionnement</a></li>
+          </ul>
+        </div>
+      </aside>
     </div>
-
-    <!-- Sidebar droite -->
-    <aside class="col-lg-4">
-      <div class="sidebar-box">
-        <h4><i class="fas fa-gavel"></i> Base légale</h4>
-        <ul>
-          <li><i class="fas fa-file-alt"></i> Constitution du 18 février 2006</li>
-          <li><i class="fas fa-file-alt"></i> Loi organique n° 13-027 de 2013</li>
-          <li><i class="fas fa-file-alt"></i> Règlement intérieur du CES</li>
-        </ul>
-      </div>
-
-      <!-- Grille des stats -->
-      <div class="row g-3 mb-4">
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">7</div><div class="lbl">Commissions</div></div>
-        </div>
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">100+</div><div class="lbl">Avis rendus</div></div>
-        </div>
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">68</div><div class="lbl">Conseillers</div></div>
-        </div>
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">10+</div><div class="lbl">Partenaires int.</div></div>
-        </div>
-      </div>
-
-      <div class="sidebar-highlight">
-        <h4><i class="fas fa-scale-balanced"></i> Saisine du CES</h4>
-        <p>Toute institution peut soumettre une question au CES pour avis consultatif.</p>
-        <a href="{{ url('contact') }}">Nous contacter</a>
-      </div>
-    </aside>
   </div>
 </div>
 

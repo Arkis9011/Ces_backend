@@ -109,90 +109,80 @@
 
 
 
-
 <!-- HERO DE PAGE -->
 <div class="page-hero">
   <div class="hero-inner">
     <div class="breadcrumb">
       <a href="{{ url('/') }}">Accueil</a><i class="fas fa-chevron-right"></i>
-      Le CES <i class="fas fa-chevron-right"></i><span>Missions</span>
+      Actualités <i class="fas fa-chevron-right"></i><span>Médiathèque</span>
     </div>
-    <div class="hero-tag"><i class="fas fa-bullseye"></i> Rôle constitutionnel</div>
-    <h1>Missions</h1>
-    <p>Le CES conseille les pouvoirs publics sur les grandes orientations qui engagent l'avenir de la Nation congolaise.</p>
+    <div class="hero-tag"><i class="fas fa-images"></i> Galerie multimédia</div>
+    <h1><em>Médiathèque</em> du CES</h1>
+    <p>Galerie photos et vidéos des activités, séances plénières, événements et missions internationales du CES-RDC.</p>
   </div>
 </div>
 
 <!-- CONTENU PRINCIPAL AVEC BOOTSTRAP -->
 <div class="content-wrap">
-  <div class="row g-5">
-    <!-- Colonne principale -->
-    <div class="col-lg-8">
-      <div class="s-tag">Attributions</div>
-      <h2 class="s-title">Ce que fait <span>le CES</span></h2>
-      <div class="prose">
-        <p>Tel que précisé par la Constitution et dans la loi organique, Le Conseil économique et social est une asseùblée consultative dotée de la personnalité juridique. Il a pour mission de donner des avis consultatifs sur les questions économiques et sociales lui soumises par le Président de la République, l’Assemblée nationale, le Sénat et le Gouvernement.Il peut, de sa propre initiative, appeler l’attention du Gouvernement et des provinces sur les réformes qui lui paraissent de nature à favoriser le développement économique et social du pays. <br> 
-        De ce fait, Le CES est chargé de :
-          <h4><strong>Analyse et Suivi</strong></h4>
-            <ul>
-              <li>Analyser la conjoncture économique et sociale du pays : Le CES examine de près les tendances actuelles du marché et du climat social pour anticiper les défis de demain.</li>
-              <li>Assurer le suivi des politiques économiques et sociales nationales, provinciales et internationales, ainsi que les répercussions sur la vie des Congolais.</li>
-            </ul>
-          <h4><strong>Information et Orientation</strong></h4>
-            <ul>
-              <li>Contribuer à l'information des citoyens sur l'évolution de la situation économique et sociale.</li>
-              <li>Donner son avis sur les orientations générales de l'économie nationale : Le CES émet des avis consultatifs sur les grandes directions stratégiques prises pour l'économie nationale.</li>
-            </ul>
-          <h4><strong>Propositions et Collaboration</strong></h4>
-          <ul>
-            <li>Formuler des propositions dans les divers domaines économique et social.</li>
-            <li>Favoriser la coopération entre les partenaires économiques et sociaux et contribuer à l'élaboration d'une charte sociale commune.</li>
-          </ul>
-          <h4><strong>Etudes et Transparence</strong></h4>
-          <ul>
-            <li>Publier un rapport annuel sur la situation économique et sociale</li>
-            <li>Collecter et constituer une banque des données sur la situation économique et sociale.</li>
-            <li>Réaliser des études et recherches dans le domaine relevant de l'exercice de ses attributions.</li>
-          </ul>
-        </p>
-      </div>
+  <div class="container">
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" data-group="med" data-target="med-photos">Photos</button>
+      <button class="tab-btn" data-group="med" data-target="med-videos">Vidéos</button>
     </div>
 
-    <!-- Sidebar droite -->
-    <aside class="col-lg-4">
-      <div class="sidebar-box">
-        <h4><i class="fas fa-gavel"></i> Base légale</h4>
-        <ul>
-          <li><i class="fas fa-file-alt"></i> Constitution du 18 février 2006</li>
-          <li><i class="fas fa-file-alt"></i> Loi organique n° 13-027 de 2013</li>
-          <li><i class="fas fa-file-alt"></i> Règlement intérieur du CES</li>
-        </ul>
-      </div>
+    <!-- Panneau Photos -->
+ <div id="med-photos" class="tab-panel active" data-group="med">
+    <div class="row g-4 mt-2">
+        @forelse($photos as $photo)
+            <div class="col-md-4">
+                <div class="reveal h-100" style="border-radius:12px; overflow:hidden; box-shadow:var(--ombre); background:#fff;">
+                    <img src="{{ $photo->image_url }}" 
+                         alt="{{ $photo->titre }}" 
+                         style="width:100%; height:210px; object-fit:cover;">
+                    <div style="padding:14px;">
+                        <p style="font-size:.82rem; color:var(--gris-texte); margin:0;">
+                            {{ $photo->titre }} — {{ \Carbon\Carbon::parse($photo->date_publication)->translatedFormat('M Y') }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <p class="text-center py-5">Aucune photo disponible dans la médiathèque.</p>
+        @endforelse
+    </div>
+</div>
 
-      <!-- Grille des stats -->
-      <div class="row g-3 mb-4">
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">7</div><div class="lbl">Commissions</div></div>
-        </div>
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">100+</div><div class="lbl">Avis rendus</div></div>
-        </div>
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">68</div><div class="lbl">Conseillers</div></div>
-        </div>
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">10+</div><div class="lbl">Partenaires int.</div></div>
-        </div>
-      </div>
-
-      <div class="sidebar-highlight">
-        <h4><i class="fas fa-scale-balanced"></i> Saisine du CES</h4>
-        <p>Toute institution peut soumettre une question au CES pour avis consultatif.</p>
-        <a href="{{ url('contact') }}">Nous contacter</a>
-      </div>
-    </aside>
+    <!-- Panneau Vidéos -->
+ <div id="med-videos" class="tab-panel" data-group="med">
+    <div class="row g-4 mt-2">
+        @forelse($videos as $video)
+            <div class="col-md-6">
+                <div class="reveal h-100" style="border-radius:12px; overflow:hidden; box-shadow:var(--ombre); background:#fff;">
+                    <div style="width:100%; height:230px; background:#1a1a2e; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;">
+                        <a href="{{ $video->url }}" target="_blank" style="text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:12px;">
+                            <div style="width:64px; height:64px; border-radius:50%; background:var(--rouge); display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:#fff;">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <span style="color:rgba(255,255,255,.6); font-size:.85rem;">Cliquez pour visionner</span>
+                        </a>
+                    </div>
+                    <div style="padding:16px;">
+                        <h4 style="font-size:.9rem; margin:0;">{{ $video->title }}</h4>
+                        @if($video->description)
+                            <p class="small text-muted mb-0 mt-1">{{ Str::limit($video->description, 80) }}</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        @empty
+            <p class="text-center py-5">Aucune vidéo disponible pour le moment.</p>
+        @endforelse
+    </div>
+</div>
   </div>
 </div>
+
 
 
 
@@ -237,58 +227,37 @@
 
   <div class="footer-tricolor" style="height:5px; background:linear-gradient(to right, var(--bleu) 33.33%, var(--jaune) 33.33%, var(--jaune) 66.66%, var(--rouge) 66.66%);"></div>
 </footer>
+script src="{{ asset('assets/js/main.Js') }}"></script>
 
-<script src="{{ asset('assets/js/main.Js') }}"></script>
+<!-- Scripts Bootstrap et animation -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Slider et observer (ajusté pour le carrousel existant)
-  let current = 0;
-  const total = 3;
-  let autoSlide;
-  function updateSlider() {
-    const track = document.querySelector('.carousel__track');
-    if (track) {
-      track.style.transform = `translateX(-${current * 100}%)`;
-      document.querySelectorAll('.carousel__dot').forEach((d, i) => {
-        d.classList.toggle('carousel__dot--active', i === current);
-        d.setAttribute('aria-current', i === current ? 'true' : 'false');
-      });
-    }
-  }
-  function changeSlide(dir) { current = (current + dir + total) % total; updateSlider(); resetAuto(); }
-  function goToSlide(n) { current = n; updateSlider(); resetAuto(); }
-  function resetAuto() { clearInterval(autoSlide); autoSlide = setInterval(() => changeSlide(1), 5500); }
-
-  // Attacher les événements après le chargement du DOM
-  document.addEventListener('DOMContentLoaded', () => {
-    const prevBtn = document.querySelector('.carousel__arrow--prev');
-    const nextBtn = document.querySelector('.carousel__arrow--next');
-    const dots = document.querySelectorAll('.carousel__dot');
-
-    if (prevBtn) prevBtn.addEventListener('click', () => changeSlide(-1));
-    if (nextBtn) nextBtn.addEventListener('click', () => changeSlide(1));
-    dots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => goToSlide(idx));
+  // Script des onglets (tabs)
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const group = this.dataset.group;
+      document.querySelectorAll(`.tab-btn[data-group="${group}"]`).forEach(b => b.classList.remove('active'));
+      document.querySelectorAll(`.tab-panel[data-group="${group}"]`).forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+      document.getElementById(this.dataset.target).classList.add('active');
     });
+  });
 
-    updateSlider();
-    resetAuto();
-
-    // Intersection Observer pour les animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.news-card, .avis-card, .pub-card, .bureau-card, .commission-card').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      observer.observe(el);
+  // Animation reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
     });
+  }, { threshold: .08 });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    obs.observe(el);
   });
 </script>
 </body>

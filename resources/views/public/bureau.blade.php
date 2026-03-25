@@ -109,90 +109,141 @@
 
 
 
-
 <!-- HERO DE PAGE -->
 <div class="page-hero">
   <div class="hero-inner">
     <div class="breadcrumb">
       <a href="{{ url('/') }}">Accueil</a><i class="fas fa-chevron-right"></i>
-      Le CES <i class="fas fa-chevron-right"></i><span>Missions</span>
+      Organisation <i class="fas fa-chevron-right"></i><span>Le Bureau</span>
     </div>
-    <div class="hero-tag"><i class="fas fa-bullseye"></i> Rôle constitutionnel</div>
-    <h1>Missions</h1>
-    <p>Le CES conseille les pouvoirs publics sur les grandes orientations qui engagent l'avenir de la Nation congolaise.</p>
+    <div class="hero-tag"><i class="fas fa-users"></i> Gouvernance</div>
+    <h1>Le <em>Bureau</em> du CES</h1>
+    <p>Composition du Bureau du Conseil Économique et Social, organe dirigeant de l'institution.</p>
   </div>
 </div>
 
 <!-- CONTENU PRINCIPAL AVEC BOOTSTRAP -->
 <div class="content-wrap">
-  <div class="row g-5">
-    <!-- Colonne principale -->
-    <div class="col-lg-8">
-      <div class="s-tag">Attributions</div>
-      <h2 class="s-title">Ce que fait <span>le CES</span></h2>
-      <div class="prose">
-        <p>Tel que précisé par la Constitution et dans la loi organique, Le Conseil économique et social est une asseùblée consultative dotée de la personnalité juridique. Il a pour mission de donner des avis consultatifs sur les questions économiques et sociales lui soumises par le Président de la République, l’Assemblée nationale, le Sénat et le Gouvernement.Il peut, de sa propre initiative, appeler l’attention du Gouvernement et des provinces sur les réformes qui lui paraissent de nature à favoriser le développement économique et social du pays. <br> 
-        De ce fait, Le CES est chargé de :
-          <h4><strong>Analyse et Suivi</strong></h4>
-            <ul>
-              <li>Analyser la conjoncture économique et sociale du pays : Le CES examine de près les tendances actuelles du marché et du climat social pour anticiper les défis de demain.</li>
-              <li>Assurer le suivi des politiques économiques et sociales nationales, provinciales et internationales, ainsi que les répercussions sur la vie des Congolais.</li>
-            </ul>
-          <h4><strong>Information et Orientation</strong></h4>
-            <ul>
-              <li>Contribuer à l'information des citoyens sur l'évolution de la situation économique et sociale.</li>
-              <li>Donner son avis sur les orientations générales de l'économie nationale : Le CES émet des avis consultatifs sur les grandes directions stratégiques prises pour l'économie nationale.</li>
-            </ul>
-          <h4><strong>Propositions et Collaboration</strong></h4>
-          <ul>
-            <li>Formuler des propositions dans les divers domaines économique et social.</li>
-            <li>Favoriser la coopération entre les partenaires économiques et sociaux et contribuer à l'élaboration d'une charte sociale commune.</li>
-          </ul>
-          <h4><strong>Etudes et Transparence</strong></h4>
-          <ul>
-            <li>Publier un rapport annuel sur la situation économique et sociale</li>
-            <li>Collecter et constituer une banque des données sur la situation économique et sociale.</li>
-            <li>Réaliser des études et recherches dans le domaine relevant de l'exercice de ses attributions.</li>
-          </ul>
-        </p>
+  <div class="container">
+    <div class="s-tag">Membres élus</div>
+    <h2 class="s-title">Composition du <span>Bureau</span></h2>
+    <p class="prose mb-5" style="max-width:680px;">Le Bureau est l'organe moteur, permanent et décisionnel du CES. Il assure la gestion courante de l'institution et statue par voie de décision. Il comprend sept membres élus par l'Assemblée Générale pour la durée de la mandature.</p>
+
+    <!-- Grille des membres -->
+    <div class="row g-4">
+      <!-- Président -->
+      <div class="col-lg-3 col-md-6">
+        <div class="membre-card reveal" style="border-top:4px solid var(--jaune)">
+          <img src="https://ik.imagekit.io/ces/bureau/Pr%20JKK_.JPG" alt="Président" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
+          <div class="mc-body">
+            <div class="mc-role">Président</div>
+            <div class="mc-name">Jean Pierre Kiwakana KIMAYALA</div>
+            <span class="mc-badge"><i class="fas fa-star"></i> Président</span>
+          </div>
+        </div>
+      </div>
+      <!-- 1er VP -->
+      <div class="col-lg-3 col-md-6">
+        <div class="membre-card reveal">
+          <img src="https://ik.imagekit.io/ces/bureau/1Pr%20LKK.png" alt="1er VP" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
+          <div class="mc-body">
+            <div class="mc-role">1er Vice-Président</div>
+            <div class="mc-name">Léon Kyaboba KASOBWA</div>
+          </div>
+        </div>
+      </div>
+      <!-- 2ème VP -->
+      <div class="col-lg-3 col-md-6">
+        <div class="membre-card reveal">
+          <img src="https://ik.imagekit.io/ces/bureau/2Pr%20CTK.png" alt="2e VP" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
+          <div class="mc-body">
+            <div class="mc-role">2ème Vice-Président</div>
+            <div class="mc-name">Célestin Tshibwabwa KANYAMA</div>
+          </div>
+        </div>
+      </div>
+      <!-- Rapporteur -->
+      <div class="col-lg-3 col-md-6">
+        <div class="membre-card reveal">
+          <img src="https://ik.imagekit.io/ces/bureau/Rapp%20RNM.png" alt="Rapporteur" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
+          <div class="mc-body">
+            <div class="mc-role">Rapporteur</div>
+            <div class="mc-name">René Ngongo MATESO</div>
+          </div>
+        </div>
+      </div>
+      <!-- Rapporteur Adjoint -->
+      <div class="col-lg-3 col-md-6">
+        <div class="membre-card reveal">
+          <img src="https://ik.imagekit.io/ces/bureau/Rapp.Adj%20SMT.png" alt="Rapp. Adj." onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
+          <div class="mc-body">
+            <div class="mc-role">Rapporteur Adjoint</div>
+            <div class="mc-name">Sylvie Mbakata THULA</div>
+          </div>
+        </div>
+      </div>
+      <!-- Questeur -->
+      <div class="col-lg-3 col-md-6">
+        <div class="membre-card reveal">
+          <img src="https://ik.imagekit.io/ces/bureau/Quest.%20AMEK.png" alt="Questeur" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
+          <div class="mc-body">
+            <div class="mc-role">Questeur</div>
+            <div class="mc-name">Astrid Martins Elias KABENGELE</div>
+          </div>
+        </div>
+      </div>
+      <!-- Questeur Adjoint -->
+      <div class="col-lg-3 col-md-6">
+        <div class="membre-card reveal">
+          <img src="https://ik.imagekit.io/ces/bureau/Quest.Adj%20BMY.png" alt="Questeur Adj." onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
+          <div class="mc-body">
+            <div class="mc-role">Questeur Adjoint</div>
+            <div class="mc-name">Béatrice Mpulu YEMBELA</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Sidebar droite -->
-    <aside class="col-lg-4">
-      <div class="sidebar-box">
-        <h4><i class="fas fa-gavel"></i> Base légale</h4>
+    <!-- Section Attributions -->
+    <div class="mt-5 p-5" style="background:var(--gris-clair); border-radius:16px;">
+      <div class="s-tag">Attributions</div>
+      <h2 class="s-title" style="font-size:1.4rem;">Rôle du <span>Bureau</span></h2>
+      <div class="prose" style="max-width:720px; margin-top:16px;">
+        <p>Le Bureau assure la continuité des travaux entre les sessions plénières et coordonne les différentes missions du Conseil auprès du gouvernement ou du parlement.</p>
         <ul>
-          <li><i class="fas fa-file-alt"></i> Constitution du 18 février 2006</li>
-          <li><i class="fas fa-file-alt"></i> Loi organique n° 13-027 de 2013</li>
-          <li><i class="fas fa-file-alt"></i> Règlement intérieur du CES</li>
+          <li>Veiller au bon fonctionnement du Conseil</li>
+          <li>Assurer la gestion quotidienne du Conseil et de son patrimoine</li>
+          <li>Elaborer le programme de travail du Conseil</li>
+          <li>Proposer le mode de décision ou de votation</li>
+          <li>Préparer et assurer l'exécution du budget du Conseil</li>
+          <li>Rechercher toute information et toute documentation susceptible de faciliter le bon déroulement des travaux du Conseil</li>
+          <li>Faire rapport à I'Assemblée Générale de toules les activités menées pendant les intersessions</li>
+          <li>Organiser et assurer le suivi des échanges inter-conseils avec les autres pays</li>
+          <li>Déterminer l'organisation et le fonctionnement des services de l'administration du Conseil</li>
+          <li>Rechercher les voies et moyens pouvant garantir les bonnes conditions de travail aux Conseillers de la République</li>
+          <li>Définir les thématiques prioritaires pour la formation des Conseillers de la République et des membres du Personnel du Conseil</li>
+          <li>Examiner les demandes d'Avis et d'études déposées par le Président de la République, I'Assemblée Nationale, le Sénat, le Gouvemement et les attribuer aux Commissions concernées</li>
+          <li>Examiner les demandes d'auto saisine, à défaut de les avoir initiées lui-même</li>
+          <li>Etablir un relevé des décisions après chaque réunion et après validation, les transmettre à chaque Conseiller de la République</li>
+          <li>Dresser chaque année un rapport de l'ensemble des suites reservées à ses Avis par les organes destinataires</li>
+          <li>Statuer de la recevabilité des pétitions conformément à l'article 25 de la Loi organique portant organisation et fonctionnement du Conseil.</li>
         </ul>
       </div>
-
-      <!-- Grille des stats -->
-      <div class="row g-3 mb-4">
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">7</div><div class="lbl">Commissions</div></div>
-        </div>
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">100+</div><div class="lbl">Avis rendus</div></div>
-        </div>
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">68</div><div class="lbl">Conseillers</div></div>
-        </div>
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">10+</div><div class="lbl">Partenaires int.</div></div>
-        </div>
-      </div>
-
-      <div class="sidebar-highlight">
-        <h4><i class="fas fa-scale-balanced"></i> Saisine du CES</h4>
-        <p>Toute institution peut soumettre une question au CES pour avis consultatif.</p>
-        <a href="{{ url('contact') }}">Nous contacter</a>
-      </div>
-    </aside>
+    </div>
   </div>
 </div>
+
+
+
+
+
 
 
 

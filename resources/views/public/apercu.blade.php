@@ -37,7 +37,7 @@
 
         <!-- Menu avec mega-dropdown -->
         <li class="site-nav-item has-mega">
-          <a href="#" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
+          <a href="{{ url('apercu') }}" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
             À propos du CES <i class="fas fa-chevron-down" aria-hidden="true"></i>
           </a>
           <div class="site-mega-dropdown" role="region" aria-label="Sous-menu À propos">
@@ -65,7 +65,7 @@
 
         <!-- Menu simple dropdown -->
         <li class="site-nav-item has-dropdown">
-          <a href="#" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
+          <a href="{{ url('avis') }}" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
             Travaux & Avis <i class="fas fa-chevron-down" aria-hidden="true"></i>
           </a>
           <ul class="site-dropdown" role="region" aria-label="Sous-menu Travaux">
@@ -75,7 +75,7 @@
         </li>
 
         <li class="site-nav-item has-dropdown">
-          <a href="#" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
+          <a href="{{ url('actualites') }}" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
             Actualités <i class="fas fa-chevron-down" aria-hidden="true"></i>
           </a>
           <ul class="site-dropdown" role="region" aria-label="Sous-menu Actualités">
@@ -87,7 +87,8 @@
 
         <li class="site-nav-item"><a href="{{ url('contact') }}" class="site-nav-link">Contact</a></li>
 
-        <!-- CTA recherche -->
+        <!-- CTA recherche commenté -->
+        {{-- 
         <li class="site-nav-item search-item">
           <button class="site-nav-link search-toggle" aria-label="Ouvrir la recherche" aria-expanded="false">
             <i class="fas fa-search" aria-hidden="true"></i>
@@ -100,6 +101,7 @@
             </form>
           </div>
         </li>
+        --}}
       </ul>
     </nav>
   </div>

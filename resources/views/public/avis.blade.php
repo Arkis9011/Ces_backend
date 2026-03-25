@@ -110,91 +110,146 @@
 
 
 
+
 <!-- HERO DE PAGE -->
 <div class="page-hero">
   <div class="hero-inner">
     <div class="breadcrumb">
       <a href="{{ url('/') }}">Accueil</a><i class="fas fa-chevron-right"></i>
-      Le CES <i class="fas fa-chevron-right"></i><span>Missions</span>
+      Travaux <i class="fas fa-chevron-right"></i><span>Nos Avis</span>
     </div>
-    <div class="hero-tag"><i class="fas fa-bullseye"></i> Rôle constitutionnel</div>
-    <h1>Missions</h1>
-    <p>Le CES conseille les pouvoirs publics sur les grandes orientations qui engagent l'avenir de la Nation congolaise.</p>
+    <h1>Nos <em>Avis</em> &amp; Recommandations</h1>
+    <p>Ensemble des avis produits par le Conseil Économique et Social sur les grandes questions économiques, sociales et environnementales.</p>
   </div>
 </div>
 
 <!-- CONTENU PRINCIPAL AVEC BOOTSTRAP -->
 <div class="content-wrap">
-  <div class="row g-5">
-    <!-- Colonne principale -->
-    <div class="col-lg-8">
-      <div class="s-tag">Attributions</div>
-      <h2 class="s-title">Ce que fait <span>le CES</span></h2>
-      <div class="prose">
-        <p>Tel que précisé par la Constitution et dans la loi organique, Le Conseil économique et social est une asseùblée consultative dotée de la personnalité juridique. Il a pour mission de donner des avis consultatifs sur les questions économiques et sociales lui soumises par le Président de la République, l’Assemblée nationale, le Sénat et le Gouvernement.Il peut, de sa propre initiative, appeler l’attention du Gouvernement et des provinces sur les réformes qui lui paraissent de nature à favoriser le développement économique et social du pays. <br> 
-        De ce fait, Le CES est chargé de :
-          <h4><strong>Analyse et Suivi</strong></h4>
-            <ul>
-              <li>Analyser la conjoncture économique et sociale du pays : Le CES examine de près les tendances actuelles du marché et du climat social pour anticiper les défis de demain.</li>
-              <li>Assurer le suivi des politiques économiques et sociales nationales, provinciales et internationales, ainsi que les répercussions sur la vie des Congolais.</li>
-            </ul>
-          <h4><strong>Information et Orientation</strong></h4>
-            <ul>
-              <li>Contribuer à l'information des citoyens sur l'évolution de la situation économique et sociale.</li>
-              <li>Donner son avis sur les orientations générales de l'économie nationale : Le CES émet des avis consultatifs sur les grandes directions stratégiques prises pour l'économie nationale.</li>
-            </ul>
-          <h4><strong>Propositions et Collaboration</strong></h4>
-          <ul>
-            <li>Formuler des propositions dans les divers domaines économique et social.</li>
-            <li>Favoriser la coopération entre les partenaires économiques et sociaux et contribuer à l'élaboration d'une charte sociale commune.</li>
-          </ul>
-          <h4><strong>Etudes et Transparence</strong></h4>
-          <ul>
-            <li>Publier un rapport annuel sur la situation économique et sociale</li>
-            <li>Collecter et constituer une banque des données sur la situation économique et sociale.</li>
-            <li>Réaliser des études et recherches dans le domaine relevant de l'exercice de ses attributions.</li>
-          </ul>
-        </p>
+  <div class="container">
+    <div class="row g-5">
+      <!-- Colonne principale -->
+      <div class="col-lg-8">
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab-btn active" data-group="avis" data-target="avis-tous">Tous les avis</button>
+          <button class="tab-btn" data-group="avis" data-target="avis-eco">ECOFIN</button>
+          <button class="tab-btn" data-group="avis" data-target="avis-env">CERNAT</button>
+          <button class="tab-btn" data-group="avis" data-target="avis-social">CSAC</button>
+          <button class="tab-btn" data-group="avis" data-target="avis-social">CEFE</button>
+          <button class="tab-btn" data-group="avis" data-target="avis-social">CIAT</button>
+          <button class="tab-btn" data-group="avis" data-target="avis-social">REX</button>
+        </div>
+
+        <!-- Panneau Tous les avis -->
+     <div id="avis-tous" class="tab-panel active" data-group="avis">
+  @forelse($avis as $item)
+    <div class="doc-card reveal">
+      <div class="doc-icon">
+        @php
+          $icon = 'fa-file-signature';
+          $comm = strtolower($item->commission);
+          if(str_contains($comm, 'ecofin')) $icon = 'fa-landmark';
+          if(str_contains($comm, 'cernat')) $icon = 'fa-leaf';
+          if(str_contains($comm, 'rex')) $icon = 'fa-shield-halved';
+        @endphp
+        <i class="fas {{ $icon }}"></i>
+      </div>
+      <div class="doc-meta">
+        <span class="doc-tag">{{ $item->commission }}</span>
+        <h4>{{ $item->titre }}</h4>
+        <div class="doc-date">
+          <i class="fas fa-calendar"></i> {{ $item->created_at->format('Y') }}
+        </div>
+        {{-- Lien vers le PDF sur ImageKit --}}
+        <a href="{{ $item->pdf_url }}" target="_blank" class="doc-link">
+          <i class="fas fa-file-pdf"></i> Lire l'avis complet
+        </a>
       </div>
     </div>
-
-    <!-- Sidebar droite -->
-    <aside class="col-lg-4">
-      <div class="sidebar-box">
-        <h4><i class="fas fa-gavel"></i> Base légale</h4>
-        <ul>
-          <li><i class="fas fa-file-alt"></i> Constitution du 18 février 2006</li>
-          <li><i class="fas fa-file-alt"></i> Loi organique n° 13-027 de 2013</li>
-          <li><i class="fas fa-file-alt"></i> Règlement intérieur du CES</li>
-        </ul>
-      </div>
-
-      <!-- Grille des stats -->
-      <div class="row g-3 mb-4">
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">7</div><div class="lbl">Commissions</div></div>
-        </div>
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">100+</div><div class="lbl">Avis rendus</div></div>
-        </div>
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">68</div><div class="lbl">Conseillers</div></div>
-        </div>
-        <div class="col-6">
-          <div class="stat-bloc"><div class="num">10+</div><div class="lbl">Partenaires int.</div></div>
-        </div>
-      </div>
-
-      <div class="sidebar-highlight">
-        <h4><i class="fas fa-scale-balanced"></i> Saisine du CES</h4>
-        <p>Toute institution peut soumettre une question au CES pour avis consultatif.</p>
-        <a href="{{ url('contact') }}">Nous contacter</a>
-      </div>
-    </aside>
-  </div>
+  @empty
+    <p class="text-center py-5">Aucun avis disponible pour le moment.</p>
+  @endforelse
 </div>
 
+<div id="avis-eco" class="tab-panel" data-group="avis">
+  @foreach($avisEco as $item)
+    <div class="doc-card">
+      <div class="doc-icon"><i class="fas fa-chart-line"></i></div>
+      <div class="doc-meta">
+        <span class="doc-tag">{{ $item->commission }}</span>
+        <h4>{{ $item->titre }}</h4>
+        <div class="doc-date"><i class="fas fa-calendar"></i> {{ $item->created_at->format('Y') }}</div>
+        <a href="{{ $item->pdf_url }}" target="_blank" class="doc-link"><i class="fas fa-file-pdf"></i> Lire l'avis</a>
+      </div>
+    </div>
+  @endforeach
+</div>
 
+{{-- Répète la même logique pour les autres panneaux (avis-env, avis-social) --}}
+
+        <!-- Panneau Économie -->
+        <div id="avis-eco" class="tab-panel" data-group="avis">
+          <div class="doc-card">
+            <div class="doc-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="doc-meta">
+              <span class="doc-tag">ECOFIN</span>
+              <h4>Analyse de la politique budgétaire et recommandations pour l'amélioration de la mobilisation des recettes fiscales en RDC.</h4>
+              <div class="doc-date"><i class="fas fa-calendar"></i> 2022</div>
+              <a href="{{ url('avis') }}" class="doc-link"><i class="fas fa-file-alt"></i> Lire l'avis</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panneau Environnement -->
+        <div id="avis-env" class="tab-panel" data-group="avis">
+          <div class="doc-card">
+            <div class="doc-icon"><i class="fas fa-leaf"></i></div>
+            <div class="doc-meta">
+              <span class="doc-tag">Environnement</span>
+              <h4>Problématique de l'exploration et de l'exploitation des ressources dans les Aires protégées en RDC.</h4>
+              <div class="doc-date"><i class="fas fa-calendar"></i> 2024</div>
+              <a href="{{ url('avis') }}" class="doc-link"><i class="fas fa-file-alt"></i> Lire l'avis</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panneau Social -->
+        <div id="avis-social" class="tab-panel" data-group="avis">
+          <div class="doc-card">
+            <div class="doc-icon"><i class="fas fa-people-group"></i></div>
+            <div class="doc-meta">
+              <span class="doc-tag">Social</span>
+              <h4>État des lieux du système de protection sociale en RDC et recommandations pour son renforcement.</h4>
+              <div class="doc-date"><i class="fas fa-calendar"></i> 2022</div>
+              <a href="{{ url('avis') }}" class="doc-link"><i class="fas fa-file-alt"></i> Lire l'avis</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar droite -->
+      <aside class="col-lg-4">
+        <div class="sidebar-box">
+          <h4><i class="fas fa-filter"></i> Par commission</h4>
+          <ul>
+            <li><i class="fas fa-chart-line"></i> ECOFIN</li>
+            <li><i class="fas fa-leaf"></i> CERNAT</li>
+            <li><i class="fas fa-shield-halved"></i> REX</li>
+            <li><i class="fas fa-heart-pulse"></i> CSAC</li>
+            <li><i class="fas fa-graduation-cap"></i> CEFE</li>
+            <li><i class="fas fa-tractor"></i> AGRIDEV</li>
+            <li><i class="fas fa-road"></i> CIAT</li>
+          </ul>
+        </div>
+        <div class="sidebar-highlight">
+          <h4><i class="fas fa-envelope"></i> Soumettre une question</h4>
+          <p>Vous souhaitez soumettre une question au CES pour avis consultatif ?</p>
+          <a href="{{ url('contact') }}">Nous contacter</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
 
 
 
@@ -238,9 +293,40 @@
   <div class="footer-tricolor" style="height:5px; background:linear-gradient(to right, var(--bleu) 33.33%, var(--jaune) 33.33%, var(--jaune) 66.66%, var(--rouge) 66.66%);"></div>
 </footer>
 
+
 <script src="{{ asset('assets/js/main.Js') }}"></script>
+
+<!-- Scripts Bootstrap et animation -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+  // Script des onglets (tabs)
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const group = this.dataset.group;
+      document.querySelectorAll(`.tab-btn[data-group="${group}"]`).forEach(b => b.classList.remove('active'));
+      document.querySelectorAll(`.tab-panel[data-group="${group}"]`).forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+      document.getElementById(this.dataset.target).classList.add('active');
+    });
+  });
+
+  // Animation reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: .08 });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    obs.observe(el);
+  });
+</script>
   // Slider et observer (ajusté pour le carrousel existant)
   let current = 0;
   const total = 3;
