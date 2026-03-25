@@ -31,16 +31,16 @@
     </button>
 
     <!-- Navigation principale -->
-    <nav class="nav" id="mainNav" aria-label="Navigation principale">
-      <ul class="nav-menu">
-        <li class="nav-item"><a href="{{ url('/') }}" class="nav-link active">Accueil</a></li>
+    <nav class="site-nav" id="mainNav" aria-label="Navigation principale">
+      <ul class="site-nav-menu">
+        <li class="site-nav-item"><a href="{{ url('/') }}" class="site-nav-link active">Accueil</a></li>
 
         <!-- Menu avec mega-dropdown -->
-        <li class="nav-item has-mega">
-          <a href="#" class="nav-link" aria-expanded="false" aria-haspopup="true">
+        <li class="site-nav-item has-mega">
+          <a href="#" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
             À propos du CES <i class="fas fa-chevron-down" aria-hidden="true"></i>
           </a>
-          <div class="mega-dropdown" role="region" aria-label="Sous-menu À propos">
+          <div class="site-mega-dropdown" role="region" aria-label="Sous-menu À propos">
             <div class="mega-col">
               <h4 class="mega-col-title">Institution</h4>
               <ul>
@@ -64,32 +64,32 @@
         </li>
 
         <!-- Menu simple dropdown -->
-        <li class="nav-item has-dropdown">
-          <a href="#" class="nav-link" aria-expanded="false" aria-haspopup="true">
+        <li class="site-nav-item has-dropdown">
+          <a href="#" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
             Travaux & Avis <i class="fas fa-chevron-down" aria-hidden="true"></i>
           </a>
-          <ul class="dropdown" role="region" aria-label="Sous-menu Travaux">
+          <ul class="site-dropdown" role="region" aria-label="Sous-menu Travaux">
             <li><a href="{{ url('avis') }}"><i class="fas fa-balance-scale" aria-hidden="true"></i> Nos Avis</a></li>
             <li><a href="{{ url('publications') }}"><i class="fas fa-book-open" aria-hidden="true"></i> Publications</a></li>
           </ul>
         </li>
 
-        <li class="nav-item has-dropdown">
-          <a href="#" class="nav-link" aria-expanded="false" aria-haspopup="true">
+        <li class="site-nav-item has-dropdown">
+          <a href="#" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
             Actualités <i class="fas fa-chevron-down" aria-hidden="true"></i>
           </a>
-          <ul class="dropdown" role="region" aria-label="Sous-menu Actualités">
+          <ul class="site-dropdown" role="region" aria-label="Sous-menu Actualités">
             <li><a href="{{ url('actualites') }}"><i class="fas fa-newspaper" aria-hidden="true"></i> Nos Actualités</a></li>
             <li><a href="{{ url('agenda') }}"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Agenda</a></li>
             <li><a href="{{ url('mediatheque') }}"><i class="fas fa-images" aria-hidden="true"></i> Médiathèque</a></li>
           </ul>
         </li>
 
-        <li class="nav-item"><a href="{{ url('contact') }}" class="nav-link">Contact</a></li>
+        <li class="site-nav-item"><a href="{{ url('contact') }}" class="site-nav-link">Contact</a></li>
 
         <!-- CTA recherche -->
-        <li class="nav-item search-item">
-          <button class="nav-link search-toggle" aria-label="Ouvrir la recherche" aria-expanded="false">
+        <li class="site-nav-item search-item">
+          <button class="site-nav-link search-toggle" aria-label="Ouvrir la recherche" aria-expanded="false">
             <i class="fas fa-search" aria-hidden="true"></i>
             <span class="search-text">Rechercher</span>
           </button>
@@ -207,52 +207,49 @@
         </div>
         <h2 class="section-title" style="font-family:'Playfair Display'; font-size:2.2rem; font-weight:700;">Nos <span style="color:var(--bleu);">Actualités</span></h2>
       </div>
-      <a href="{{ url('actualites') }}" class="see-all btn btn-outline-primary" style="border-color:var(--bleu-fonce); color:var(--bleu-fonce); font-weight:600;">Toutes les actualités <i class="fas fa-arrow-right"></i></a>
+      <a href="#" class="see-all btn btn-outline-primary" style="border-color:var(--bleu-fonce); color:var(--bleu-fonce); font-weight:600;">Toutes les actualités <i class="fas fa-arrow-right"></i></a>
     </div>
 
     <div class="row g-4">
-      <!-- Article vedette -->
-      <div class="col-md-6">
-        <div class="news-card featured h-100">
-          <img src="https://res.cloudinary.com/dkjqzohc7/image/upload/v1745589138/news/dyurlyy2wr9mpuyuxqbt.jpg" class="w-100" style="height:300px; object-fit:cover;" alt="Séance plénière CES">
-          <div class="news-body p-4">
-            <span class="news-badge">Séance plénière</span>
-            <div class="news-date text-primary small fw-semibold mt-2"><i class="fas fa-calendar"></i> 23 avril 2025</div>
-            <h3 class="h5 fw-semibold mt-2" style="font-family:'Playfair Display';">Déroulement des travaux du Conseil Économique et Social – Séance plénière du mercredi 16 avril</h3>
-            <a href="#" class="news-link text-primary fw-semibold">Lire l'article <i class="fas fa-arrow-right"></i></a>
+      @forelse($actualites as $index => $post)
+        {{-- Le premier article prend 6 colonnes (col-md-6), les suivants 3 (col-md-3) --}}
+        <div class="{{ $index == 0 ? 'col-md-6' : 'col-md-3' }}">
+          <div class="news-card {{ $index == 0 ? 'featured' : '' }} h-100">
+            
+            {{-- Image dynamique depuis ImageKit --}}
+            <img src="{{ $post->image_url ?? 'https://via.placeholder.com/600x400?text=CES+RDC' }}" 
+                 class="w-100" 
+                 style="height:{{ $index == 0 ? '300px' : '220px' }}; object-fit:cover;" 
+                 alt="{{ $post->titre }}">
+            
+            <div class="news-body p-4">
+              @if($post->categorie)
+                <span class="news-badge">{{ $post->categorie }}</span>
+              @endif
+
+              <div class="news-date text-primary small fw-semibold mt-2">
+                <i class="fas fa-calendar"></i> {{ \Carbon\Carbon::parse($post->date_publication)->translatedFormat('d F Y') }}
+              </div>
+
+              <h3 class="{{ $index == 0 ? 'h5' : 'h6' }} fw-semibold mt-2" style="font-family:'Playfair Display';">
+                {{ $post->titre }}
+              </h3>
+
+              <a href="#" class="news-link text-primary fw-semibold">Lire l'article <i class="fas fa-arrow-right"></i></a>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Article 2 -->
-      <div class="col-md-3">
-        <div class="news-card h-100">
-          <img src="https://res.cloudinary.com/dkjqzohc7/image/upload/v1745589058/news/fkzyakylpfkosokkz9hd.jpg" class="w-100" style="height:220px; object-fit:cover;" alt="ZLECAF">
-          <div class="news-body p-4">
-            <div class="news-date text-primary small fw-semibold"><i class="fas fa-calendar"></i> 22 avril 2025</div>
-            <h3 class="h6 fw-semibold mt-2" style="font-family:'Playfair Display';">Cérémonie d'ouverture de la 16ème réunion du Conseil des ministres – ZLECAF</h3>
-            <a href="#" class="news-link text-primary fw-semibold">Lire l'article <i class="fas fa-arrow-right"></i></a>
-          </div>
+      @empty
+        <div class="col-12 text-center py-5">
+          <p class="text-muted">Aucune actualité n'est disponible pour le moment.</p>
         </div>
-      </div>
-      <!-- Article 3 -->
-      <div class="col-md-3">
-        <div class="news-card h-100">
-          <img src="https://res.cloudinary.com/dkjqzohc7/image/upload/v1745588992/news/dh3d8vvizgsufsynd9tp.jpg" class="w-100" style="height:220px; object-fit:cover;" alt="Plénière désignation bureau">
-          <div class="news-body p-4">
-            <div class="news-date text-primary small fw-semibold"><i class="fas fa-calendar"></i> 21 avril 2025</div>
-            <h3 class="h6 fw-semibold mt-2" style="font-family:'Playfair Display';">Plénière du 9 Avril 2025 au CES – Désignation des membres du bureau</h3>
-            <a href="#" class="news-link text-primary fw-semibold">Lire l'article <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
+      @endforelse
     </div>
   </div>
-</section>
-
+</section>  
 <!-- ===== NOS AVIS ===== -->
 <section class="avis-section py-5">
   <div class="container">
-    <!-- En-tête de section -->
     <div class="d-flex flex-wrap align-items-end justify-content-between mb-5">
       <div>
         <div class="d-flex align-items-center gap-2 mb-2">
@@ -261,49 +258,47 @@
         </div>
         <h2 class="section-title" style="font-family:'Playfair Display', serif; font-size:2.2rem; font-weight:700;">Nos <span style="color:var(--bleu);">Avis</span></h2>
       </div>
-      <a href="{{ url('avis') }}" class="btn btn-outline-primary" style="border-color:var(--bleu-fonce); color:var(--bleu-fonce); font-weight:600; border-width:2px; padding:8px 20px;">Tous les avis <i class="fas fa-arrow-right ms-2"></i></a>
+      <a href="#" class="btn btn-outline-primary" style="border-color:var(--bleu-fonce); color:var(--bleu-fonce); font-weight:600; border-width:2px; padding:8px 20px;">Tous les avis <i class="fas fa-arrow-right ms-2"></i></a>
     </div>
 
-    <!-- Grille des avis -->
     <div class="row g-4">
-      <!-- Avis 1 -->
-      <div class="col-md-4">
-        <div class="avis-card position-relative p-4 h-100" style="border:1px solid #e8eef6; border-radius:12px; overflow:hidden; transition:all 0.7s ease;">
-          <div style="position:absolute; top:0; left:0; width:4px; height:100%; background:linear-gradient(to bottom, var(--bleu), var(--rouge));"></div>
-          <div class="avis-icon mb-3" style="width:48px; height:48px; border-radius:10px; background:var(--bleu-clair); display:flex; align-items:center; justify-content:center; font-size:1.3rem; color:var(--bleu-fonce);">
-            <i class="fas fa-oil-well"></i>
-          </div>
-          <span class="badge bg-light text-danger text-uppercase mb-2" style="font-size:0.7rem; letter-spacing:0.08em; padding:3px 10px; border-radius:20px;">Ressources naturelles</span>
-          <h3 class="h6 fw-semibold" style="font-family:'Playfair Display', serif; line-height:1.5; color:var(--texte);">Problématique de l'exploration et de l'exploitation des ressources pétrolières, minières et forestières dans les Aires protégées en RDC.</h3>
-          <a href="#" class="d-inline-flex align-items-center mt-3 text-primary fw-semibold" style="color:var(--bleu); text-decoration:none; font-size:0.83rem; transition:gap 0.7s ease;" onmouseover="this.style.gap='10px'" onmouseout="this.style.gap='6px'">Lire l'avis <i class="fas fa-arrow-right ms-2"></i></a>
-        </div>
-      </div>
+      @forelse($avis as $item)
+        <div class="col-md-4">
+          <div class="avis-card position-relative p-4 h-100" style="border:1px solid #e8eef6; border-radius:12px; overflow:hidden; transition:all 0.7s ease;">
+            <div style="position:absolute; top:0; left:0; width:4px; height:100%; background:linear-gradient(to bottom, var(--bleu), var(--rouge));"></div>
+            
+            <div class="avis-icon mb-3" style="width:48px; height:48px; border-radius:10px; background:var(--bleu-clair); display:flex; align-items:center; justify-content:center; font-size:1.3rem; color:var(--bleu-fonce);">
+              @php
+                // Choix de l'icône basé sur la commission
+                $icon = 'fa-file-signature'; 
+                $comm = strtolower($item->commission);
+                if(str_contains($comm, 'économique')) $icon = 'fa-landmark';
+                if(str_contains($comm, 'sociale')) $icon = 'fa-users-gears';
+                if(str_contains($comm, 'environnement')) $icon = 'fa-leaf';
+                if(str_contains($comm, 'ressources')) $icon = 'fa-oil-well';
+              @endphp
+              <i class="fas {{ $icon }}"></i>
+            </div>
 
-      <!-- Avis 2 -->
-      <div class="col-md-4">
-        <div class="avis-card position-relative p-4 h-100" style="border:1px solid #e8eef6; border-radius:12px; overflow:hidden; transition:all 0.7s ease;">
-          <div style="position:absolute; top:0; left:0; width:4px; height:100%; background:linear-gradient(to bottom, var(--bleu), var(--rouge));"></div>
-          <div class="avis-icon mb-3" style="width:48px; height:48px; border-radius:10px; background:var(--bleu-clair); display:flex; align-items:center; justify-content:center; font-size:1.3rem; color:var(--bleu-fonce);">
-            <i class="fas fa-shield-halved"></i>
-          </div>
-          <span class="badge bg-light text-danger text-uppercase mb-2" style="font-size:0.7rem; letter-spacing:0.08em; padding:3px 10px; border-radius:20px;">Gouvernance</span>
-          <h3 class="h6 fw-semibold" style="font-family:'Playfair Display', serif; line-height:1.5; color:var(--texte);">Gagner la bataille contre la corruption, condition sine qua non pour la transformation socio-économique durable de la RDC.</h3>
-          <a href="#" class="d-inline-flex align-items-center mt-3 text-primary fw-semibold" style="color:var(--bleu); text-decoration:none; font-size:0.83rem; transition:gap 0.7s ease;" onmouseover="this.style.gap='10px'" onmouseout="this.style.gap='6px'">Lire l'avis <i class="fas fa-arrow-right ms-2"></i></a>
-        </div>
-      </div>
+            <span class="badge bg-light text-danger text-uppercase mb-2" style="font-size:0.7rem; letter-spacing:0.08em; padding:3px 10px; border-radius:20px;">
+                {{ $item->commission }}
+            </span>
 
-      <!-- Avis 3 -->
-      <div class="col-md-4">
-        <div class="avis-card position-relative p-4 h-100" style="border:1px solid #e8eef6; border-radius:12px; overflow:hidden; transition:all 0.7s ease;">
-          <div style="position:absolute; top:0; left:0; width:4px; height:100%; background:linear-gradient(to bottom, var(--bleu), var(--rouge));"></div>
-          <div class="avis-icon mb-3" style="width:48px; height:48px; border-radius:10px; background:var(--bleu-clair); display:flex; align-items:center; justify-content:center; font-size:1.3rem; color:var(--bleu-fonce);">
-            <i class="fas fa-landmark"></i>
+            <h3 class="h6 fw-semibold" style="font-family:'Playfair Display', serif; line-height:1.5; color:var(--texte);">
+              {{ $item->titre }}
+            </h3>
+
+            {{-- Le lien pointe vers le pdf_url généré par ImageKit --}}
+            <a href="{{ $item->pdf_url }}" target="_blank" class="d-inline-flex align-items-center mt-3 text-primary fw-semibold" style="color:var(--bleu); text-decoration:none; font-size:0.83rem; transition:gap 0.7s ease;" onmouseover="this.style.gap='10px'" onmouseout="this.style.gap='6px'">
+              Lire l'avis <i class="fas fa-arrow-right ms-2"></i>
+            </a>
           </div>
-          <span class="badge bg-light text-danger text-uppercase mb-2" style="font-size:0.7rem; letter-spacing:0.08em; padding:3px 10px; border-radius:20px;">Économie</span>
-          <h3 class="h6 fw-semibold" style="font-family:'Playfair Display', serif; line-height:1.5; color:var(--texte);">Gagner la bataille de la corruption – Analyse des mécanismes institutionnels et propositions concrètes de réforme.</h3>
-          <a href="#" class="d-inline-flex align-items-center mt-3 text-primary fw-semibold" style="color:var(--bleu); text-decoration:none; font-size:0.83rem; transition:gap 0.7s ease;" onmouseover="this.style.gap='10px'" onmouseout="this.style.gap='6px'">Lire l'avis <i class="fas fa-arrow-right ms-2"></i></a>
         </div>
-      </div>
+      @empty
+        <div class="col-12 text-center py-4">
+          <p class="text-muted">Aucun avis disponible.</p>
+        </div>
+      @endforelse
     </div>
   </div>
 </section>
@@ -555,16 +550,79 @@
   </div>
 </section>
 
-<!-- ===== AGENDA ===== -->
-<div class="agenda-band py-5" style="background: var(--bleu-clair);">
-  <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
-    <div class="agenda-text mb-4 mb-md-0">
-      <h2 class="h1" style="font-family:'Playfair Display';"><i class="fas fa-calendar-days"></i> Notre Agenda</h2>
-      <p class="mb-0">Consultez le programme des séances plénières, réunions et événements institutionnels du CES.</p>
+<!-- ===== AGENDA & ÉVÉNEMENTS ===== -->
+<section class="agenda-section py-5" style="background: #fdfdfe; border-top: 1px solid #f0f4f8;">
+  <div class="container">
+    <!-- En-tête harmonisé -->
+    <div class="d-flex flex-wrap align-items-end justify-content-between mb-5">
+      <div>
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <span style="width:24px; height:2px; background:var(--rouge);"></span>
+          <span style="color:var(--rouge); font-weight:700; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em;">Calendrier Institutionnel</span>
+        </div>
+        <h2 class="section-title" style="font-family:'Playfair Display', serif; font-size:2.2rem; font-weight:700;">Notre <span>Agenda</span></h2>
+      </div>
+      <a href="{{ url('agenda') }}" class="btn btn-outline-primary" style="border-color:var(--bleu-fonce); color:var(--bleu-fonce); font-weight:600; border-width:2px; padding:8px 20px; border-radius:8px;">Voir tout l'agenda <i class="fas fa-arrow-right ms-2"></i></a>
     </div>
-    <a href="{{ url('agenda') }}" class="agenda-btn btn btn-dark" style="background: var(--bleu-fonce); border:none; padding:13px 28px; font-weight:700;"><i class="fas fa-calendar-check"></i> Consulter l'agenda</a>
+
+    <!-- Contenu Agenda -->
+    <div class="row g-4 align-items-stretch">
+      <!-- Zone Texte/Description -->
+      <div class="col-lg-4">
+        <div class="p-4 h-100 d-flex flex-column justify-content-center" style="background:var(--bleu-clair); border-radius:16px; border:1px solid rgba(0, 127, 255, 0.1);">
+          <p class="text-muted mb-0" style="font-size:1.05rem; line-height:1.7;">
+            Suivez les activités du Conseil à travers ses séances plénières, ses réunions de commissions et ses événements publics.
+          </p>
+          <hr class="my-4 opacity-25">
+          <div class="d-flex align-items-center gap-3 text-primary fw-bold">
+            <i class="fas fa-circle-info fa-lg"></i>
+            <span style="font-size:0.9rem;">Mise à jour en temps réel</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prochain Événement (Style Épuré) -->
+      <div class="col-lg-8">
+        @if($agendas->count() > 0)
+          @php $prochain = $agendas->first(); @endphp
+          <div class="agenda-card position-relative p-4 h-100" style="border:1px solid #e8eef6; border-radius:16px; background:#fff; box-shadow:0 4px 20px rgba(0,0,0,0.05); transition:all 0.3s ease; overflow:hidden;">
+            
+            <div class="row align-items-center g-4">
+              <!-- Date Badge -->
+              <div class="col-md-auto text-center">
+                <div class="d-inline-flex flex-column align-items-center justify-content-center shadow-sm" style="width:100px; height:100px; background:#fff; border:1px solid #eee; border-radius:20px;">
+                  <span class="fw-bold" style="font-size:2.2rem; line-height:1; color: var(--bleu-fonce);">{{ \Carbon\Carbon::parse($prochain->date)->translatedFormat('d') }}</span>
+                  <span class="text-muted text-uppercase fw-semibold" style="font-size:0.8rem; letter-spacing:1px;">{{ \Carbon\Carbon::parse($prochain->date)->translatedFormat('M') }}</span>
+                </div>
+              </div>
+
+              <!-- Infos -->
+              <div class="col-md">
+                <div class="d-flex flex-wrap gap-3 mb-3">
+                  <span class="badge bg-light text-primary px-3 py-2" style="border-radius:12px; font-weight:600;">
+                    <i class="far fa-clock me-2"></i> {{ $prochain->heure ?? '--:--' }}
+                  </span>
+                  <span class="badge bg-light text-muted px-3 py-2" style="border-radius:12px; font-weight:600;">
+                    <i class="fas fa-location-dot me-2 text-primary"></i> {{ $prochain->lieu ?? 'Siège du CES' }}
+                  </span>
+                </div>
+                <h3 class="h4 mb-0" style="font-family:'Playfair Display', serif; font-weight:700; color:var(--texte); line-height:1.4;">
+                  {{ $prochain->title }}
+                </h3>
+                <p class="text-muted mt-2 mb-0" style="font-size:0.95rem;">{{ Str::limit($prochain->summary, 120) }}</p>
+              </div>
+            </div>
+          </div>
+        @else
+          <div class="empty-agenda p-5 text-center d-flex flex-column align-items-center justify-content-center h-100" style="background:#f8f9fa; border-radius:16px; border:2px dashed #ddd;">
+             <i class="fas fa-calendar-alt fa-3x mb-3 text-muted opacity-25"></i>
+             <p class="text-muted fw-semibold">Aucun événement spécial à l'horizon.</p>
+          </div>
+        @endif
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
 <!-- ===== PARTENAIRES & INSTITUTIONS ===== -->
 <section class="partenaires-section py-5" style="background: var(--gris-clair);">

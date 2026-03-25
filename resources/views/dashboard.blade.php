@@ -46,9 +46,9 @@
     background-color: #f8f9fa;
 }
 
-.btn-link:focus {
-    box-shadow: none;
-}
+    .btn-link:focus {
+        box-shadow: none;
+    }
   </style>
 </head>
 <body>
