@@ -64,11 +64,13 @@
           if(request()->has('agendas')) $activeTab = 'section-events';
           elseif(request()->has('videos')) $activeTab = 'section-videos';
           elseif(request()->has('avis')) $activeTab = 'section-avis';
+          elseif(request()->has('allocutions')) $activeTab = 'section-allocutions';
       @endphp
       <a href="#actus" class="nav-btn {{ $activeTab == 'section-actus' ? 'active' : '' }}" data-target="section-actus"><i class="fas fa-newspaper"></i> Actualités</a>
       <a href="#events" class="nav-btn {{ $activeTab == 'section-events' ? 'active' : '' }}" data-target="section-events"><i class="fas fa-calendar-alt"></i> Agenda</a>
       <a href="#videos" class="nav-btn {{ $activeTab == 'section-videos' ? 'active' : '' }}" data-target="section-videos"><i class="fas fa-video"></i> Vidéos</a>
       <a href="#avis" class="nav-btn {{ $activeTab == 'section-avis' ? 'active' : '' }}" data-target="section-avis"><i class="fas fa-balance-scale"></i> Avis rendus</a>
+      <a href="#allocutions" class="nav-btn {{ $activeTab == 'section-allocutions' ? 'active' : '' }}" data-target="section-allocutions"><i class="fas fa-microphone-alt"></i> Allocutions</a>
       
       <a href="{{ route('profile.edit') }}"><i class="fas fa-user-cog"></i> Mon Profil</a>
       <a href="{{ url('/') }}" style="margin-top: 30px;"><i class="fas fa-globe"></i> Retour au site</a>
@@ -269,6 +271,7 @@
 @include('admin.sections.agenda')
       @include('admin.sections.videos')
       @include('admin.sections.avis')
+      @include('admin.sections.allocutions')
 
     </div>
   </main>
@@ -391,6 +394,12 @@
                         <div class="mb-3 text-muted">Commission : ${item.commission}</div>
                         <div class="p-3 bg-light rounded mb-3">${item.resume}</div>
                         <a href="${item.pdf_url}" target="_blank" class="btn btn-danger"><i class="fas fa-file-pdf me-2"></i> Voir le PDF</a>
+                    `;
+                } else if (type === 'allocution') {
+                    html = `
+                        <h4 class="fw-bold mb-3">${item.titre}</h4>
+                        <div class="mb-3 text-muted">Date : ${item.date_allocution}</div>
+                        ${item.document_url ? `<a href="${item.document_url}" target="_blank" class="btn btn-danger"><i class="fas fa-file-pdf me-2"></i> Voir le document</a>` : '<p class="text-muted">Aucun document joint</p>'}
                     `;
                 }
                 body.innerHTML = html;
@@ -517,6 +526,25 @@
                             <div class="mb-3">
                                 <label class="form-label">Modifier le PDF</label>
                                 <input type="file" name="pdf_file" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
+                        </form>
+                    `;
+                } else if (type === 'allocution') {
+                    formHtml = `
+                        <form action="/allocutions/${item.id}" method="POST" enctype="multipart/form-data">
+                            @csrf @method('PUT')
+                            <div class="mb-3">
+                                <label class="form-label">Titre</label>
+                                <input type="text" name="titre" class="form-control" value="${item.titre}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Date</label>
+                                <input type="date" name="date_allocution" class="form-control" value="${item.date_allocution}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Changer le document</label>
+                                <input type="file" name="document" class="form-control" accept=".pdf,.doc,.docx">
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
                         </form>

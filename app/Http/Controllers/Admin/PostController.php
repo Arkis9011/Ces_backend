@@ -39,33 +39,39 @@ class PostController extends Controller
     /**
      * Affiche le Dashboard avec toutes les données
      */
-    public function index(Request $request)
-    {
-        // Paramètres de tri par défaut
-        $sort = $request->get('sort', 'created_at');
-        $direction = $request->get('direction', 'desc');
+   public function index(Request $request)
+{
+    // 1. On définit la direction du tri (desc par défaut)
+    $direction = $request->get('direction', 'desc') === 'asc' ? 'asc' : 'desc';
+    $sort = $request->get('sort', 'created_at');
 
-        // On s'assure que le tri est sécurisé (colonnes autorisées)
-        $allowedSorts = ['titre', 'date_publication', 'created_at', 'title', 'date'];
-        if (!in_array($sort, $allowedSorts)) {
-            $sort = 'created_at';
-        }
+    // 2. Pagination pour les Actualités (Modèle Post)
+    // On adapte la colonne de tri si nécessaire
+    $postSort = in_array($sort, ['titre', 'date_publication', 'created_at']) ? $sort : 'created_at';
+    $posts = Post::orderBy($postSort, $direction)->paginate(5, ['*'], 'posts');
 
-        // Pagination indépendante pour chaque type
-        $posts   = Post::orderBy($sort == 'title' ? 'titre' : ($sort == 'date' ? 'date_publication' : $sort), $direction)
-                       ->paginate(5, ['*'], 'posts');
-        
-        $agendas = \App\Models\Agenda::orderBy($sort == 'titre' ? 'title' : $sort, $direction)
-                                     ->paginate(5, ['*'], 'agendas');
-        
-        $videos  = \App\Models\Video::orderBy($sort == 'titre' ? 'title' : $sort, $direction)
-                                    ->paginate(5, ['*'], 'videos');
-        
-        $avis    = \App\Models\Avis::orderBy($sort == 'title' ? 'titre' : $sort, $direction)
-                                   ->paginate(5, ['*'], 'avis');
+    // 3. Pagination pour l'Agenda (Modèle Agenda)
+    // Si le tri demandé est 'titre', on le remplace par 'title' pour ce modèle
+    $agendaSort = ($sort === 'titre') ? 'title' : (($sort === 'date_publication') ? 'date' : $sort);
+    $agendaSort = in_array($agendaSort, ['title', 'date', 'created_at']) ? $agendaSort : 'created_at';
+    $agendas = \App\Models\Agenda::orderBy($agendaSort, $direction)->paginate(5, ['*'], 'agendas');
 
-        return view('dashboard', compact('posts', 'agendas', 'videos', 'avis'));
-    }
+    // 4. Pagination pour les Vidéos
+    $videoSort = ($sort === 'titre') ? 'title' : $sort;
+    $videoSort = in_array($videoSort, ['title', 'created_at']) ? $videoSort : 'created_at';
+    $videos = \App\Models\Video::orderBy($videoSort, $direction)->paginate(5, ['*'], 'videos');
+
+    // 5. Pagination pour les Avis
+    $avisSort = in_array($sort, ['titre', 'created_at']) ? $sort : 'created_at';
+    $avis = \App\Models\Avis::latest()->paginate(5, ['*'], 'avis');
+
+    // 6. Pagination pour les Allocutions
+    $allocSort = ($sort === 'titre') ? 'titre' : (($sort === 'date_publication') ? 'date_allocution' : $sort);
+    $allocSort = in_array($allocSort, ['titre', 'date_allocution', 'created_at']) ? $allocSort : 'created_at';
+    $allocutions = \App\Models\Allocution::orderBy($allocSort, $direction)->paginate(5, ['*'], 'allocutions');
+
+    return view('dashboard', compact('posts', 'agendas', 'videos', 'avis', 'allocutions'));
+}
 
     /**
      * Enregistre une actualité
