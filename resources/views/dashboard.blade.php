@@ -245,6 +245,12 @@
                 <option value="Audience">Audience</option>
                 <option value="Communiqué">Communiqué</option>
                 <option value="Partenariat">Partenariat</option>
+                 <option value="Partenariat">Séance académique</option>
+                 <option value="Partenariat">Forum</option>
+
+                 <option value="Partenariat">autre</option>
+
+
             </select>
         </div>
     </div>
@@ -437,6 +443,11 @@
                                         <option value="Séance plénière" ${item.categorie == 'Séance plénière' ? 'selected' : ''}>Séance plénière</option>
                                         <option value="Audience" ${item.categorie == 'Audience' ? 'selected' : ''}>Audience</option>
                                         <option value="Communiqué" ${item.categorie == 'Communiqué' ? 'selected' : ''}>Communiqué</option>
+                                        <option value="partenariat" ${item.categorie == 'partenariat' ? 'selected' : ''}>partenariat</option>
+                                        <option value="séance académique" ${item.categorie == 'séance académique' ? 'selected' : ''}>séance académique</option>
+                                        <option value="forum" ${item.categorie == 'forum' ? 'selected' : ''}>forum</option>
+                                        <option value="autre" ${item.categorie == 'autre' ? 'selected' : ''}>autre</option>
+
                                     </select>
                                 </div>
                             </div>
@@ -514,9 +525,14 @@
                             <div class="mb-3">
                                 <label class="form-label">Commission</label>
                                 <select name="commission" class="form-select">
-                                    <option value="Commission Économique" ${item.commission == 'Commission Économique' ? 'selected' : ''}>Commission Économique</option>
-                                    <option value="Commission Sociale" ${item.commission == 'Commission Sociale' ? 'selected' : ''}>Commission Sociale</option>
-                                    <option value="Commission Environnementale" ${item.commission == 'Commission Environnementale' ? 'selected' : ''}>Commission Environnementale</option>
+                                    <option value="CERNAT" ${item.commission == 'CERNAT' ? 'selected'       : ''}>CERNAT</option>
+                                    <option value="ECOFIN" ${item.commission == 'ECOFIN' ? 'selected' : ''}>ECOFIN</option>
+                                    <option value="REX" ${item.commission == 'REX' ? 'selected' : ''}>REX</option>
+                                    <option value="CSAC" ${item.commission == 'CSAC' ? 'selected' : ''}>CSAC</option>
+                                    <option value="CEFE" ${item.commission == 'CEFE' ? 'selected' : ''}>CEFE</option>
+                                    <option value="AGRIDEV" ${item.commission == 'AGRIDEV' ? 'selected' : ''}>AGRIDEV</option>
+                                    <option value="CIAT" ${item.commission == 'CIAT' ? 'selected' : ''}>CIAT</option>
+                                    
                                 </select>
                             </div>
                             <div class="mb-3">

@@ -88,9 +88,13 @@
                 <div class="col-md-4">
                     <label class="form-label">Commission</label>
                     <select name="commission" class="form-select">
-                        <option value="Commission Économique">Commission Économique</option>
-                        <option value="Commission Sociale">Commission Sociale</option>
-                        <option value="Commission Environnementale">Commission Environnementale</option>
+                        <option value="CERNAT">CERNAT</option>
+                        <option value="ECOFIN">ECOFIN</option>
+                        <option value="REX">REX</option>
+                        <option value="CSAC">CSAC</option>
+                        <option value="CEFE">CEFE</option>
+                        <option value="AGRIDEV">AGRIDEV</option>
+                        <option value="CIAT">CIAT</option>
                     </select>
                 </div>
             </div>

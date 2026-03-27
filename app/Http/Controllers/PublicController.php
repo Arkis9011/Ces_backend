@@ -4,78 +4,72 @@ namespace App\Http\Controllers;
 
 use App\Models\Avis;
 use App\Models\Agenda;
-use App\Models\Post; // Si tu as des actualités
+use App\Models\Post;
 use App\Models\Video;
 use Illuminate\Http\Request;
+use App\Models\Allocution;
 
 class PublicController extends Controller
 {
-public function agenda()
-{
-    // On récupère les événements à partir d'aujourd'hui, triés par date proche
-    $evenements = \App\Models\Agenda::where('date', '>=', now())
-                    ->orderBy('date', 'asc')
-                    ->get();
+    public function agenda()
+    {
+        // On affiche TOUT (passés et futurs), les plus récents/proches en premier
+        $evenements = Agenda::orderBy('date', 'desc')
+                            ->orderBy('heure', 'desc')
+                            ->get();
 
-    return view('public.agenda', compact('evenements'));
-}
+        return view('public.agenda', compact('evenements'));
+    }
 
-public function president()
-{
-    $allocutions = \App\Models\Allocution::orderBy('date_allocution', 'desc')->get();
-    
-    return view('public.president', compact('allocutions'));
-}
-public function actualites()
-{
-    // On récupère les actualités triées par date de publication (les plus récentes en premier)
-    // On utilise paginate(9) pour afficher 9 articles par page
-    $actualites = \App\Models\Post::orderBy('date_publication', 'desc')->paginate(9);
+    public function actualites()
+    {
+        // Tri par date de publication et heure de création (si l'heure n'est pas un champ spécifique)
+        $actualites = Post::orderBy('date_publication', 'desc')
+                          ->orderBy('created_at', 'desc')
+                          ->paginate(9);
 
-    return view('public.actualites', compact('actualites'));
-}
+        return view('public.actualites', compact('actualites'));
+    }
 
-
-public function mediatheque()
-{
-    // On récupère les posts qui ont une image pour la galerie photo
-    $photos = \App\Models\Post::whereNotNull('image_url')
-                ->orderBy('date_publication', 'desc')
-                ->get();
-
-    // On récupère toutes les vidéos
-    $videos = \App\Models\Video::orderBy('created_at', 'desc')->get();
-
-    return view('public.mediatheque', compact('photos', 'videos'));
-}
-    
     public function avis()
     {
-        // RÉPONSE À TON ERREUR : Il faut récupérer les avis ici !
-        $avis = Avis::latest()->get();
+        // On récupère tout en triant par la date de création (qui contient l'heure par défaut)
+        $avis = Avis::latest()->get(); 
         
-        // On sépare par commission pour tes onglets
         $avisEco = Avis::where('commission', 'ECOFIN')->latest()->get();
         $avisEnv = Avis::where('commission', 'CERNAT')->latest()->get();
         $avisSocial = Avis::where('commission', 'CSAC')->latest()->get();
 
-        // On envoie TOUTES les variables à la vue
         return view('public.avis', compact('avis', 'avisEco', 'avisEnv', 'avisSocial'));
     }
 
     public function index()
     {
-        $actualites = Post::latest()->take(3)->get();
+        // Pour l'accueil, on veut les 3 ou 4 derniers éléments sans restriction de date passée
+        $actualites = Post::orderBy('date_publication', 'desc')->take(3)->get();
         $avis = Avis::latest()->take(3)->get();
-        
-        // Correction de la ligne 26 (utilise 'date' au lieu de 'date_evenement')
-        $agendas = Agenda::where('date', '>=', now())
-                    ->orderBy('date', 'asc')
-                    ->take(4)
-                    ->get();
+        $agendas = Agenda::orderBy('date', 'desc')->take(4)->get();
                     
         $derniere_video = Video::latest()->first();
 
         return view('public.index', compact('actualites', 'avis', 'agendas', 'derniere_video'));
     }
-}
+
+    // ... tes autres fonctions (index, agenda, etc.)
+
+    public function president()
+    {
+        $allocutions = Allocution::latest('date_allocution')->get();
+        return view('public.president', compact('allocutions'));
+    }
+
+    public function mediatheque()
+    {
+        $videos = Video::latest()->paginate(12);
+        // Les photos sont tirées des actualités ayant une image
+        $photos = Post::whereNotNull('image_url')->where('image_url', '!=', '')->latest()->paginate(12);
+        return view('public.mediatheque', compact('videos', 'photos'));
+    }
+} // Fin de la classe
+
+

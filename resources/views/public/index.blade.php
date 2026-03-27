@@ -114,12 +114,12 @@
       <!-- Slide 1 -->
       <div class="carousel__slide" role="group" aria-roledescription="slide" aria-label="1 sur 3">
         <source srcset="https://www.ces.cd/images/banner/slider2.webp" type="image/webp">
-        <img class="carousel__image" src="https://ik.imagekit.io/ces/bureau/slide2.jpeg?updatedAt=1774355318294" alt="Paysage congolais illustrant la biodiversité" loading="eager" width="1920" height="1080">
+        <img class="carousel__image" src="https://ik.imagekit.io/ces/Slide/slide1.webp" alt="Paysage congolais illustrant la biodiversité" loading="eager" width="1920" height="1080">
         <div class="carousel__overlay"></div>
         <div class="carousel__content">
           <span class="carousel__tag"><i class="fas fa-star" aria-hidden="true"></i> À la une</span>
-          <h2 class="carousel__title">Une voix consultative au cœur des politiques publiques</h2>
-          <p class="carousel__description">Le CES conseille les pouvoirs publics sur les grandes orientations économiques, sociales, culturelles et environnementales.</p>
+          <h2 class="carousel__title">Eclairer les politiques publiques par l'expertise citoyenne</h2>
+          <p class="carousel__description">Le CES éclaire les politiques publiques par son expertise citoyenne et stratégique sur tous les grands enjeux.</p>
           <div class="carousel__actions">
             <a href="{{ url('actualites') }}" class="carousel__btn carousel__btn--primary">Nos Actualités</a>
             <a href="{{ url('apercu') }}" class="carousel__btn carousel__btn--outline">Découvrir le CES <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
@@ -129,12 +129,12 @@
       <!-- Slide 2 -->
       <div class="carousel__slide" role="group" aria-roledescription="slide" aria-label="2 sur 3">
         <source srcset="https://www.ces.cd/images/banner/slider1.webp" type="image/webp">
-        <img class="carousel__image" src="https://ik.imagekit.io/ces/bureau/slide.jpeg" alt="Richesses minières de la RDC" loading="lazy" width="1920" height="1080">
+        <img class="carousel__image" src="https://ik.imagekit.io/ces/Slide/slide2.webp" alt="Richesses minières de la RDC" loading="lazy" width="1920" height="1080">
         <div class="carousel__overlay"></div>
         <div class="carousel__content">
-          <span class="carousel__tag"><i class="fas fa-gem" aria-hidden="true"></i> Nos richesses</span>
-          <h2 class="carousel__title">Un espace de concertation inclusif pour la RDC</h2>
-          <p class="carousel__description">Le CES réunit les représentants de toutes les forces vives : syndicats, patronat, ONG, professions libérales pour bâtir un développement durable.</p>
+          <span class="carousel__tag"><i class="fas fa-gem" aria-hidden="true"></i> Notre Engagement</span>
+          <h2 class="carousel__title">Bâtir un consensus durable pour le développement de la RDC</h2>
+          <p class="carousel__description">Transformer la diversité des opinions en une force d'action pour une croissance inclusive.</p>
           <div class="carousel__actions">
             <a href="{{ url('contact') }}" class="carousel__btn carousel__btn--primary">Nous Contacter</a>
             <a href="{{ url('commissions') }}" class="carousel__btn carousel__btn--outline">Nos Commissions <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
@@ -144,12 +144,12 @@
       <!-- Slide 3 -->
       <div class="carousel__slide" role="group" aria-roledescription="slide" aria-label="3 sur 3">
         <source srcset="https://www.ces.cd/images/banner/slider3.webp" type="image/webp">
-        <img class="carousel__image" src="https://ik.imagekit.io/ces/bureau/Slide3%20(2).JPG" alt="Forêt équatoriale du Congo" loading="lazy" width="1920" height="1080">
+        <img class="carousel__image" src="https://ik.imagekit.io/ces/Slide/Slide3.webp" alt="Forêt équatoriale du Congo" loading="lazy" width="1920" height="1080">
         <div class="carousel__overlay"></div>
         <div class="carousel__content">
-          <span class="carousel__tag"><i class="fas fa-leaf" aria-hidden="true"></i> Environnement</span>
-          <h2 class="carousel__title">Analyse, réflexion &amp; propositions pour la Nation</h2>
-          <p class="carousel__description">À travers ses avis et recommandations, le CES contribue à la formulation des politiques économiques et sociales basées sur les réalités du terrain.</p>
+          <span class="carousel__tag"><i class="fas fa-leaf" aria-hidden="true"></i> Société</span>
+          <h2 class="carousel__title">Transformer l'expertise en solutions pour la Nation</h2>
+          <p class="carousel__description">À travers ses avis, le CES traduit les réalités du terrain en recommandations stratégiques pour une gouvernance plus juste et efficace.</p>
           <div class="carousel__actions">
             <a href="{{ url('avis') }}" class="carousel__btn carousel__btn--primary">Nos Avis</a>
             <a href="{{ url('publications') }}" class="carousel__btn carousel__btn--outline">Publications <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
@@ -212,41 +212,58 @@
       <a href="{{ url('actualites') }}" class="see-all btn btn-outline-primary" style="border-color:var(--bleu-fonce); color:var(--bleu-fonce); font-weight:600;">Toutes les actualités <i class="fas fa-arrow-right"></i></a>
     </div>
 
-    <div class="row g-4">
-      @forelse($actualites as $index => $post)
-        {{-- Le premier article prend 6 colonnes (col-md-6), les suivants 3 (col-md-3) --}}
-        <div class="{{ $index == 0 ? 'col-md-6' : 'col-md-3' }}">
-          <div class="news-card {{ $index == 0 ? 'featured' : '' }} h-100">
-            
-            {{-- Image dynamique depuis ImageKit --}}
-            <img src="{{ $post->image_url ?? 'https://via.placeholder.com/600x400?text=CES+RDC' }}" 
-                 class="w-100" 
-                 style="height:{{ $index == 0 ? '300px' : '220px' }}; object-fit:cover;" 
-                 alt="{{ $post->titre }}">
-            
-            <div class="news-body p-4">
-              @if($post->categorie)
-                <span class="news-badge">{{ $post->categorie }}</span>
-              @endif
+<div class="row g-4">
+  @forelse($actualites as $index => $post)
+    <div class="{{ $index == 0 ? 'col-md-6' : 'col-md-3' }}">
+      <div class="news-card {{ $index == 0 ? 'featured' : '' }} h-100 position-relative">
+        
+        {{-- Badge "AUJOURD'HUI" si la date de publication est celle du jour --}}
+        @if(\Carbon\Carbon::parse($post->date_publication)->isToday())
+          <span class="badge bg-danger position-absolute top-0 start-0 m-3 z-3 animate-pulse">
+             <i class="fas fa-bolt"></i> AUJOURD'HUI
+          </span>
+        @endif
 
-              <div class="news-date text-primary small fw-semibold mt-2">
-                <i class="fas fa-calendar"></i> {{ \Carbon\Carbon::parse($post->date_publication)->translatedFormat('d F Y') }}
-              </div>
-
-              <h3 class="{{ $index == 0 ? 'h5' : 'h6' }} fw-semibold mt-2" style="font-family:'Playfair Display';">
-                {{ $post->titre }}
-              </h3>
-
-              <a href="{{ url('actualites') }}" class="news-link text-primary fw-semibold">Lire l'article <i class="fas fa-arrow-right"></i></a>
-            </div>
+        {{-- Image dynamique --}}
+        <img src="{{ $post->image_url ?? 'https://via.placeholder.com/600x400?text=CES+RDC' }}" 
+             class="w-100" 
+             style="height:{{ $index == 0 ? '300px' : '220px' }}; object-fit:cover;" 
+             alt="{{ $post->titre }}">
+        
+        <div class="news-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            @if($post->categorie)
+              <span class="news-badge m-0">{{ $post->categorie }}</span>
+            @endif
+            {{-- Affichage de l'heure --}}
+            <small class="text-muted">
+              <i class="far fa-clock"></i> {{ \Carbon\Carbon::parse($post->created_at)->format('H:i') }}
+            </small>
           </div>
+
+          <div class="news-date text-primary small fw-semibold">
+            <i class="fas fa-calendar-alt"></i> {{ \Carbon\Carbon::parse($post->date_publication)->translatedFormat('d F Y') }}
+          </div>
+
+          <h3 class="{{ $index == 0 ? 'h5' : 'h6' }} fw-semibold mt-2" style="font-family:'Playfair Display';">
+            {{ $post->titre }}
+          </h3>
+
+          {{-- Ajout du résumé (abstract) pour le premier article --}}
+          @if($index == 0 && $post->resume)
+            <p class="small text-muted mb-3">{{ Str::limit($post->resume, 120) }}</p>
+          @endif
+
+          <a href="javascript:void(0)" onclick="openViewModal('post', {{ $post->id }})" class="news-link text-primary fw-semibold">Lire l'article <i class="fas fa-arrow-right"></i></a>
         </div>
-      @empty
-        <div class="col-12 text-center py-5">
-          <p class="text-muted">Aucune actualité n'est disponible pour le moment.</p>
-        </div>
-      @endforelse
+      </div>
     </div>
+  @empty
+    <div class="col-12 text-center py-5">
+      <p class="text-muted">Aucune actualité n'est disponible.</p>
+    </div>
+  @endforelse
+</div>  
   </div>
 </section>  
 <!-- ===== NOS AVIS ===== -->
@@ -290,8 +307,8 @@
               {{ $item->titre }}
             </h3>
 
-            {{-- Le lien pointe vers le pdf_url généré par ImageKit --}}
-            <a href="{{ $item->pdf_url }}" target="_blank" class="d-inline-flex align-items-center mt-3 text-primary fw-semibold" style="color:var(--bleu); text-decoration:none; font-size:0.83rem; transition:gap 0.7s ease;" onmouseover="this.style.gap='10px'" onmouseout="this.style.gap='6px'">
+            {{-- Le lien ouvre la modale des infos au lieu d'ouvrir directement le pdf --}}
+            <a href="javascript:void(0)" onclick="openViewModal('avi', {{ $item->id }})" class="d-inline-flex align-items-center mt-3 text-primary fw-semibold" style="color:var(--bleu); text-decoration:none; font-size:0.83rem; transition:gap 0.7s ease;" onmouseover="this.style.gap='10px'" onmouseout="this.style.gap='6px'">
               Lire l'avis <i class="fas fa-arrow-right ms-2"></i>
             </a>
           </div>
@@ -325,7 +342,7 @@
       <!-- Publication 1 -->
       <div class="col-md-3">
         <div class="pub-card p-4 text-white h-100" style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:12px; transition:all 0.7s ease; cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.13)'; this.style.borderColor='var(--jaune)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.background='rgba(255,255,255,0.07)'; this.style.borderColor='rgba(255,255,255,0.12)'; this.style.transform='translateY(0)';">
-          <div class="pub-icon fs-1 mb-3" style="color:rgba(247,209,23,0.3);"><i class="fas fa-file-pdf"></i></div>
+          <div class="pub-icon fs-1 mb-3" style="color:rgba(247,209,23,0.3);"><i class="fas fa-file-pdf"style="color:var(--jaune);"></i></div>
           <div class="pub-type small text-uppercase fw-bold" style="color:var(--jaune);">Publication</div>
           <h4 class="h6 mt-2"> <a href="https://ik.imagekit.io/ces/documents/Expos%C3%A9%20du%20Pr%C3%A9sident%20National%20de%20F%C3%A9d%C3%A9ration%20des%20Entreprises%20du%20Congo%20et%20Pr%C3%A9sident%20du%20Conseil%20d_Administration%20de%20GECAMINES.pdf?updatedAt=1774195744577" target="blank">Exposé du Président National de la FEC et Président du Conseil d'Administration de GECAMINES</a></h4>
         </div>
@@ -334,7 +351,7 @@
       <!-- Publication 2 -->
       <div class="col-md-3">
         <div class="pub-card p-4 text-white h-100" style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:12px; transition:all 0.7s ease; cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.13)'; this.style.borderColor='var(--jaune)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.background='rgba(255,255,255,0.07)'; this.style.borderColor='rgba(255,255,255,0.12)'; this.style.transform='translateY(0)';">
-          <div class="pub-icon fs-1 mb-3" style="color:rgba(247,209,23,0.3);"><i class="fas fa-gavel"></i></div>
+          <div class="pub-icon fs-1 mb-3" style="color:rgba(247,209,23,0.3);"><i class="fas fa-gavel"style="color:var(--jaune);"></i></div>
           <div class="pub-type small text-uppercase fw-bold" style="color:var(--jaune);">Loi organique</div>
           <h4 class="h6 mt-2"> <a href="https://ik.imagekit.io/ces/documents/LOI%20ORGANIQUE%20n%C2%B0%2013-027%20portant%20organisation%20et%20fonctionnement%20du%20Conseil%20%C3%A9conomique%20et%20social%20(J.O.RDC.,%209%20novembre%202013,%20n%C2%B0%20sp%C3%A9cial,%20col.%201).pdf?updatedAt=1774195742804" target="blank">LOI ORGANIQUE n°13-027 portant organisation et fonctionnement du CES (J.O.RDC., 2013)</a></h4>
         </div>
@@ -343,7 +360,7 @@
       <!-- Publication 3 -->
       <div class="col-md-3">
         <div class="pub-card p-4 text-white h-100" style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:12px; transition:all 0.7s ease; cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.13)'; this.style.borderColor='var(--jaune)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.background='rgba(255,255,255,0.07)'; this.style.borderColor='rgba(255,255,255,0.12)'; this.style.transform='translateY(0)';">
-          <div class="pub-icon fs-1 mb-3" style="color:rgba(247,209,23,0.3);"><i class="fas fa-earth-africa"></i></div>
+          <div class="pub-icon fs-1 mb-3" style="color:rgba(247,209,23,0.3);"><i class="fas fa-earth-africa"style="color:var(--jaune);"></i></div>
           <div class="pub-type small text-uppercase fw-bold" style="color:var(--jaune);">Charte</div>
           <h4 class="h6 mt-2"><a href="https://ik.imagekit.io/ces/documents/CHARTE%20DE%20L_UCESA%20POUR%20LA%20DURABILITE%20DU%20DEVELOPPEMENT%20DE%20L_AFRIQUE.pdf?updatedAt=1774195749498" target="blank">Charte de l'UCESA pour la durabilité du développement de l'Afrique</a></h4>
         </div>
@@ -352,7 +369,7 @@
       <!-- Publication 4 -->
       <div class="col-md-3">
         <div class="pub-card p-4 text-white h-100" style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:12px; transition:all 0.7s ease; cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.13)'; this.style.borderColor='var(--jaune)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.background='rgba(255,255,255,0.07)'; this.style.borderColor='rgba(255,255,255,0.12)'; this.style.transform='translateY(0)';">
-          <div class="pub-icon fs-1 mb-3" style="color:rgba(247,209,23,0.3);"><i class="fas fa-users-gear"></i></div>
+          <div class="pub-icon fs-1 mb-3" style="color:rgba(247,209,23,0.3);"><i class="fas fa-users-gear"style="color:var(--jaune);"></i></div>
           <div class="pub-type small text-uppercase fw-bold" style="color:var(--jaune);">Rapport</div>
           <h4 class="h6 mt-2"> <a href="https://ik.imagekit.io/ces/documents/R%C3%A9union%20du%20Groupe%20de%20travail%20sur%20la%20Charte%20de%20l_UCESA%20pour%20la%20durabilit%C3%A9%20du%20d%C3%A9veloppement%20l_Afrique.pdf?updatedAt=1774195745390" target="blank">Réunion du Groupe de travail sur la Charte de l'UCESA pour la durabilité du développement en Afrique</a></h4>
         </div>
@@ -381,7 +398,7 @@
       <!-- Président -->
       <div class="col-md col-6">
         <div class="bureau-card bureau-president text-center h-100" style="background:var(--blanc); border-radius:12px; overflow:hidden; box-shadow:var(--ombre); transition:all 0.7s ease;" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 14px 40px rgba(0,0,0,0.14)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--ombre)';">
-          <img src="https://ik.imagekit.io/ces/bureau/Pr%20JKK_.JPG?updatedAt=1774203069796" class="w-100" style="height:160px; object-fit:cover;" alt="Président Jean Pierre Kiwakana KIMAYALA" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <img src="https://ik.imagekit.io/ces/bureau/Pr_JKK__(1)_1_.webp?updatedAt=1774448219113" class="w-100" style="height:160px; object-fit:cover;" alt="Président Jean Pierre Kiwakana KIMAYALA" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
           <div class="bureau-img-placeholder" style="display:none; width:100%; height:160px; background:linear-gradient(135deg, var(--bleu-clair), #d0e8ff); align-items:center; justify-content:center; font-size:2.5rem; color:var(--bleu);"><i class="fas fa-user-tie"></i></div>
           <div class="bureau-info p-3">
             <div class="role small text-uppercase fw-bold" style="color:var(--rouge);">Président</div>
@@ -393,7 +410,7 @@
       <!-- 1er Vice-Président -->
       <div class="col-md col-6">
         <div class="bureau-card text-center h-100" style="background:var(--blanc); border-radius:12px; overflow:hidden; box-shadow:var(--ombre); transition:all 0.7s ease;" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 14px 40px rgba(0,0,0,0.14)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--ombre)';">
-          <img src="https://ik.imagekit.io/ces/bureau/1Pr%20LKK.png?updatedAt=1774201365444" class="w-100" style="height:160px; object-fit:cover;" alt="1er Vice-Président Léon Kyaboba KASOBWA" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <img src="https://ik.imagekit.io/ces/bureau/1VP_LKK_.webp?updatedAt=1774449073714" class="w-100" style="height:160px; object-fit:cover;" alt="1er Vice-Président Léon Kyaboba KASOBWA" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
           <div class="bureau-img-placeholder" style="display:none; width:100%; height:160px; background:linear-gradient(135deg, var(--bleu-clair), #d0e8ff); align-items:center; justify-content:center; font-size:2.5rem; color:var(--bleu);"><i class="fas fa-user-tie"></i></div>
           <div class="bureau-info p-3">
             <div class="role small text-uppercase fw-bold" style="color:var(--rouge);">1er Vice-Président</div>
@@ -405,7 +422,7 @@
       <!-- 2ème Vice-Président -->
       <div class="col-md col-6">
         <div class="bureau-card text-center h-100" style="background:var(--blanc); border-radius:12px; overflow:hidden; box-shadow:var(--ombre); transition:all 0.7s ease;" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 14px 40px rgba(0,0,0,0.14)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--ombre)';">
-          <img src="https://ik.imagekit.io/ces/bureau/2Pr%20CTK.png?updatedAt=1774201365415" class="w-100" style="height:160px; object-fit:cover;" alt="2ème Vice-Président Célestin Tshibwabwa KANYAMA" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <img src="https://ik.imagekit.io/ces/bureau/2VP_CTK.webp?updatedAt=1774448924923" class="w-100" style="height:160px; object-fit:cover;" alt="2ème Vice-Président Célestin Tshibwabwa KANYAMA" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
           <div class="bureau-img-placeholder" style="display:none; width:100%; height:160px; background:linear-gradient(135deg, var(--bleu-clair), #d0e8ff); align-items:center; justify-content:center; font-size:2.5rem; color:var(--bleu);"><i class="fas fa-user-tie"></i></div>
           <div class="bureau-info p-3">
             <div class="role small text-uppercase fw-bold" style="color:var(--rouge);">2ème Vice-Président</div>
@@ -417,7 +434,7 @@
       <!-- Rapporteur -->
       <div class="col-md col-6">
         <div class="bureau-card text-center h-100" style="background:var(--blanc); border-radius:12px; overflow:hidden; box-shadow:var(--ombre); transition:all 0.7s ease;" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 14px 40px rgba(0,0,0,0.14)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--ombre)';">
-          <img src="https://ik.imagekit.io/ces/bureau/Rapp%20RNM.png?updatedAt=1774201365492" class="w-100" style="height:160px; object-fit:cover;" alt="Rapporteur René Ngongo MATESO" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <img src="https://ik.imagekit.io/ces/bureau/Rapp_RNM_.webp?updatedAt=1774448978783" class="w-100" style="height:160px; object-fit:cover;" alt="Rapporteur René Ngongo MATESO" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
           <div class="bureau-img-placeholder" style="display:none; width:100%; height:160px; background:linear-gradient(135deg, var(--bleu-clair), #d0e8ff); align-items:center; justify-content:center; font-size:2.5rem; color:var(--bleu);"><i class="fas fa-user-tie"></i></div>
           <div class="bureau-info p-3">
             <div class="role small text-uppercase fw-bold" style="color:var(--rouge);">Rapporteur</div>
@@ -429,7 +446,7 @@
       <!-- Rapporteur Adjoint -->
       <div class="col-md col-6">
         <div class="bureau-card text-center h-100" style="background:var(--blanc); border-radius:12px; overflow:hidden; box-shadow:var(--ombre); transition:all 0.7s ease;" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 14px 40px rgba(0,0,0,0.14)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--ombre)';">
-          <img src="https://ik.imagekit.io/ces/bureau/Rapp.Adj%20SMT.png?updatedAt=1774201365404" class="w-100" style="height:160px; object-fit:cover;" alt="Rapporteur Adjoint Sylvie Mbakata THULA" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <img src="https://ik.imagekit.io/ces/bureau/Rapp_Adj%20SMT_.webp?updatedAt=1774448958778" class="w-100" style="height:160px; object-fit:cover;" alt="Rapporteur Adjoint Sylvie Mbakata THULA" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
           <div class="bureau-img-placeholder" style="display:none; width:100%; height:160px; background:linear-gradient(135deg, var(--bleu-clair), #d0e8ff); align-items:center; justify-content:center; font-size:2.5rem; color:var(--bleu);"><i class="fas fa-user-tie"></i></div>
           <div class="bureau-info p-3">
             <div class="role small text-uppercase fw-bold" style="color:var(--rouge);">Rapporteur Adjoint</div>
@@ -441,7 +458,7 @@
       <!-- Questeur -->
       <div class="col-md col-6">
         <div class="bureau-card text-center h-100" style="background:var(--blanc); border-radius:12px; overflow:hidden; box-shadow:var(--ombre); transition:all 0.7s ease;" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 14px 40px rgba(0,0,0,0.14)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--ombre)';">
-          <img src="https://ik.imagekit.io/ces/bureau/Quest.%20AMEK.png?updatedAt=1774201365391" class="w-100" style="height:160px; object-fit:cover;" alt="Questeur Astrid Martins Elias KABENGELE" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <img src="https://ik.imagekit.io/ces/bureau/Quest_AMK.webp?updatedAt=1774449132444" class="w-100" style="height:160px; object-fit:cover;" alt="Questeur Astrid Martins Elias KABENGELE" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
           <div class="bureau-img-placeholder" style="display:none; width:100%; height:160px; background:linear-gradient(135deg, var(--bleu-clair), #d0e8ff); align-items:center; justify-content:center; font-size:2.5rem; color:var(--bleu);"><i class="fas fa-user-tie"></i></div>
           <div class="bureau-info p-3">
             <div class="role small text-uppercase fw-bold" style="color:var(--rouge);">Questeur</div>
@@ -453,7 +470,7 @@
       <!-- Questeur Adjoint -->
       <div class="col-md col-6">
         <div class="bureau-card text-center h-100" style="background:var(--blanc); border-radius:12px; overflow:hidden; box-shadow:var(--ombre); transition:all 0.7s ease;" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 14px 40px rgba(0,0,0,0.14)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--ombre)';">
-          <img src="https://ik.imagekit.io/ces/bureau/Quest.Adj%20BMY.png?updatedAt=1774201364781" class="w-100" style="height:160px; object-fit:cover;" alt="Questeur Adjoint Béatrice Mpulu YEMBELA" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <img src="https://ik.imagekit.io/ces/bureau/Quest_Adj_BM_.webp?updatedAt=1774449118409" class="w-100" style="height:160px; object-fit:cover;" alt="Questeur Adjoint Béatrice Mpulu YEMBELA" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
           <div class="bureau-img-placeholder" style="display:none; width:100%; height:160px; background:linear-gradient(135deg, var(--bleu-clair), #d0e8ff); align-items:center; justify-content:center; font-size:2.5rem; color:var(--bleu);"><i class="fas fa-user-tie"></i></div>
           <div class="bureau-info p-3">
             <div class="role small text-uppercase fw-bold" style="color:var(--rouge);">Questeur Adjoint</div>
@@ -732,6 +749,8 @@
 
   <div class="footer-tricolor" style="height:5px; background:linear-gradient(to right, var(--bleu) 33.33%, var(--jaune) 33.33%, var(--jaune) 66.66%, var(--rouge) 66.66%);"></div>
 </footer>
+
+@include('components.public-view-modal')
 
 <script src="{{ asset('assets/js/main.Js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

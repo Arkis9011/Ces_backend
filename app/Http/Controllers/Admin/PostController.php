@@ -41,21 +41,21 @@ class PostController extends Controller
      */
    public function index(Request $request)
 {
-    // 1. On définit la direction du tri (desc par défaut)
+    // 1. On définit le tri par défaut sur 'date_publication' au lieu de 'created_at'
+    // Si aucun paramètre n'est passé dans l'URL, on prend 'date_publication' en 'desc'
+    $sort = $request->get('sort', 'date_publication'); 
     $direction = $request->get('direction', 'desc') === 'asc' ? 'asc' : 'desc';
-    $sort = $request->get('sort', 'created_at');
 
     // 2. Pagination pour les Actualités (Modèle Post)
-    // On adapte la colonne de tri si nécessaire
-    $postSort = in_array($sort, ['titre', 'date_publication', 'created_at']) ? $sort : 'created_at';
+    // On s'assure que si c'est le tri par défaut, on utilise bien la colonne date_publication
+    $postSort = in_array($sort, ['titre', 'date_publication', 'created_at']) ? $sort : 'date_publication';
     $posts = Post::orderBy($postSort, $direction)->paginate(5, ['*'], 'posts');
 
     // 3. Pagination pour l'Agenda (Modèle Agenda)
-    // Si le tri demandé est 'titre', on le remplace par 'title' pour ce modèle
-    $agendaSort = ($sort === 'titre') ? 'title' : (($sort === 'date_publication') ? 'date' : $sort);
-    $agendaSort = in_array($agendaSort, ['title', 'date', 'created_at']) ? $agendaSort : 'created_at';
+    // Ici, on fait correspondre 'date_publication' avec la colonne 'date' de ton modèle Agenda
+    $agendaSort = ($sort === 'date_publication') ? 'date' : (($sort === 'titre') ? 'title' : $sort);
+    $agendaSort = in_array($agendaSort, ['title', 'date', 'created_at']) ? $agendaSort : 'date';
     $agendas = \App\Models\Agenda::orderBy($agendaSort, $direction)->paginate(5, ['*'], 'agendas');
-
     // 4. Pagination pour les Vidéos
     $videoSort = ($sort === 'titre') ? 'title' : $sort;
     $videoSort = in_array($videoSort, ['title', 'created_at']) ? $videoSort : 'created_at';

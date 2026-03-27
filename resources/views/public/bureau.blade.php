@@ -134,7 +134,7 @@
       <!-- Président -->
       <div class="col-lg-3 col-md-6">
         <div class="membre-card reveal" style="border-top:4px solid var(--jaune)">
-          <img src="https://ik.imagekit.io/ces/bureau/Pr%20JKK_.JPG" alt="Président" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <img src="https://ik.imagekit.io/ces/bureau/Pr_JKK__(1)_1_.webp?updatedAt=1774448219113" alt="Président" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
           <div class="mc-body">
             <div class="mc-role">Président</div>
@@ -146,7 +146,7 @@
       <!-- 1er VP -->
       <div class="col-lg-3 col-md-6">
         <div class="membre-card reveal">
-          <img src="https://ik.imagekit.io/ces/bureau/1Pr%20LKK.png" alt="1er VP" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <img src="https://ik.imagekit.io/ces/bureau/1VP_LKK_.webp?updatedAt=1774449073714" alt="1er VP" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
           <div class="mc-body">
             <div class="mc-role">1er Vice-Président</div>
@@ -157,7 +157,7 @@
       <!-- 2ème VP -->
       <div class="col-lg-3 col-md-6">
         <div class="membre-card reveal">
-          <img src="https://ik.imagekit.io/ces/bureau/2Pr%20CTK.png" alt="2e VP" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <img src="https://ik.imagekit.io/ces/bureau/2VP_CTK.webp?updatedAt=1774448924923" alt="2e VP" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
           <div class="mc-body">
             <div class="mc-role">2ème Vice-Président</div>
@@ -168,7 +168,7 @@
       <!-- Rapporteur -->
       <div class="col-lg-3 col-md-6">
         <div class="membre-card reveal">
-          <img src="https://ik.imagekit.io/ces/bureau/Rapp%20RNM.png" alt="Rapporteur" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <img src="https://ik.imagekit.io/ces/bureau/Rapp_RNM_.webp?updatedAt=1774448978783" alt="Rapporteur" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
           <div class="mc-body">
             <div class="mc-role">Rapporteur</div>
@@ -179,7 +179,7 @@
       <!-- Rapporteur Adjoint -->
       <div class="col-lg-3 col-md-6">
         <div class="membre-card reveal">
-          <img src="https://ik.imagekit.io/ces/bureau/Rapp.Adj%20SMT.png" alt="Rapp. Adj." onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <img src="https://ik.imagekit.io/ces/bureau/Rapp_Adj%20SMT_.webp?updatedAt=1774448958778" alt="Rapp. Adj." onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
           <div class="mc-body">
             <div class="mc-role">Rapporteur Adjoint</div>
@@ -190,7 +190,7 @@
       <!-- Questeur -->
       <div class="col-lg-3 col-md-6">
         <div class="membre-card reveal">
-          <img src="https://ik.imagekit.io/ces/bureau/Quest.%20AMEK.png" alt="Questeur" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <img src="https://ik.imagekit.io/ces/bureau/Quest_AMK.webp?updatedAt=1774449132444" alt="Questeur" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
           <div class="mc-body">
             <div class="mc-role">Questeur</div>
@@ -201,7 +201,7 @@
       <!-- Questeur Adjoint -->
       <div class="col-lg-3 col-md-6">
         <div class="membre-card reveal">
-          <img src="https://ik.imagekit.io/ces/bureau/Quest.Adj%20BMY.png" alt="Questeur Adj." onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <img src="https://ik.imagekit.io/ces/bureau/Quest_Adj_BM_.webp?updatedAt=1774449118409" alt="Questeur Adj." onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
           <div class="mc-body">
             <div class="mc-role">Questeur Adjoint</div>

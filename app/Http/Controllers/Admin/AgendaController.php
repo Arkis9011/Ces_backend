@@ -70,11 +70,18 @@ class AgendaController extends Controller
     /**
      * API Index
      */
-    public function apiIndex(Request $request)
-    {
-        if ($request->has('id')) {
-            return response()->json(Agenda::findOrFail($request->id));
-        }
-        return response()->json(Agenda::latest()->get());
+public function apiIndex(Request $request)
+{
+    if ($request->has('id')) {
+        return response()->json(Agenda::findOrFail($request->id));
     }
+
+    // On récupère tout, trié par date décroissante (plus récent/futur en haut)
+    // Les événements du jour sont inclus naturellement
+    $events = Agenda::orderBy('date', 'desc')
+                    ->orderBy('heure', 'desc')
+                    ->get();
+
+    return response()->json($events);
+}
 }

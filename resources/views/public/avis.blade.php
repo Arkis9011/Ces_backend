@@ -124,133 +124,88 @@
 </div>
 
 <!-- CONTENU PRINCIPAL AVEC BOOTSTRAP -->
-<div class="content-wrap">
+<div class="content-wrap py-5">
   <div class="container">
     <div class="row g-5">
-      <!-- Colonne principale -->
       <div class="col-lg-8">
-        <!-- Tabs -->
-        <div class="tabs">
-          <button class="tab-btn active" data-group="avis" data-target="avis-tous">Tous les avis</button>
-          <button class="tab-btn" data-group="avis" data-target="avis-eco">ECOFIN</button>
-          <button class="tab-btn" data-group="avis" data-target="avis-env">CERNAT</button>
-          <button class="tab-btn" data-group="avis" data-target="avis-social">CSAC</button>
-          <button class="tab-btn" data-group="avis" data-target="avis-social">CEFE</button>
-          <button class="tab-btn" data-group="avis" data-target="avis-social">CIAT</button>
-          <button class="tab-btn" data-group="avis" data-target="avis-social">REX</button>
-        </div>
-
-        <!-- Panneau Tous les avis -->
-     <div id="avis-tous" class="tab-panel active" data-group="avis">
-  @forelse($avis as $item)
-    <div class="doc-card reveal">
-      <div class="doc-icon">
-        @php
-          $icon = 'fa-file-signature';
-          $comm = strtolower($item->commission);
-          if(str_contains($comm, 'ecofin')) $icon = 'fa-landmark';
-          if(str_contains($comm, 'cernat')) $icon = 'fa-leaf';
-          if(str_contains($comm, 'rex')) $icon = 'fa-shield-halved';
-        @endphp
-        <i class="fas {{ $icon }}"></i>
-      </div>
-      <div class="doc-meta">
-        <span class="doc-tag">{{ $item->commission }}</span>
-        <h4>{{ $item->titre }}</h4>
-        <div class="doc-date">
-          <i class="fas fa-calendar"></i> {{ $item->created_at->format('Y') }}
-        </div>
-        {{-- Lien vers le PDF sur ImageKit --}}
-        <a href="{{ $item->pdf_url }}" target="_blank" class="doc-link">
-          <i class="fas fa-file-pdf"></i> Lire l'avis complet
-        </a>
-      </div>
-    </div>
-  @empty
-    <p class="text-center py-5">Aucun avis disponible pour le moment.</p>
-  @endforelse
-</div>
-
-<div id="avis-eco" class="tab-panel" data-group="avis">
-  @foreach($avisEco as $item)
-    <div class="doc-card">
-      <div class="doc-icon"><i class="fas fa-chart-line"></i></div>
-      <div class="doc-meta">
-        <span class="doc-tag">{{ $item->commission }}</span>
-        <h4>{{ $item->titre }}</h4>
-        <div class="doc-date"><i class="fas fa-calendar"></i> {{ $item->created_at->format('Y') }}</div>
-        <a href="{{ $item->pdf_url }}" target="_blank" class="doc-link"><i class="fas fa-file-pdf"></i> Lire l'avis</a>
-      </div>
-    </div>
-  @endforeach
-</div>
-
-{{-- Répète la même logique pour les autres panneaux (avis-env, avis-social) --}}
-
-        <!-- Panneau Économie -->
-        <div id="avis-eco" class="tab-panel" data-group="avis">
-          <div class="doc-card">
-            <div class="doc-icon"><i class="fas fa-chart-line"></i></div>
-            <div class="doc-meta">
-              <span class="doc-tag">ECOFIN</span>
-              <h4>Analyse de la politique budgétaire et recommandations pour l'amélioration de la mobilisation des recettes fiscales en RDC.</h4>
-              <div class="doc-date"><i class="fas fa-calendar"></i> 2022</div>
-              <a href="{{ url('avis') }}" class="doc-link"><i class="fas fa-file-alt"></i> Lire l'avis</a>
-            </div>
+        <div class="tabs-container mb-4 shadow-sm p-2 bg-light rounded-pill">
+          <div class="tabs d-flex overflow-auto">
+            <button class="tab-btn active px-4 py-2" data-group="avis" data-target="avis-tous">Tous les avis</button>
+            @foreach(['ECOFIN', 'CERNAT', 'CSAC', 'CEFE', 'CIAT', 'REX', 'AGRIDEV'] as $comm)
+              <button class="tab-btn px-4 py-2" data-group="avis" data-target="avis-{{ strtolower($comm) }}">{{ $comm }}</button>
+            @endforeach
           </div>
         </div>
 
-        <!-- Panneau Environnement -->
-        <div id="avis-env" class="tab-panel" data-group="avis">
-          <div class="doc-card">
-            <div class="doc-icon"><i class="fas fa-leaf"></i></div>
-            <div class="doc-meta">
-              <span class="doc-tag">Environnement</span>
-              <h4>Problématique de l'exploration et de l'exploitation des ressources dans les Aires protégées en RDC.</h4>
-              <div class="doc-date"><i class="fas fa-calendar"></i> 2024</div>
-              <a href="{{ url('avis') }}" class="doc-link"><i class="fas fa-file-alt"></i> Lire l'avis</a>
+        <div id="avis-tous" class="tab-panel active" data-group="avis">
+          @forelse($avis as $item)
+            <div class="doc-card reveal mb-3 p-4 shadow-sm border-start border-4 border-primary bg-white d-flex align-items-center gap-4" style="border-radius: 8px;">
+              <div class="doc-icon flex-shrink-0 d-flex align-items-center justify-content-center bg-primary-subtle text-primary rounded-circle" style="width: 60px; height: 60px;">
+                @php
+                  $icon = 'fa-file-signature';
+                  $comm = strtolower($item->commission);
+                  if(str_contains($comm, 'eco')) $icon = 'fa-chart-line';
+                  elseif(str_contains($comm, 'cer')) $icon = 'fa-leaf';
+                  elseif(str_contains($comm, 'rex')) $icon = 'fa-shield-halved';
+                  elseif(str_contains($comm, 'agr')) $icon = 'fa-tractor';
+                @endphp
+                <i class="fas {{ $icon }} fa-lg"></i>
+              </div>
+              
+              <div class="doc-meta flex-grow-1">
+                <div class="d-flex justify-content-between align-items-start mb-1">
+                  <span class="badge bg-secondary-subtle text-secondary text-uppercase small" style="font-size: 0.65rem;">{{ $item->commission }}</span>
+                  <span class="text-muted small"><i class="far fa-clock me-1"></i>{{ $item->created_at->format('H:i') }}</span>
+                </div>
+                <h4 class="h6 fw-bold mb-2" style="font-family: 'Inter', sans-serif; line-height: 1.5;">{{ $item->titre }}</h4>
+                <div class="d-flex align-items-center gap-3">
+                  <div class="doc-date text-muted small">
+                    <i class="fas fa-calendar-alt me-1 text-primary"></i> {{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d M Y') }}
+                  </div>
+                  <a href="javascript:void(0)" onclick="openViewModal('avi', {{ $item->id }})" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                    <i class="fas fa-eye me-2"></i>Voir les détails
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
+          @empty
+            <div class="text-center py-5 bg-light rounded-4">
+              <i class="fas fa-folder-open fa-3x mb-3 text-muted opacity-25"></i>
+              <p class="text-muted">Aucun avis disponible pour le moment.</p>
+            </div>
+          @endforelse
         </div>
 
-        <!-- Panneau Social -->
-        <div id="avis-social" class="tab-panel" data-group="avis">
-          <div class="doc-card">
-            <div class="doc-icon"><i class="fas fa-people-group"></i></div>
-            <div class="doc-meta">
-              <span class="doc-tag">Social</span>
-              <h4>État des lieux du système de protection sociale en RDC et recommandations pour son renforcement.</h4>
-              <div class="doc-date"><i class="fas fa-calendar"></i> 2022</div>
-              <a href="{{ url('avis') }}" class="doc-link"><i class="fas fa-file-alt"></i> Lire l'avis</a>
-            </div>
-          </div>
+        {{-- Les panneaux filtrés (Exemple pour ECOFIN) --}}
+        <div id="avis-ecofin" class="tab-panel" data-group="avis">
+            {{-- Ici tu peux filtrer ta collection en Blade si tu ne veux pas multiplier les variables du contrôleur --}}
+            @foreach($avis->where('commission', 'ECOFIN') as $item)
+                {{-- Même structure que la doc-card ci-dessus --}}
+            @endforeach
         </div>
+
       </div>
 
-      <!-- Sidebar droite -->
       <aside class="col-lg-4">
-        <div class="sidebar-box">
-          <h4><i class="fas fa-filter"></i> Par commission</h4>
-          <ul>
-            <li><i class="fas fa-chart-line"></i> ECOFIN</li>
-            <li><i class="fas fa-leaf"></i> CERNAT</li>
-            <li><i class="fas fa-shield-halved"></i> REX</li>
-            <li><i class="fas fa-heart-pulse"></i> CSAC</li>
-            <li><i class="fas fa-graduation-cap"></i> CEFE</li>
-            <li><i class="fas fa-tractor"></i> AGRIDEV</li>
-            <li><i class="fas fa-road"></i> CIAT</li>
+        <div class="sidebar-box p-4 bg-white shadow-sm rounded-4 mb-4">
+          <h4 class="h5 fw-bold mb-4 border-bottom pb-2"><i class="fas fa-filter text-primary me-2"></i>Rôle consultatif</h4>
+          <p class="small text-muted">Les avis du CES sont le fruit de délibérations rigoureuses au sein des commissions spécialisées, visant à éclairer les décisions publiques.</p>
+          <ul class="list-unstyled mt-3">
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Études d'impact</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Rapports annuels</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Recommandations stratégiques</li>
           </ul>
         </div>
-        <div class="sidebar-highlight">
-          <h4><i class="fas fa-envelope"></i> Soumettre une question</h4>
-          <p>Vous souhaitez soumettre une question au CES pour avis consultatif ?</p>
-          <a href="{{ url('contact') }}">Nous contacter</a>
+        
+        <div class="sidebar-highlight p-4 text-white rounded-4 shadow-lg" style="background: linear-gradient(135deg, var(--bleu), #003366);">
+          <h4 class="h5 fw-bold mb-3"><i class="fas fa-paper-plane me-2"></i>Saisine du Conseil</h4>
+          <p class="small opacity-75">Le CES peut être saisi par le Président de la République, le Gouvernement ou le Parlement.</p>
+          <a href="{{ url('contact') }}" class="btn btn-warning w-100 fw-bold mt-2">Nous contacter</a>
         </div>
       </aside>
     </div>
   </div>
 </div>
-
 
 
 <!-- ===== FOOTER ===== -->
@@ -294,6 +249,8 @@
 </footer>
 
 
+@include('components.public-view-modal')
+
 <script src="{{ asset('assets/js/main.Js') }}"></script>
 
 <!-- Scripts Bootstrap et animation -->
@@ -327,6 +284,7 @@
     obs.observe(el);
   });
 </script>
+<script>
   // Slider et observer (ajusté pour le carrousel existant)
   let current = 0;
   const total = 3;

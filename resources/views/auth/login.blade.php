@@ -26,6 +26,19 @@
     .btn-auth { background: #003366; color: #fff; width: 100%; padding: 12px; border-radius: 8px; font-weight: 600; border: none; transition: all 0.3s ease; margin-top: 15px; }
     .btn-auth:hover { background: #0055aa; transform: translateY(-2px); }
     .back-link { display: block; text-align: center; color: #666; margin-top: 20px; font-size: 0.85rem; text-decoration: none; }
+    
+    .password-wrapper { position: relative; }
+    .password-toggle {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #666;
+        z-index: 10;
+        transition: color 0.3s;
+    }
+    .password-toggle:hover { color: #003366; }
   </style>
 </head>
 <body>
@@ -54,7 +67,10 @@
         
         <div class="form-group mb-4">
           <label for="password">Mot de passe</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="" required>
+          <div class="password-wrapper">
+            <input type="password" id="password" name="password" class="form-control" placeholder="" required>
+            <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+          </div>
         </div>
         
         <button type="submit" class="btn-auth">
@@ -68,5 +84,19 @@
     </div>
   </div>
 
+  <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+
+    togglePassword.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+  </script>
 </body>
 </html>

@@ -2532,3 +2532,44 @@ th{
 }
 
 
+/* Style des onglets (Tabs) */
+.tab-btn {
+    border: none;
+    background: transparent;
+    color: #6c757d;
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+}
+
+.tab-btn.active {
+    background: var(--bleu);
+    color: white !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hover sur les documents */
+.doc-card {
+    transition: all 0.3s ease;
+}
+
+.doc-card:hover {
+    transform: translateX(10px);
+    background-color: #f8f9fa !important;
+}
