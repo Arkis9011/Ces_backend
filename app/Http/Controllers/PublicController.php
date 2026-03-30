@@ -70,6 +70,21 @@ class PublicController extends Controller
         $photos = Post::whereNotNull('image_url')->where('image_url', '!=', '')->latest()->paginate(12);
         return view('public.mediatheque', compact('videos', 'photos'));
     }
+    public function showActualite($id)
+    {
+        $actualite = Post::findOrFail($id);
+        return view('public.show_actualite', compact('actualite'));
+    }
+
+    public function showAvis($id)
+    {
+        $avisshow = Avis::findOrFail($id);
+        return view('public.show_avis', compact('avisshow'));
+    }
+
+    public function showAgenda($id)
+    {
+        $agendashow = Agenda::findOrFail($id);
+        return view('public.show_agenda', compact('agendashow'));
+    }
 } // Fin de la classe
-
-

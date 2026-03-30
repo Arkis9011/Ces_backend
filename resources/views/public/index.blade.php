@@ -254,7 +254,7 @@
             <p class="small text-muted mb-3">{{ Str::limit($post->resume, 120) }}</p>
           @endif
 
-          <a href="javascript:void(0)" onclick="openViewModal('post', {{ $post->id }})" class="news-link text-primary fw-semibold">Lire l'article <i class="fas fa-arrow-right"></i></a>
+          <a href="{{ route('actualites.show', $post->id) }}" class="news-link text-primary fw-semibold">Lire l'article <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -307,8 +307,8 @@
               {{ $item->titre }}
             </h3>
 
-            {{-- Le lien ouvre la modale des infos au lieu d'ouvrir directement le pdf --}}
-            <a href="javascript:void(0)" onclick="openViewModal('avi', {{ $item->id }})" class="d-inline-flex align-items-center mt-3 text-primary fw-semibold" style="color:var(--bleu); text-decoration:none; font-size:0.83rem; transition:gap 0.7s ease;" onmouseover="this.style.gap='10px'" onmouseout="this.style.gap='6px'">
+            {{-- Le lien ouvre la page des infos au lieu d'ouvrir directement le pdf --}}
+            <a href="{{ route('avis.detail', $item->id) }}" class="d-inline-flex align-items-center mt-3 text-primary fw-semibold" style="color:var(--bleu); text-decoration:none; font-size:0.83rem; transition:gap 0.7s ease;" onmouseover="this.style.gap='10px'" onmouseout="this.style.gap='6px'">
               Lire l'avis <i class="fas fa-arrow-right ms-2"></i>
             </a>
           </div>
@@ -323,7 +323,7 @@
 </section>
 
 <!-- ===== PUBLICATIONS ===== -->
-<section class="publications-section py-5" style="background-color: var(--bleu-fonce);">
+<section class="publications-section py-5" style="background-color: var(--texte);">
   <div class="container">
     <!-- En-tête de section -->
     <div class="d-flex flex-wrap align-items-end justify-content-between mb-5">
@@ -697,14 +697,14 @@
 </div>
 
 <!-- ===== NEWSLETTER ===== -->
-<section class="newsletter-section py-5" style="background: linear-gradient(135deg, var(--bleu-fonce) 0%, #003a7a 100%);">
+<section class="newsletter-section py-5" style="background: var(--bleu-clair);">
   <div class="container">
-    <div class="text-center text-white" style="max-width:680px; margin:auto;">
-      <h2 class="h1" style="font-family:'Playfair Display';">Lettre d'information</h2>
-      <p class="mb-4">Recevez directement sur votre adresse email les dernières informations et actualités sur l'institution.</p>
+    <div class="text-center" style="max-width:680px; margin:auto; color: var(--texte);">
+      <h2 class="h1" style="font-family:'Playfair Display'; font-weight: 700;">Lettre d'information</h2>
+      <p class="mb-4 opacity-75">Recevez directement sur votre adresse email les dernières informations et actualités sur l'institution.</p>
       <div class="d-flex flex-column flex-sm-row gap-3">
-        <input type="email" class="form-control bg-transparent text-white" placeholder="Votre adresse email..." style="border:1px solid rgba(255,255,255,0.3);">
-        <button class="btn btn-warning fw-bold" style="background:var(--jaune); border:none;">S'abonner <i class="fas fa-paper-plane"></i></button>
+        <input type="email" class="form-control" placeholder="Votre adresse email..." style="border:1px solid rgba(0,0,0,0.1); padding: 12px 20px; border-radius: 8px;">
+        <button class="btn btn-warning fw-bold px-4" style="background:var(--jaune); border:none; border-radius: 8px; color: var(--texte);">S'abonner <i class="fas fa-paper-plane ms-2"></i></button>
       </div>
     </div>
   </div>
@@ -750,7 +750,7 @@
   <div class="footer-tricolor" style="height:5px; background:linear-gradient(to right, var(--bleu) 33.33%, var(--jaune) 33.33%, var(--jaune) 66.66%, var(--rouge) 66.66%);"></div>
 </footer>
 
-@include('components.public-view-modal')
+{{-- @include('components.public-view-modal') --}}
 
 <script src="{{ asset('assets/js/main.Js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

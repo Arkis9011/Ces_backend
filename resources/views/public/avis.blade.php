@@ -162,7 +162,7 @@
                   <div class="doc-date text-muted small">
                     <i class="fas fa-calendar-alt me-1 text-primary"></i> {{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d M Y') }}
                   </div>
-                  <a href="javascript:void(0)" onclick="openViewModal('avi', {{ $item->id }})" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                  <a href="{{ route('avis.detail', $item->id) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">
                     <i class="fas fa-eye me-2"></i>Voir les détails
                   </a>
                 </div>
@@ -249,7 +249,7 @@
 </footer>
 
 
-@include('components.public-view-modal')
+{{-- @include('components.public-view-modal') --}}
 
 <script src="{{ asset('assets/js/main.Js') }}"></script>
 

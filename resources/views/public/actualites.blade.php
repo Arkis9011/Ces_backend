@@ -168,7 +168,7 @@
                             {{ Str::limit($post->resume, 110) }}
                         </p>
 
-                        <a href="javascript:void(0)" onclick="openViewModal('post', {{ $post->id }})" class="btn btn-link p-0 text-decoration-none fw-bold text-primary">
+                        <a href="{{ route('actualites.show', $post->id) }}" class="btn btn-link p-0 text-decoration-none fw-bold text-primary">
                             Lire la suite <i class="fas fa-arrow-right ms-1"></i>
                         </a>
                     </div>
@@ -238,7 +238,7 @@
   <div class="footer-tricolor" style="height:5px; background:linear-gradient(to right, var(--bleu) 33.33%, var(--jaune) 33.33%, var(--jaune) 66.66%, var(--rouge) 66.66%);"></div>
 </footer>
 
-@include('components.public-view-modal')
+{{-- @include('components.public-view-modal') --}}
 
 <script src="{{ asset('assets/js/main.Js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

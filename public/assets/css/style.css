@@ -460,7 +460,7 @@ ul {
   margin-bottom: 12px;
 }
 .page-hero h1 em {
-  color: var(--jaune);
+  color: #fff;
   font-style: normal;
 }
 .page-hero p {

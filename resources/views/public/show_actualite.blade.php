@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Site Officiel du Conseil Économique et Social | République Démocratique du Congo</title>
+  <title>{{ $actualite->titre }} | Conseil Économique et Social</title>
   
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,22 +20,17 @@
 <!-- ===== HEADER ===== -->
 <header class="site-header">
   <div class="header-container">
-    <!-- Logo -->
     <a href="{{ url('/') }}" class="logo">
       <img src="{{ asset('assets/images/logo_header.png') }}" alt="Conseil Économique et Social - RDC" class="logo-img">
     </a>
 
-    <!-- Bouton menu mobile -->
     <button class="mobile-toggle" id="mobileToggle" aria-label="Menu" aria-expanded="false">
       <i class="fas fa-bars" aria-hidden="true"></i>
     </button>
 
-    <!-- Navigation principale -->
     <nav class="site-nav" id="mainNav" aria-label="Navigation principale">
       <ul class="site-nav-menu">
-        <li class="site-nav-item"><a href="{{ url('/') }}" class="site-nav-link active">Accueil</a></li>
-
-        <!-- Menu avec mega-dropdown -->
+        <li class="site-nav-item"><a href="{{ url('/') }}" class="site-nav-link">Accueil</a></li>
         <li class="site-nav-item has-mega">
           <a href="{{ url('apercu') }}" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
             À propos du CES <i class="fas fa-chevron-down" aria-hidden="true"></i>
@@ -62,8 +57,6 @@
             </div>
           </div>
         </li>
-
-        <!-- Menu simple dropdown -->
         <li class="site-nav-item has-dropdown">
           <a href="{{ url('avis') }}" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
             Travaux & Avis <i class="fas fa-chevron-down" aria-hidden="true"></i>
@@ -73,9 +66,8 @@
             <li><a href="{{ url('publications') }}"><i class="fas fa-book-open" aria-hidden="true"></i> Publications</a></li>
           </ul>
         </li>
-
         <li class="site-nav-item has-dropdown">
-          <a href="{{ url('actualites') }}" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
+          <a href="{{ url('actualites') }}" class="site-nav-link active" aria-expanded="false" aria-haspopup="true">
             Actualités <i class="fas fa-chevron-down" aria-hidden="true"></i>
           </a>
           <ul class="site-dropdown" role="region" aria-label="Sous-menu Actualités">
@@ -84,116 +76,46 @@
             <li><a href="{{ url('mediatheque') }}"><i class="fas fa-images" aria-hidden="true"></i> Médiathèque</a></li>
           </ul>
         </li>
-
         <li class="site-nav-item"><a href="{{ url('contact') }}" class="site-nav-link">Contact</a></li>
-
-        <!-- CTA recherche commenté -->
-        {{-- 
-        <li class="site-nav-item search-item">
-          <button class="site-nav-link search-toggle" aria-label="Ouvrir la recherche" aria-expanded="false">
-            <i class="fas fa-search" aria-hidden="true"></i>
-            <span class="search-text">Rechercher</span>
-          </button>
-          <div class="search-dropdown">
-            <form action="{{ url('recherche') }}" method="get" role="search">
-              <input type="search" name="q" placeholder="Rechercher..." aria-label="Rechercher" required>
-              <button type="submit" aria-label="Lancer la recherche"><i class="fas fa-search"></i></button>
-            </form>
-          </div>
-        </li>
-        --}}
       </ul>
     </nav>
   </div>
 </header>
-
 
 <!-- HERO DE PAGE -->
 <div class="page-hero">
   <div class="hero-inner">
     <div class="breadcrumb">
       <a href="{{ url('/') }}">Accueil</a><i class="fas fa-chevron-right"></i>
-      Actualités <i class="fas fa-chevron-right"></i><span>Agenda</span>
+      <a href="{{ url('actualites') }}">Actualités</a><i class="fas fa-chevron-right"></i><span>Article</span>
     </div>
-
-    <h1><em>Agenda</em> du CES</h1>
-    <p>Programme des séances plénières, réunions des commissions et événements officiels du Conseil Économique et Social.</p>
+    <div class="hero-tag"><i class="fas fa-newspaper"></i> Actualité</div>
+    <h1>{{ $actualite->titre }}</h1>
   </div>
 </div>
 
-<!-- CONTENU PRINCIPAL AVEC BOOTSTRAP -->
+<!-- CONTENU PRINCIPAL -->
 <div class="content-wrap">
-  <div class="container">
-    <div class="row g-5">
-      <!-- Colonne principale -->
-      <div class="col-lg-8">
-        <div class="s-tag">Événements à venir</div>
-        <h2 class="s-title">Programme <span>2026</span></h2>
-      <div class="mt-4">
-    @forelse($evenements as $item)
-        @php
-            $dateObj = \Carbon\Carbon::parse($item->date);
-        @endphp
-        
-        <div class="agenda-item reveal">
-            <div class="agenda-date-box">
-                <div class="day">{{ $dateObj->format('d') }}</div>
-                <div class="month">{{ $dateObj->translatedFormat('M') }}</div>
-            </div>
-
-            <div class="agenda-info">
-                <h4>{{ $item->title }}</h4>
-                <p>{{ $item->summary }}</p>
-                
-                <div class="a-meta">
-                    @if($item->lieu)
-                        <span><i class="fas fa-map-marker-alt"></i> {{ $item->lieu }}</span>
-                    @endif
-                    
-                    @if($item->heure)
-                        <span><i class="fas fa-clock"></i> {{ \Carbon\Carbon::parse($item->heure)->format('H\hi') }}</span>
-                    @else
-                        <span><i class="fas fa-clock"></i> Heure à définir</span>
-                    @endif
-                </div>
-                <div class="mt-3">
-                    <a href="{{ route('agenda.show', $item->id) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">
-                        <i class="fas fa-eye me-2"></i>Voir les détails
-                    </a>
-                </div>
-            </div>
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="prose">
+        <img src="{{ $actualite->image_url ?? 'https://via.placeholder.com/1200x600?text=CES+RDC' }}" alt="{{ $actualite->titre }}" class="w-100 mb-4 rounded" style="object-fit:cover; max-height:500px;">
+        <div class="d-flex align-items-center mb-4 gap-3 text-muted small">
+            <span><i class="far fa-calendar-alt"></i> {{ \Carbon\Carbon::parse($actualite->date_publication ?? $actualite->created_at)->translatedFormat('d F Y') }}</span>
+            @if($actualite->categorie) 
+              <span><i class="fas fa-tag"></i> {{ $actualite->categorie }}</span> 
+            @endif
         </div>
-    @empty
-        <div class="text-center py-5">
-            <p class="text-muted">Aucun événement programmé pour le moment.</p>
+        <div class="texte_justifie mt-4" style="font-size: 1.05rem; line-height: 1.8;">
+            {!! $actualite->contenu !!}
         </div>
-    @endforelse
-</div>
       </div>
-
-      <!-- Sidebar droite -->
-      <aside class="col-lg-4">
-        <!-- Sidebar commentée dans l'original -->
-        <div class="sidebar-box">
-          <h4><i class="fas fa-info-circle"></i> Accès aux séances</h4>
-          <ul>
-            <li><i class="fas fa-circle-dot"></i> Les séances plénières sont publiques</li>
-            <li><i class="fas fa-circle-dot"></i> Accréditation presse disponible</li>
-            <li><i class="fas fa-circle-dot"></i> Retransmission en ligne prévue</li>
-            <li><i class="fas fa-circle-dot"></i> Comptes rendus publiés après chaque séance</li>
-          </ul>
-        </div>
-      </aside>
+      <div class="mt-5">
+        <a href="{{ url('actualites') }}" class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i> Retour aux actualités</a>
+      </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
 
 <!-- ===== FOOTER ===== -->
 <footer style="background: var(--texte); padding-top: 3rem;">
@@ -206,7 +128,6 @@
           <div class="small" style="color: rgba(255,255,255,0.5);">République Démocratique du Congo</div>
         </div>
       </a>
-
       <div class="text-md-end">
         <div class="d-flex flex-column gap-2">
           <div class="d-flex gap-2 justify-content-md-end">
@@ -224,69 +145,16 @@
         </div>
       </div>
     </div>
-
     <div class="d-flex flex-wrap justify-content-between align-items-center py-4 mt-5" style="border-top: 1px solid rgba(255,255,255,0.08);">
       <p class="small mb-0 mx-auto" style="color: rgba(255,255,255,0.4);">
         © {{ date('Y') }} Tous droits réservés | Conseil Économique et Social — République Démocratique du Congo
       </p>
     </div>
   </div>
-
   <div class="footer-tricolor" style="height:5px; background:linear-gradient(to right, var(--bleu) 33.33%, var(--jaune) 33.33%, var(--jaune) 66.66%, var(--rouge) 66.66%);"></div>
 </footer>
 
 <script src="{{ asset('assets/js/main.Js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // Slider et observer (ajusté pour le carrousel existant)
-  let current = 0;
-  const total = 3;
-  let autoSlide;
-  function updateSlider() {
-    const track = document.querySelector('.carousel__track');
-    if (track) {
-      track.style.transform = `translateX(-${current * 100}%)`;
-      document.querySelectorAll('.carousel__dot').forEach((d, i) => {
-        d.classList.toggle('carousel__dot--active', i === current);
-        d.setAttribute('aria-current', i === current ? 'true' : 'false');
-      });
-    }
-  }
-  function changeSlide(dir) { current = (current + dir + total) % total; updateSlider(); resetAuto(); }
-  function goToSlide(n) { current = n; updateSlider(); resetAuto(); }
-  function resetAuto() { clearInterval(autoSlide); autoSlide = setInterval(() => changeSlide(1), 5500); }
-
-  // Attacher les événements après le chargement du DOM
-  document.addEventListener('DOMContentLoaded', () => {
-    const prevBtn = document.querySelector('.carousel__arrow--prev');
-    const nextBtn = document.querySelector('.carousel__arrow--next');
-    const dots = document.querySelectorAll('.carousel__dot');
-
-    if (prevBtn) prevBtn.addEventListener('click', () => changeSlide(-1));
-    if (nextBtn) nextBtn.addEventListener('click', () => changeSlide(1));
-    dots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => goToSlide(idx));
-    });
-
-    updateSlider();
-    resetAuto();
-
-    // Intersection Observer pour les animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.news-card, .avis-card, .pub-card, .bureau-card, .commission-card').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      observer.observe(el);
-    });
-  });
-</script>
 </body>
 </html>
