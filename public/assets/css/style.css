@@ -128,7 +128,7 @@ ul {
   gap: 14px;
 }
 .logo-img {
-  height: 100px;
+  height: 150px;
   width: auto;
   transition: all 0.2s ease;
 }
@@ -423,7 +423,6 @@ ul {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(to right, var(--bleu) 33%, var(--jaune) 33%, var(--jaune) 66%, var(--rouge) 66%);
 }
 .hero-inner {
   max-width: 1280px;
@@ -447,7 +446,7 @@ ul {
   color: var(--jaune);
 }
 .breadcrumb span {
-  color: var(--jaune);
+  color: #fff;
 }
 .breadcrumb i {
   font-size: 0.6rem;
@@ -473,9 +472,9 @@ ul {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(247, 209, 23, 0.15);
-  border: 1px solid rgba(247, 209, 23, 0.4);
-  color: var(--jaune);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;

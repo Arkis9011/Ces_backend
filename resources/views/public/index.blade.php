@@ -697,7 +697,7 @@
 </div>
 
 <!-- ===== NEWSLETTER ===== -->
-<section class="newsletter-section py-5" style="background: var(--bleu-clair);">
+<section class="newsletter-section py-5" style="background: var(--gris-clair);">
   <div class="container">
     <div class="text-center" style="max-width:680px; margin:auto; color: var(--texte);">
       <h2 class="h1" style="font-family:'Playfair Display'; font-weight: 700;">Lettre d'information</h2>
