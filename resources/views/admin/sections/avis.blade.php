@@ -49,8 +49,7 @@
                                         <li><hr class="dropdown-divider"></li>
                                         <li>
                                             <form action="{{ route('avis.destroy', $item->id) }}" method="POST" onsubmit="confirmDelete(event, this)">
-                                                @csrf
-                                                @method('DELETE')
+                                                @csrf @method('DELETE')
                                                 <button type="submit" class="dropdown-item text-danger">
                                                     <i class="fas fa-trash me-2"></i> Supprimer
                                                 </button>
@@ -101,7 +100,7 @@
             <div class="row g-3 mt-1">
                 <div class="col-md-6">
                     <label class="form-label">Fichier PDF (Obligatoire)</label>
-                    <input type="file" name="pdf_file" class="form-control @error('pdf_file') is-invalid @enderror" required>
+                    <input type="file" name="pdf_file" class="form-control @error('pdf_file') is-invalid @enderror">
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Image d'illustration (Optionnelle)</label>
@@ -109,8 +108,8 @@
                 </div>
             </div>
             <div class="mt-3">
-                <label class="form-label">Résumé succinct</label>
-                <textarea name="resume" class="form-control @error('resume') is-invalid @enderror" rows="3" required>{{ old('resume') }}</textarea>
+                <label class="form-label fw-bold">Résumé succinct</label>
+                <textarea id="avis-editor" name="resume" class="form-control @error('resume') is-invalid @enderror" rows="3">{{ old('resume') }}</textarea>
             </div>
             <button type="submit" class="btn px-4 py-2 fw-bold text-white mt-4" style="background: #003366; border-radius: 8px;">
                 <i class="fas fa-file-export me-2"></i> Publier l'avis
@@ -118,3 +117,22 @@
         </form>
     </div>
 </section>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const avisElement = document.querySelector('#avis-editor');
+        if (avisElement) {
+            ClassicEditor
+                .create(avisElement, {
+                    toolbar: [
+                        'heading', '|', 
+                        'bold', 'italic', 'link', '|', 
+                        'bulletedList', 'numberedList', 'blockQuote', '|', 
+                        'undo', 'redo'
+                    ]
+                })
+                .catch(error => {
+                    console.error('Erreur CKEditor Avis:', error);
+                });
+        }
+    });
+</script>

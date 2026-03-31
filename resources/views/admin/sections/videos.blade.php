@@ -40,24 +40,13 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="dropdownMenuVideo{{ $video->id }}">
-                                        <li>
-                                            <a class="dropdown-item text-dark" href="javascript:void(0)" onclick="openViewModal('video', {{ $video->id }})">
-                                                <i class="fas fa-eye me-2 text-primary"></i> Voir
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item text-dark" href="javascript:void(0)" onclick="openEditModal('video', {{ $video->id }})">
-                                                <i class="fas fa-edit me-2 text-warning"></i> Modifier
-                                            </a>
-                                        </li>
+                                        <li><a class="dropdown-item text-dark" href="javascript:void(0)" onclick="openViewModal('video', {{ $video->id }})"><i class="fas fa-eye me-2 text-primary"></i> Voir</a></li>
+                                        <li><a class="dropdown-item text-dark" href="javascript:void(0)" onclick="openEditModal('video', {{ $video->id }})"><i class="fas fa-edit me-2 text-warning"></i> Modifier</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li>
                                             <form action="{{ route('videos.destroy', $video->id) }}" method="POST" onsubmit="confirmDelete(event, this)">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="dropdown-item text-danger">
-                                                    <i class="fas fa-trash me-2"></i> Supprimer
-                                                </button>
+                                                @csrf @method('DELETE')
+                                                <button type="submit" class="dropdown-item text-danger"><i class="fas fa-trash me-2"></i> Supprimer</button>
                                             </form>
                                         </li>
                                     </ul>
@@ -65,9 +54,7 @@
                             </td>
                         </tr>
                     @empty
-                        <tr>
-                            <td colspan="3" class="text-center py-4 text-muted">Aucune vidéo dans la galerie.</td>
-                        </tr>
+                        <tr><td colspan="3" class="text-center py-4 text-muted">Aucune vidéo dans la galerie.</td></tr>
                     @endforelse
                 </tbody>
             </table>
@@ -101,8 +88,8 @@
                 </div>
             </div>
             <div class="mt-3">
-                <label class="form-label">Description (Optionnelle)</label>
-                <textarea name="description" class="form-control" rows="2">{{ old('description') }}</textarea>
+                <label class="form-label fw-bold">Description (Optionnelle)</label>
+                <textarea id="video-editor" name="description" class="form-control" rows="2">{{ old('description') }}</textarea>
             </div>
             <button type="submit" class="btn px-4 py-2 fw-bold text-white mt-4" style="background: #003366; border-radius: 8px;">
                 <i class="fas fa-cloud-upload-alt me-2"></i> Publier la vidéo
@@ -110,3 +97,16 @@
         </form>
     </div>
 </section>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const videoElement = document.querySelector('#video-editor');
+        if (videoElement) {
+            ClassicEditor
+                .create(videoElement, {
+                    toolbar: ['bold', 'italic', 'link', 'bulletedList', 'undo', 'redo'],
+                    placeholder: 'Ajoutez une brève description ou le contexte de cette vidéo...'
+                })
+                .catch(error => console.error('Erreur CKEditor Vidéo:', error));
+        }
+    });
+</script>

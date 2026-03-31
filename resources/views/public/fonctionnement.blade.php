@@ -130,29 +130,44 @@
   <div class="container">
     <div class="row g-5">
       <!-- Colonne principale -->
-      <div class="col-lg-8">
-        <div class="s-tag">Processus</div>
-        <h2 class="s-title">Comment fonctionne <span>le CES</span> ?</h2>
-        <p>Le Conseil Economique et Social fonctionne comme un pont entre la société civile organisée et le pouvoir politique (Gouvernement, Parlement). Son rôle n'est pas de voter des lois, mais de donner des Avis éclairées pour orienter les décisions publiques.<br>
-           Le fonctionnement suit une méthodologie rigoureuse pour garantir la neutralité et l'expertise :
-        </p>
-        <div class="prose">
-          <ol>
-            <li><h3>La saisine</h3></li>
-            <p>Le CES peut être saisi par  Le Conseil peut être saisi par le Gouvernement ou le Parlement pour donner son avis sur un projet de loi. Il peut aussi s'autosaisir d'un sujet de société.</p>
-            <li><h3>Le travail en commission</h3></li>
-            <p>Le sujet est envoyé à une commission spécialisée. Les conseillers auditionnent des experts, des chercheurs et des acteurs de terrain pour recueillir des données concrètes.
-              La commission rédige un projet d'avis et désigne un rapporteur qui le présentera devant l'Assemblée Générale.</p>
-            <li><h3>Le Débat et le Consensus</h3></li>
-            <p>C’est l'étape clé. Des groupes aux intérêts souvent opposés doivent discuter pour trouver un terrain d'entente ou, à défaut, exposer clairement leurs points de divergence.</p>
-            <li><h3>L'adoption en séance plénière</h3></li>
-            <p>Le projet d'avis est soumis à l'Assemblée Générale réunie en séance plénière. Après débat, il est adopté ou rejeté à la majorité des membres présents.</p>
-            <li><h3>La notification de l'avis</h3></li>
-            <p>Une fois l'Avis adopté, il est transmis aux autorités et rendu public conformément aux dispositions du règlement intérieur. Il peut être publié au Journal Officiel de la RDC.</p>
-          </ol>
-        </div>
-      </div>
-
+  <div class="col-lg-8">
+    <div class="s-tag">Processus</div>
+    <h2 class="s-title">Comment fonctionne <span>le CES</span> ?</h2>
+    <p>
+        Le Conseil Économique et Social fonctionne comme un pont entre la société civile organisée et le pouvoir politique (Gouvernement, Parlement). Son rôle n'est pas de voter des lois, mais de donner des <strong>avis éclairés</strong> pour orienter les décisions publiques.<br>
+        Le fonctionnement suit une méthodologie rigoureuse pour garantir la neutralité et l'expertise :
+    </p>
+    
+    <div class="prose">
+        <ol>
+            <li>
+                <h3>La saisine</h3>
+                <p>Le CES peut être saisi par le Gouvernement ou le Parlement pour donner son avis sur un projet de loi. Il peut aussi s'autosaisir d'un sujet de société.</p>
+            </li>
+            
+            <li>
+                <h3>Le travail en commission</h3>
+                <p>Le sujet est envoyé à une commission spécialisée. Les conseillers auditionnent des experts, des chercheurs et des acteurs de terrain pour recueillir des données concrètes. 
+                La commission rédige un projet d'avis et désigne un rapporteur qui le présentera devant l'Assemblée Générale.</p>
+            </li>
+            
+            <li>
+                <h3>Le débat et le consensus</h3>
+                <p>C’est l'étape clé. Des groupes aux intérêts souvent opposés doivent discuter pour trouver un terrain d'entente ou, à défaut, exposer clairement leurs points de divergence.</p>
+            </li>
+            
+            <li>
+                <h3>L'adoption en séance plénière</h3>
+                <p>Le projet d'avis est soumis à l'Assemblée Générale réunie en séance plénière. Après débat, il est adopté ou rejeté à la majorité des membres présents.</p>
+            </li>
+            
+            <li>
+                <h3>La notification de l'avis</h3>
+                <p>Une fois l'avis adopté, il est transmis aux autorités et rendu public conformément aux dispositions du règlement intérieur. Il peut être publié au Journal Officiel de la RDC.</p>
+            </li>
+        </ol>
+    </div>
+</div>
       <!-- Sidebar droite -->
       <aside class="col-lg-4">
         <div class="sidebar-box">

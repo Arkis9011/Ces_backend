@@ -13,12 +13,12 @@ class PostController extends Controller
 {
     /**
      * Méthode privée pour l'upload vers ImageKit
-     * Adaptée de ton AvisController pour garantir la compatibilité Laragon/Windows
+     * INDISPENSABLE sur Laragon pour éviter le rejet SSL
      */
     private function uploadToImageKit($file, $title, $folder)
     {
         $response = Http::withBasicAuth(env('IMAGEKIT_PRIVATE_KEY'), '')
-            ->withoutVerifying() // INDISPENSABLE sur Laragon pour éviter le rejet SSL
+            ->withoutVerifying() 
             ->attach(
                 'file', 
                 file_get_contents($file->getRealPath()), 
@@ -39,39 +39,21 @@ class PostController extends Controller
     /**
      * Affiche le Dashboard avec toutes les données
      */
-   public function index(Request $request)
-{
-    // 1. On définit le tri par défaut sur 'date_publication' au lieu de 'created_at'
-    // Si aucun paramètre n'est passé dans l'URL, on prend 'date_publication' en 'desc'
-    $sort = $request->get('sort', 'date_publication'); 
-    $direction = $request->get('direction', 'desc') === 'asc' ? 'asc' : 'desc';
+    public function index(Request $request)
+    {
+        $sort = $request->get('sort', 'date_publication'); 
+        $direction = $request->get('direction', 'desc') === 'asc' ? 'asc' : 'desc';
 
-    // 2. Pagination pour les Actualités (Modèle Post)
-    // On s'assure que si c'est le tri par défaut, on utilise bien la colonne date_publication
-    $postSort = in_array($sort, ['titre', 'date_publication', 'created_at']) ? $sort : 'date_publication';
-    $posts = Post::orderBy($postSort, $direction)->paginate(5, ['*'], 'posts');
+        $postSort = in_array($sort, ['titre', 'date_publication', 'created_at']) ? $sort : 'date_publication';
+        $posts = Post::orderBy($postSort, $direction)->paginate(5, ['*'], 'posts');
 
-    // 3. Pagination pour l'Agenda (Modèle Agenda)
-    // Ici, on fait correspondre 'date_publication' avec la colonne 'date' de ton modèle Agenda
-    $agendaSort = ($sort === 'date_publication') ? 'date' : (($sort === 'titre') ? 'title' : $sort);
-    $agendaSort = in_array($agendaSort, ['title', 'date', 'created_at']) ? $agendaSort : 'date';
-    $agendas = \App\Models\Agenda::orderBy($agendaSort, $direction)->paginate(5, ['*'], 'agendas');
-    // 4. Pagination pour les Vidéos
-    $videoSort = ($sort === 'titre') ? 'title' : $sort;
-    $videoSort = in_array($videoSort, ['title', 'created_at']) ? $videoSort : 'created_at';
-    $videos = \App\Models\Video::orderBy($videoSort, $direction)->paginate(5, ['*'], 'videos');
+        $agendas = \App\Models\Agenda::latest()->paginate(5, ['*'], 'agendas');
+        $videos = \App\Models\Video::latest()->paginate(5, ['*'], 'videos');
+        $avis = \App\Models\Avis::latest()->paginate(5, ['*'], 'avis');
+        $allocutions = \App\Models\Allocution::latest()->paginate(5, ['*'], 'allocutions');
 
-    // 5. Pagination pour les Avis
-    $avisSort = in_array($sort, ['titre', 'created_at']) ? $sort : 'created_at';
-    $avis = \App\Models\Avis::latest()->paginate(5, ['*'], 'avis');
-
-    // 6. Pagination pour les Allocutions
-    $allocSort = ($sort === 'titre') ? 'titre' : (($sort === 'date_publication') ? 'date_allocution' : $sort);
-    $allocSort = in_array($allocSort, ['titre', 'date_allocution', 'created_at']) ? $allocSort : 'created_at';
-    $allocutions = \App\Models\Allocution::orderBy($allocSort, $direction)->paginate(5, ['*'], 'allocutions');
-
-    return view('dashboard', compact('posts', 'agendas', 'videos', 'avis', 'allocutions'));
-}
+        return view('dashboard', compact('posts', 'agendas', 'videos', 'avis', 'allocutions'));
+    }
 
     /**
      * Enregistre une actualité
@@ -84,36 +66,46 @@ class PostController extends Controller
             'categorie'        => 'required',
             'resume'           => 'required',
             'contenu'          => 'required',
-            'image'            => 'nullable|image|max:2048', 
+            'image'            => 'nullable|image|max:2048',
+            'image_url_2'      => 'nullable|image|max:2048',
+            'image_url_3'      => 'nullable|image|max:2048',
+            'image_url_4'      => 'nullable|image|max:2048',
+            'section_1'        => 'nullable',
+            'section_2'        => 'nullable',
+            'section_3'        => 'nullable',
         ]);
 
         try {
-            $imageUrl = null; 
-
-            // Si une image est présente, on utilise la logique d'AvisController
-            if ($request->hasFile('image')) {
-                $imageUrl = $this->uploadToImageKit(
-                    $request->file('image'), 
-                    $request->titre, 
-                    '/posts/images'
-                );
-            }
-
-            // Création de l'entrée en base de données
-            Post::create([
+            $data = [
                 'titre'            => $request->titre,
                 'slug'             => Str::slug($request->titre) . '-' . uniqid(),
                 'date_publication' => $request->date_publication,
                 'categorie'        => $request->categorie,
                 'resume'           => $request->resume,
                 'contenu'          => $request->contenu,
-                'image_url'        => $imageUrl, // Assure-toi que la colonne en BD est bien image_url
-            ]);
+                'section_1'        => $request->section_1,
+                'section_2'        => $request->section_2,
+                'section_3'        => $request->section_3,
+            ];
+
+            // Image principale
+            if ($request->hasFile('image')) {
+                $data['image_url'] = $this->uploadToImageKit($request->file('image'), $request->titre, '/posts/images');
+            }
+
+            // Images supplémentaires (2, 3 et 4)
+            for ($i = 2; $i <= 4; $i++) {
+                $key = "image_url_$i";
+                if ($request->hasFile($key)) {
+                    $data[$key] = $this->uploadToImageKit($request->file($key), $request->titre . "_$i", '/posts/images');
+                }
+            }
+
+            Post::create($data);
 
             return redirect()->route('dashboard')->with('success', 'L\'actualité a été publiée avec succès !');
 
         } catch (Exception $e) {
-            // Renvoie l'erreur détaillée dans l'alerte JS de ton dashboard
             return redirect()->back()
                 ->with('js_error', "Erreur technique : " . $e->getMessage())
                 ->withInput();
@@ -121,18 +113,25 @@ class PostController extends Controller
     }
 
     /**
-     * Supprime une actualité
+     * Met à jour une actualité
      */
     public function update(Request $request, $id)
     {
         $post = Post::findOrFail($id);
+
         $request->validate([
             'titre'            => 'required|max:255',
             'date_publication' => 'required|date',
             'categorie'        => 'required',
             'resume'           => 'required',
             'contenu'          => 'required',
-            'image'            => 'nullable|image|max:2048', 
+            'image'            => 'nullable|image|max:2048',
+            'image_url_2'      => 'nullable|image|max:2048',
+            'image_url_3'      => 'nullable|image|max:2048',
+            'image_url_4'      => 'nullable|image|max:2048',
+            'section_1'        => 'nullable',
+            'section_2'        => 'nullable',
+            'section_3'        => 'nullable',
         ]);
 
         try {
@@ -142,14 +141,22 @@ class PostController extends Controller
                 'categorie'        => $request->categorie,
                 'resume'           => $request->resume,
                 'contenu'          => $request->contenu,
+                'section_1'        => $request->section_1,
+                'section_2'        => $request->section_2,
+                'section_3'        => $request->section_3,
             ];
 
+            // Mise à jour image principale
             if ($request->hasFile('image')) {
-                $data['image_url'] = $this->uploadToImageKit(
-                    $request->file('image'), 
-                    $request->titre, 
-                    '/posts/images'
-                );
+                $data['image_url'] = $this->uploadToImageKit($request->file('image'), $request->titre, '/posts/images');
+            }
+
+            // Mise à jour images supplémentaires
+            for ($i = 2; $i <= 4; $i++) {
+                $key = "image_url_$i";
+                if ($request->hasFile($key)) {
+                    $data[$key] = $this->uploadToImageKit($request->file($key), $request->titre . "_$i", '/posts/images');
+                }
             }
 
             $post->update($data);

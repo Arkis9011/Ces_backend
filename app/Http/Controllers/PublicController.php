@@ -70,10 +70,21 @@ class PublicController extends Controller
         $photos = Post::whereNotNull('image_url')->where('image_url', '!=', '')->latest()->paginate(12);
         return view('public.mediatheque', compact('videos', 'photos'));
     }
-    public function showActualite($id)
+  public function showActualite($id)
     {
+        // 1. On récupère l'article avec toutes ses nouvelles colonnes (sections et images)
         $actualite = Post::findOrFail($id);
-        return view('public.show_actualite', compact('actualite'));
+
+        // 2. On récupère 3 autres articles de la même catégorie pour la section "À lire aussi"
+        // On exclut l'article actuel pour ne pas l'avoir en double
+        $suggestions = Post::where('categorie', $actualite->categorie)
+                            ->where('id', '!=', $actualite->id)
+                            ->latest()
+                            ->take(3)
+                            ->get();
+
+        // 3. On envoie le tout à la vue
+        return view('public.show_actualite', compact('actualite', 'suggestions'));
     }
 
     public function showAvis($id)

@@ -211,67 +211,125 @@
               {{ $posts->appends(request()->query())->links('pagination::bootstrap-5') }}
           </div>
         </div>
-
-        <div class="admin-card">
-          <div class="admin-card-header">
-            <i class="fas fa-plus-circle fa-lg text-primary"></i>
-            <h3>Nouvelle publication</h3>
-          </div>
-          
-       <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf <div class="row g-3">
-        <div class="col-md-8">
-            <label class="form-label">Titre de l'actualité</label>
-            <input type="text" name="titre" class="form-control @error('titre') is-invalid @enderror" value="{{ old('titre') }}" placeholder="Entrez le titre principal..." required>
-            @error('titre') <div class="invalid-feedback">{{ $message }}</div> @enderror
-        </div>
-        <div class="col-md-4">
-            <label class="form-label">Date</label>
-            <input type="date" name="date_publication" class="form-control @error('date_publication') is-invalid @enderror" value="{{ old('date_publication', date('Y-m-d')) }}" required>
-            @error('date_publication') <div class="invalid-feedback">{{ $message }}</div> @enderror
-        </div>
+<div class="admin-card">
+    <div class="admin-card-header">
+        <i class="fas fa-plus-circle fa-lg text-primary"></i>
+        <h3>Nouvelle publication</h3>
     </div>
 
-    <div class="row g-3 mt-1">
-        <div class="col-md-6">
-            <label class="form-label">Image de couverture</label>
-            <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
-            <small class="text-muted">L'image sera hébergée sur ImageKit</small>
+    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf 
+        <div class="row g-3">
+            <div class="col-md-8">
+                <label class="form-label">Titre de l'actualité</label>
+                <input type="text" name="titre" class="form-control @error('titre') is-invalid @enderror" value="{{ old('titre') }}" placeholder="Entrez le titre principal..." required>
+                @error('titre') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Date</label>
+                <input type="date" name="date_publication" class="form-control @error('date_publication') is-invalid @enderror" value="{{ old('date_publication', date('Y-m-d')) }}" required>
+                @error('date_publication') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            </div>
         </div>
-        <div class="col-md-6">
-            <label class="form-label">Tag / Catégorie</label>
-            <select name="categorie" class="form-select">
-                <option value="Séance plénière">Séance plénière</option>
-                <option value="Audience">Audience</option>
-                <option value="Communiqué">Communiqué</option>
-                <option value="Partenariat">Partenariat</option>
-                 <option value="Partenariat">Séance académique</option>
-                 <option value="Partenariat">Forum</option>
 
-                 <option value="Partenariat">autre</option>
-
-
-            </select>
+        <div class="row g-3 mt-1">
+            <div class="col-md-6">
+                <label class="form-label">Image de couverture</label>
+                <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
+                <small class="text-muted">L'image sera hébergée sur ImageKit</small>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Tag / Catégorie</label>
+                <select name="categorie" class="form-select">
+                    <option value="Séance plénière">Séance plénière</option>
+                    <option value="Audience">Audience</option>
+                    <option value="Communiqué">Communiqué</option>
+                    <option value="Partenariat">Partenariat</option>
+                    <option value="Séance académique">Séance académique</option>
+                    <option value="Forum">Forum</option>
+                    <option value="autre">autre</option>
+                </select>
+            </div>
         </div>
-    </div>
 
-    <div class="mt-3">
-        <label class="form-label">Résumé de l'article</label>
-        <textarea name="resume" class="form-control @error('resume') is-invalid @enderror" rows="2" placeholder="Un court résumé pour la liste..." required>{{ old('resume') }}</textarea>
-        @error('resume') <div class="invalid-feedback">{{ $message }}</div> @enderror
-    </div>
-
-    <div class="mt-3">
-        <label class="form-label">Contenu textuel</label>
-        <textarea name="contenu" class="form-control @error('contenu') is-invalid @enderror" rows="8" placeholder="Rédigez l'article complet ici..." required>{{ old('contenu') }}</textarea>
-        @error('contenu') <div class="invalid-feedback">{{ $message }}</div> @enderror
-    </div>
-
-<button type="submit" class="btn px-4 py-2 fw-bold text-white mt-5 " style="background: #003366; border-radius: 8px;">
-    <i class="fas fa-paper-plane me-2"></i> Publier l'actualité
-</button>
-</form>
+        <div class="mt-3">
+            <label class="form-label">Résumé de l'article</label>
+            <textarea name="resume" class="form-control @error('resume') is-invalid @enderror" rows="2" placeholder="Un court résumé pour la liste..." required>{{ old('resume') }}</textarea>
+            @error('resume') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
+
+        <div class="mt-3">
+            <label class="form-label fw-bold text-primary">Contenu principal (Obligatoire)</label>
+            <textarea id="create-editor-main" name="contenu" class="form-control @error('contenu') is-invalid @enderror" rows="6" placeholder="Introduction ou corps principal...">{{ old('contenu') }}</textarea>
+        </div>
+
+        <hr class="my-4">
+        <h5 class="text-muted mb-3"><i class="fas fa-plus-circle me-2"></i>Sections & Images Supplémentaires (Optionnelles)</h5>
+
+        <div class="row g-3">
+            <div class="col-md-6 border-end">
+                <label class="form-label fw-bold">Sous-titre / Section 1</label>
+                <textarea id="create-editor-s1" name="section_1" class="form-control mb-2" rows="3" placeholder="Texte additionnel...">{{ old('section_1') }}</textarea>
+                
+                <label class="form-label small text-muted mt-2">Image pour cette section</label>
+                <input type="file" name="image_url_2" class="form-control form-control-sm">
+            </div>
+            
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Sous-titre / Section 2</label>
+                <textarea id="create-editor-s2" name="section_2" class="form-control mb-2" rows="3" placeholder="Texte additionnel...">{{ old('section_2') }}</textarea>
+                
+                <label class="form-label small text-muted mt-2">Image pour cette section</label>
+                <input type="file" name="image_url_3" class="form-control form-control-sm">
+            </div>
+
+            <div class="col-md-12 mt-3">
+                <label class="form-label fw-bold">Sous-titre / Section 3</label>
+                <textarea id="create-editor-s3" name="section_3" class="form-control mb-2" rows="3" placeholder="Texte de conclusion ou autre...">{{ old('section_3') }}</textarea>
+                
+                <label class="form-label small text-muted mt-2">Dernière image</label>
+                <input type="file" name="image_url_4" class="form-control form-control-sm">
+            </div>
+        </div>
+
+        <button type="submit" class="btn px-4 py-2 fw-bold text-white mt-5" style="background: #003366; border-radius: 8px;">
+            <i class="fas fa-paper-plane me-2"></i> Publier l'actualité
+        </button>
+    </form>
+</div>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const editorSelectors = [
+            '#create-editor-main', 
+            '#create-editor-s1', 
+            '#create-editor-s2', 
+            '#create-editor-s3'
+        ];
+
+        editorSelectors.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                ClassicEditor
+                    .create(element, {
+                        toolbar: {
+                            items: [
+                                'heading', '|',
+                                'bold', 'italic', 'link', '|',
+                                'bulletedList', 'numberedList', '|',
+                                'blockQuote', 'undo', 'redo'
+                            ]
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur CKEditor:', error);
+                    });
+            }
+        });
+    });
+</script>
       </section>
 
 @include('admin.sections.agenda')
@@ -413,162 +471,219 @@
     }
 
     function openEditModal(type, id) {
-        const body = document.getElementById('editModalBody');
-        body.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-primary" role="status"></div></div>';
-        const modal = new bootstrap.Modal(document.getElementById('editModal'));
-        modal.show();
+    const body = document.getElementById('editModalBody');
+    // 1. Afficher le loader
+    body.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-primary" role="status"></div></div>';
+    
+    const modalElement = document.getElementById('editModal');
+    const modal = new bootstrap.Modal(modalElement);
+    modal.show();
 
-        fetch(`/api/${type}s?id=${id}`)
-            .then(response => response.json())
-            .then(data => {
-                const item = Array.isArray(data) ? data.find(i => i.id == id) : data;
-                let formHtml = '';
-                
-                if (type === 'post') {
-                    formHtml = `
-                        <form action="/posts/${item.id}" method="POST" enctype="multipart/form-data">
-                            @csrf @method('PUT')
-                            <div class="mb-3">
-                                <label class="form-label">Titre</label>
-                                <input type="text" name="titre" class="form-control" value="${item.titre}" required>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">Date</label>
-                                    <input type="date" name="date_publication" class="form-control" value="${item.date_publication}" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Catégorie</label>
-                                    <select name="categorie" class="form-select">
-                                        <option value="Séance plénière" ${item.categorie == 'Séance plénière' ? 'selected' : ''}>Séance plénière</option>
-                                        <option value="Audience" ${item.categorie == 'Audience' ? 'selected' : ''}>Audience</option>
-                                        <option value="Communiqué" ${item.categorie == 'Communiqué' ? 'selected' : ''}>Communiqué</option>
-                                        <option value="partenariat" ${item.categorie == 'partenariat' ? 'selected' : ''}>partenariat</option>
-                                        <option value="séance académique" ${item.categorie == 'séance académique' ? 'selected' : ''}>séance académique</option>
-                                        <option value="forum" ${item.categorie == 'forum' ? 'selected' : ''}>forum</option>
-                                        <option value="autre" ${item.categorie == 'autre' ? 'selected' : ''}>autre</option>
+    // 2. Récupérer les données
+    fetch(`/api/${type}s?id=${id}`)
+        .then(response => response.json())
+        .then(data => {
+            const item = Array.isArray(data) ? data.find(i => i.id == id) : data;
+            let formHtml = '';
+            
+            // --- CAS DES ACTUALITÉS (POSTS) ---
+            if (type === 'post') {
+                formHtml = `
+                <form action="/posts/${item.id}" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_method" value="PUT">
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-8">
+                            <label class="form-label fw-bold">Titre</label>
+                            <input type="text" name="titre" class="form-control" value="${item.titre || ''}" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Catégorie</label>
+                            <select name="categorie" class="form-select">
+                                <option value="Séance plénière" ${item.categorie == 'Séance plénière' ? 'selected' : ''}>Séance plénière</option>
+                                <option value="Audience" ${item.categorie == 'Audience' ? 'selected' : ''}>Audience</option>
+                                <option value="Communiqué" ${item.categorie == 'Communiqué' ? 'selected' : ''}>Communiqué</option>
+                                <option value="Partenariat" ${item.categorie == 'Partenariat' ? 'selected' : ''}>Partenariat</option>
+                                <option value="autre" ${item.categorie == 'autre' ? 'selected' : ''}>autre</option>
+                            </select>
+                        </div>
+                    </div>
 
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Résumé</label>
-                                <textarea name="resume" class="form-control" rows="2">${item.resume}</textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Contenu</label>
-                                <textarea name="contenu" class="form-control" rows="5">${item.contenu}</textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Changer l'image</label>
-                                <input type="file" name="image" class="form-control">
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Enregistrer les modifications</button>
-                        </form>
-                    `;
-                } else if (type === 'agenda') {
-                    formHtml = `
-                        <form action="/agendas/${item.id}" method="POST">
-                            @csrf @method('PUT')
-                            <div class="mb-3">
-                                <label class="form-label">Titre</label>
-                                <input type="text" name="title" class="form-control" value="${item.title}" required>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">Date</label>
-                                    <input type="date" name="date" class="form-control" value="${item.date}" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Heure</label>
-                                    <input type="time" name="heure" class="form-control" value="${item.heure}">
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Lieu</label>
-                                <input type="text" name="lieu" class="form-control" value="${item.lieu}">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Résumé</label>
-                                <textarea name="summary" class="form-control" rows="3">${item.summary}</textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Mettre à jour</button>
-                        </form>
-                    `;
-                } else if (type === 'video') {
-                    formHtml = `
-                        <form action="/videos/${item.id}" method="POST" enctype="multipart/form-data">
-                            @csrf @method('PUT')
-                            <div class="mb-3">
-                                <label class="form-label">Titre</label>
-                                <input type="text" name="title" class="form-control" value="${item.title}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">URL Vidéo</label>
-                                <input type="url" name="url" class="form-control" value="${item.url}">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Description</label>
-                                <textarea name="description" class="form-control" rows="3">${item.description}</textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Mettre à jour</button>
-                        </form>
-                    `;
-                } else if (type === 'avi') {
-                    formHtml = `
-                        <form action="/avis/${item.id}" method="POST" enctype="multipart/form-data">
-                            @csrf @method('PUT')
-                            <div class="mb-3">
-                                <label class="form-label">Titre</label>
-                                <input type="text" name="titre" class="form-control" value="${item.titre}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Commission</label>
-                                <select name="commission" class="form-select">
-                                    <option value="CERNAT" ${item.commission == 'CERNAT' ? 'selected'       : ''}>CERNAT</option>
-                                    <option value="ECOFIN" ${item.commission == 'ECOFIN' ? 'selected' : ''}>ECOFIN</option>
-                                    <option value="REX" ${item.commission == 'REX' ? 'selected' : ''}>REX</option>
-                                    <option value="CSAC" ${item.commission == 'CSAC' ? 'selected' : ''}>CSAC</option>
-                                    <option value="CEFE" ${item.commission == 'CEFE' ? 'selected' : ''}>CEFE</option>
-                                    <option value="AGRIDEV" ${item.commission == 'AGRIDEV' ? 'selected' : ''}>AGRIDEV</option>
-                                    <option value="CIAT" ${item.commission == 'CIAT' ? 'selected' : ''}>CIAT</option>
-                                    
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Résumé</label>
-                                <textarea name="resume" class="form-control" rows="2">${item.resume}</textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Modifier le PDF</label>
-                                <input type="file" name="pdf_file" class="form-control">
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
-                        </form>
-                    `;
-                } else if (type === 'allocution') {
-                    formHtml = `
-                        <form action="/allocutions/${item.id}" method="POST" enctype="multipart/form-data">
-                            @csrf @method('PUT')
-                            <div class="mb-3">
-                                <label class="form-label">Titre</label>
-                                <input type="text" name="titre" class="form-control" value="${item.titre}" required>
-                            </div>
-                            <div class="mb-3">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Résumé (Texte court)</label>
+                        <textarea name="resume" class="form-control" rows="2">${item.resume || ''}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-primary">Contenu Principal</label>
+                        <textarea id="editor-main" name="contenu" class="form-control">${item.contenu || ''}</textarea>
+                    </div>
+
+                    <div class="p-3 border rounded bg-light mb-3">
+                        <h6 class="fw-bold border-bottom pb-2"><i class="fas fa-plus-circle me-2"></i>Sections Additionnelles</h6>
+                        
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold">Section 1 & Image 2</label>
+                            <textarea id="editor-s1" name="section_1" class="form-control mb-1">${item.section_1 || ''}</textarea>
+                            <input type="file" name="image_url_2" class="form-control form-control-sm mt-2">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold">Section 2 & Image 3</label>
+                            <textarea id="editor-s2" name="section_2" class="form-control mb-1">${item.section_2 || ''}</textarea>
+                            <input type="file" name="image_url_3" class="form-control form-control-sm mt-2">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold">Section 3 & Image 4</label>
+                            <textarea id="editor-s3" name="section_3" class="form-control mb-1">${item.section_3 || ''}</textarea>
+                            <input type="file" name="image_url_4" class="form-control form-control-sm mt-2">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Remplacer l'image de couverture (Principale)</label>
+                        <input type="file" name="image" class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">
+                        <i class="fas fa-save me-2"></i>Mettre à jour l'actualité
+                    </button>
+                </form>`;
+
+            // --- CAS DES AGENDAS ---
+            } else if (type === 'agenda') {
+                formHtml = `
+                    <form action="/agendas/${item.id}" method="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="_method" value="PUT">
+                        <div class="mb-3">
+                            <label class="form-label">Titre</label>
+                            <input type="text" name="title" class="form-control" value="${item.title}" required>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
                                 <label class="form-label">Date</label>
-                                <input type="date" name="date_allocution" class="form-control" value="${item.date_allocution}" required>
+                                <input type="date" name="date" class="form-control" value="${item.date}" required>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Changer le document</label>
-                                <input type="file" name="document" class="form-control" accept=".pdf,.doc,.docx">
+                            <div class="col-md-6">
+                                <label class="form-label">Heure</label>
+                                <input type="time" name="heure" class="form-control" value="${item.heure}">
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
-                        </form>
-                    `;
-                }
-                body.innerHTML = formHtml;
-            });
-    }
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Lieu</label>
+                            <input type="text" name="lieu" class="form-control" value="${item.lieu}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Résumé</label>
+                            <textarea name="summary" class="form-control" rows="3">${item.summary || ''}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Mettre à jour</button>
+                    </form>`;
+
+            // --- CAS DES VIDÉOS ---
+            } else if (type === 'video') {
+                formHtml = `
+                    <form action="/videos/${item.id}" method="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="_method" value="PUT">
+                        <div class="mb-3">
+                            <label class="form-label">Titre</label>
+                            <input type="text" name="title" class="form-control" value="${item.title}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">URL Vidéo (YouTube)</label>
+                            <input type="url" name="url" class="form-control" value="${item.url}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea name="description" class="form-control" rows="3">${item.description || ''}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Mettre à jour</button>
+                    </form>`;
+
+            // --- CAS DES AVIS ---
+            } else if (type === 'avi') {
+                formHtml = `
+                    <form action="/avis/${item.id}" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="_method" value="PUT">
+                        <div class="mb-3">
+                            <label class="form-label">Titre</label>
+                            <input type="text" name="titre" class="form-control" value="${item.titre}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Commission</label>
+                            <select name="commission" class="form-select">
+                                <option value="CERNAT" ${item.commission == 'CERNAT' ? 'selected' : ''}>CERNAT</option>
+                                <option value="ECOFIN" ${item.commission == 'ECOFIN' ? 'selected' : ''}>ECOFIN</option>
+                                <option value="REX" ${item.commission == 'REX' ? 'selected' : ''}>REX</option>
+                                <option value="CSAC" ${item.commission == 'CSAC' ? 'selected' : ''}>CSAC</option>
+                                <option value="CEFE" ${item.commission == 'CEFE' ? 'selected' : ''}>CEFE</option>
+                                <option value="AGRIDEV" ${item.commission == 'AGRIDEV' ? 'selected' : ''}>AGRIDEV</option>
+                                <option value="CIAT" ${item.commission == 'CIAT' ? 'selected' : ''}>CIAT</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Résumé</label>
+                            <textarea name="resume" class="form-control" rows="2">${item.resume || ''}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Changer le PDF</label>
+                            <input type="file" name="pdf_file" class="form-control" accept=".pdf">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Enregistrer les modifications</button>
+                    </form>`;
+
+            // --- CAS DES ALLOCUTIONS ---
+            } else if (type === 'allocution') {
+                formHtml = `
+                    <form action="/allocutions/${item.id}" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="_method" value="PUT">
+                        <div class="mb-3">
+                            <label class="form-label">Titre</label>
+                            <input type="text" name="titre" class="form-control" value="${item.titre}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Date</label>
+                            <input type="date" name="date_allocution" class="form-control" value="${item.date_allocution}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Changer le document (PDF, DOC)</label>
+                            <input type="file" name="document" class="form-control" accept=".pdf,.doc,.docx">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
+                    </form>`;
+            }
+
+            // 3. Injection du HTML dans le DOM
+            body.innerHTML = formHtml;
+
+            // 4. Initialisation des éditeurs CKEditor si c'est un "post"
+            if (type === 'post') {
+                const editors = ['#editor-main', '#editor-s1', '#editor-s2', '#editor-s3'];
+                
+                editors.forEach(selector => {
+                    const el = document.querySelector(selector);
+                    if (el) {
+                        ClassicEditor
+                            .create(el, {
+                                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'undo', 'redo']
+                            })
+                            .catch(error => console.error('Erreur CKEditor sur ' + selector, error));
+                    }
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Erreur Fetch:', error);
+            body.innerHTML = '<div class="alert alert-danger">Une erreur est survenue lors du chargement des données.</div>';
+        });
+}
+    
   </script>
 
 

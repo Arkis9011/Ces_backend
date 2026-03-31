@@ -1,7 +1,3 @@
-@php
-    $activeTab = $activeTab ?? 'section-actus';
-@endphp
-
 <section id="section-allocutions" class="admin-section {{ $activeTab == 'section-allocutions' ? 'active' : '' }}">
     <div class="mb-2 text-uppercase fw-bold text-muted" style="font-size: 0.75rem; letter-spacing: 1px;">Gestion des contenus</div>
     <h2 class="h4 mb-4 fw-bold" style="color:#003366">Gérer les <span style="color:#007fff">Allocutions</span></h2>
@@ -76,13 +72,33 @@
                     <input type="date" name="date_allocution" class="form-control" required value="{{ date('Y-m-d') }}">
                 </div>
             </div>
+
             <div class="mt-3">
                 <label class="form-label">Document (PDF, DOC)</label>
                 <input type="file" name="document" class="form-control" accept=".pdf,.doc,.docx">
             </div>
+
+            <div class="mt-3">
+                <label class="form-label fw-bold">Description / Contexte</label>
+                <textarea id="allocution-editor" name="description" class="form-control" rows="3" placeholder="Informations complémentaires sur cette intervention...">{{ old('description') }}</textarea>
+            </div>
+
             <button type="submit" class="btn px-4 py-2 fw-bold text-white mt-4" style="background: #003366; border-radius: 8px;">
                 <i class="fas fa-paper-plane me-2"></i> Ajouter l'allocution
             </button>
         </form>
     </div>
 </section>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Initialisation pour l'allocution
+        const allocElement = document.querySelector('#allocution-editor');
+        if (allocElement) {
+            ClassicEditor
+                .create(allocElement, {
+                    toolbar: ['bold', 'italic', 'link', 'bulletedList', 'undo', 'redo']
+                })
+                .catch(error => console.error('Erreur CKEditor Allocution:', error));
+        }
+    });
+</script>

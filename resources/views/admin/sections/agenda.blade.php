@@ -1,4 +1,4 @@
-      <section id="section-events" class="admin-section {{ (isset($activeTab) && $activeTab == 'section-events') ? 'active' : '' }}">
+<section id="section-events" class="admin-section {{ (isset($activeTab) && $activeTab == 'section-events') ? 'active' : '' }}">
     <div class="mb-2 text-uppercase fw-bold text-muted" style="font-size: 0.75rem; letter-spacing: 1px;">Gestion de l'agenda</div>
     <h2 class="h4 mb-4 fw-bold" style="color:#003366">Gérer l'<span style="color:#007fff">Agenda</span></h2>
     
@@ -102,8 +102,8 @@
                 </div>
             </div>
             <div class="mt-3">
-                <label class="form-label">Résumé / Description</label>
-                <textarea name="summary" class="form-control @error('summary') is-invalid @enderror" rows="3" required>{{ old('summary') }}</textarea>
+                <label class="form-label fw-bold">Résumé / Description</label>
+                <textarea id="agenda-editor" name="summary" class="form-control @error('summary') is-invalid @enderror" rows="3">{{ old('summary') }}</textarea>
             </div>
             <button type="submit" class="btn px-4 py-2 fw-bold text-white mt-4" style="background: #003366; border-radius: 8px;">
                 <i class="fas fa-save me-2"></i> Enregistrer l'événement
@@ -111,3 +111,19 @@
         </form>
     </div>
 </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Initialisation de CKEditor pour l'agenda
+        const agendaElement = document.querySelector('#agenda-editor');
+        if (agendaElement) {
+            ClassicEditor
+                .create(agendaElement, {
+                    toolbar: ['bold', 'italic', 'link', 'bulletedList', 'numberedList', 'undo', 'redo']
+                })
+                .catch(error => {
+                    console.error('Erreur CKEditor Agenda:', error);
+                });
+        }
+    });
+</script>
