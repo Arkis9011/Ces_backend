@@ -5,6 +5,11 @@
 
     RewriteEngine On
 
+    # --- NOUVELLE RÈGLE : Redirection WWW vers NON-WWW ---
+    RewriteCond %{HTTP_HOST} ^www\.ces\.cd [NC]
+    RewriteRule ^(.*)$ https://ces.cd/$1 [L,R=301]
+    # -----------------------------------------------------
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

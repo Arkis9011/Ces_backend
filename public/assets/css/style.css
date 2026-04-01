@@ -2431,7 +2431,7 @@ footer {
   }
   /* Logo */
   .logo-img {
-    height: 60px;
+    height: 85px;
   }
   .logo-title {
     font-size: 0.9rem;
@@ -2485,7 +2485,7 @@ footer {
 
 @media (max-width: 480px) {
   .logo-img {
-    height: 50px;
+    height: 110px;
   }
   .carousel__title {
     font-size: 1.5rem;

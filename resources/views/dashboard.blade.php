@@ -18,7 +18,8 @@
     body { background: #f4f7fa; min-height: 100vh; display: flex; font-family: 'Inter', sans-serif; }
     .admin-sidebar { width: 280px; background: #003366; color: #fff; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; transition: all 0.3s; }
     .admin-brand { padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 15px; }
-    .admin-brand img { width: 50px; background: #fff; padding: 4px; border-radius: 8px; }
+    .admin-brand img { width: 65px; background: #fff; padding: 6px; border-radius: 10px; transition: all 0.3s; }
+    @media (max-width: 991px) { .admin-brand img { width: 75px; } }
     .admin-brand span { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; line-height: 1.2; }
     .admin-nav { flex: 1; padding: 20px 0; overflow-y: auto; }
     .admin-nav a, .admin-nav button { display: flex; align-items: center; gap: 12px; padding: 12px 24px; color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.2s; font-weight: 500; font-size: 0.95rem; border: none; background: none; width: 100%; text-align: left; }
@@ -33,8 +34,16 @@
     .admin-section { display: none; animation: fadeIn 0.3s ease-in; }
     .admin-section.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    @media (max-width: 991px) { .admin-sidebar { transform: translateX(-100%); } .admin-sidebar.show { transform: translateX(0); } .admin-main { margin-left: 0; } .mobile-menu-btn { display: block; } }
-    .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: #003366; }
+    @media (max-width: 991px) { 
+      .admin-sidebar { transform: translateX(-100%); width: 260px; } 
+      .admin-sidebar.show { transform: translateX(0); box-shadow: 10px 0 30px rgba(0,0,0,0.2); } 
+      .admin-main { margin-left: 0; transition: margin-left 0.3s; } 
+      .mobile-menu-btn { display: block; } 
+      .admin-content { padding: 15px; }
+      .admin-topbar { padding: 0 15px; }
+      .admin-card { padding: 15px; }
+    }
+    .mobile-menu-btn { display: none; background: #f0f2f5; border: 1px solid #e5ebf4; border-radius: 8px; width: 40px; height: 40px; font-size: 1.2rem; color: #003366; align-items: center; justify-content: center; }
     /* Style pour le menu trois points */
 .dropdown-item {
     font-size: 0.9rem;
@@ -494,9 +503,13 @@
                     <input type="hidden" name="_method" value="PUT">
                     
                     <div class="row mb-3">
-                        <div class="col-md-8">
+                        <div class="col-md-5">
                             <label class="form-label fw-bold">Titre</label>
                             <input type="text" name="titre" class="form-control" value="${item.titre || ''}" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold">Date de publication</label>
+                            <input type="date" name="date_publication" class="form-control" value="${item.date_publication || ''}" required>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-bold">Catégorie</label>
