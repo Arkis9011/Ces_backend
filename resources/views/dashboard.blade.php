@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tableau de Bord | Administration CES</title>
+  <link rel="icon" type="image/png" href="{{ asset('assets/images/logo_header.png') }}">
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   
@@ -43,6 +44,8 @@
       .admin-topbar { padding: 0 15px; }
       .admin-card { padding: 15px; }
     }
+    .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 95; }
+    .sidebar-overlay.show { display: block; }
     .mobile-menu-btn { display: none; background: #f0f2f5; border: 1px solid #e5ebf4; border-radius: 8px; width: 40px; height: 40px; font-size: 1.2rem; color: #003366; align-items: center; justify-content: center; }
     /* Style pour le menu trois points */
 .dropdown-item {
@@ -61,6 +64,9 @@
   </style>
 </head>
 <body>
+
+  <!-- Overlay pour mobile -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
   <aside class="admin-sidebar" id="sidebar">
     <div class="admin-brand">
@@ -392,14 +398,29 @@
 
         if (window.innerWidth <= 991) {
           document.getElementById('sidebar').classList.remove('show');
+          document.getElementById('sidebarOverlay').classList.remove('show');
         }
       });
     });
 
     // Toggle Mobile Sidebar
-    document.getElementById('menuToggle').addEventListener('click', function() {
-      document.getElementById('sidebar').classList.toggle('show');
-    });
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
+            sidebarOverlay.classList.toggle('show');
+        });
+    }
+
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('show');
+            sidebarOverlay.classList.remove('show');
+        });
+    }
 
     // Confirmation de suppression SweetAlert
     function confirmDelete(event, form) {

@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Site Officiel du Conseil Économique et Social | République Démocratique du Congo</title>
+  <link rel="icon" type="image/png" href="{{ asset('assets/images/logo_header.png') }}">
   
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -245,13 +246,13 @@
             <i class="fas fa-calendar-alt"></i> {{ \Carbon\Carbon::parse($post->date_publication)->translatedFormat('d F Y') }}
           </div>
 
-          <h3 class="{{ $index == 0 ? 'h5' : 'h6' }} fw-semibold mt-2" style="font-family:'Playfair Display';">
+          <h3 class="{{ $index == 0 ? 'h5' : 'h6' }} fw-semibold mt-2" style="font-family:'Playfair Display'; text-align: justify;">
             {{ $post->titre }}
           </h3>
 
           {{-- Ajout du résumé (abstract) pour le premier article --}}
           @if($index == 0 && $post->resume)
-            <p class="small text-muted mb-3">{{ Str::limit($post->resume, 120) }}</p>
+            <p class="small text-muted mb-3" style="text-align: justify;">{{ Str::limit($post->resume, 120) }}</p>
           @endif
 
           <a href="{{ route('actualites.show', $post->id) }}" class="news-link text-primary fw-semibold">Lire l'article <i class="fas fa-arrow-right"></i></a>

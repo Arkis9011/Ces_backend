@@ -142,7 +142,7 @@
         <ol>
             <li>
                 <h3>La saisine</h3>
-                <p>Le CES peut être saisi par le Gouvernement ou le Parlement pour donner son avis sur un projet de loi. Il peut aussi s'autosaisir d'un sujet de société.</p>
+                <p>Le CES peut être saisi par le Président, le Gouvernement ou le Parlement pour donner son avis sur un projet de loi. Il peut aussi s'autosaisir d'un sujet de société.</p>
             </li>
             
             <li>

@@ -216,7 +216,6 @@
       <div class="s-tag">Attributions</div>
       <h2 class="s-title" style="font-size:1.4rem;">Rôle du <span>Bureau</span></h2>
       <div class="prose" style="max-width:720px; margin-top:16px;">
-        <p>Le Bureau assure la continuité des travaux entre les sessions plénières et coordonne les différentes missions du Conseil auprès du gouvernement ou du parlement.</p>
         <ul>
           <li>Veiller au bon fonctionnement du Conseil</li>
           <li>Assurer la gestion quotidienne du Conseil et de son patrimoine</li>

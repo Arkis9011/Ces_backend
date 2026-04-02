@@ -45,10 +45,15 @@ class PublicController extends Controller
 
     public function index()
     {
-        // Pour l'accueil, on veut les 3 ou 4 derniers éléments sans restriction de date passée
+        // Pour l'accueil, on veut les 3 ou 4 derniers éléments
         $actualites = Post::orderBy('date_publication', 'desc')->take(3)->get();
         $avis = Avis::latest()->take(3)->get();
-        $agendas = Agenda::orderBy('date', 'desc')->take(4)->get();
+        
+        // On affiche uniquement les événements dont la date est passée ou égale à aujourd'hui (sans l'heure)
+        $agendas = Agenda::whereDate('date', '>=', now()->toDateString())
+                         ->orderBy('date', 'asc')
+                         ->take(4)
+                         ->get();
                     
         $derniere_video = Video::latest()->first();
 
