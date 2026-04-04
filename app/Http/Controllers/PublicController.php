@@ -11,31 +11,88 @@ use App\Models\Allocution;
 
 class PublicController extends Controller
 {
-    public function agenda()
+    public function agenda(Request $request)
     {
-        // On affiche TOUT (passés et futurs), les plus récents/proches en premier
-        $evenements = Agenda::orderBy('date', 'desc')
-                            ->orderBy('heure', 'desc')
-                            ->get();
+        $query = Agenda::query();
+
+        if ($request->has('q')) {
+            $q = $request->q;
+            $query->where(function($w) use ($q) {
+                $w->where('title', 'LIKE', "%$q%")
+                  ->orWhere('summary', 'LIKE', "%$q%")
+                  ->orWhere('lieu', 'LIKE', "%$q%");
+            });
+        }
+
+        $sort = $request->get('sort', 'desc');
+        $query->orderBy('date', $sort)->orderBy('heure', $sort);
+
+        $evenements = $query->get();
+
+        if ($request->ajax()) {
+            return view('public.partials._agenda_grid', compact('evenements'))->render();
+        }
 
         return view('public.agenda', compact('evenements'));
     }
 
-    public function actualites()
+    public function actualites(Request $request)
     {
-        // Tri par date de publication et heure de création (si l'heure n'est pas un champ spécifique)
-        $actualites = Post::orderBy('date_publication', 'desc')
-                          ->orderBy('created_at', 'desc')
-                          ->paginate(9);
+        $query = Post::query();
+
+        // Recherche locale
+        if ($request->has('q')) {
+            $q = $request->q;
+            $query->where(function($w) use ($q) {
+                $w->where('titre', 'LIKE', "%$q%")
+                  ->orWhere('resume', 'LIKE', "%$q%")
+                  ->orWhere('contenu', 'LIKE', "%$q%");
+            });
+        }
+
+        // Filtrage par catégorie
+        if ($request->has('category') && $request->category != 'all') {
+            $query->where('categorie', $request->category);
+        }
+
+        // Tri
+        $sort = $request->get('sort', 'desc');
+        $query->orderBy('date_publication', $sort)->orderBy('created_at', $sort);
+
+        $actualites = $query->paginate(9);
+
+        if ($request->ajax()) {
+            return view('public.partials._actualites_grid', compact('actualites'))->render();
+        }
 
         return view('public.actualites', compact('actualites'));
     }
 
-    public function avis()
+    public function avis(Request $request)
     {
-        // On récupère tout en triant par la date de création (qui contient l'heure par défaut)
-        $avis = Avis::latest()->get(); 
-        
+        $query = Avis::query();
+
+        if ($request->has('q')) {
+            $q = $request->q;
+            $query->where(function($w) use ($q) {
+                $w->where('titre', 'LIKE', "%$q%")
+                  ->orWhere('summary', 'LIKE', "%$q%");
+            });
+        }
+
+        if ($request->has('commission') && $request->commission != 'all') {
+            $query->where('commission', $request->commission);
+        }
+
+        $sort = $request->get('sort', 'desc');
+        $query->orderBy('created_at', $sort);
+
+        $avis = $query->get();
+
+        if ($request->ajax()) {
+            return view('public.partials._avis_grid', compact('avis'))->render();
+        }
+
         $avisEco = Avis::where('commission', 'ECOFIN')->latest()->get();
         $avisEnv = Avis::where('commission', 'CERNAT')->latest()->get();
         $avisSocial = Avis::where('commission', 'CSAC')->latest()->get();
@@ -102,5 +159,54 @@ class PublicController extends Controller
     {
         $agendashow = Agenda::findOrFail($id);
         return view('public.show_agenda', compact('agendashow'));
+    }
+    public function recherche(Request $request)
+    {
+        $q = $request->get('q');
+        if (!$q) return redirect()->back();
+
+        $posts = Post::where('titre', 'LIKE', "%$q%")->orWhere('resume', 'LIKE', "%$q%")->latest()->take(10)->get();
+        $avis = Avis::where('titre', 'LIKE', "%$q%")->orWhere('resume', 'LIKE', "%$q%")->latest()->take(10)->get();
+        $agendas = Agenda::where('title', 'LIKE', "%$q%")->orWhere('summary', 'LIKE', "%$q%")->latest()->take(10)->get();
+        $videos = Video::where('title', 'LIKE', "%$q%")->latest()->take(5)->get();
+
+        return view('public.recherche', compact('posts', 'avis', 'agendas', 'videos', 'q'));
+    }
+
+    public function rechercheApi(Request $request)
+    {
+        $q = $request->get('q');
+        if (strlen($q) < 2) return response()->json([]);
+
+        $results = [];
+
+        $posts = Post::where('titre', 'LIKE', "%$q%")->latest()->take(3)->get();
+        foreach ($posts as $post) {
+            $results[] = [
+                'title' => $post->titre,
+                'url' => route('actualites.show', $post->id),
+                'type' => 'Actualité'
+            ];
+        }
+
+        $avis = Avis::where('titre', 'LIKE', "%$q%")->latest()->take(3)->get();
+        foreach ($avis as $a) {
+            $results[] = [
+                'title' => $a->titre,
+                'url' => route('avis.detail', $a->id),
+                'type' => 'Avis'
+            ];
+        }
+
+        $agendas = Agenda::where('title', 'LIKE', "%$q%")->latest()->take(3)->get();
+        foreach ($agendas as $ag) {
+            $results[] = [
+                'title' => $ag->title,
+                'url' => route('agenda.show', $ag->id),
+                'type' => 'Événement'
+            ];
+        }
+
+        return response()->json($results);
     }
 } // Fin de la classe

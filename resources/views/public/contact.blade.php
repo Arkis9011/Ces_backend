@@ -1,112 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Site Officiel du Conseil Économique et Social | République Démocratique du Congo</title>
-  
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  
-  <!-- Polices et icônes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
-  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-</head>
-<body>
+@extends('layouts.public')
 
-<!-- ===== HEADER ===== -->
-<header class="site-header">
-  <div class="header-container">
-    <!-- Logo -->
-    <a href="{{ url('/') }}" class="logo">
-      <img src="{{ asset('assets/images/logo_header.png') }}" alt="Conseil Économique et Social - RDC" class="logo-img">
-    </a>
+@section('title', 'Contactez le CES | Conseil Économique et Social - RDC')
 
-    <!-- Bouton menu mobile -->
-    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu" aria-expanded="false">
-      <i class="fas fa-bars" aria-hidden="true"></i>
-    </button>
-
-    <!-- Navigation principale -->
-    <nav class="site-nav" id="mainNav" aria-label="Navigation principale">
-      <ul class="site-nav-menu">
-        <li class="site-nav-item"><a href="{{ url('/') }}" class="site-nav-link active">Accueil</a></li>
-
-        <!-- Menu avec mega-dropdown -->
-        <li class="site-nav-item has-mega">
-          <a href="{{ url('apercu') }}" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
-            À propos du CES <i class="fas fa-chevron-down" aria-hidden="true"></i>
-          </a>
-          <div class="site-mega-dropdown" role="region" aria-label="Sous-menu À propos">
-            <div class="mega-col">
-              <h4 class="mega-col-title">Institution</h4>
-              <ul>
-                <li><a href="{{ url('apercu') }}"><i class="fas fa-info-circle" aria-hidden="true"></i> Aperçu du CES</a></li>
-                <li><a href="{{ url('missions') }}"><i class="fas fa-bullseye" aria-hidden="true"></i> Missions</a></li>
-                <li><a href="{{ url('partenaires') }}"><i class="fas fa-handshake" aria-hidden="true"></i> Partenaires</a></li>
-                <li><a href="{{ url('textes') }}"><i class="fas fa-file-alt" aria-hidden="true"></i> Textes Légaux et Réglementaires</a></li>
-              </ul>
-            </div>
-            <div class="mega-col">
-              <h4 class="mega-col-title">Organisation</h4>
-              <ul>
-                <li><a href="{{ url('president') }}"><i class="fas fa-user-tie" aria-hidden="true"></i> Le Président</a></li>
-                <li><a href="{{ url('bureau') }}"><i class="fas fa-users" aria-hidden="true"></i> Le Bureau</a></li>
-                <li><a href="{{ url('assemblee') }}"><i class="fas fa-landmark" aria-hidden="true"></i> Assemblée Générale</a></li>
-                <li><a href="{{ url('commissions') }}"><i class="fas fa-project-diagram" aria-hidden="true"></i> Commissions</a></li>
-                <li><a href="{{ url('fonctionnement') }}"><i class="fas fa-cogs" aria-hidden="true"></i> Fonctionnement</a></li>
-              </ul>
-            </div>
-          </div>
-        </li>
-
-        <!-- Menu simple dropdown -->
-        <li class="site-nav-item has-dropdown">
-          <a href="{{ url('avis') }}" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
-            Travaux & Avis <i class="fas fa-chevron-down" aria-hidden="true"></i>
-          </a>
-          <ul class="site-dropdown" role="region" aria-label="Sous-menu Travaux">
-            <li><a href="{{ url('avis') }}"><i class="fas fa-balance-scale" aria-hidden="true"></i> Nos Avis</a></li>
-            <li><a href="{{ url('publications') }}"><i class="fas fa-book-open" aria-hidden="true"></i> Publications</a></li>
-          </ul>
-        </li>
-
-        <li class="site-nav-item has-dropdown">
-          <a href="{{ url('actualites') }}" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
-            Actualités <i class="fas fa-chevron-down" aria-hidden="true"></i>
-          </a>
-          <ul class="site-dropdown" role="region" aria-label="Sous-menu Actualités">
-            <li><a href="{{ url('actualites') }}"><i class="fas fa-newspaper" aria-hidden="true"></i> Nos Actualités</a></li>
-            <li><a href="{{ url('agenda') }}"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Agenda</a></li>
-            <li><a href="{{ url('mediatheque') }}"><i class="fas fa-images" aria-hidden="true"></i> Médiathèque</a></li>
-          </ul>
-        </li>
-
-        <li class="site-nav-item"><a href="{{ url('contact') }}" class="site-nav-link">Contact</a></li>
-
-        <!-- CTA recherche commenté -->
-        {{-- 
-        <li class="site-nav-item search-item">
-          <button class="site-nav-link search-toggle" aria-label="Ouvrir la recherche" aria-expanded="false">
-            <i class="fas fa-search" aria-hidden="true"></i>
-            <span class="search-text">Rechercher</span>
-          </button>
-          <div class="search-dropdown">
-            <form action="{{ url('recherche') }}" method="get" role="search">
-              <input type="search" name="q" placeholder="Rechercher..." aria-label="Rechercher" required>
-              <button type="submit" aria-label="Lancer la recherche"><i class="fas fa-search"></i></button>
-            </form>
-          </div>
-        </li>
-        --}}
-      </ul>
-    </nav>
-  </div>
-</header>
-
+@section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">
   <div class="hero-inner">
@@ -121,37 +17,33 @@
 
 <!-- CONTENU PRINCIPAL AVEC BOOTSTRAP -->
 <div class="content-wrap">
-  <div class="container">
+  <div class="container py-5">
     <div class="row g-5">
       <!-- Colonne principale : formulaire -->
       <div class="col-lg-8">
         <div class="s-tag">Formulaire de contact</div>
         <h2 class="s-title">Envoyez-nous un <span>message</span></h2>
-        <form class="mt-4" onsubmit="return false">
+        <form class="mt-4 shadow-sm p-4 border rounded bg-white" onsubmit="return false">
           <!-- Deux champs côte à côte -->
           <div class="row g-3">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Nom complet <span style="color:var(--rouge)">*</span></label>
-                <input type="text" class="form-control" placeholder="Votre nom et prénom" style="border:1.5px solid #d8e4f0; border-radius:8px;">
-              </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label small fw-bold">Nom complet <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" placeholder="Votre nom et prénom">
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Adresse email <span style="color:var(--rouge)">*</span></label>
-                <input type="email" class="form-control" placeholder="votre@email.com" style="border:1.5px solid #d8e4f0; border-radius:8px;">
-              </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label small fw-bold">Adresse email <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" placeholder="votre@email.com">
             </div>
           </div>
           <!-- Organisation -->
-          <div class="form-group">
-            <label>Organisation / Institution</label>
-            <input type="text" class="form-control" placeholder="Nom de votre organisation" style="border:1.5px solid #d8e4f0; border-radius:8px;">
+          <div class="mb-3">
+            <label class="form-label small fw-bold">Organisation / Institution</label>
+            <input type="text" class="form-control" placeholder="Nom de votre organisation">
           </div>
           <!-- Objet -->
-          <div class="form-group">
-            <label>Objet du message <span style="color:var(--rouge)">*</span></label>
-            <select class="form-select" style="border:1.5px solid #d8e4f0; border-radius:8px;">
+          <div class="mb-3">
+            <label class="form-label small fw-bold">Objet du message <span class="text-danger">*</span></label>
+            <select class="form-select">
               <option value="">-- Sélectionnez un objet --</option>
               <option>Demande d'information générale</option>
               <option>Saisine officielle du CES</option>
@@ -162,124 +54,53 @@
             </select>
           </div>
           <!-- Message -->
-          <div class="form-group">
-            <label>Votre message <span style="color:var(--rouge)">*</span></label>
-            <textarea class="form-control" placeholder="Rédigez votre message ici..." rows="5" style="border:1.5px solid #d8e4f0; border-radius:8px;"></textarea>
+          <div class="mb-3">
+            <label class="form-label small fw-bold">Votre message <span class="text-danger">*</span></label>
+            <textarea class="form-control" placeholder="Rédigez votre message ici..." rows="5"></textarea>
           </div>
           <!-- Case à cocher RGPD -->
-          <div class="form-group d-flex align-items-center gap-2">
-            <input type="checkbox" id="rgpd" style="width:auto; padding:0;">
-            <label for="rgpd" style="margin-bottom:0; font-weight:400; font-size:.84rem; cursor:pointer;">J'accepte que mes données soient traitées conformément à la politique de confidentialité du CES.</label>
+          <div class="mb-4 form-check">
+            <input type="checkbox" class="form-check-input" id="rgpd">
+            <label class="form-check-label small text-muted" for="rgpd">J'accepte que mes données soient traitées conformément à la politique de confidentialité du CES.</label>
           </div>
           <!-- Bouton -->
-          <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Envoyer le message</button>
+          <button type="submit" class="btn btn-primary px-4 py-2"><i class="fas fa-paper-plane me-2"></i> Envoyer le message</button>
         </form>
       </div>
 
       <!-- Sidebar droite -->
       <aside class="col-lg-4">
-        <div class="info-card reveal">
-          <h3><i class="fas fa-map-marker-alt" style="background:var(--bleu-fonce)"></i> Adresse</h3>
-          <ul><li><i class="fas fa-building"></i> 161, Avenue Lupungu, Immeuble BOBO<br>Kinshasa / Gombe — RDC</li></ul>
+        <div class="info-card reveal mb-4 p-4 border rounded bg-white shadow-sm">
+          <h5 class="mb-3"><span class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center me-2" style="width:32px;height:32px"><i class="fas fa-map-marker-alt small"></i></span> Adresse</h5>
+          <address class="small text-muted mb-0">
+            161, Avenue Lupungu, Immeuble BOBO<br>
+            Kinshasa / Gombe — RDC
+          </address>
         </div>
-        <div class="info-card reveal">
-          <h3><i class="fas fa-phone" style="background:var(--bleu-fonce)"></i> Coordonnées</h3>
-          <ul>
-            <li><i class="fas fa-envelope"></i> infos@ces.cd</li>
-            <li><i class="fas fa-globe"></i> www.ces.cd</li>
+        <div class="info-card reveal mb-4 p-4 border rounded bg-white shadow-sm">
+          <h5 class="mb-3"><span class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center me-2" style="width:32px;height:32px"><i class="fas fa-phone small"></i></span> Coordonnées</h5>
+          <ul class="list-unstyled small text-muted mb-0">
+            <li class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i> <a href="mailto:infos@ces.cd" class="text-decoration-none">infos@ces.cd</a></li>
+            <li><i class="fas fa-globe me-2 text-primary"></i> <a href="https://www.ces.cd" target="_blank" class="text-decoration-none">www.ces.cd</a></li>
           </ul>
         </div>
-        <div class="info-card reveal">
-          <h3><i class="fas fa-share-nodes" style="background:var(--bleu-fonce)"></i> Réseaux sociaux</h3>
-          <ul>
-            <li><i class="fab fa-facebook" style="color:#1877F2"></i> <a href="https://www.facebook.com/share/184aGHRW8M/" target="_blank" style="color:var(--bleu)">Conseil Economique et Social/CES-RDC</a></li>
-            <li><i class="fab fa-x-twitter" style="color:#222"></i> <a href="https://x.com/ConseilEco_RDC" target="_blank" style="color:var(--bleu)">@ConseilEco_RDC</a></li>
-            <li><i class="fab fa-youtube" style="color:#FF0000"></i> <a href="https://www.youtube.com/@cesdrc" target="_blank" style="color:var(--bleu)">youtube.com/@cesdrc</a></li>
+        <div class="info-card reveal p-4 border rounded bg-white shadow-sm">
+          <h5 class="mb-3"><span class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center me-2" style="width:32px;height:32px"><i class="fas fa-share-nodes small"></i></span> Réseaux sociaux</h5>
+          <ul class="list-unstyled small mb-0">
+            <li class="mb-2"><i class="fab fa-facebook text-primary me-2"></i> <a href="https://www.facebook.com/share/184aGHRW8M/" target="_blank" class="text-decoration-none text-muted">CES-RDC Officiel</a></li>
+            <li class="mb-2"><i class="fab fa-x-twitter text-dark me-2"></i> <a href="https://x.com/ConseilEco_RDC" target="_blank" class="text-decoration-none text-muted">@ConseilEco_RDC</a></li>
+            <li><i class="fab fa-youtube text-danger me-2"></i> <a href="https://www.youtube.com/@cesdrc" target="_blank" class="text-decoration-none text-muted">Youtube CES DRC</a></li>
           </ul>
         </div>
       </aside>
     </div>
   </div>
 </div>
+@endsection
 
-
-<!-- ===== FOOTER ===== -->
-<footer style="background: var(--texte); padding-top: 3rem;">
-  <div class="container">
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-start gap-4 mb-4">
-      <a href="{{ url('/') }}" class="d-flex align-items-center gap-3 text-decoration-none">
-        <img src="{{ asset('assets/images/LOGO.png') }}" alt="Logo CES" style="height: 100px;">
-        <div>
-          <div class="text-white fw-bold fs-5">Conseil Économique et Social</div>
-          <div class="small" style="color: rgba(255,255,255,0.5);">République Démocratique du Congo</div>
-        </div>
-      </a>
-
-      <div class="text-md-end">
-        <div class="d-flex flex-column gap-2">
-          <div class="d-flex gap-2 justify-content-md-end">
-            <i class="fas fa-map-marker-alt" style="color: var(--jaune); width: 20px;"></i>
-            <span class="small text-white-50">161, Avenue Lupungu, Immeuble BOBO, Kinshasa / Gombe</span>
-          </div>
-          <div class="d-flex gap-2 justify-content-md-end">
-            <i class="fas fa-envelope" style="color: var(--jaune); width: 20px;"></i>
-            <span class="small text-white-50">infos@ces.cd</span>
-          </div>
-          <div class="d-flex gap-2 justify-content-md-end">
-            <i class="fas fa-globe" style="color: var(--jaune); width: 20px;"></i>
-            <span class="small text-white-50">www.ces.cd</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="d-flex flex-wrap justify-content-between align-items-center py-4 mt-5" style="border-top: 1px solid rgba(255,255,255,0.08);">
-      <p class="small mb-0 mx-auto" style="color: rgba(255,255,255,0.4);">
-        © {{ date('Y') }} Tous droits réservés | Conseil Économique et Social — République Démocratique du Congo
-      </p>
-    </div>
-  </div>
-
-  <div class="footer-tricolor" style="height:5px; background:linear-gradient(to right, var(--bleu) 33.33%, var(--jaune) 33.33%, var(--jaune) 66.66%, var(--rouge) 66.66%);"></div>
-</footer>
-
-<script src="{{ asset('assets/js/main.Js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+@section('scripts')
 <script>
-  // Slider et observer (ajusté pour le carrousel existant)
-  let current = 0;
-  const total = 3;
-  let autoSlide;
-  function updateSlider() {
-    const track = document.querySelector('.carousel__track');
-    if (track) {
-      track.style.transform = `translateX(-${current * 100}%)`;
-      document.querySelectorAll('.carousel__dot').forEach((d, i) => {
-        d.classList.toggle('carousel__dot--active', i === current);
-        d.setAttribute('aria-current', i === current ? 'true' : 'false');
-      });
-    }
-  }
-  function changeSlide(dir) { current = (current + dir + total) % total; updateSlider(); resetAuto(); }
-  function goToSlide(n) { current = n; updateSlider(); resetAuto(); }
-  function resetAuto() { clearInterval(autoSlide); autoSlide = setInterval(() => changeSlide(1), 5500); }
-
-  // Attacher les événements après le chargement du DOM
   document.addEventListener('DOMContentLoaded', () => {
-    const prevBtn = document.querySelector('.carousel__arrow--prev');
-    const nextBtn = document.querySelector('.carousel__arrow--next');
-    const dots = document.querySelectorAll('.carousel__dot');
-
-    if (prevBtn) prevBtn.addEventListener('click', () => changeSlide(-1));
-    if (nextBtn) nextBtn.addEventListener('click', () => changeSlide(1));
-    dots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => goToSlide(idx));
-    });
-
-    updateSlider();
-    resetAuto();
-
-    // Intersection Observer pour les animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -288,13 +109,13 @@
         }
       });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.news-card, .avis-card, .pub-card, .bureau-card, .commission-card').forEach(el => {
+
+    document.querySelectorAll('.reveal').forEach(el => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
       observer.observe(el);
     });
   });
 </script>
-</body>
-</html>
+@endsection

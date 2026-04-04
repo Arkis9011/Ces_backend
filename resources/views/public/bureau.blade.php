@@ -1,114 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Site Officiel du Conseil Économique et Social | République Démocratique du Congo</title>
-  
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  
-  <!-- Polices et icônes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
-  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-</head>
-<body>
+@extends('layouts.public')
 
-<!-- ===== HEADER ===== -->
-<header class="site-header">
-  <div class="header-container">
-    <!-- Logo -->
-    <a href="{{ url('/') }}" class="logo">
-      <img src="{{ asset('assets/images/logo_header.png') }}" alt="Conseil Économique et Social - RDC" class="logo-img">
-    </a>
+@section('title', 'Le Bureau | Conseil Économique et Social - RDC')
 
-    <!-- Bouton menu mobile -->
-    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu" aria-expanded="false">
-      <i class="fas fa-bars" aria-hidden="true"></i>
-    </button>
-
-    <!-- Navigation principale -->
-    <nav class="site-nav" id="mainNav" aria-label="Navigation principale">
-      <ul class="site-nav-menu">
-        <li class="site-nav-item"><a href="{{ url('/') }}" class="site-nav-link active">Accueil</a></li>
-
-        <!-- Menu avec mega-dropdown -->
-        <li class="site-nav-item has-mega">
-          <a href="{{ url('apercu') }}" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
-            À propos du CES <i class="fas fa-chevron-down" aria-hidden="true"></i>
-          </a>
-          <div class="site-mega-dropdown" role="region" aria-label="Sous-menu À propos">
-            <div class="mega-col">
-              <h4 class="mega-col-title">Institution</h4>
-              <ul>
-                <li><a href="{{ url('apercu') }}"><i class="fas fa-info-circle" aria-hidden="true"></i> Aperçu du CES</a></li>
-                <li><a href="{{ url('missions') }}"><i class="fas fa-bullseye" aria-hidden="true"></i> Missions</a></li>
-                <li><a href="{{ url('partenaires') }}"><i class="fas fa-handshake" aria-hidden="true"></i> Partenaires</a></li>
-                <li><a href="{{ url('textes') }}"><i class="fas fa-file-alt" aria-hidden="true"></i> Textes Légaux et Réglementaires</a></li>
-              </ul>
-            </div>
-            <div class="mega-col">
-              <h4 class="mega-col-title">Organisation</h4>
-              <ul>
-                <li><a href="{{ url('president') }}"><i class="fas fa-user-tie" aria-hidden="true"></i> Le Président</a></li>
-                <li><a href="{{ url('bureau') }}"><i class="fas fa-users" aria-hidden="true"></i> Le Bureau</a></li>
-                <li><a href="{{ url('assemblee') }}"><i class="fas fa-landmark" aria-hidden="true"></i> Assemblée Générale</a></li>
-                <li><a href="{{ url('commissions') }}"><i class="fas fa-project-diagram" aria-hidden="true"></i> Commissions</a></li>
-                <li><a href="{{ url('fonctionnement') }}"><i class="fas fa-cogs" aria-hidden="true"></i> Fonctionnement</a></li>
-              </ul>
-            </div>
-          </div>
-        </li>
-
-        <!-- Menu simple dropdown -->
-        <li class="site-nav-item has-dropdown">
-          <a href="{{ url('avis') }}" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
-            Travaux & Avis <i class="fas fa-chevron-down" aria-hidden="true"></i>
-          </a>
-          <ul class="site-dropdown" role="region" aria-label="Sous-menu Travaux">
-            <li><a href="{{ url('avis') }}"><i class="fas fa-balance-scale" aria-hidden="true"></i> Nos Avis</a></li>
-            <li><a href="{{ url('publications') }}"><i class="fas fa-book-open" aria-hidden="true"></i> Publications</a></li>
-          </ul>
-        </li>
-
-        <li class="site-nav-item has-dropdown">
-          <a href="{{ url('actualites') }}" class="site-nav-link" aria-expanded="false" aria-haspopup="true">
-            Actualités <i class="fas fa-chevron-down" aria-hidden="true"></i>
-          </a>
-          <ul class="site-dropdown" role="region" aria-label="Sous-menu Actualités">
-            <li><a href="{{ url('actualites') }}"><i class="fas fa-newspaper" aria-hidden="true"></i> Nos Actualités</a></li>
-            <li><a href="{{ url('agenda') }}"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Agenda</a></li>
-            <li><a href="{{ url('mediatheque') }}"><i class="fas fa-images" aria-hidden="true"></i> Médiathèque</a></li>
-          </ul>
-        </li>
-
-        <li class="site-nav-item"><a href="{{ url('contact') }}" class="site-nav-link">Contact</a></li>
-
-        <!-- CTA recherche commenté -->
-        {{-- 
-        <li class="site-nav-item search-item">
-          <button class="site-nav-link search-toggle" aria-label="Ouvrir la recherche" aria-expanded="false">
-            <i class="fas fa-search" aria-hidden="true"></i>
-            <span class="search-text">Rechercher</span>
-          </button>
-          <div class="search-dropdown">
-            <form action="{{ url('recherche') }}" method="get" role="search">
-              <input type="search" name="q" placeholder="Rechercher..." aria-label="Rechercher" required>
-              <button type="submit" aria-label="Lancer la recherche"><i class="fas fa-search"></i></button>
-            </form>
-          </div>
-        </li>
-        --}}
-      </ul>
-    </nav>
-  </div>
-</header>
-
-
-
+@section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">
   <div class="hero-inner">
@@ -124,207 +18,122 @@
 
 <!-- CONTENU PRINCIPAL AVEC BOOTSTRAP -->
 <div class="content-wrap">
-  <div class="container">
+  <div class="container py-5">
     <div class="s-tag">Membres élus</div>
     <h2 class="s-title">Composition du <span>Bureau</span></h2>
     <p class="prose mb-5" style="max-width:680px;">Le Bureau est l'organe moteur, permanent et décisionnel du CES. Il assure la gestion courante de l'institution et statue par voie de décision. Il comprend sept membres élus par l'Assemblée Générale pour la durée de la mandature.</p>
 
     <!-- Grille des membres -->
-    <div class="row g-4">
+    <div class="row g-4 mb-5">
       <!-- Président -->
-      <div class="col-lg-3 col-md-6">
-        <div class="membre-card reveal" style="border-top:4px solid var(--jaune)">
-          <img src="https://ik.imagekit.io/ces/bureau/Pr_JKK__(1)_1_.webp?updatedAt=1774448219113" alt="Président" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
+      <div class="col-lg-3 col-md-6 text-center">
+        <div class="membre-card reveal border-top border-4 border-warning bg-white p-3 rounded shadow-sm h-100">
+          <img src="https://ik.imagekit.io/ces/bureau/Pr_JKK__(1)_1_.webp?updatedAt=1774448219113" alt="Président" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="membre-photo-ph bg-light rounded d-none justify-content-center align-items-center mb-3" style="height:200px;"><i class="fas fa-user-tie fa-4x text-muted"></i></div>
           <div class="mc-body">
-            <div class="mc-role">Président</div>
-            <div class="mc-name">Jean Pierre Kiwakana KIMAYALA</div>
-            <span class="mc-badge"><i class="fas fa-star"></i> Président</span>
+            <div class="small text-primary text-uppercase fw-bold mb-1">Président</div>
+            <div class="h6 fw-bold">Jean Pierre Kiwakana KIMAYALA</div>
           </div>
         </div>
       </div>
       <!-- 1er VP -->
-      <div class="col-lg-3 col-md-6">
-        <div class="membre-card reveal">
-          <img src="https://ik.imagekit.io/ces/bureau/1VP_LKK_.webp?updatedAt=1774449073714" alt="1er VP" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
+      <div class="col-lg-3 col-md-6 text-center">
+        <div class="membre-card reveal bg-white p-3 rounded shadow-sm h-100">
+          <img src="https://ik.imagekit.io/ces/bureau/1VP_LKK_.webp?updatedAt=1774449073714" alt="1er VP" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="membre-photo-ph bg-light rounded d-none justify-content-center align-items-center mb-3" style="height:200px;"><i class="fas fa-user-tie fa-4x text-muted"></i></div>
           <div class="mc-body">
-            <div class="mc-role">1er Vice-Président</div>
-            <div class="mc-name">Léon Kyaboba KASOBWA</div>
+            <div class="small text-primary text-uppercase fw-bold mb-1">1er Vice-Président</div>
+            <div class="h6 fw-bold">Léon Kyaboba KASOBWA</div>
           </div>
         </div>
       </div>
       <!-- 2ème VP -->
-      <div class="col-lg-3 col-md-6">
-        <div class="membre-card reveal">
-          <img src="https://ik.imagekit.io/ces/bureau/2VP_CTK.webp?updatedAt=1774448924923" alt="2e VP" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
+      <div class="col-lg-3 col-md-6 text-center">
+        <div class="membre-card reveal bg-white p-3 rounded shadow-sm h-100">
+          <img src="https://ik.imagekit.io/ces/bureau/2VP_CTK.webp?updatedAt=1774448924923" alt="2e VP" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="membre-photo-ph bg-light rounded d-none justify-content-center align-items-center mb-3" style="height:200px;"><i class="fas fa-user-tie fa-4x text-muted"></i></div>
           <div class="mc-body">
-            <div class="mc-role">2ème Vice-Président</div>
-            <div class="mc-name">Célestin Tshibwabwa KANYAMA</div>
+            <div class="small text-primary text-uppercase fw-bold mb-1">2ème Vice-Président</div>
+            <div class="h6 fw-bold">Célestin Tshibwabwa KANYAMA</div>
           </div>
         </div>
       </div>
       <!-- Rapporteur -->
-      <div class="col-lg-3 col-md-6">
-        <div class="membre-card reveal">
-          <img src="https://ik.imagekit.io/ces/bureau/Rapp_RNM_.webp?updatedAt=1774448978783" alt="Rapporteur" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
+      <div class="col-lg-3 col-md-6 text-center">
+        <div class="membre-card reveal bg-white p-3 rounded shadow-sm h-100">
+          <img src="https://ik.imagekit.io/ces/bureau/Rapp_RNM_.webp?updatedAt=1774448978783" alt="Rapporteur" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="membre-photo-ph bg-light rounded d-none justify-content-center align-items-center mb-3" style="height:200px;"><i class="fas fa-user-tie fa-4x text-muted"></i></div>
           <div class="mc-body">
-            <div class="mc-role">Rapporteur</div>
-            <div class="mc-name">René Ngongo MATESO</div>
+            <div class="small text-primary text-uppercase fw-bold mb-1">Rapporteur</div>
+            <div class="h6 fw-bold">René Ngongo MATESO</div>
           </div>
         </div>
       </div>
       <!-- Rapporteur Adjoint -->
-      <div class="col-lg-3 col-md-6">
-        <div class="membre-card reveal">
-          <img src="https://ik.imagekit.io/ces/bureau/Rapp_Adj%20SMT_.webp?updatedAt=1774448958778" alt="Rapp. Adj." onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
+      <div class="col-lg-4 col-md-6 text-center">
+        <div class="membre-card reveal bg-white p-3 rounded shadow-sm h-100">
+          <img src="https://ik.imagekit.io/ces/bureau/Rapp_Adj%20SMT_.webp?updatedAt=1774448958778" alt="Rapp. Adj." class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="membre-photo-ph bg-light rounded d-none justify-content-center align-items-center mb-3" style="height:200px;"><i class="fas fa-user-tie fa-4x text-muted"></i></div>
           <div class="mc-body">
-            <div class="mc-role">Rapporteur Adjoint</div>
-            <div class="mc-name">Sylvie Mbakata THULA</div>
+            <div class="small text-primary text-uppercase fw-bold mb-1">Rapporteur Adjoint</div>
+            <div class="h6 fw-bold">Sylvie Mbakata THULA</div>
           </div>
         </div>
       </div>
       <!-- Questeur -->
-      <div class="col-lg-3 col-md-6">
-        <div class="membre-card reveal">
-          <img src="https://ik.imagekit.io/ces/bureau/Quest_AMK.webp?updatedAt=1774449132444" alt="Questeur" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
+      <div class="col-lg-4 col-md-6 text-center">
+        <div class="membre-card reveal bg-white p-3 rounded shadow-sm h-100">
+          <img src="https://ik.imagekit.io/ces/bureau/Quest_AMK.webp?updatedAt=1774449132444" alt="Questeur" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="membre-photo-ph bg-light rounded d-none justify-content-center align-items-center mb-3" style="height:200px;"><i class="fas fa-user-tie fa-4x text-muted"></i></div>
           <div class="mc-body">
-            <div class="mc-role">Questeur</div>
-            <div class="mc-name">Astrid Martins Elias KABENGELE</div>
+            <div class="small text-primary text-uppercase fw-bold mb-1">Questeur</div>
+            <div class="h6 fw-bold">Astrid Martins Elias KABENGELE</div>
           </div>
         </div>
       </div>
       <!-- Questeur Adjoint -->
-      <div class="col-lg-3 col-md-6">
-        <div class="membre-card reveal">
-          <img src="https://ik.imagekit.io/ces/bureau/Quest_Adj_BM_.webp?updatedAt=1774449118409" alt="Questeur Adj." onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="membre-photo-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
+      <div class="col-lg-4 col-md-6 text-center">
+        <div class="membre-card reveal bg-white p-3 rounded shadow-sm h-100">
+          <img src="https://ik.imagekit.io/ces/bureau/Quest_Adj_BM_.webp?updatedAt=1774449118409" alt="Questeur Adj." class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="membre-photo-ph bg-light rounded d-none justify-content-center align-items-center mb-3" style="height:200px;"><i class="fas fa-user-tie fa-4x text-muted"></i></div>
           <div class="mc-body">
-            <div class="mc-role">Questeur Adjoint</div>
-            <div class="mc-name">Béatrice Mpulu YEMBELA</div>
+            <div class="small text-primary text-uppercase fw-bold mb-1">Questeur Adjoint</div>
+            <div class="h6 fw-bold">Béatrice Mpulu YEMBELA</div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Section Attributions -->
-    <div class="mt-5 p-5" style="background:var(--gris-clair); border-radius:16px;">
+    <div class="p-5" style="background:var(--gris-clair); border-radius:16px;">
       <div class="s-tag">Attributions</div>
       <h2 class="s-title" style="font-size:1.4rem;">Rôle du <span>Bureau</span></h2>
-      <div class="prose" style="max-width:720px; margin-top:16px;">
-        <ul>
-          <li>Veiller au bon fonctionnement du Conseil</li>
-          <li>Assurer la gestion quotidienne du Conseil et de son patrimoine</li>
-          <li>Elaborer le programme de travail du Conseil</li>
-          <li>Proposer le mode de décision ou de votation</li>
-          <li>Préparer et assurer l'exécution du budget du Conseil</li>
-          <li>Rechercher toute information et toute documentation susceptible de faciliter le bon déroulement des travaux du Conseil</li>
-          <li>Faire rapport à I'Assemblée Générale de toules les activités menées pendant les intersessions</li>
-          <li>Organiser et assurer le suivi des échanges inter-conseils avec les autres pays</li>
-          <li>Déterminer l'organisation et le fonctionnement des services de l'administration du Conseil</li>
-          <li>Rechercher les voies et moyens pouvant garantir les bonnes conditions de travail aux Conseillers de la République</li>
-          <li>Définir les thématiques prioritaires pour la formation des Conseillers de la République et des membres du Personnel du Conseil</li>
-          <li>Examiner les demandes d'Avis et d'études déposées par le Président de la République, I'Assemblée Nationale, le Sénat, le Gouvemement et les attribuer aux Commissions concernées</li>
-          <li>Examiner les demandes d'auto saisine, à défaut de les avoir initiées lui-même</li>
-          <li>Etablir un relevé des décisions après chaque réunion et après validation, les transmettre à chaque Conseiller de la République</li>
-          <li>Dresser chaque année un rapport de l'ensemble des suites reservées à ses Avis par les organes destinataires</li>
-          <li>Statuer de la recevabilité des pétitions conformément à l'article 25 de la Loi organique portant organisation et fonctionnement du Conseil.</li>
-        </ul>
+      <div class="prose row mt-4">
+        <div class="col-md-6">
+          <ul class="small">
+            <li class="mb-2">Veiller au bon fonctionnement du Conseil</li>
+            <li class="mb-2">Assurer la gestion quotidienne du Conseil et de son patrimoine</li>
+            <li class="mb-2">Elaborer le programme de travail du Conseil</li>
+            <li class="mb-2">Préparer et assurer l'exécution du budget du Conseil</li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <ul class="small">
+            <li class="mb-2">Organiser et assurer le suivi des échanges inter-conseils</li>
+            <li class="mb-2">Déterminer l'organisation des services administratifs</li>
+            <li class="mb-2">Examiner les demandes d'Avis et d'études déposées par les institutions</li>
+            <li class="mb-2">Statuer de la recevabilité des pétitions</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </div>
+@endsection
 
-
-
-
-
-
-
-
-
-
-<!-- ===== FOOTER ===== -->
-<footer style="background: var(--texte); padding-top: 3rem;">
-  <div class="container">
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-start gap-4 mb-4">
-      <a href="{{ url('/') }}" class="d-flex align-items-center gap-3 text-decoration-none">
-        <img src="{{ asset('assets/images/LOGO.png') }}" alt="Logo CES" style="height: 100px;">
-        <div>
-          <div class="text-white fw-bold fs-5">Conseil Économique et Social</div>
-          <div class="small" style="color: rgba(255,255,255,0.5);">République Démocratique du Congo</div>
-        </div>
-      </a>
-
-      <div class="text-md-end">
-        <div class="d-flex flex-column gap-2">
-          <div class="d-flex gap-2 justify-content-md-end">
-            <i class="fas fa-map-marker-alt" style="color: var(--jaune); width: 20px;"></i>
-            <span class="small text-white-50">161, Avenue Lupungu, Immeuble BOBO, Kinshasa / Gombe</span>
-          </div>
-          <div class="d-flex gap-2 justify-content-md-end">
-            <i class="fas fa-envelope" style="color: var(--jaune); width: 20px;"></i>
-            <span class="small text-white-50">infos@ces.cd</span>
-          </div>
-          <div class="d-flex gap-2 justify-content-md-end">
-            <i class="fas fa-globe" style="color: var(--jaune); width: 20px;"></i>
-            <span class="small text-white-50">www.ces.cd</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="d-flex flex-wrap justify-content-between align-items-center py-4 mt-5" style="border-top: 1px solid rgba(255,255,255,0.08);">
-      <p class="small mb-0 mx-auto" style="color: rgba(255,255,255,0.4);">
-        © {{ date('Y') }} Tous droits réservés | Conseil Économique et Social — République Démocratique du Congo
-      </p>
-    </div>
-  </div>
-
-  <div class="footer-tricolor" style="height:5px; background:linear-gradient(to right, var(--bleu) 33.33%, var(--jaune) 33.33%, var(--jaune) 66.66%, var(--rouge) 66.66%);"></div>
-</footer>
-
-<script src="{{ asset('assets/js/main.Js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+@section('scripts')
 <script>
-  // Slider et observer (ajusté pour le carrousel existant)
-  let current = 0;
-  const total = 3;
-  let autoSlide;
-  function updateSlider() {
-    const track = document.querySelector('.carousel__track');
-    if (track) {
-      track.style.transform = `translateX(-${current * 100}%)`;
-      document.querySelectorAll('.carousel__dot').forEach((d, i) => {
-        d.classList.toggle('carousel__dot--active', i === current);
-        d.setAttribute('aria-current', i === current ? 'true' : 'false');
-      });
-    }
-  }
-  function changeSlide(dir) { current = (current + dir + total) % total; updateSlider(); resetAuto(); }
-  function goToSlide(n) { current = n; updateSlider(); resetAuto(); }
-  function resetAuto() { clearInterval(autoSlide); autoSlide = setInterval(() => changeSlide(1), 5500); }
-
-  // Attacher les événements après le chargement du DOM
   document.addEventListener('DOMContentLoaded', () => {
-    const prevBtn = document.querySelector('.carousel__arrow--prev');
-    const nextBtn = document.querySelector('.carousel__arrow--next');
-    const dots = document.querySelectorAll('.carousel__dot');
-
-    if (prevBtn) prevBtn.addEventListener('click', () => changeSlide(-1));
-    if (nextBtn) nextBtn.addEventListener('click', () => changeSlide(1));
-    dots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => goToSlide(idx));
-    });
-
-    updateSlider();
-    resetAuto();
-
-    // Intersection Observer pour les animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -333,13 +142,13 @@
         }
       });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.news-card, .avis-card, .pub-card, .bureau-card, .commission-card').forEach(el => {
+
+    document.querySelectorAll('.reveal').forEach(el => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
       observer.observe(el);
     });
   });
 </script>
-</body>
-</html>
+@endsection

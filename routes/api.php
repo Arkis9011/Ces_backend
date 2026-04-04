@@ -15,6 +15,7 @@ Route::get('/posts',   [PostController::class, 'apiIndex']);
 Route::get('/agendas', [\App\Http\Controllers\Admin\AgendaController::class, 'apiIndex']);
 Route::get('/avis',    [\App\Http\Controllers\Admin\AvisController::class, 'apiIndex']);
 Route::get('/videos',  [\App\Http\Controllers\Admin\VideoController::class, 'apiIndex']);
+Route::get('/search-preview', [\App\Http\Controllers\PublicController::class, 'rechercheApi']);
 
 // Route protégée par Token (Optionnel - Pour de futurs besoins externes)
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
