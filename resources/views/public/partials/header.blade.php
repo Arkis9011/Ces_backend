@@ -8,7 +8,7 @@
 
     <!-- Bouton menu mobile -->
     <button class="mobile-toggle" id="mobileToggle" aria-label="Menu" aria-expanded="false">
-      <i class="fas fa-bars" aria-hidden="true"></i>
+      <i class="fas fa-bars" id="mobileToggleIcon" aria-hidden="true"></i>
     </button>
 
     <!-- Navigation principale -->

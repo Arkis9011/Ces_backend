@@ -1,15 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
     // === 1. NAVIGATION MOBILE ===
     const mobileToggle = document.getElementById('mobileToggle');
+    const mobileToggleIcon = document.getElementById('mobileToggleIcon');
     const mainNav = document.getElementById('mainNav');
     const navItems = document.querySelectorAll('.site-nav-item.has-dropdown, .site-nav-item.has-mega');
 
     if (mobileToggle && mainNav) {
         mobileToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
-            mobileToggle.setAttribute('aria-expanded', !expanded);
-            mainNav.classList.toggle('active');
+            const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+            
+            // Toggle state
+            const newState = !isExpanded;
+            mobileToggle.setAttribute('aria-expanded', newState);
+            mainNav.classList.toggle('active', newState);
+            
+            // Toggle icon
+            if (mobileToggleIcon) {
+                if (newState) {
+                    mobileToggleIcon.classList.remove('fa-bars');
+                    mobileToggleIcon.classList.add('fa-times');
+                } else {
+                    mobileToggleIcon.classList.remove('fa-times');
+                    mobileToggleIcon.classList.add('fa-bars');
+                }
+            }
+
+            // Optionnel: Empêcher le scroll sur le body quand le menu est ouvert
+            document.body.classList.toggle('menu-open', newState);
         });
 
         // Gestion des sous-menus en mobile
@@ -29,9 +46,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Fermer le menu au clic extérieur
         document.addEventListener('click', (e) => {
-            if (window.innerWidth <= 991 && !mainNav.contains(e.target) && !mobileToggle.contains(e.target)) {
+            if (window.innerWidth <= 991 && 
+                !mainNav.contains(e.target) && 
+                !mobileToggle.contains(e.target) && 
+                mainNav.classList.contains('active')) {
+                
                 mainNav.classList.remove('active');
                 mobileToggle.setAttribute('aria-expanded', 'false');
+                if (mobileToggleIcon) {
+                    mobileToggleIcon.classList.remove('fa-times');
+                    mobileToggleIcon.classList.add('fa-bars');
+                }
+                document.body.classList.remove('menu-open');
                 navItems.forEach(i => i.classList.remove('open'));
             }
         });

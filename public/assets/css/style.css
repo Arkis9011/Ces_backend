@@ -2398,11 +2398,23 @@ footer {
     flex-direction: column;
     align-items: flex-start;
     padding: 0;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
     border-top: 2px solid var(--bleu);
+    z-index: 1000;
   }
   .site-nav.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
     display: flex;
+  }
+  
+  /* Bloquer le scroll quand le menu est ouvert */
+  body.menu-open {
+    overflow: hidden;
   }
   .site-nav-menu {
     flex-direction: column;
