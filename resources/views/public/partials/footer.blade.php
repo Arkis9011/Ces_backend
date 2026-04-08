@@ -11,18 +11,18 @@
 </div>
 
 <!-- ===== NEWSLETTER ===== -->
-<section class="newsletter-section py-5" style="background: var(--gris-clair);">
-  <div class="container">
-    <div class="text-center" style="max-width:680px; margin:auto; color: var(--texte);">
-      <h2 class="h1" style="font-family:'Playfair Display'; font-weight: 700;">Lettre d'information</h2>
-      <p class="mb-4 opacity-75">Recevez directement sur votre adresse email les dernières informations et actualités sur l'institution.</p>
-      <div class="d-flex flex-column flex-sm-row gap-3">
-        <input type="email" class="form-control" placeholder="Votre adresse email..." style="border:1px solid rgba(0,0,0,0.1); padding: 12px 20px; border-radius: 8px;">
-        <button class="btn btn-warning fw-bold px-4" style="background:var(--jaune); border:none; border-radius: 8px; color: var(--texte);">S'abonner <i class="fas fa-paper-plane ms-2"></i></button>
-      </div>
-    </div>
-  </div>
-</section>
+<!--<section class="newsletter-section py-5" style="background: var(--gris-clair);">-->
+<!--  <div class="container">-->
+<!--    <div class="text-center" style="max-width:680px; margin:auto; color: var(--texte);">-->
+<!--      <h2 class="h1" style="font-family:'Playfair Display'; font-weight: 700;">Lettre d'information</h2>-->
+<!--      <p class="mb-4 opacity-75">Recevez directement sur votre adresse email les dernières informations et actualités sur l'institution.</p>-->
+<!--      <div class="d-flex flex-column flex-sm-row gap-3">-->
+<!--        <input type="email" class="form-control" placeholder="Votre adresse email..." style="border:1px solid rgba(0,0,0,0.1); padding: 12px 20px; border-radius: 8px;">-->
+<!--        <button class="btn btn-warning fw-bold px-4" style="background:var(--jaune); border:none; border-radius: 8px; color: var(--texte);">S'abonner <i class="fas fa-paper-plane ms-2"></i></button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
 
 <!-- ===== FOOTER ===== -->
 <footer style="background: var(--texte); padding-top: 3rem;">

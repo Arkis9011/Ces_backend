@@ -18,64 +18,78 @@
 
 <!-- CONTENU PRINCIPAL AVEC BOOTSTRAP -->
 <div class="content-wrap">
-  <div class="container py-5">
+  <div class="container">
     <div class="row g-5">
       <!-- Colonne principale -->
-      <div class="col-lg-8">
-        <div class="s-tag">Processus</div>
-        <h2 class="s-title">Comment fonctionne <span>le CES</span> ?</h2>
-        <p class="prose mb-4">
-            Le Conseil Économique et Social fonctionne comme un pont entre la société civile organisée et le pouvoir politique. Son rôle n'est pas de voter des lois, mais de donner des <strong>avis éclairés</strong> pour orienter les décisions publiques.
-        </p>
-        
-        <div class="prose small">
-            <ol class="list-unstyled">
-                <li class="p-4 border rounded mb-3 bg-white shadow-sm">
-                    <h5 class="fw-bold"><span class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center me-2" style="width:28px;height:28px">1</span> La saisine</h5>
-                    <p class="mb-0 text-muted">Le CES peut être saisi par le Président, le Gouvernement ou le Parlement. Il peut aussi s'autosaisir d'un sujet de société.</p>
-                </li>
-                
-                <li class="p-4 border rounded mb-3 bg-white shadow-sm">
-                    <h5 class="fw-bold"><span class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center me-2" style="width:28px;height:28px">2</span> Le travail en commission</h5>
-                    <p class="mb-0 text-muted">Le sujet est envoyé à une commission spécialisée. Les conseillers auditionnent des experts et des acteurs de terrain pour recueillir des données concrètes.</p>
-                </li>
-                
-                <li class="p-4 border rounded mb-3 bg-white shadow-sm">
-                    <h5 class="fw-bold"><span class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center me-2" style="width:28px;height:28px">3</span> Le débat et le consensus</h5>
-                    <p class="mb-0 text-muted">C’est l'étape clé où différents groupes discutent pour trouver un terrain d'entente ou exposer clairement leurs points de divergence.</p>
-                </li>
-                
-                <li class="p-4 border rounded mb-3 bg-white shadow-sm">
-                    <h5 class="fw-bold"><span class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center me-2" style="width:28px;height:28px">4</span> L'adoption en séance plénière</h5>
-                    <p class="mb-0 text-muted">Le projet d'avis est soumis à l'Assemblée Générale. Après débat, il est adopté ou rejeté à la majorité des membres présents.</p>
-                </li>
-            </ol>
-        </div>
-      </div>
-      
+  <div class="col-lg-8">
+    <div class="s-tag">Processus</div>
+    <h2 class="s-title">Comment fonctionne <span>le CES</span> ?</h2>
+    <p>
+        Le Conseil Économique et Social fonctionne comme un pont entre la société civile organisée et le pouvoir politique (Gouvernement, Parlement). Son rôle n'est pas de voter des lois, mais de donner des <strong>avis éclairés</strong> pour orienter les décisions publiques.<br>
+        Le fonctionnement suit une méthodologie rigoureuse pour garantir la neutralité et l'expertise :
+    </p>
+    
+    <div class="prose">
+        <ol>
+            <li>
+                <h3>La saisine</h3>
+                <p>Le CES peut être saisi par le Président, le Gouvernement ou le Parlement pour donner son avis sur un projet de loi. Il peut aussi s'autosaisir d'un sujet de société.</p>
+            </li>
+            
+            <li>
+                <h3>Le travail en commission</h3>
+                <p>Le sujet est envoyé à une commission spécialisée. Les conseillers auditionnent des experts, des chercheurs et des acteurs de terrain pour recueillir des données concrètes. 
+                La commission rédige un projet d'avis et désigne un rapporteur qui le présentera devant l'Assemblée Générale.</p>
+            </li>
+            
+            <li>
+                <h3>Le débat et le consensus</h3>
+                <p>C’est l'étape clé. Des groupes aux intérêts souvent opposés doivent discuter pour trouver un terrain d'entente ou, à défaut, exposer clairement leurs points de divergence.</p>
+            </li>
+            
+            <li>
+                <h3>L'adoption en séance plénière</h3>
+                <p>Le projet d'avis est soumis à l'Assemblée Générale réunie en séance plénière. Après débat, il est adopté ou rejeté à la majorité des membres présents.</p>
+            </li>
+            
+            <li>
+                <h3>La notification de l'avis</h3>
+                <p>Une fois l'avis adopté, il est transmis aux autorités et rendu public conformément aux dispositions du règlement intérieur. Il peut être publié au Journal Officiel de la RDC.</p>
+            </li>
+        </ol>
+    </div>
+</div>
       <!-- Sidebar droite -->
       <aside class="col-lg-4">
-        <div class="sidebar-box mb-4 p-4 border rounded bg-white shadow-sm">
-          <h5 class="mb-3 fw-bold"><i class="fas fa-sitemap me-2 text-primary"></i> Organigramme</h5>
-          <ul class="list-unstyled small text-muted">
-            <li class="mb-2"><i class="fas fa-angle-right me-2"></i> Assemblée Générale (plénière)</li>
-            <li class="mb-2"><i class="fas fa-angle-right me-2"></i> Bureau (7 membres)</li>
-            <li class="mb-2"><i class="fas fa-angle-right me-2"></i> 7 Commissions permanentes</li>
-            <li><i class="fas fa-angle-right me-2"></i> Secrétariat Général</li>
+        <div class="sidebar-box">
+          <h4><i class="fas fa-sitemap"></i> Organigramme</h4>
+          <ul>
+            <li><i class="fas fa-angle-right"></i> Assemblée Générale (plénière)</li>
+            <li><i class="fas fa-angle-right"></i> Bureau (7 membres)</li>
+            <li><i class="fas fa-angle-right"></i> 7 Commissions permanentes</li>
+            <li><i class="fas fa-angle-right"></i> Secrétariat Général</li>
+            <li><i class="fas fa-angle-right"></i> Services administratifs</li>
           </ul>
         </div>
-        <div class="sidebar-box p-4 border rounded bg-light">
-          <h5 class="mb-3 fw-bold theme-color-secondary"><i class="fas fa-calendar-alt me-2"></i> Sessions</h5>
-          <ul class="list-unstyled small text-muted">
-            <li class="mb-2 d-flex align-items-center"><i class="fas fa-circle-dot me-2 small"></i> 2 sessions ordinaires par an</li>
-            <li class="mb-2 d-flex align-items-center"><i class="fas fa-circle-dot me-2 small"></i> Durée maximale : 30 jours</li>
-            <li><i class="fas fa-circle-dot me-2 small"></i> Séances publiques</li>
+        <div class="sidebar-box">
+          <h4><i class="fas fa-calendar-alt"></i> Sessions</h4>
+          <ul>
+            <li><i class="fas fa-circle-dot"></i> 2 sessions ordinaires par an</li>
+            <li><i class="fas fa-circle-dot"></i> Sessions extraordinaires sur convocation</li>
+            <li><i class="fas fa-circle-dot"></i> Durée maximale : 30 jours</li>
+            <li><i class="fas fa-circle-dot"></i> Prolongation possible si nécessaire</li>
           </ul>
+        </div>
+        <div class="sidebar-highlight">
+          <h4><i class="fas fa-file-alt"></i> Textes de référence</h4>
+          <p>Consultez les textes législatifs qui encadrent le fonctionnement du CES.</p>
+          <a href="{{ url('textes') }}">Voir les textes</a>
         </div>
       </aside>
     </div>
   </div>
 </div>
+
 @endsection
 
 @section('scripts')

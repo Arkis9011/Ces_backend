@@ -37,8 +37,8 @@
                 <div class="filter-group">
                     <label for="sort">Trier par date</label>
                     <select name="sort" id="sort" class="filter-control">
-                        <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Plus récent (desc)</option>
-                        <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>Le plus loin (asc)</option>
+                        <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Plus récent </option>
+                        <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>Plus ancien </option>
                     </select>
                 </div>
             </form>
@@ -57,13 +57,14 @@
 
       <!-- Sidebar droite -->
       <aside class="col-lg-4">
-        <div class="sidebar-box p-4 bg-white shadow-sm rounded-4 mb-4">
-          <h4 class="h5 fw-bold mb-4 border-bottom pb-2"><i class="fas fa-info-circle text-primary me-2"></i> Accès aux séances</h4>
-          <ul class="list-unstyled">
-            <li class="mb-2"><i class="fas fa-circle-dot text-primary me-2"></i> Les séances plénières sont publiques</li>
-            <li class="mb-2"><i class="fas fa-circle-dot text-primary me-2"></i> Accréditation presse disponible</li>
-            <li class="mb-2"><i class="fas fa-circle-dot text-primary me-2"></i> Retransmission en ligne prévue</li>
-            <li class="mb-2"><i class="fas fa-circle-dot text-primary me-2"></i> Comptes rendus publiés après chaque séance</li>
+        <!-- Sidebar commentée dans l'original -->
+        <div class="sidebar-box">
+          <h4><i class="fas fa-info-circle"></i> Accès aux séances</h4>
+          <ul>
+            <li><i class="fas fa-circle-dot"></i> Les séances plénières sont publiques</li>
+            <li><i class="fas fa-circle-dot"></i> Accréditation presse disponible</li>
+            <li><i class="fas fa-circle-dot"></i> Retransmission en ligne prévue</li>
+            <li><i class="fas fa-circle-dot"></i> Comptes rendus publiés après chaque séance</li>
           </ul>
         </div>
       </aside>

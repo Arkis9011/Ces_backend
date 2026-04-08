@@ -18,7 +18,7 @@
 
 <!-- CONTENU PRINCIPAL AVEC BOOTSTRAP -->
 <div class="content-wrap">
-  <div class="container py-5">
+  <div class="container">
     <div class="row g-5">
       <!-- Colonne principale : documents -->
       <div class="col-lg-8">
@@ -26,33 +26,43 @@
         <h2 class="s-title">Cadre <span>juridique</span></h2>
         <div class="mt-4">
           <!-- Doc 1 -->
-          <div class="doc-card reveal mb-4 p-4 border rounded bg-white shadow-sm d-flex gap-4 align-items-center">
-            <div class="doc-icon h1 text-primary mb-0"><i class="fas fa-file-pdf"></i></div>
-            <div class="doc-meta flex-grow-1">
-              <span class="badge bg-primary mb-2">Constitution</span>
-              <h4 class="h5 mb-1">Constitution de la RDC du 18 février 2006 — Articles 208, 209 & 210</h4>
-              <div class="small text-muted mb-2"><i class="fas fa-calendar me-1"></i> 18 Février 2006</div>
-              <a href="https://ik.imagekit.io/ces/documents/Constitution%20de%20la%203me%20Republique.%2018%20Fev%202006.pdf" target="blank" class="btn btn-sm btn-outline-primary"><i class="fas fa-download me-1"></i> Télécharger</a>
+          <div class="doc-card reveal">
+            <div class="doc-icon"><i class="fas fa-file-pdf"></i></div>
+            <div class="doc-meta">
+              <span class="doc-tag">Constitution</span>
+              <h4>Constitution de la RDC du 18 février 2006 — Articles 208, 209 & 210 relatifs au CES</h4>
+              <div class="doc-date"><i class="fas fa-calendar"></i> 18 Février 2006</div>
+              <a href="https://ik.imagekit.io/ces/documents/Constitution%20de%20la%203me%20Republique.%2018%20Fev%202006.pdf" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
             </div>
           </div>
           <!-- Doc 2 -->
-          <div class="doc-card reveal mb-4 p-4 border rounded bg-white shadow-sm d-flex gap-4 align-items-center">
-            <div class="doc-icon h1 text-success mb-0"><i class="fas fa-gavel"></i></div>
-            <div class="doc-meta flex-grow-1">
-              <span class="badge bg-success mb-2">Loi organique</span>
-              <h4 class="h5 mb-1">Loi organique n° 13/027 du 30 octobre 2013</h4>
-              <div class="small text-muted mb-2"><i class="fas fa-calendar me-1"></i> 30 Octobre 2013</div>
-              <a href="https://ik.imagekit.io/ces/documents/LOI%20ORGANIQUE%20n%C2%B0%2013-027%20portant%20organisation%20et%20fonctionnement%20du%20Conseil%20%C3%A9conomique%20et%20social%20(J.O.RDC.,%209%20novembre%202013,%20n%C2%B0%20sp%C3%A9cial,%20col.%201).pdf" target="blank" class="btn btn-sm btn-outline-success"><i class="fas fa-download me-1"></i> Télécharger</a>
+          <div class="doc-card reveal">
+            <div class="doc-icon"><i class="fas fa-gavel"></i></div>
+            <div class="doc-meta">
+              <span class="doc-tag">Loi organique</span>
+              <h4>Loi organique n° 13/027 du 30 octobre 2013 portant organisation et fonctionnement du CES </h4>
+              <div class="doc-date"><i class="fas fa-calendar"></i> 3O Octobre 2013</div>
+              <a href="https://ik.imagekit.io/ces/documents/LOI%20ORGANIQUE%20n%C2%B0%2013-027%20portant%20organisation%20et%20fonctionnement%20du%20Conseil%20%C3%A9conomique%20et%20social%20(J.O.RDC.,%209%20novembre%202013,%20n%C2%B0%20sp%C3%A9cial,%20col.%201).pdf?updatedAt=1774195742804" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
             </div>
           </div>
           <!-- Doc 3 -->
-          <div class="doc-card reveal mb-4 p-4 border rounded bg-white shadow-sm d-flex gap-4 align-items-center">
-            <div class="doc-icon h1 text-info mb-0"><i class="fas fa-book"></i></div>
-            <div class="doc-meta flex-grow-1">
-              <span class="badge bg-info mb-2">Règlement</span>
-              <h4 class="h5 mb-1">Règlement intérieur du CES</h4>
-              <div class="small text-muted mb-2"><i class="fas fa-calendar me-1"></i> 2020</div>
-              <a href="#" class="btn btn-sm btn-outline-info"><i class="fas fa-download me-1"></i> Télécharger</a>
+          <div class="doc-card reveal">
+            <div class="doc-icon"><i class="fas fa-book"></i></div>
+            <div class="doc-meta">
+              <span class="doc-tag">Règlement</span>
+              <h4>Règlement intérieur du CES — Dispositions relatives aux séances plénières et délibérations</h4>
+              <div class="doc-date"><i class="fas fa-calendar"></i> 2020</div>
+              <a href="{{ url('textes') }}" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
+            </div>
+          </div>
+          <!-- Doc 4 -->
+          <div class="doc-card reveal">
+            <div class="doc-icon"><i class="fas fa-earth-africa"></i></div>
+            <div class="doc-meta">
+              <span class="doc-tag">Charte internationale</span>
+              <h4>Charte de l'UCESA pour la durabilité du développement de l'Afrique — Engagement du CES-RDC</h4>
+              <div class="doc-date"><i class="fas fa-calendar"></i> 2022</div>
+              <a href="https://ik.imagekit.io/ces/documents/CHARTE%20DE%20L_UCESA%20POUR%20LA%20DURABILITE%20DU%20DEVELOPPEMENT%20DE%20L_AFRIQUE.pdf?updatedAt=1774195749498" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
             </div>
           </div>
         </div>
@@ -60,17 +70,18 @@
 
       <!-- Sidebar droite -->
       <aside class="col-lg-4">
-        <div class="sidebar-highlight p-4 rounded text-white bg-dark mb-4">
-          <h4><i class="fas fa-shield-halved me-2"></i> Textes protégés</h4>
-          <p class="small">Les documents mis à disposition sont officiels et protégés. Tout usage doit mentionner la source CES-RDC.</p>
-          <a href="{{ url('contact') }}" class="btn btn-sm btn-outline-light">Demande officielle</a>
+        <div class="sidebar-highlight">
+          <h4><i class="fas fa-shield-halved"></i> Textes protégés</h4>
+          <p>Les documents mis à disposition sont officiels et protégés. Tout usage doit mentionner la source CES-RDC.</p>
+          <a href="{{ url('contact') }}">Demande officielle</a>
         </div>
-        <div class="sidebar-box p-4 border rounded bg-light">
-          <h4><i class="fas fa-link me-2"></i> Liens utiles</h4>
-          <ul class="list-unstyled small">
-            <li class="mb-2"><a href="https://journalofficiel.cd" target="_blank" class="text-decoration-none"><i class="fas fa-external-link-alt me-2"></i> Journal Officiel RDC</a></li>
-            <li class="mb-2"><a href="https://www.senat.cd" target="_blank" class="text-decoration-none"><i class="fas fa-external-link-alt me-2"></i> Sénat — Lois</a></li>
-            <li class="mb-2"><a href="{{ url('missions') }}" class="text-decoration-none"><i class="fas fa-arrow-right me-2"></i> Missions du CES</a></li>
+        <div class="sidebar-box">
+          <h4><i class="fas fa-link"></i> Liens utiles</h4>
+          <ul>
+            <li><i class="fas fa-external-link-alt"></i> <a href="https://journalofficiel.cd" target="_blank">Journal Officiel RDC</a></li>
+            <li><i class="fas fa-external-link-alt"></i> <a href="https://www.senat.cd" target="_blank">Sénat — Textes législatifs</a></li>
+            <li><i class="fas fa-arrow-right"></i> <a href="{{ url('missions') }}">Missions du CES</a></li>
+            <li><i class="fas fa-arrow-right"></i> <a href="{{ url('fonctionnement') }}">Fonctionnement</a></li>
           </ul>
         </div>
       </aside>
