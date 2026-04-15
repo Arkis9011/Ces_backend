@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'imagekit' => [
+        'private_key' => env('IMAGEKIT_PRIVATE_KEY'),
+    ],
+
 ];

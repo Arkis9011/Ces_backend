@@ -12,11 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // CSRF must protect all state-changing web routes (including auth & admin).
+        // Keep API routes excluded (stateless, typically token-based).
         $middleware->validateCsrfTokens(except: [
-           'login',
-        'register',
-        'api/*',
-        'admin/*',
+            'api/*',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

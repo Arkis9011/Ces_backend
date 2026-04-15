@@ -16,8 +16,15 @@ class AvisController extends Controller
      */
     private function uploadToImageKit($file, $title, $folder)
     {
-        $response = Http::withBasicAuth(env('IMAGEKIT_PRIVATE_KEY'), '')
-            ->withoutVerifying() // Pour passer sur Laragon
+        $http = Http::withBasicAuth(config('services.imagekit.private_key'), '')
+            ->timeout(30)
+            ->retry(2, 200);
+
+        if (app()->isLocal()) {
+            $http = $http->withoutVerifying();
+        }
+
+        $response = $http
             ->attach(
                 'file', 
                 file_get_contents($file->getRealPath()), 
@@ -130,6 +137,10 @@ class AvisController extends Controller
         if ($request->has('id')) {
             return response()->json(Avis::findOrFail($request->id));
         }
-        return response()->json(Avis::latest()->get());
+
+        $perPage = (int) $request->integer('per_page', 20);
+        $perPage = max(1, min($perPage, 100));
+
+        return response()->json(Avis::latest()->paginate($perPage));
     }
 }

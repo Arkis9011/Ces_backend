@@ -202,8 +202,8 @@ ul {
   outline: none;
 }
 .site-nav-link.active {
-  background: var(white);
-  color: var(black);
+  background: var(--blanc);
+  color: var(--texte);
 }
 .site-nav-link i {
   font-size: 0.65rem;
@@ -213,6 +213,31 @@ ul {
 .site-nav-item:hover .site-nav-link i {
   transform: rotate(180deg);
 }
+
+/* ------------------------------------------------
+   FOOTER / SOCIAL BUTTONS (avoid inline styles)
+----------------------------------------------- */
+.social-btn {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: opacity 0.2s ease, transform 0.2s ease, filter 0.2s ease;
+  color: #fff !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.social-btn:hover,
+.social-btn:focus-visible {
+  opacity: 0.88;
+  transform: translateY(-2px);
+  outline: none;
+}
+.social-btn--facebook { background: #1877F2; }
+.social-btn--x { background: #1DA1F2; }
+.social-btn--youtube { background: #FF0000; }
 
 /* Dropdowns */
 .site-dropdown,
@@ -1406,6 +1431,8 @@ ul {
 .commission-card {
   background: var(--blanc);
   border: 1px solid #e5ebf4;
+  border-radius: 12px;
+  text-decoration: none;
 }
 .commission-card:hover {
   background: var(--bleu-fonce);
@@ -1418,6 +1445,27 @@ ul {
 .commission-card:hover h4 {
   color: var(--blanc);
 }
+.commission-card--more {
+  border: 2px dashed var(--bleu);
+  background: var(--bleu-clair);
+}
+.commission-card--more .commission-icon--more {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--blanc);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: var(--bleu-fonce);
+  transition: all 0.2s ease;
+}
+.commission-card--more .commission-title--more {
+  color: var(--bleu-fonce);
+  transition: color 0.2s ease;
+}
 .commission-icon {
   width: 64px;
   height: 64px;
@@ -1429,12 +1477,14 @@ ul {
   justify-content: center;
   font-size: 1.6rem;
   color: var(--bleu-fonce);
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 .partenaire-item {
   background: var(--blanc);
   box-shadow: var(--ombre);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 10px;
+  text-decoration: none;
 }
 .partenaire-item:hover {
   transform: translateY(-3px);
@@ -1444,11 +1494,30 @@ ul {
   background: var(--blanc);
   border: 1px solid #e5ebf4;
   transition: all 0.2s ease;
+  color: var(--bleu-fonce);
+  font-size: 0.82rem;
+  text-decoration: none;
 }
 .inst-item:hover {
   background: var(--bleu-fonce);
   color: #fff;
   border-color: var(--bleu-fonce);
+}
+
+.partner-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--bleu-clair);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--bleu-fonce);
+}
+
+.partner-name {
+  color: var(--texte);
 }
 .social-btn {
   transition: all 0.2s ease;

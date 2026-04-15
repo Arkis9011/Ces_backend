@@ -3,9 +3,15 @@
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center gap-3">
       <span class="fw-semibold text-secondary">Suivez-nous :</span>
-      <a href="https://www.facebook.com/share/184aGHRW8M/" class="social-btn btn d-flex align-items-center gap-2" style="background:#1877F2; color:#fff; border:none; padding:10px 18px; border-radius:8px; font-size:0.85rem; font-weight:600; transition:all 0.7s ease;" onmouseover="this.style.opacity='0.88'; this.style.transform='translateY(-2px)';" onmouseout="this.style.opacity='1'; this.style.transform='translateY(0)';"><i class="fab fa-facebook-f"></i> Conseil Économique et Social/CES-RDC</a>
-      <a href="https://x.com/ConseilEco_RDC" class="social-btn btn d-flex align-items-center gap-2" style="background:#1DA1F2; color:#fff; border:none; padding:10px 18px; border-radius:8px; font-size:0.85rem; font-weight:600; transition:all 0.7s ease;" onmouseover="this.style.opacity='0.88'; this.style.transform='translateY(-2px)';" onmouseout="this.style.opacity='1'; this.style.transform='translateY(0)';"><i class="fab fa-x-twitter"></i> @ConseilEco_RDC</a>
-      <a href="https://www.youtube.com/@cesdrc" class="social-btn btn d-flex align-items-center gap-2" style="background:#FF0000; color:#fff; border:none; padding:10px 18px; border-radius:8px; font-size:0.85rem; font-weight:600; transition:all 0.7s ease;" onmouseover="this.style.opacity='0.88'; this.style.transform='translateY(-2px)';" onmouseout="this.style.opacity='1'; this.style.transform='translateY(0)';"><i class="fab fa-youtube"></i> YouTube</a>
+      <a href="https://www.facebook.com/share/184aGHRW8M/" class="social-btn social-btn--facebook">
+        <i class="fab fa-facebook-f" aria-hidden="true"></i> Conseil Économique et Social/CES-RDC
+      </a>
+      <a href="https://x.com/ConseilEco_RDC" class="social-btn social-btn--x">
+        <i class="fab fa-x-twitter" aria-hidden="true"></i> @ConseilEco_RDC
+      </a>
+      <a href="https://www.youtube.com/@cesdrc" class="social-btn social-btn--youtube">
+        <i class="fab fa-youtube" aria-hidden="true"></i> YouTube
+      </a>
     </div>
   </div>
 </div>

@@ -76,11 +76,12 @@ public function apiIndex(Request $request)
         return response()->json(Agenda::findOrFail($request->id));
     }
 
-    // On récupère tout, trié par date décroissante (plus récent/futur en haut)
-    // Les événements du jour sont inclus naturellement
+    $perPage = (int) $request->integer('per_page', 20);
+    $perPage = max(1, min($perPage, 100));
+
     $events = Agenda::orderBy('date', 'desc')
-                    ->orderBy('heure', 'desc')
-                    ->get();
+        ->orderBy('heure', 'desc')
+        ->paginate($perPage);
 
     return response()->json($events);
 }
