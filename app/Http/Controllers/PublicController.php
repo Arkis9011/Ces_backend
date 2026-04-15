@@ -71,33 +71,33 @@ class PublicController extends Controller
     public function avis(Request $request)
     {
         $query = Avis::query();
-
+    
+        // 1. Recherche : Correction de 'summary' par 'resume'
         if ($request->has('q')) {
             $q = $request->q;
             $query->where(function($w) use ($q) {
                 $w->where('titre', 'LIKE', "%$q%")
-                  ->orWhere('summary', 'LIKE', "%$q%");
+                  ->orWhere('resume', 'LIKE', "%$q%"); // Changé de summary à resume
             });
         }
-
+    
+        // 2. Filtre par commission
         if ($request->has('commission') && $request->commission != 'all') {
             $query->where('commission', $request->commission);
         }
-
+    
+        // 3. Tri par la date de publication (plus logique pour l'utilisateur) avec fallback
         $sort = $request->get('sort', 'desc');
-        $query->orderBy('created_at', $sort);
-
-        $avis = $query->get();
-
+        $query->orderBy('date_publication', $sort)->orderBy('created_at', $sort);
+    
+        $avis = $query->paginate(9);
+    
+        // Gestion AJAX (Pagination/Filtres dynamiques)
         if ($request->ajax()) {
             return view('public.partials._avis_grid', compact('avis'))->render();
         }
-
-        $avisEco = Avis::where('commission', 'ECOFIN')->latest()->get();
-        $avisEnv = Avis::where('commission', 'CERNAT')->latest()->get();
-        $avisSocial = Avis::where('commission', 'CSAC')->latest()->get();
-
-        return view('public.avis', compact('avis', 'avisEco', 'avisEnv', 'avisSocial'));
+    
+        return view('public.avis', compact('avis'));
     }
 
     public function index()

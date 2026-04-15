@@ -26,7 +26,8 @@
         <div class="d-flex flex-wrap gap-4 align-items-start mb-4 president-bio">
           <img src="https://res.cloudinary.com/dkjqzohc7/image/upload/v1745910754/conseillers/bwmb6mbelrka45j23tlz.png"
                alt="Président Jean Pierre Kiwakana KIMAYALA"
-               style="width:220px; height:260px; object-fit:cover; border-radius:16px; box-shadow:var(--ombre); border:4px solid var(--jaune);"
+               class="img-fit-contain"
+               style="width:220px; height:260px; border-radius:16px; box-shadow:var(--ombre); border:4px solid var(--jaune);"
                onerror="this.outerHTML='<div style=width:220px;height:260px;border-radius:16px;background:var(--bleu-clair);display:flex;align-items:center;justify-content:center;font-size:4rem;color:var(--bleu)><i class=fas fa-user-tie></i></div>'">
           <div style="flex:1; min-width:220px;">
             <div class="s-tag">Président du CES</div>

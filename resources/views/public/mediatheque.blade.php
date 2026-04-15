@@ -33,7 +33,8 @@
                     <div class="reveal h-100" style="border-radius:12px; overflow:hidden; box-shadow:var(--ombre); background:#fff;">
                         <img src="{{ $photo->image_url }}" 
                              alt="{{ $photo->titre }}" 
-                             style="width:100%; height:210px; object-fit:cover;">
+                             class="img-fit-contain"
+                             style="width:100%; height:210px;">
                         <div style="padding:14px;">
                             <p style="font-size:.82rem; color:var(--gris-texte); margin:0;">
                                 {{ $photo->titre }} — {{ \Carbon\Carbon::parse($photo->date_publication)->translatedFormat('M Y') }}

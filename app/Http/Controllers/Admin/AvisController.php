@@ -48,28 +48,36 @@ class AvisController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'titre'      => 'required|max:255',
-            'resume'     => 'required',
-            'commission' => 'required',
-            'pdf_file'   => 'required|mimes:pdf|max:10000',
-            'image'      => 'nullable|image|max:2048',
+            'titre'            => 'required|max:255',
+            'resume'           => 'required',
+            'commission'       => 'required',
+            'date_publication' => 'required|date', // Validation de la nouvelle colonne
+            'pdf_file'         => 'nullable|mimes:pdf|max:10000', // PDF désormais optionnel
+            'image'            => 'nullable|image|max:2048',
         ]);
 
         try {
-            $pdfUrl = $this->uploadToImageKit($request->file('pdf_file'), $request->titre, '/avis/documents');
+            $pdfUrl = null;
             $imageUrl = null;
 
+            // Upload du PDF uniquement s'il est présent
+            if ($request->hasFile('pdf_file')) {
+                $pdfUrl = $this->uploadToImageKit($request->file('pdf_file'), $request->titre, '/avis/documents');
+            }
+
+            // Upload de l'image uniquement si elle est présente
             if ($request->hasFile('image')) {
                 $imageUrl = $this->uploadToImageKit($request->file('image'), $request->titre, '/avis/images');
             }
 
             Avis::create([
-                'titre'      => $request->titre,
-                'slug'       => \Illuminate\Support\Str::slug($request->titre) . '-' . uniqid(),
-                'resume'     => $request->resume,
-                'commission' => $request->commission,
-                'pdf_url'    => $pdfUrl,
-                'image_url'  => $imageUrl,
+                'titre'            => $request->titre,
+                'slug'             => Str::slug($request->titre) . '-' . uniqid(),
+                'resume'           => $request->resume,
+                'commission'       => $request->commission,
+                'date_publication' => $request->date_publication, // Enregistrement de la date
+                'pdf_url'          => $pdfUrl,
+                'image_url'        => $imageUrl,
             ]);
 
             return redirect()->route('dashboard')->with('success', 'Avis rendu publié !');
@@ -84,25 +92,30 @@ class AvisController extends Controller
     public function update(Request $request, $id)
     {
         $avis = Avis::findOrFail($id);
+        
         $request->validate([
-            'titre'      => 'required|max:255',
-            'resume'     => 'required',
-            'commission' => 'required',
-            'pdf_file'   => 'nullable|mimes:pdf|max:10000',
-            'image'      => 'nullable|image|max:2048',
+            'titre'            => 'required|max:255',
+            'resume'           => 'required',
+            'commission'       => 'required',
+            'date_publication' => 'required|date', // Validation de la date en update
+            'pdf_file'         => 'nullable|mimes:pdf|max:10000',
+            'image'            => 'nullable|image|max:2048',
         ]);
 
         try {
             $data = [
-                'titre'      => $request->titre,
-                'resume'     => $request->resume,
-                'commission' => $request->commission,
+                'titre'            => $request->titre,
+                'resume'           => $request->resume,
+                'commission'       => $request->commission,
+                'date_publication' => $request->date_publication, // Mise à jour de la date
             ];
 
+            // Si un nouveau PDF est téléchargé, on met à jour l'URL
             if ($request->hasFile('pdf_file')) {
                 $data['pdf_url'] = $this->uploadToImageKit($request->file('pdf_file'), $request->titre, '/avis/documents');
             }
 
+            // Si une nouvelle image est téléchargée, on met à jour l'URL
             if ($request->hasFile('image')) {
                 $data['image_url'] = $this->uploadToImageKit($request->file('image'), $request->titre, '/avis/images');
             }
@@ -141,6 +154,7 @@ class AvisController extends Controller
         $perPage = (int) $request->integer('per_page', 20);
         $perPage = max(1, min($perPage, 100));
 
-        return response()->json(Avis::latest()->paginate($perPage));
+        // On trie par date_publication pour l'API
+        return response()->json(Avis::orderBy('date_publication', 'desc')->paginate($perPage));
     }
 }

@@ -118,8 +118,8 @@
               </span>
             @endif
             <img src="{{ $post->image_url ?? 'https://via.placeholder.com/600x400?text=CES+RDC' }}" 
-                 class="w-100" 
-                 style="height:{{ $index == 0 ? '300px' : '220px' }}; object-fit:cover;" 
+                 class="w-100 img-fit-contain" 
+                 style="height:{{ $index == 0 ? '300px' : '220px' }};" 
                  alt="{{ $post->titre }}">
             <div class="news-body p-4">
               <div class="d-flex justify-content-between align-items-center mb-2">
@@ -263,11 +263,11 @@
       <a href="{{ url('bureau') }}" class="btn btn-outline-primary" style="border-color:var(--bleu-fonce); color:var(--bleu-fonce); border-width:2px; padding:8px 20px; font-weight:600;">Voir tous les membres <i class="fas fa-arrow-right ms-2"></i></a>
     </div>
 
-    <div class="row g-3">
+    <div class="row g-4">
       <!-- Président -->
       <div class="col-md col-6">
         <div class="bureau-card bureau-president text-center h-100" style="background:var(--blanc); border-radius:12px; overflow:hidden; box-shadow:var(--ombre); transition:all 0.7s ease;">
-          <img src="https://ik.imagekit.io/ces/bureau/Pr_JKK__(1)_1_.webp?updatedAt=1774448219113" class="w-100" style="height:160px; object-fit:cover;" alt="Président Jean Pierre Kiwakana KIMAYALA">
+          <img src="https://ik.imagekit.io/ces/bureau/Pr_JKK__(1)_1_.webp?updatedAt=1774448219113" class="w-100 img-fit-contain" style="height:160px;" alt="Président Jean Pierre Kiwakana KIMAYALA">
           <div class="bureau-info p-3">
             <div class="role small text-uppercase fw-bold" style="color:var(--rouge);">Président</div>
             <h4 class="h6 fw-semibold mt-1">Jean Pierre Kiwakana KIMAYALA</h4>
@@ -278,7 +278,7 @@
       <!-- 1er Vice-Président -->
       <div class="col-md col-6">
         <div class="bureau-card text-center h-100" style="background:var(--blanc); border-radius:12px; overflow:hidden; box-shadow:var(--ombre); transition:all 0.7s ease;">
-          <img src="https://ik.imagekit.io/ces/bureau/1VP_LKK_.webp?updatedAt=1774449073714" class="w-100" style="height:160px; object-fit:cover;" alt="1er Vice-Président Léon Kyaboba KASOBWA">
+          <img src="https://ik.imagekit.io/ces/bureau/1VP_LKK_.webp?updatedAt=1774449073714" class="w-100 img-fit-contain" style="height:160px;" alt="1er Vice-Président Léon Kyaboba KASOBWA">
           <div class="bureau-info p-3">
             <div class="role small text-uppercase fw-bold" style="color:var(--rouge);">1er Vice-Président</div>
             <h4 class="h6 fw-semibold mt-1">Léon Kyaboba KASOBWA</h4>
@@ -289,7 +289,7 @@
       <!-- 2ème Vice-Président -->
       <div class="col-md col-6">
         <div class="bureau-card text-center h-100" style="background:var(--blanc); border-radius:12px; overflow:hidden; box-shadow:var(--ombre); transition:all 0.7s ease;">
-          <img src="https://ik.imagekit.io/ces/bureau/2VP_CTK.webp?updatedAt=1774448924923" class="w-100" style="height:160px; object-fit:cover;" alt="2ème Vice-Président Célestin Tshibwabwa KANYAMA">
+          <img src="https://ik.imagekit.io/ces/bureau/2VP_CTK.webp?updatedAt=1774448924923" class="w-100 img-fit-contain" style="height:160px;" alt="2ème Vice-Président Célestin Tshibwabwa KANYAMA">
           <div class="bureau-info p-3">
             <div class="role small text-uppercase fw-bold" style="color:var(--rouge);">2ème Vice-Président</div>
             <h4 class="h6 fw-semibold mt-1">Célestin Tshibwabwa KANYAMA</h4>
@@ -300,7 +300,7 @@
       <!-- Rapporteur -->
       <div class="col-md col-6">
         <div class="bureau-card text-center h-100" style="background:var(--blanc); border-radius:12px; overflow:hidden; box-shadow:var(--ombre); transition:all 0.7s ease;">
-          <img src="https://ik.imagekit.io/ces/bureau/Rapp_RNM_.webp?updatedAt=1774448978783" class="w-100" style="height:160px; object-fit:cover;" alt="Rapporteur René Ngongo MATESO">
+          <img src="https://ik.imagekit.io/ces/bureau/Rapp_RNM_.webp?updatedAt=1774448978783" class="w-100 img-fit-contain" style="height:160px;" alt="Rapporteur René Ngongo MATESO">
           <div class="bureau-info p-3">
             <div class="role small text-uppercase fw-bold" style="color:var(--rouge);">Rapporteur</div>
             <h4 class="h6 fw-semibold mt-1">René Ngongo MATESO</h4>

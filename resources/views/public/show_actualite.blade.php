@@ -19,7 +19,7 @@
     <div class="row justify-content-center">
       <div class="col-lg-10">
         <div class="prose">
-          <img src="{{ $actualite->image_url ?? 'https://via.placeholder.com/1200x600?text=CES+RDC' }}" alt="{{ $actualite->titre }}" class="w-100 mb-4 rounded shadow-sm" style="object-fit:cover; max-height:600px;">
+          <img src="{{ $actualite->image_url ?? 'https://via.placeholder.com/1200x600?text=CES+RDC' }}" alt="{{ $actualite->titre }}" class="w-100 mb-4 rounded shadow-sm img-fit-contain" style="max-height:600px;">
           
           <div class="d-flex align-items-center mb-4 gap-4 text-muted small border-bottom pb-3">
               <span><i class="far fa-calendar-alt text-primary"></i> {{ \Carbon\Carbon::parse($actualite->date_publication ?? $actualite->created_at)->translatedFormat('d F Y') }}</span>
@@ -61,7 +61,7 @@
 
           @if($actualite->image_url_4)
               <div class="mb-4 text-center">
-                  <img src="{{ $actualite->image_url_4 }}" class="img-fluid rounded shadow-sm w-100" style="max-height: 500px; object-fit: cover;" alt="Illustration finale">
+                  <img src="{{ $actualite->image_url_4 }}" class="img-fluid rounded shadow-sm w-100 img-fit-contain" style="max-height: 500px;" alt="Illustration finale">
               </div>
           @endif
 
@@ -88,7 +88,7 @@
             @foreach($suggestions as $item)
                 <div class="col-md-4">
                     <div class="card h-100 border-0 shadow-sm transition-hover">
-                        <img src="{{ $item->image_url ?? 'https://via.placeholder.com/400x250' }}" class="card-img-top" alt="{{ $item->titre }}" style="height: 200px; object-fit: cover;">
+                        <img src="{{ $item->image_url ?? 'https://via.placeholder.com/400x250' }}" class="card-img-top img-fit-contain" alt="{{ $item->titre }}" style="height: 200px;">
                         <div class="card-body">
                             <small class="text-primary fw-bold text-uppercase" style="font-size: 0.7rem;">{{ $item->categorie }}</small>
                             <h5 class="card-title mt-2 h6 fw-bold">

@@ -14,7 +14,7 @@
                         <th style="cursor:pointer" onclick="window.location.href='{{ request()->fullUrlWithQuery(['sort' => 'titre', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}'">
                             Titre / Commission {!! request('sort') == 'titre' ? (request('direction') == 'asc' ? '<i class="fas fa-sort-up ms-1"></i>' : '<i class="fas fa-sort-down ms-1"></i>') : '<i class="fas fa-sort ms-1 opacity-25"></i>' !!}
                         </th>
-                        <th>Document</th>
+                        <th>Date</th> <th>Document</th>
                         <th class="text-end">Actions</th>
                     </tr>
                 </thead>
@@ -26,9 +26,19 @@
                                 <small class="text-muted"><i class="fas fa-users me-1"></i> {{ $item->commission }}</small>
                             </td>
                             <td>
-                                <a href="{{ $item->pdf_url }}" target="_blank" class="btn btn-sm btn-outline-danger">
-                                    <i class="fas fa-file-pdf me-1"></i> PDF
-                                </a>
+                                <span class="badge bg-light text-dark border">
+                                    <i class="far fa-calendar-alt me-1"></i> 
+                                    {{ $item->date_publication ? $item->date_publication->format('d/m/Y') : 'N/A' }}
+                                </span>
+                            </td>
+                            <td>
+                                @if($item->pdf_url)
+                                    <a href="{{ $item->pdf_url }}" target="_blank" class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-file-pdf me-1"></i> PDF
+                                    </a>
+                                @else
+                                    <span class="text-muted small italic">Aucun document</span>
+                                @endif
                             </td>
                             <td class="text-end">
                                 <div class="dropdown">
@@ -61,7 +71,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="3" class="text-center py-4 text-muted">Aucun avis rendu pour le moment.</td>
+                            <td colspan="4" class="text-center py-4 text-muted">Aucun avis rendu pour le moment.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -80,31 +90,37 @@
         <form action="{{ route('avis.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row g-3">
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <label class="form-label">Titre de l'avis</label>
                     <input type="text" name="titre" class="form-control @error('titre') is-invalid @enderror" value="{{ old('titre') }}" required>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="form-label">Commission</label>
                     <select name="commission" class="form-select">
-                        <option value="CERNAT">CERNAT</option>
-                        <option value="ECOFIN">ECOFIN</option>
-                        <option value="REX">REX</option>
-                        <option value="CSAC">CSAC</option>
-                        <option value="CEFE">CEFE</option>
-                        <option value="AGRIDEV">AGRIDEV</option>
-                        <option value="CIAT">CIAT</option>
+                        <option value="CERNAT" {{ old('commission') == 'CERNAT' ? 'selected' : '' }}>CERNAT</option>
+                        <option value="ECOFIN" {{ old('commission') == 'ECOFIN' ? 'selected' : '' }}>ECOFIN</option>
+                        <option value="REX" {{ old('commission') == 'REX' ? 'selected' : '' }}>REX</option>
+                        <option value="CSAC" {{ old('commission') == 'CSAC' ? 'selected' : '' }}>CSAC</option>
+                        <option value="CEFE" {{ old('commission') == 'CEFE' ? 'selected' : '' }}>CEFE</option>
+                        <option value="AGRIDEV" {{ old('commission') == 'AGRIDEV' ? 'selected' : '' }}>AGRIDEV</option>
+                        <option value="CIAT" {{ old('commission') == 'CIAT' ? 'selected' : '' }}>CIAT</option>
+                        <option value="AD-HOC" {{ old('commission') == 'AD-HOC' ? 'selected' : '' }}>AD-HOC</option>
+
                     </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Date de publication</label>
+                    <input type="date" name="date_publication" class="form-control @error('date_publication') is-invalid @enderror" value="{{ old('date_publication', date('Y-m-d')) }}" required>
                 </div>
             </div>
             <div class="row g-3 mt-1">
                 <div class="col-md-6">
-                    <label class="form-label">Fichier PDF (Obligatoire)</label>
-                    <input type="file" name="pdf_file" class="form-control @error('pdf_file') is-invalid @enderror">
+                    <label class="form-label">Fichier PDF (Optionnel)</label>
+                    <input type="file" name="pdf_file" class="form-control @error('pdf_file') is-invalid @enderror" accept="application/pdf">
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Image d'illustration (Optionnelle)</label>
-                    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
+                    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" accept="image/*">
                 </div>
             </div>
             <div class="mt-3">
@@ -117,6 +133,7 @@
         </form>
     </div>
 </section>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const avisElement = document.querySelector('#avis-editor');

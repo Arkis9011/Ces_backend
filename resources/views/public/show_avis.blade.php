@@ -22,13 +22,15 @@
       <div class="col-lg-10">
         <div class="prose">
           @if($avisshow->image_url)
-              <img src="{{ $avisshow->image_url }}" alt="{{ $avisshow->titre }}" class="w-100 mb-4 rounded shadow-sm" style="object-fit:cover; max-height:500px;">
+              <img src="{{ $avisshow->image_url }}" alt="{{ $avisshow->titre }}" class="w-100 mb-4 rounded shadow-sm img-fit-contain" style="max-height:500px;">
           @endif
           
           <div class="d-flex align-items-center mb-4 gap-3 text-muted small border-bottom pb-3">
               <span class="badge bg-danger text-uppercase px-3 py-2">{{ $avisshow->commission }}</span>
-              <span class="ms-auto"><i class="far fa-calendar-alt text-primary me-1"></i> {{ \Carbon\Carbon::parse($avisshow->created_at)->translatedFormat('d F Y') }}</span>
-          </div>
+              <span class="ms-auto">
+    <i class="far fa-calendar-alt text-primary me-1"></i> 
+    {{ $avisshow->date_publication ? $avisshow->date_publication->translatedFormat('Y') : 'N/A' }}
+</span>          </div>
 
           <div class="tx-content mt-4" style="font-size: 1.1rem; line-height: 1.8; color: #333; text-align: justify;">
               {!! $avisshow->resume !!}
@@ -37,7 +39,7 @@
           @if($avisshow->pdf_url)
           <div class="mt-5 p-5 rounded text-center bg-light border border-dashed">
               <a href="{{ $avisshow->pdf_url }}" target="_blank" class="btn btn-primary btn-lg px-5 py-3 shadow-lg rounded-pill">
-                <i class="fas fa-file-pdf me-2"></i> Consulter l'Avis Complet (PDF)
+                <i class="fas fa-file-pdf me-2"></i> Consulter le résumé de l'avis 
               </a>
               <p class="text-muted mt-3 small mb-0">Le document s'ouvrira dans un nouvel onglet pour lecture ou téléchargement.</p>
           </div>

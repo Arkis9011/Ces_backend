@@ -21,7 +21,7 @@
                 <h4 class="h6 fw-bold mb-2" style="font-family: 'Inter', sans-serif; line-height: 1.5;">{{ $item->titre }}</h4>
                 <div class="d-flex align-items-center gap-3">
                     <div class="doc-date text-muted small">
-                        <i class="fas fa-calendar-alt me-1 text-primary"></i> {{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d M Y') }}
+                        <i class="fas fa-calendar-alt me-1 text-primary"></i> {{ $item->date_publication ? \Carbon\Carbon::parse($item->date_publication)->translatedFormat('d M Y') : \Carbon\Carbon::parse($item->created_at)->translatedFormat('d M Y') }}
                     </div>
                     <a href="{{ route('avis.detail', $item->id) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">
                         <i class="fas fa-eye me-2"></i>Voir les détails
@@ -35,4 +35,9 @@
             <p class="text-muted">Aucun avis ne correspond à votre recherche.</p>
         </div>
     @endforelse
+</div>
+
+{{-- Pagination AJAX-friendly --}}
+<div class="d-flex justify-content-center mt-5 pagination-wrapper" id="pagination-links">
+    {{ $avis->appends(request()->query())->links() }}
 </div>

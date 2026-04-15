@@ -176,7 +176,7 @@
             <td>
                 <div class="d-flex align-items-center">
                     @if($post->image_url)
-                        <img src="{{ $post->image_url }}" alt="" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                        <img src="{{ $post->image_url }}" alt="" class="rounded me-2 img-fit-contain" style="width: 40px; height: 40px;">
                     @endif
                     <span class="fw-bold text-dark">{{ $post->titre }}</span>
                 </div>
@@ -457,7 +457,7 @@
                 if (type === 'post') {
                     html = `
                         <div class="text-center mb-4">
-                            ${item.image_url ? `<img src="${item.image_url}" class="rounded shadow-sm mb-3" style="max-height: 300px; width: 100%; object-fit: cover;">` : ''}
+                            ${item.image_url ? `<img src="${item.image_url}" class="rounded shadow-sm mb-3 img-fit-contain" style="max-height: 300px; width: 100%;">` : ''}
                             <h4 class="fw-bold">${item.titre}</h4>
                             <span class="badge bg-primary mb-2">${item.categorie}</span>
                             <div class="text-muted small">${item.date_publication}</div>
@@ -484,11 +484,29 @@
                     `;
                 } else if (type === 'avi') {
                     html = `
-                        <h4 class="fw-bold mb-3">${item.titre}</h4>
-                        <div class="mb-3 text-muted">Commission : ${item.commission}</div>
-                        <div class="p-3 bg-light rounded mb-3">${item.resume}</div>
-                        <a href="${item.pdf_url}" target="_blank" class="btn btn-danger"><i class="fas fa-file-pdf me-2"></i> Voir le PDF</a>
-                    `;
+    <h4 class="fw-bold mb-1">${item.titre}</h4>
+    <div class="mb-3">
+        <span class="badge bg-primary me-2">${item.commission}</span>
+        <span class="text-muted small">
+            <i class="far fa-calendar-alt me-1"></i> 
+            Publié le : ${item.date_publication ? new Date(item.date_publication).toLocaleDateString('fr-FR') : 'Date non définie'}
+        </span>
+    </div>
+
+    <div class="p-3 bg-light rounded mb-3">
+        <div class="fw-bold mb-1 small text-uppercase text-muted">Résumé :</div>
+        ${item.resume || '<i class="text-muted">Aucun résumé disponible.</i>'}
+    </div>
+
+    ${item.pdf_url 
+        ? `<a href="${item.pdf_url}" target="_blank" class="btn btn-danger">
+                <i class="fas fa-file-pdf me-2"></i> Consulter le document PDF
+           </a>`
+        : `<div class="alert alert-warning py-2 small">
+                <i class="fas fa-info-circle me-2"></i> Aucun document PDF n'est rattaché à cet avis.
+           </div>`
+    }
+`;
                 } else if (type === 'allocution') {
                     html = `
                         <h4 class="fw-bold mb-3">${item.titre}</h4>
@@ -641,36 +659,58 @@
             // --- CAS DES AVIS ---
             } else if (type === 'avi') {
                 formHtml = `
-                    <form action="/avis/${item.id}" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="_method" value="PUT">
-                        <div class="mb-3">
-                            <label class="form-label">Titre</label>
-                            <input type="text" name="titre" class="form-control" value="${item.titre}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Commission</label>
-                            <select name="commission" class="form-select">
-                                <option value="CERNAT" ${item.commission == 'CERNAT' ? 'selected' : ''}>CERNAT</option>
-                                <option value="ECOFIN" ${item.commission == 'ECOFIN' ? 'selected' : ''}>ECOFIN</option>
-                                <option value="REX" ${item.commission == 'REX' ? 'selected' : ''}>REX</option>
-                                <option value="CSAC" ${item.commission == 'CSAC' ? 'selected' : ''}>CSAC</option>
-                                <option value="CEFE" ${item.commission == 'CEFE' ? 'selected' : ''}>CEFE</option>
-                                <option value="AGRIDEV" ${item.commission == 'AGRIDEV' ? 'selected' : ''}>AGRIDEV</option>
-                                <option value="CIAT" ${item.commission == 'CIAT' ? 'selected' : ''}>CIAT</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Résumé</label>
-                            <textarea name="resume" class="form-control" rows="2">${item.resume || ''}</textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Changer le PDF</label>
-                            <input type="file" name="pdf_file" class="form-control" accept=".pdf">
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Enregistrer les modifications</button>
-                    </form>`;
+                  <form action="/avis/${item.id}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="_method" value="PUT">
+        
+        <div class="mb-3">
+            <label class="form-label">Titre</label>
+            <input type="text" name="titre" class="form-control" value="${item.titre}" required>
+        </div>
 
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Commission</label>
+                <select name="commission" class="form-select">
+                    <option value="CERNAT" ${item.commission == 'CERNAT' ? 'selected' : ''}>CERNAT</option>
+                    <option value="ECOFIN" ${item.commission == 'ECOFIN' ? 'selected' : ''}>ECOFIN</option>
+                    <option value="REX" ${item.commission == 'REX' ? 'selected' : ''}>REX</option>
+                    <option value="CSAC" ${item.commission == 'CSAC' ? 'selected' : ''}>CSAC</option>
+                    <option value="CEFE" ${item.commission == 'CEFE' ? 'selected' : ''}>CEFE</option>
+                    <option value="AGRIDEV" ${item.commission == 'AGRIDEV' ? 'selected' : ''}>AGRIDEV</option>
+                    <option value="CIAT" ${item.commission == 'CIAT' ? 'selected' : ''}>CIAT</option>
+                    <option value="AD-HOC" ${item.commission == 'AD-HOC' ? 'selected' : ''}>AD-HOC</option>
+
+                </select>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Date de publication</label>
+                <input type="date" name="date_publication" class="form-control" 
+                       value="${item.date_publication ? item.date_publication.substring(0, 10) : ''}" required>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Résumé</label>
+            <textarea name="resume" class="form-control" rows="2">${item.resume || ''}</textarea>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Changer le PDF (Optionnel)</label>
+                <input type="file" name="pdf_file" class="form-control" accept=".pdf">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Changer l'image (Optionnel)</label>
+                <input type="file" name="image" class="form-control" accept="image/*">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">
+            <i class="fas fa-save me-2"></i> Enregistrer les modifications
+        </button>
+    </form>`;
             // --- CAS DES ALLOCUTIONS ---
             } else if (type === 'allocution') {
                 formHtml = `
