@@ -537,7 +537,7 @@
             // --- CAS DES ACTUALITÉS (POSTS) ---
             if (type === 'post') {
                 formHtml = `
-                <form action="/posts/${item.id}" method="POST" enctype="multipart/form-data">
+                <form action="/admin/posts/${item.id}" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="PUT">
                     
@@ -607,7 +607,7 @@
             // --- CAS DES AGENDAS ---
             } else if (type === 'agenda') {
                 formHtml = `
-                    <form action="/agendas/${item.id}" method="POST">
+                    <form action="/admin/agendas/${item.id}" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="PUT">
                         <div class="mb-3">
@@ -638,7 +638,7 @@
             // --- CAS DES VIDÉOS ---
             } else if (type === 'video') {
                 formHtml = `
-                    <form action="/videos/${item.id}" method="POST">
+                    <form action="/admin/videos/${item.id}" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="PUT">
                         <div class="mb-3">
@@ -659,7 +659,7 @@
             // --- CAS DES AVIS ---
             } else if (type === 'avi') {
                 formHtml = `
-                  <form action="/avis/${item.id}" method="POST" enctype="multipart/form-data">
+                  <form action="/admin/avis/${item.id}" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="PUT">
         
@@ -714,7 +714,7 @@
             // --- CAS DES ALLOCUTIONS ---
             } else if (type === 'allocution') {
                 formHtml = `
-                    <form action="/allocutions/${item.id}" method="POST" enctype="multipart/form-data">
+                    <form action="/admin/allocutions/${item.id}" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="PUT">
                         <div class="mb-3">

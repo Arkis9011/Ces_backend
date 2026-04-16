@@ -58,6 +58,15 @@ img {
   display: block;
 }
 
+.img-fit-contain {
+  object-fit: contain;
+  background-color: var(--gris-clair);
+}
+
+.img-fit-cover {
+  object-fit: cover;
+}
+
 ul {
   list-style: none;
 }

@@ -2,6 +2,11 @@
 
 @section('title', ($avisshow->titre ?? 'Avis') . ' | Conseil Économique et Social')
 
+@section('og_type', 'article')
+@section('og_title', $avisshow->titre)
+@section('og_description', Str::limit(strip_tags($avisshow->resume), 150))
+@section('og_image', $avisshow->image_url ?? asset('assets/images/logo_header.png'))
+
 @section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">

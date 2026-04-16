@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>@yield('title', 'CES RDC | Conseil Économique et Social')</title>
 
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Conseil Économique et Social (CES) - RDC">
-  <meta property="og:description" content="Site officiel du Conseil Économique et Social de la République Démocratique du Congo. Une assemblée consultative au service du développement.">
-  <meta property="og:image" content="{{ asset('assets/images/logo_header.png') }}">
-  <meta property="og:url" content="{{ url('/') }}">
+  <meta property="og:type" content="@yield('og_type', 'website')">
+  <meta property="og:title" content="@yield('og_title', 'Conseil Économique et Social (CES) - RDC')">
+  <meta property="og:description" content="@yield('og_description', 'Site officiel du Conseil Économique et Social de la République Démocratique du Congo. Une assemblée consultative au service du développement.')">
+  <meta property="og:image" content="@yield('og_image', asset('assets/images/logo_header.png'))">
+  <meta property="og:url" content="@yield('og_url', url()->current())">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" type="image/png" href="{{ asset('assets/images/logo_header.png') }}">

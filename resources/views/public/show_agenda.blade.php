@@ -2,6 +2,10 @@
 
 @section('title', ($agendashow->title ?? 'Événement') . ' | Conseil Économique et Social')
 
+@section('og_type', 'article')
+@section('og_title', $agendashow->title)
+@section('og_description', Str::limit(strip_tags($agendashow->description), 150))
+
 @section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">

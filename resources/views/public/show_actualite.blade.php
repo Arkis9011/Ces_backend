@@ -2,6 +2,11 @@
 
 @section('title', ($actualite->titre ?? 'Article') . ' | Conseil Économique et Social')
 
+@section('og_type', 'article')
+@section('og_title', $actualite->titre)
+@section('og_description', Str::limit(strip_tags($actualite->contenu), 150))
+@section('og_image', $actualite->image_url ?? asset('assets/images/logo_header.png'))
+
 @section('content')
 <div class="page-hero">
   <div class="hero-inner">
