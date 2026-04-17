@@ -16,11 +16,11 @@ class PublicController extends Controller
         $query = Agenda::query();
 
         if ($request->has('q')) {
-            $q = $request->q;
+            $q = mb_strtolower($request->q, 'UTF-8');
             $query->where(function($w) use ($q) {
-                $w->where('title', 'LIKE', "%$q%")
-                  ->orWhere('summary', 'LIKE', "%$q%")
-                  ->orWhere('lieu', 'LIKE', "%$q%");
+                $w->whereRaw('LOWER(title) LIKE ?', ["%$q%"])
+                  ->orWhereRaw('LOWER(summary) LIKE ?', ["%$q%"])
+                  ->orWhereRaw('LOWER(lieu) LIKE ?', ["%$q%"]);
             });
         }
 
@@ -40,13 +40,12 @@ class PublicController extends Controller
     {
         $query = Post::query();
 
-        // Recherche locale
         if ($request->has('q')) {
-            $q = $request->q;
+            $q = mb_strtolower($request->q, 'UTF-8');
             $query->where(function($w) use ($q) {
-                $w->where('titre', 'LIKE', "%$q%")
-                  ->orWhere('resume', 'LIKE', "%$q%")
-                  ->orWhere('contenu', 'LIKE', "%$q%");
+                $w->whereRaw('LOWER(titre) LIKE ?', ["%$q%"])
+                  ->orWhereRaw('LOWER(resume) LIKE ?', ["%$q%"])
+                  ->orWhereRaw('LOWER(contenu) LIKE ?', ["%$q%"]);
             });
         }
 
@@ -72,12 +71,11 @@ class PublicController extends Controller
     {
         $query = Avis::query();
     
-        // 1. Recherche : Correction de 'summary' par 'resume'
         if ($request->has('q')) {
-            $q = $request->q;
+            $q = mb_strtolower($request->q, 'UTF-8');
             $query->where(function($w) use ($q) {
-                $w->where('titre', 'LIKE', "%$q%")
-                  ->orWhere('resume', 'LIKE', "%$q%"); // Changé de summary à resume
+                $w->whereRaw('LOWER(titre) LIKE ?', ["%$q%"])
+                  ->orWhereRaw('LOWER(resume) LIKE ?', ["%$q%"]); // Changé de summary à resume
             });
         }
     
