@@ -2,6 +2,10 @@
 
 @section('title', 'Nos Actualités | CES RDC')
 
+@section('og_title', 'Nos Actualités | Conseil Économique et Social - RDC')
+@section('og_description', 'Suivez toute la vie institutionnelle du CES : séances plénières, événements nationaux et internationaux, communiqués officiels.')
+@section('og_image', asset('assets/images/logo_header.png'))
+
 @section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">

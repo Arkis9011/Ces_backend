@@ -2,6 +2,10 @@
 
 @section('title', 'Contactez le CES | Conseil Économique et Social - RDC')
 
+@section('og_title', 'Contact et Localisation | Conseil Économique et Social - RDC')
+@section('og_description', 'Une question ? Un partenariat ? Contactez nos services ou rendez-nous visite au siège du CES à Kinshasa.')
+@section('og_image', asset('assets/images/logo_header.png'))
+
 @section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">

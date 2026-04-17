@@ -2,6 +2,10 @@
 
 @section('title', 'Aperçu du CES | Conseil Économique et Social - RDC')
 
+@section('og_title', 'Aperçu et Historique | Conseil Économique et Social - RDC')
+@section('og_description', 'Découvrez l\'institution, son histoire depuis 1964 et son rôle constitutionnel en République Démocratique du Congo.')
+@section('og_image', asset('assets/images/logo_header.png'))
+
 @section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">

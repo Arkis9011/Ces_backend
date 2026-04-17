@@ -5,6 +5,7 @@
 @section('og_type', 'article')
 @section('og_title', $agendashow->title)
 @section('og_description', Str::limit(strip_tags($agendashow->description), 150))
+@section('og_image', asset('assets/images/logo_header.png'))
 
 @section('content')
 <!-- HERO DE PAGE -->

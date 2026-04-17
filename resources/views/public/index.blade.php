@@ -2,6 +2,9 @@
 
 @section('title', 'CES RDC | Conseil Économique et Social')
 
+@section('og_description', 'Site officiel du Conseil Économique et Social de la République Démocratique du Congo. Une assemblée consultative au service du développement.')
+@section('og_image', asset('assets/images/logo_header.png'))
+
 @section('content')
 <!-- ===== HERO SLIDER ===== -->
 <section class="carousel" aria-label="Carrousel d'actualités" aria-roledescription="carrousel">
@@ -118,7 +121,7 @@
               </span>
             @endif
             <img src="{{ $post->image_url ?? 'https://via.placeholder.com/600x400?text=CES+RDC' }}" 
-                 class="w-100 img-fit-contain" 
+                 class="w-100 img-cover" 
                  style="height:{{ $index == 0 ? '300px' : '220px' }};" 
                  alt="{{ $post->titre }}">
             <div class="news-body p-4">
@@ -221,28 +224,28 @@
         <div class="pub-card p-4 text-white h-100" style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:12px; transition:all 0.7s ease; cursor:pointer;">
           <div class="pub-icon fs-1 mb-3" style="color:rgba(247,209,23,0.3);"><i class="fas fa-file-pdf" style="color:var(--jaune);"></i></div>
           <div class="pub-type small text-uppercase fw-bold" style="color:var(--jaune);">Publication</div>
-          <h4 class="h6 mt-2"> <a href="https://ik.imagekit.io/ces/documents/Expos%C3%A9%20du%20Pr%C3%A9sident%20National%20de%20F%C3%A9d%C3%A9ration%20des%20Entreprises%20du%20Congo%20et%20Pr%C3%A9sident%20du%20Conseil%20d_Administration%20de%20GECAMINES.pdf?updatedAt=1774195744577" target="blank">Exposé du Président National de la FEC et Président du Conseil d'Administration de GÉCAMINES</a></h4>
+          <h4 class="h6 mt-2"> <a href="https://ik.imagekit.io/ces/documents/Expos%C3%A9%20du%20Pr%C3%A9sident%20National%20de%20F%C3%A9d%C3%A9ration%20des%20Entreprises%20du%20Congo%20et%20Pr%C3%A9sident%20du%20Conseil%20d_Administration%20de%20GECAMINES.pdf?updatedAt=1774195744577" target="_blank">Exposé du Président National de la FEC et Président du Conseil d'Administration de GÉCAMINES</a></h4>
         </div>
       </div>
       <div class="col-md-3">
         <div class="pub-card p-4 text-white h-100" style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:12px; transition:all 0.7s ease; cursor:pointer;">
           <div class="pub-icon fs-1 mb-3" style="color:rgba(247,209,23,0.3);"><i class="fas fa-gavel" style="color:var(--jaune);"></i></div>
           <div class="pub-type small text-uppercase fw-bold" style="color:var(--jaune);">Loi organique</div>
-          <h4 class="h6 mt-2"> <a href="https://ik.imagekit.io/ces/documents/LOI%20ORGANIQUE%20n%C2%B0%2013-027%20portant%20organisation%20et%20fonctionnement%20du%20Conseil%20%C3%A9conomique%20et%20social%20(J.O.RDC.,%209%20novembre%202013,%20n%C2%B0%20sp%C3%A9cial,%20col.%201).pdf?updatedAt=1774195742804" target="blank">LOI ORGANIQUE n°13-027 portant organisation et fonctionnement du CES (J.O.RDC., 2013)</a></h4>
+          <h4 class="h6 mt-2"> <a href="https://ik.imagekit.io/ces/documents/LOI%20ORGANIQUE%20n%C2%B0%2013-027%20portant%20organisation%20et%20fonctionnement%20du%20Conseil%20%C3%A9conomique%20et%20social%20(J.O.RDC.,%209%20novembre%202013,%20n%C2%B0%20sp%C3%A9cial,%20col.%201).pdf?updatedAt=1774195742804" target="_blank">LOI ORGANIQUE n°13-027 portant organisation et fonctionnement du CES (J.O.RDC., 2013)</a></h4>
         </div>
       </div>
       <div class="col-md-3">
         <div class="pub-card p-4 text-white h-100" style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:12px; transition:all 0.7s ease; cursor:pointer;">
           <div class="pub-icon fs-1 mb-3" style="color:rgba(247,209,23,0.3);"><i class="fas fa-earth-africa" style="color:var(--jaune);"></i></div>
           <div class="pub-type small text-uppercase fw-bold" style="color:var(--jaune);">Charte</div>
-          <h4 class="h6 mt-2"><a href="https://ik.imagekit.io/ces/documents/CHARTE%20DE%20L_UCESA%20POUR%20LA%20DURABILITE%20DU%20DEVELOPPEMENT%20DE%20L_AFRIQUE.pdf?updatedAt=1774195749498" target="blank">Charte de l'UCESA pour la durabilité du développement de l'Afrique</a></h4>
+          <h4 class="h6 mt-2"><a href="https://ik.imagekit.io/ces/documents/CHARTE%20DE%20L_UCESA%20POUR%20LA%20DURABILITE%20DU%20DEVELOPPEMENT%20DE%20L_AFRIQUE.pdf?updatedAt=1774195749498" target="_blank">Charte de l'UCESA pour la durabilité du développement de l'Afrique</a></h4>
         </div>
       </div>
       <div class="col-md-3">
         <div class="pub-card p-4 text-white h-100" style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:12px; transition:all 0.7s ease; cursor:pointer;">
           <div class="pub-icon fs-1 mb-3" style="color:rgba(247,209,23,0.3);"><i class="fas fa-users-gear" style="color:var(--jaune);"></i></div>
           <div class="pub-type small text-uppercase fw-bold" style="color:var(--jaune);">Rapport</div>
-          <h4 class="h6 mt-2"> <a href="https://ik.imagekit.io/ces/documents/R%C3%A9union%20du%20Groupe%20de%20travail%20sur%20la%20Charte%20de%20l_UCESA%20pour%20la%20durabilit%C3%A9%20du%20d%C3%A9veloppement%20l_Afrique.pdf?updatedAt=1774195745390" target="blank">Réunion du Groupe de travail sur la Charte de l'UCESA pour la durabilité du développement en Afrique</a></h4>
+          <h4 class="h6 mt-2"> <a href="https://ik.imagekit.io/ces/documents/R%C3%A9union%20du%20Groupe%20de%20travail%20sur%20la%20Charte%20de%20l_UCESA%20pour%20la%20durabilit%C3%A9%20du%20d%C3%A9veloppement%20l_Afrique.pdf?updatedAt=1774195745390" target="_blank">Réunion du Groupe de travail sur la Charte de l'UCESA pour la durabilité du développement en Afrique</a></h4>
         </div>
       </div>
     </div>
@@ -267,7 +270,7 @@
       <!-- Président -->
       <div class="col-md col-6">
         <div class="bureau-card bureau-president text-center h-100" style="background:var(--blanc); border-radius:12px; overflow:hidden; box-shadow:var(--ombre); transition:all 0.7s ease;">
-          <img src="https://ik.imagekit.io/ces/bureau/Pr_JKK__(1)_1_.webp?updatedAt=1774448219113" class="w-100 img-fit-contain" style="height:160px;" alt="Président Jean Pierre Kiwakana KIMAYALA">
+          <img src="https://ik.imagekit.io/ces/bureau/Pr_JKK__(1)_1_.webp?updatedAt=1774448219113" class="w-100 img-contain" style="height:160px;" alt="Président Jean Pierre Kiwakana KIMAYALA">
           <div class="bureau-info p-3">
             <div class="role small text-uppercase fw-bold" style="color:var(--rouge);">Président</div>
             <h4 class="h6 fw-semibold mt-1">Jean Pierre Kiwakana KIMAYALA</h4>
@@ -278,7 +281,7 @@
       <!-- 1er Vice-Président -->
       <div class="col-md col-6">
         <div class="bureau-card text-center h-100" style="background:var(--blanc); border-radius:12px; overflow:hidden; box-shadow:var(--ombre); transition:all 0.7s ease;">
-          <img src="https://ik.imagekit.io/ces/bureau/1VP_LKK_.webp?updatedAt=1774449073714" class="w-100 img-fit-contain" style="height:160px;" alt="1er Vice-Président Léon Kyaboba KASOBWA">
+          <img src="https://ik.imagekit.io/ces/bureau/1VP_LKK_.webp?updatedAt=1774449073714" class="w-100 img-contain" style="height:160px;" alt="1er Vice-Président Léon Kyaboba KASOBWA">
           <div class="bureau-info p-3">
             <div class="role small text-uppercase fw-bold" style="color:var(--rouge);">1er Vice-Président</div>
             <h4 class="h6 fw-semibold mt-1">Léon Kyaboba KASOBWA</h4>
@@ -289,7 +292,7 @@
       <!-- 2ème Vice-Président -->
       <div class="col-md col-6">
         <div class="bureau-card text-center h-100" style="background:var(--blanc); border-radius:12px; overflow:hidden; box-shadow:var(--ombre); transition:all 0.7s ease;">
-          <img src="https://ik.imagekit.io/ces/bureau/2VP_CTK.webp?updatedAt=1774448924923" class="w-100 img-fit-contain" style="height:160px;" alt="2ème Vice-Président Célestin Tshibwabwa KANYAMA">
+          <img src="https://ik.imagekit.io/ces/bureau/2VP_CTK.webp?updatedAt=1774448924923" class="w-100 img-contain" style="height:160px;" alt="2ème Vice-Président Célestin Tshibwabwa KANYAMA">
           <div class="bureau-info p-3">
             <div class="role small text-uppercase fw-bold" style="color:var(--rouge);">2ème Vice-Président</div>
             <h4 class="h6 fw-semibold mt-1">Célestin Tshibwabwa KANYAMA</h4>
@@ -300,7 +303,7 @@
       <!-- Rapporteur -->
       <div class="col-md col-6">
         <div class="bureau-card text-center h-100" style="background:var(--blanc); border-radius:12px; overflow:hidden; box-shadow:var(--ombre); transition:all 0.7s ease;">
-          <img src="https://ik.imagekit.io/ces/bureau/Rapp_RNM_.webp?updatedAt=1774448978783" class="w-100 img-fit-contain" style="height:160px;" alt="Rapporteur René Ngongo MATESO">
+          <img src="https://ik.imagekit.io/ces/bureau/Rapp_RNM_.webp?updatedAt=1774448978783" class="w-100 img-contain" style="height:160px;" alt="Rapporteur René Ngongo MATESO">
           <div class="bureau-info p-3">
             <div class="role small text-uppercase fw-bold" style="color:var(--rouge);">Rapporteur</div>
             <h4 class="h6 fw-semibold mt-1">René Ngongo MATESO</h4>

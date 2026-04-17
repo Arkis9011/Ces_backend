@@ -48,7 +48,7 @@
                   const datePub = new Date(item.date_publication).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
                   html = `
                       <div class="text-center mb-4">
-                          ${item.image_url ? `<img src="${item.image_url}" class="rounded shadow-sm mb-4 img-fit-contain" style="max-height: 400px; width: 100%;" alt="${item.titre}">` : ''}
+                          ${item.image_url ? `<img src="${item.image_url}" class="rounded shadow-sm mb-4 img-contain" style="max-height: 400px; width: 100%;" alt="${item.titre}">` : ''}
                           <h3 class="fw-bold mb-3" style="font-family: 'Playfair Display', serif; color: var(--bleu-fonce);">${item.titre}</h3>
                           <div class="d-flex justify-content-center align-items-center gap-3">
                               <span class="badge bg-primary-subtle text-primary">${item.categorie || 'Actualité'}</span>

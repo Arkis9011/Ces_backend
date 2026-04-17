@@ -2,6 +2,10 @@
 
 @section('title', 'Missions du CES | Conseil Économique et Social - RDC')
 
+@section('og_title', 'Missions du CES | Conseil Économique et Social - RDC')
+@section('og_description', 'Les missions du CES consistent à assurer le dialogue entre les forces vives de la nation et les pouvoirs publics pour un développement durable.')
+@section('og_image', asset('assets/images/logo_header.png'))
+
 @section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">

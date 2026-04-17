@@ -4,7 +4,7 @@
 
 @section('og_type', 'article')
 @section('og_title', $avisshow->titre)
-@section('og_description', Str::limit(strip_tags($avisshow->resume), 150))
+@section('og_description', Str::limit(strip_tags($avisshow->resume), 160))
 @section('og_image', $avisshow->image_url ?? asset('assets/images/logo_header.png'))
 
 @section('content')
@@ -27,7 +27,7 @@
       <div class="col-lg-10">
         <div class="prose">
           @if($avisshow->image_url)
-              <img src="{{ $avisshow->image_url }}" alt="{{ $avisshow->titre }}" class="w-100 mb-4 rounded shadow-sm img-fit-contain" style="max-height:500px;">
+              <img src="{{ $avisshow->image_url }}" alt="{{ $avisshow->titre }}" class="w-100 mb-4 rounded shadow-sm img-contain" style="max-height:500px;">
           @endif
           
           <div class="d-flex align-items-center mb-4 gap-3 text-muted small border-bottom pb-3">
@@ -58,4 +58,38 @@
     </div>
   </div>
 </div>
+
+@if(isset($suggestions) && $suggestions->count() > 0)
+<section class="bg-light py-5 mt-4">
+    <div class="container">
+        <h3 class="fw-bold mb-4" style="color: var(--bleu);">D'autres avis à consulter</h3>
+        <div class="row g-4">
+            @foreach($suggestions as $item)
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm transition-hover">
+                        <!-- Image qui remplit la carte et est centrée -->
+                        <div style="height: 200px; overflow: hidden; background: #f0f0f0;">
+                            @if($item->image_url)
+                                <img src="{{ $item->image_url }}" class="w-100 h-100 img-cover" alt="{{ $item->titre }}">
+                            @else
+                                <div class="w-100 h-100 d-flex align-items-center justify-content-center bg-primary-subtle text-primary">
+                                    <i class="fas fa-file-signature fa-3x opacity-25"></i>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="card-body">
+                            <small class="text-danger fw-bold text-uppercase" style="font-size: 0.7rem;">{{ $item->commission }}</small>
+                            <h5 class="card-title mt-2 h6 fw-bold">
+                                <a href="{{ route('avis.detail', $item->id) }}" class="text-decoration-none text-dark stretched-link">
+                                    {{ Str::limit($item->titre, 70) }}
+                                </a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
 @endsection

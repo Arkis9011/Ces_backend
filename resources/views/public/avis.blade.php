@@ -2,6 +2,10 @@
 
 @section('title', 'Nos Avis | CES RDC')
 
+@section('og_title', 'Nos Avis et Recommandations | Conseil Économique et Social - RDC')
+@section('og_description', 'Ensemble des avis produits par le Conseil Économique et Social sur les grandes questions économiques, sociales et environnementales.')
+@section('og_image', asset('assets/images/logo_header.png'))
+
 @section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">

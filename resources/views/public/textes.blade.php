@@ -2,6 +2,10 @@
 
 @section('title', 'Textes Légaux | Conseil Économique et Social - RDC')
 
+@section('og_title', 'Textes Légaux et Fondateurs | Conseil Économique et Social - RDC')
+@section('og_description', 'Consultez la Constitution, la Loi Organique et le Règlement Intérieur qui régissent le Conseil Économique et Social.')
+@section('og_image', asset('assets/images/logo_header.png'))
+
 @section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">
@@ -32,7 +36,7 @@
               <span class="doc-tag">Constitution</span>
               <h4>Constitution de la RDC du 18 février 2006 — Articles 208, 209 & 210 relatifs au CES</h4>
               <div class="doc-date"><i class="fas fa-calendar"></i> 18 Février 2006</div>
-              <a href="https://ik.imagekit.io/ces/documents/Constitution%20de%20la%203me%20Republique.%2018%20Fev%202006.pdf" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
+              <a href="https://ik.imagekit.io/ces/documents/Constitution%20de%20la%203me%20Republique.%2018%20Fev%202006.pdf" target="_blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
             </div>
           </div>
           <!-- Doc 2 -->
@@ -42,7 +46,7 @@
               <span class="doc-tag">Loi organique</span>
               <h4>Loi organique n° 13/027 du 30 octobre 2013 portant organisation et fonctionnement du CES </h4>
               <div class="doc-date"><i class="fas fa-calendar"></i> 3O Octobre 2013</div>
-              <a href="https://ik.imagekit.io/ces/documents/LOI%20ORGANIQUE%20n%C2%B0%2013-027%20portant%20organisation%20et%20fonctionnement%20du%20Conseil%20%C3%A9conomique%20et%20social%20(J.O.RDC.,%209%20novembre%202013,%20n%C2%B0%20sp%C3%A9cial,%20col.%201).pdf?updatedAt=1774195742804" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
+              <a href="https://ik.imagekit.io/ces/documents/LOI%20ORGANIQUE%20n%C2%B0%2013-027%20portant%20organisation%20et%20fonctionnement%20du%20Conseil%20%C3%A9conomique%20et%20social%20(J.O.RDC.,%209%20novembre%202013,%20n%C2%B0%20sp%C3%A9cial,%20col.%201).pdf?updatedAt=1774195742804" target="_blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
             </div>
           </div>
           <!-- Doc 3 -->
@@ -52,7 +56,7 @@
               <span class="doc-tag">Règlement</span>
               <h4>Règlement intérieur du CES — Dispositions relatives aux séances plénières et délibérations</h4>
               <div class="doc-date"><i class="fas fa-calendar"></i> 2020</div>
-              <a href="{{ url('textes') }}" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
+              <a href="{{ url('textes') }}" target="_blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
             </div>
           </div>
           <!-- Doc 4 -->
@@ -62,7 +66,7 @@
               <span class="doc-tag">Charte internationale</span>
               <h4>Charte de l'UCESA pour la durabilité du développement de l'Afrique — Engagement du CES-RDC</h4>
               <div class="doc-date"><i class="fas fa-calendar"></i> 2022</div>
-              <a href="https://ik.imagekit.io/ces/documents/CHARTE%20DE%20L_UCESA%20POUR%20LA%20DURABILITE%20DU%20DEVELOPPEMENT%20DE%20L_AFRIQUE.pdf?updatedAt=1774195749498" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
+              <a href="https://ik.imagekit.io/ces/documents/CHARTE%20DE%20L_UCESA%20POUR%20LA%20DURABILITE%20DU%20DEVELOPPEMENT%20DE%20L_AFRIQUE.pdf?updatedAt=1774195749498" target="_blank" class="doc-link"><i class="fas fa-download"></i> Télécharger</a>
             </div>
           </div>
         </div>

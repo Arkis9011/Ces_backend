@@ -2,6 +2,10 @@
 
 @section('title', 'Assemblée Générale | Conseil Économique et Social - RDC')
 
+@section('og_title', 'L\'Assemblée du CES | Conseil Économique et Social - RDC')
+@section('og_description', 'Composée de 68 Conseillers de la République, l\'Assemblée est l\'organe souverain de délibération du CES.')
+@section('og_image', asset('assets/images/logo_header.png'))
+
 @section('content')
 <!-- PAGE HERO -->
 <div class="page-hero">

@@ -13,7 +13,7 @@
                 {{-- Image avec gestion d'erreur --}}
                 <div class="actu-img-wrapper" style="height: 220px; overflow: hidden; background: #f0f0f0;">
                     @if($post->image_url)
-                        <img src="{{ $post->image_url }}" alt="{{ $post->titre }}" class="w-100 h-100 img-fit-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <img src="{{ $post->image_url }}" alt="{{ $post->titre }}" class="w-100 h-100 img-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                     @endif
                     <div class="actu-img-ph w-100 h-100 d-flex align-items-center justify-content-center bg-light text-muted" style="{{ $post->image_url ? 'display:none' : 'display:flex' }}">
                         <i class="fas fa-newspaper fa-3x opacity-25"></i>

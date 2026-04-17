@@ -2,6 +2,10 @@
 
 @section('title', 'Nos Publications | Conseil Économique et Social - RDC')
 
+@section('og_title', 'Nos Publications et Rapports | Conseil Économique et Social - RDC')
+@section('og_description', 'Téléchargez les rapports annuels, les études thématiques et les documents officiels produits par le Conseil Économique et Social.')
+@section('og_image', asset('assets/images/logo_header.png'))
+
 @section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">
@@ -31,7 +35,7 @@
               <span class="doc-tag">Publication</span>
               <h4>Exposé du Président National de la Fédération des Entreprises du Congo (FEC) et Président du Conseil d'Administration de GECAMINES</h4>
               <div class="doc-date"><i class="fas fa-calendar"></i> 2024</div>
-              <a href="https://ik.imagekit.io/ces/documents/Expos%C3%A9%20du%20Pr%C3%A9sident%20National%20de%20F%C3%A9d%C3%A9ration%20des%20Entreprises%20du%20Congo%20et%20Pr%C3%A9sident%20du%20Conseil%20d_Administration%20de%20GECAMINES.pdf?updatedAt=1774195744577" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger le document</a>
+              <a href="https://ik.imagekit.io/ces/documents/Expos%C3%A9%20du%20Pr%C3%A9sident%20National%20de%20F%C3%A9d%C3%A9ration%20des%20Entreprises%20du%20Congo%20et%20Pr%C3%A9sident%20du%20Conseil%20d_Administration%20de%20GECAMINES.pdf?updatedAt=1774195744577" target="_blank" class="doc-link"><i class="fas fa-download"></i> Télécharger le document</a>
             </div>
           </div>
           <!-- Publication 2 -->
@@ -41,7 +45,7 @@
               <span class="doc-tag">Loi organique</span>
               <h4>LOI ORGANIQUE n° 13-027 portant organisation et fonctionnement du Conseil Économique et Social (J.O.RDC., 9 novembre 2013, n° spécial, col. 1)</h4>
               <div class="doc-date"><i class="fas fa-calendar"></i> 9 novembre 2013</div>
-              <a href="https://ik.imagekit.io/ces/documents/LOI%20ORGANIQUE%20n%C2%B0%2013-027%20portant%20organisation%20et%20fonctionnement%20du%20Conseil%20%C3%A9conomique%20et%20social%20(J.O.RDC.,%209%20novembre%202013,%20n%C2%B0%20sp%C3%A9cial,%20col.%201).pdf?updatedAt=1774195742804" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger le document</a>
+              <a href="https://ik.imagekit.io/ces/documents/LOI%20ORGANIQUE%20n%C2%B0%2013-027%20portant%20organisation%20et%20fonctionnement%20du%20Conseil%20%C3%A9conomique%20et%20social%20(J.O.RDC.,%209%20novembre%202013,%20n%C2%B0%20sp%C3%A9cial,%20col.%201).pdf?updatedAt=1774195742804" target="_blank" class="doc-link"><i class="fas fa-download"></i> Télécharger le document</a>
             </div>
           </div>
           <!-- Publication 3 -->
@@ -51,7 +55,7 @@
               <span class="doc-tag">Charte</span>
               <h4>CHARTE DE L'UCESA POUR LA DURABILITÉ DU DÉVELOPPEMENT DE L'AFRIQUE — Engagement du CES-RDC</h4>
               <div class="doc-date"><i class="fas fa-calendar"></i> 2022</div>
-              <a href="https://ik.imagekit.io/ces/documents/CHARTE%20DE%20L_UCESA%20POUR%20LA%20DURABILITE%20DU%20DEVELOPPEMENT%20DE%20L_AFRIQUE.pdf?updatedAt=1774195749498" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger le document</a>
+              <a href="https://ik.imagekit.io/ces/documents/CHARTE%20DE%20L_UCESA%20POUR%20LA%20DURABILITE%20DU%20DEVELOPPEMENT%20DE%20L_AFRIQUE.pdf?updatedAt=1774195749498" target="_blank" class="doc-link"><i class="fas fa-download"></i> Télécharger le document</a>
             </div>
           </div>
           <!-- Publication 4 -->
@@ -61,7 +65,7 @@
               <span class="doc-tag">Rapport</span>
               <h4>Réunion du Groupe de travail sur la Charte de l'UCESA pour la durabilité du développement de l'Afrique</h4>
               <div class="doc-date"><i class="fas fa-calendar"></i> 2022</div>
-              <a href="https://ik.imagekit.io/ces/documents/R%C3%A9union%20du%20Groupe%20de%20travail%20sur%20la%20Charte%20de%20l_UCESA%20pour%20la%20durabilit%C3%A9%20du%20d%C3%A9veloppement%20l_Afrique.pdf?updatedAt=1774195745390" target="blank" class="doc-link"><i class="fas fa-download"></i> Télécharger le document</a>
+              <a href="https://ik.imagekit.io/ces/documents/R%C3%A9union%20du%20Groupe%20de%20travail%20sur%20la%20Charte%20de%20l_UCESA%20pour%20la%20durabilit%C3%A9%20du%20d%C3%A9veloppement%20l_Afrique.pdf?updatedAt=1774195745390" target="_blank" class="doc-link"><i class="fas fa-download"></i> Télécharger le document</a>
             </div>
           </div>
         </div>

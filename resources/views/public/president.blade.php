@@ -2,6 +2,10 @@
 
 @section('title', 'Le Président | Conseil Économique et Social RDC')
 
+@section('og_title', 'Mot du Président | Conseil Économique et Social - RDC')
+@section('og_description', 'Retrouvez les allocutions et les priorités de Monsieur Jean-Pierre Kiwakana Kimayala, Président du Conseil Économique et Social.')
+@section('og_image', asset('assets/images/logo_header.png'))
+
 @section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">
@@ -26,7 +30,7 @@
         <div class="d-flex flex-wrap gap-4 align-items-start mb-4 president-bio">
           <img src="https://res.cloudinary.com/dkjqzohc7/image/upload/v1745910754/conseillers/bwmb6mbelrka45j23tlz.png"
                alt="Président Jean Pierre Kiwakana KIMAYALA"
-               class="img-fit-contain"
+               class="img-contain"
                style="width:220px; height:260px; border-radius:16px; box-shadow:var(--ombre); border:4px solid var(--jaune);"
                onerror="this.outerHTML='<div style=width:220px;height:260px;border-radius:16px;background:var(--bleu-clair);display:flex;align-items:center;justify-content:center;font-size:4rem;color:var(--bleu)><i class=fas fa-user-tie></i></div>'">
           <div style="flex:1; min-width:220px;">
@@ -115,6 +119,11 @@
             <p class="text-muted">Aucune allocution publiée pour le moment.</p>
         </div>
     @endforelse
+
+    {{-- Pagination AJAX-friendly --}}
+    <div class="d-flex justify-content-center mt-5 pagination-wrapper" id="pagination-links">
+        {{ $allocutions->appends(request()->query())->links() }}
+    </div>
 </div>
 
         <!-- Panneau Rôle & Missions -->

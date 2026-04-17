@@ -38,3 +38,8 @@
         </div>
     @endforelse
 </div>
+
+{{-- Pagination AJAX-friendly --}}
+<div class="d-flex justify-content-center mt-5 pagination-wrapper" id="pagination-links">
+    {{ $evenements->appends(request()->query())->links() }}
+</div>

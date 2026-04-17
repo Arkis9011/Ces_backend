@@ -2,6 +2,10 @@
 
 @section('title', 'Médiathèque | CES RDC')
 
+@section('og_title', 'Médiathèque et Photos | Conseil Économique et Social - RDC')
+@section('og_description', 'Retrouvez toute l\'actualité du CES en images et en vidéos. Plénières, rencontres institutionnelles et grands événements.')
+@section('og_image', asset('assets/images/logo_header.png'))
+
 @section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">
@@ -33,7 +37,7 @@
                     <div class="reveal h-100" style="border-radius:12px; overflow:hidden; box-shadow:var(--ombre); background:#fff;">
                         <img src="{{ $photo->image_url }}" 
                              alt="{{ $photo->titre }}" 
-                             class="img-fit-contain"
+                             class="img-cover"
                              style="width:100%; height:210px;">
                         <div style="padding:14px;">
                             <p style="font-size:.82rem; color:var(--gris-texte); margin:0;">

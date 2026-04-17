@@ -27,7 +27,7 @@ class PublicController extends Controller
         $sort = $request->get('sort', 'desc');
         $query->orderBy('date', $sort)->orderBy('heure', $sort);
 
-        $evenements = $query->get();
+        $evenements = $query->paginate(9);
 
         if ($request->ajax()) {
             return view('public.partials._agenda_grid', compact('evenements'))->render();
@@ -121,7 +121,7 @@ class PublicController extends Controller
 
     public function president()
     {
-        $allocutions = Allocution::latest('date_allocution')->get();
+        $allocutions = Allocution::latest('date_allocution')->paginate(6);
         return view('public.president', compact('allocutions'));
     }
 
@@ -152,7 +152,15 @@ class PublicController extends Controller
     public function showAvis($id)
     {
         $avisshow = Avis::findOrFail($id);
-        return view('public.show_avis', compact('avisshow'));
+
+        // Suggestions : 3 autres avis de la même commission
+        $suggestions = Avis::where('commission', $avisshow->commission)
+                            ->where('id', '!=', $avisshow->id)
+                            ->latest()
+                            ->take(3)
+                            ->get();
+
+        return view('public.show_avis', compact('avisshow', 'suggestions'));
     }
 
     public function showAgenda($id)

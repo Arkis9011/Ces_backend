@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v=1.5">
 
   <style>
     body { background: #f4f7fa; min-height: 100vh; display: flex; font-family: 'Inter', sans-serif; }
@@ -176,7 +176,7 @@
             <td>
                 <div class="d-flex align-items-center">
                     @if($post->image_url)
-                        <img src="{{ $post->image_url }}" alt="" class="rounded me-2 img-fit-contain" style="width: 40px; height: 40px;">
+                        <img src="{{ $post->image_url }}" alt="" class="rounded me-2 img-cover" style="width: 40px; height: 40px;">
                     @endif
                     <span class="fw-bold text-dark">{{ $post->titre }}</span>
                 </div>
@@ -457,7 +457,7 @@
                 if (type === 'post') {
                     html = `
                         <div class="text-center mb-4">
-                            ${item.image_url ? `<img src="${item.image_url}" class="rounded shadow-sm mb-3 img-fit-contain" style="max-height: 300px; width: 100%;">` : ''}
+                            ${item.image_url ? `<img src="${item.image_url}" class="rounded shadow-sm mb-3 img-cover" style="max-height: 300px; width: 100%;">` : ''}
                             <h4 class="fw-bold">${item.titre}</h4>
                             <span class="badge bg-primary mb-2">${item.categorie}</span>
                             <div class="text-muted small">${item.date_publication}</div>

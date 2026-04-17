@@ -2,6 +2,10 @@
 
 @section('title', 'Nos Partenaires | Conseil Économique et Social - RDC')
 
+@section('og_title', 'Nos Partenaires | Conseil Économique et Social - RDC')
+@section('og_description', 'Le CES-RDC entretient des partenariats solides avec l\'AICESIS, l\'UCESIF et l\'UCESA pour promouvoir le dialogue social.')
+@section('og_image', asset('assets/images/logo_header.png'))
+
 @section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">

@@ -10,7 +10,13 @@
   <meta property="og:description" content="@yield('og_description', 'Site officiel du Conseil Économique et Social de la République Démocratique du Congo. Une assemblée consultative au service du développement.')">
   <meta property="og:image" content="@yield('og_image', asset('assets/images/logo_header.png'))">
   <meta property="og:url" content="@yield('og_url', url()->current())">
+  <meta property="og:site_name" content="CES RDC">
+
+  <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="@yield('og_title', 'Conseil Économique et Social (CES) - RDC')">
+  <meta name="twitter:description" content="@yield('og_description', 'Site officiel du Conseil Économique et Social de la République Démocratique du Congo. Une assemblée consultative au service du développement.')">
+  <meta name="twitter:image" content="@yield('og_image', asset('assets/images/logo_header.png'))">
 
   <link rel="icon" type="image/png" href="{{ asset('assets/images/logo_header.png') }}">
   
@@ -22,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
-  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v=1.2">
+  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v=1.5">
   @yield('styles')
 </head>
 <body>

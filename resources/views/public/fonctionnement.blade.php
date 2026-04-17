@@ -2,6 +2,10 @@
 
 @section('title', 'Fonctionnement du CES | Conseil Économique et Social - RDC')
 
+@section('og_title', 'Organisation et Fonctionnement | Conseil Économique et Social - RDC')
+@section('og_description', 'Comprendre comment le CES organise ses travaux, de la saisine à l\'adoption des avis en séance plénière.')
+@section('og_image', asset('assets/images/logo_header.png'))
+
 @section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">

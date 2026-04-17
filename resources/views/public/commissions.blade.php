@@ -2,6 +2,10 @@
 
 @section('title', 'Nos Commissions | CES RDC')
 
+@section('og_title', 'Nos Commissions Permanentes | Conseil Économique et Social - RDC')
+@section('og_description', 'Découvrez les 7 commissions techniques permanentes chargées d\'instruire les dossiers soumis au Conseil.')
+@section('og_image', asset('assets/images/logo_header.png'))
+
 @section('content')
 <!-- HERO DE PAGE -->
 <div class="page-hero">
