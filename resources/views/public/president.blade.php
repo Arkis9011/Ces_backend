@@ -176,11 +176,6 @@
 @endsection
 
 @section('scripts')
-
-<script src="{{ asset('assets/js/main.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Scripts Bootstrap et animation -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   // Script des onglets (tabs)
   document.querySelectorAll('.tab-btn').forEach(btn => {

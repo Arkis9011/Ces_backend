@@ -8,13 +8,13 @@
             <h3>Galerie Vidéo</h3>
         </div>
         <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table class="table table-hover align-middle admin-table-mobile">
                 <thead class="table-light">
                     <tr>
                         <th style="cursor:pointer" onclick="window.location.href='{{ request()->fullUrlWithQuery(['sort' => 'title', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}'">
                             Miniature / Titre {!! request('sort') == 'title' ? (request('direction') == 'asc' ? '<i class="fas fa-sort-up ms-1"></i>' : '<i class="fas fa-sort-down ms-1"></i>') : '<i class="fas fa-sort ms-1 opacity-25"></i>' !!}
                         </th>
-                        <th>Lien / Source</th>
+                        <th class="d-none d-md-table-cell">Lien / Source</th>
                         <th class="text-end">Actions</th>
                     </tr>
                 </thead>
@@ -23,13 +23,20 @@
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <div class="bg-dark rounded me-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 40px;">
+                                    <div class="bg-dark rounded me-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 40px; flex-shrink: 0;">
                                         <i class="fas fa-play text-white fa-xs"></i>
                                     </div>
-                                    <span class="fw-bold text-dark">{{ $video->title }}</span>
+                                    <div>
+                                        <span class="fw-bold text-dark" style="display: block; line-height: 1.3;">{{ $video->title }}</span>
+                                        <div class="d-md-none mt-1">
+                                            <a href="{{ $video->url }}" target="_blank" class="text-primary text-decoration-none small">
+                                                <i class="fas fa-external-link-alt me-1"></i> Voir la source
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
-                            <td>
+                            <td class="d-none d-md-table-cell">
                                 <a href="{{ $video->url }}" target="_blank" class="text-primary text-decoration-none small">
                                     <i class="fas fa-external-link-alt me-1"></i> Voir la source
                                 </a>

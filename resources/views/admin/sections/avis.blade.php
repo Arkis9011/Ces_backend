@@ -8,13 +8,14 @@
             <h3>Liste des avis publiés</h3>
         </div>
         <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table class="table table-hover align-middle admin-table-mobile">
                 <thead class="table-light">
                     <tr>
                         <th style="cursor:pointer" onclick="window.location.href='{{ request()->fullUrlWithQuery(['sort' => 'titre', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}'">
                             Titre / Commission {!! request('sort') == 'titre' ? (request('direction') == 'asc' ? '<i class="fas fa-sort-up ms-1"></i>' : '<i class="fas fa-sort-down ms-1"></i>') : '<i class="fas fa-sort ms-1 opacity-25"></i>' !!}
                         </th>
-                        <th>Date</th> <th>Document</th>
+                        <th class="d-none d-md-table-cell">Date</th> 
+                        <th class="d-none d-md-table-cell">Document</th>
                         <th class="text-end">Actions</th>
                     </tr>
                 </thead>
@@ -22,16 +23,33 @@
                     @forelse ($avis as $item)
                         <tr>
                             <td>
-                                <div class="fw-bold text-dark">{{ $item->titre }}</div>
-                                <small class="text-muted"><i class="fas fa-users me-1"></i> {{ $item->commission }}</small>
+                                <div class="fw-bold text-dark" style="line-height: 1.3;">{{ $item->titre }}</div>
+                                <div class="d-flex flex-wrap gap-2 mt-1 align-items-center">
+                                    <small class="text-muted"><i class="fas fa-users me-1"></i> {{ $item->commission }}</small>
+                                    
+                                    <div class="d-md-none">
+                                        <span class="text-muted" style="font-size: 0.75rem;">
+                                            <i class="far fa-calendar-alt me-1"></i> 
+                                            {{ $item->date_publication ? $item->date_publication->format('d/m/Y') : 'N/A' }}
+                                        </span>
+                                    </div>
+
+                                    @if($item->pdf_url)
+                                        <div class="d-md-none">
+                                            <a href="{{ $item->pdf_url }}" target="_blank" class="badge bg-light text-danger border" style="text-decoration:none;">
+                                                <i class="fas fa-file-pdf me-1"></i> PDF
+                                            </a>
+                                        </div>
+                                    @endif
+                                </div>
                             </td>
-                            <td>
+                            <td class="d-none d-md-table-cell">
                                 <span class="badge bg-light text-dark border">
                                     <i class="far fa-calendar-alt me-1"></i> 
                                     {{ $item->date_publication ? $item->date_publication->format('d/m/Y') : 'N/A' }}
                                 </span>
                             </td>
-                            <td>
+                            <td class="d-none d-md-table-cell">
                                 @if($item->pdf_url)
                                     <a href="{{ $item->pdf_url }}" target="_blank" class="btn btn-sm btn-outline-danger">
                                         <i class="fas fa-file-pdf me-1"></i> PDF

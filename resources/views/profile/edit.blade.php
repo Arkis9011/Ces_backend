@@ -15,7 +15,8 @@
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
   <style>
-    body { background: #f4f7fa; min-height: 100vh; display: flex; font-family: 'Inter', sans-serif; }
+    body { background: #f4f7fa; min-height: 100vh; display: flex; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    html { overflow-x: hidden; }
     .admin-sidebar { width: 280px; background: #003366; color: #fff; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; transition: all 0.3s; }
     .admin-brand { padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 15px; }
     .admin-brand img { width: 50px; background: #fff; padding: 4px; border-radius: 8px; }
@@ -30,11 +31,24 @@
     .admin-card { background: #fff; border-radius: 12px; border: 1px solid #e5ebf4; padding: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 24px; }
     .admin-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #e5ebf4; }
     .admin-card-header h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #003366; margin: 0; }
-    @media (max-width: 991px) { .admin-sidebar { transform: translateX(-100%); } .admin-sidebar.show { transform: translateX(0); } .admin-main { margin-left: 0; } .mobile-menu-btn { display: block; } }
-    .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: #003366; }
+    @media (max-width: 991px) { 
+      .admin-sidebar { transform: translateX(-100%); width: 260px; } 
+      .admin-sidebar.show { transform: translateX(0); box-shadow: 10px 0 30px rgba(0,0,0,0.2); } 
+      .admin-main { margin-left: 0; } 
+      .mobile-menu-btn { display: flex !important; } 
+      .admin-content { padding: 15px; width: 100%; }
+      .admin-topbar { padding: 0 15px; width: 100%; }
+      .admin-card { padding: 15px; width: 100%; }
+    }
+    .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 95; }
+    .sidebar-overlay.show { display: block; }
+    .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: #003366; align-items: center; justify-content: center; }
   </style>
 </head>
 <body>
+
+  <!-- Overlay pour mobile -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
   <aside class="admin-sidebar" id="sidebar">
     <div class="admin-brand">
@@ -61,11 +75,11 @@
 
   <main class="admin-main">
     <header class="admin-topbar">
-      <button class="mobile-menu-btn" id="menuToggle"><i class="fas fa-bars"></i></button>
-      <div class="ms-auto admin-user">
+      <div class="ms-auto admin-user me-3">
         <i class="fas fa-user-circle fs-4" style="color:#007fff"></i>
         <span>{{ Auth::user()->name }}</span>
       </div>
+      <button class="mobile-menu-btn" id="menuToggle"><i class="fas fa-bars"></i></button>
     </header>
 
     <div class="admin-content">
@@ -105,9 +119,23 @@
 
   <script>
     // Toggle Mobile Sidebar
-    document.getElementById('menuToggle').addEventListener('click', function() {
-      document.getElementById('sidebar').classList.toggle('show');
-    });
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
+            sidebarOverlay.classList.toggle('show');
+        });
+    }
+
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('show');
+            sidebarOverlay.classList.remove('show');
+        });
+    }
 
     @if(session('status'))
         Swal.fire({

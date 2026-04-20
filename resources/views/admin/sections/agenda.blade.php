@@ -8,10 +8,10 @@
             <h3>Événements à venir</h3>
         </div>
         <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table class="table table-hover align-middle admin-table-mobile">
                 <thead class="table-light">
                     <tr>
-                        <th style="cursor:pointer" onclick="window.location.href='{{ request()->fullUrlWithQuery(['sort' => 'date', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}'">
+                        <th class="d-none d-md-table-cell" style="cursor:pointer" onclick="window.location.href='{{ request()->fullUrlWithQuery(['sort' => 'date', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}'">
                             Date & Heure {!! request('sort') == 'date' ? (request('direction') == 'asc' ? '<i class="fas fa-sort-up ms-1"></i>' : '<i class="fas fa-sort-down ms-1"></i>') : '<i class="fas fa-sort ms-1 opacity-25"></i>' !!}
                         </th>
                         <th style="cursor:pointer" onclick="window.location.href='{{ request()->fullUrlWithQuery(['sort' => 'title', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}'">
@@ -23,12 +23,16 @@
                 <tbody>
                     @forelse ($agendas as $event)
                         <tr>
-                            <td style="width: 180px;">
+                            <td class="d-none d-md-table-cell" style="width: 180px;">
                                 <div class="fw-bold text-dark">{{ \Carbon\Carbon::parse($event->date)->translatedFormat('d M Y') }}</div>
                                 <small class="text-muted">{{ $event->heure ?? '--:--' }}</small>
                             </td>
                             <td>
-                                <div class="fw-bold text-dark">{{ $event->title }}</div>
+                                <div class="d-md-none text-muted small mb-1">
+                                    <i class="far fa-calendar-alt me-1"></i> {{ \Carbon\Carbon::parse($event->date)->translatedFormat('d M Y') }} 
+                                    @if($event->heure) à {{ $event->heure }} @endif
+                                </div>
+                                <div class="fw-bold text-dark" style="line-height: 1.3;">{{ $event->title }}</div>
                                 <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i> {{ $event->lieu ?? 'Non spécifié' }}</small>
                             </td>
                             <td class="text-end">

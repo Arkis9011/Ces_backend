@@ -16,33 +16,38 @@
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v=1.5">
 
   <style>
-    body { background: #f4f7fa; min-height: 100vh; display: flex; font-family: 'Inter', sans-serif; }
+    body { background: #f4f7fa; min-height: 100vh; display: flex; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    html { overflow-x: hidden; }
     .admin-sidebar { width: 280px; background: #003366; color: #fff; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; transition: all 0.3s; }
     .admin-brand { padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 15px; }
     .admin-brand img { width: 65px; background: #fff; padding: 6px; border-radius: 10px; transition: all 0.3s; }
     @media (max-width: 991px) { .admin-brand img { width: 75px; } }
-    .admin-brand span { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; line-height: 1.2; }
+    .admin-brand span { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; line-height: 1.2; white-space: nowrap; }
     .admin-nav { flex: 1; padding: 20px 0; overflow-y: auto; }
     .admin-nav a, .admin-nav button { display: flex; align-items: center; gap: 12px; padding: 12px 24px; color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.2s; font-weight: 500; font-size: 0.95rem; border: none; background: none; width: 100%; text-align: left; }
     .admin-nav a:hover, .admin-nav a.active { color: #ffcc00; background: rgba(255,255,255,0.05); border-left: 4px solid #ffcc00; }
-    .admin-main { flex: 1; margin-left: 280px; display: flex; flex-direction: column; min-height: 100vh; }
+    .admin-main { flex: 1; margin-left: 280px; display: flex; flex-direction: column; min-height: 100vh; width: 100%; overflow-x: hidden; }
     .admin-topbar { height: 70px; background: #fff; border-bottom: 1px solid #e5ebf4; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; position: sticky; top: 0; z-index: 90; }
     .admin-user { display: flex; align-items: center; gap: 10px; font-weight: 600; color: #333; }
     .admin-content { padding: 30px; flex: 1; }
-    .admin-card { background: #fff; border-radius: 12px; border: 1px solid #e5ebf4; padding: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 24px; }
+    .admin-card { background: #fff; border-radius: 12px; border: 1px solid #e5ebf4; padding: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 24px; overflow: hidden; }
     .admin-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #e5ebf4; }
     .admin-card-header h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #003366; margin: 0; }
     .admin-section { display: none; animation: fadeIn 0.3s ease-in; }
     .admin-section.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 991px) { 
+      body { display: block; overflow-x: hidden; position: relative; width: 100%; }
       .admin-sidebar { transform: translateX(-100%); width: 260px; } 
       .admin-sidebar.show { transform: translateX(0); box-shadow: 10px 0 30px rgba(0,0,0,0.2); } 
-      .admin-main { margin-left: 0; transition: margin-left 0.3s; } 
-      .mobile-menu-btn { display: block; } 
-      .admin-content { padding: 15px; }
-      .admin-topbar { padding: 0 15px; }
-      .admin-card { padding: 15px; }
+      .admin-main { margin-left: 0; transition: margin-left 0.3s; width: 100%; max-width: 100%; overflow-x: hidden; display: block; } 
+      .mobile-menu-btn { display: flex !important; }  
+      .admin-content { padding: 15px; width: 100%; max-width: 100%; box-sizing: border-box; overflow-x: hidden; }
+      .admin-topbar { padding: 0 15px; width: 100%; max-width: 100%; box-sizing: border-box; overflow-x: hidden; }
+      .admin-card { padding: 12px; width: 100%; max-width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; box-sizing: border-box; overflow-wrap: break-word; overflow-x: hidden; }
+      .admin-card .row { margin-left: 0 !important; margin-right: 0 !important; }
+      .admin-card .col-md-6, .admin-card .col-md-3 { padding-left: 0 !important; padding-right: 0 !important; }
+      .admin-user span { max-width: 90px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; vertical-align: middle; }
     }
     .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 95; }
     .sidebar-overlay.show { display: block; }
@@ -60,6 +65,50 @@
 
     .btn-link:focus {
         box-shadow: none;
+    }
+    
+    @media (max-width: 767.98px) {
+        .admin-table-mobile tr {
+            display: block;
+            background: #fff;
+            border: 1px solid #e5ebf4;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            padding: 15px;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            width: 100% !important;
+        }
+        .admin-table-mobile thead { display: none; }
+        .table-responsive { overflow-x: hidden !important; }
+        .admin-table-mobile td {
+            display: block;
+            width: 100% !important;
+            border: none;
+            padding: 5px 0;
+            text-align: left !important;
+            word-break: break-word;
+            overflow-wrap: anywhere;
+        }
+        .admin-table-mobile td.text-end {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: auto !important;
+            padding: 0;
+        }
+        .mobile-label {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #999;
+            margin-right: 5px;
+        }
+        .admin-table-mobile .img-cover {
+            width: 50px !important;
+            height: 50px !important;
+        }
     }
   </style>
 </head>
@@ -101,11 +150,11 @@
 
   <main class="admin-main">
     <header class="admin-topbar">
-      <button class="mobile-menu-btn" id="menuToggle"><i class="fas fa-bars"></i></button>
-      <div class="ms-auto admin-user">
+      <div class="ms-auto admin-user me-3">
         <i class="fas fa-user-circle fs-4" style="color:#007fff"></i>
         <span>{{ Auth::user()->name }}</span>
       </div>
+      <button class="mobile-menu-btn" id="menuToggle"><i class="fas fa-bars"></i></button>
     </header>
 
     <div class="admin-content">
@@ -155,10 +204,10 @@
             <h3>Liste des publications récentes</h3>
           </div>
           <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table class="table table-hover align-middle admin-table-mobile">
               <thead class="table-light">
                 <tr>
-                  <th style="cursor:pointer" onclick="window.location.href='{{ request()->fullUrlWithQuery(['sort' => 'date_publication', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}'">
+                  <th class="d-none d-md-table-cell" style="cursor:pointer" onclick="window.location.href='{{ request()->fullUrlWithQuery(['sort' => 'date_publication', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}'">
                     Date {!! request('sort') == 'date_publication' ? (request('direction') == 'asc' ? '<i class="fas fa-sort-up ms-1"></i>' : '<i class="fas fa-sort-down ms-1"></i>') : '<i class="fas fa-sort ms-1 opacity-25"></i>' !!}
                   </th>
                   <th style="cursor:pointer" onclick="window.location.href='{{ request()->fullUrlWithQuery(['sort' => 'titre', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}'">
@@ -170,15 +219,23 @@
         <tbody>
     @forelse ($posts as $post)
         <tr>
-            <td style="width: 120px;">
+            <td class="d-none d-md-table-cell" style="width: 120px;">
                 {{ \Carbon\Carbon::parse($post->date_publication)->translatedFormat('d M Y') }}
             </td>
             <td>
                 <div class="d-flex align-items-center">
                     @if($post->image_url)
-                        <img src="{{ $post->image_url }}" alt="" class="rounded me-2 img-cover" style="width: 40px; height: 40px;">
+                        <img src="{{ $post->image_url }}" alt="" class="rounded me-3 img-cover" style="width: 45px; height: 45px; flex-shrink: 0;">
                     @endif
-                    <span class="fw-bold text-dark">{{ $post->titre }}</span>
+                    <div>
+                        <div class="d-md-none text-muted small mb-1">
+                            <i class="far fa-calendar-alt me-1"></i> {{ \Carbon\Carbon::parse($post->date_publication)->translatedFormat('d M Y') }}
+                        </div>
+                        <span class="fw-bold text-dark" style="line-height: 1.3; display: block;">{{ $post->titre }}</span>
+                        <div class="d-md-none mt-1">
+                             <span class="badge bg-light text-primary border" style="font-size: 0.65rem;">{{ $post->categorie }}</span>
+                        </div>
+                    </div>
                 </div>
             </td>
          <td class="text-end">

@@ -8,10 +8,10 @@
             <h3>Liste des allocutions</h3>
         </div>
         <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table class="table table-hover align-middle admin-table-mobile">
                 <thead class="table-light">
                     <tr>
-                        <th style="cursor:pointer" onclick="window.location.href='{{ request()->fullUrlWithQuery(['sort' => 'date_allocution', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}'">
+                        <th class="d-none d-md-table-cell" style="cursor:pointer" onclick="window.location.href='{{ request()->fullUrlWithQuery(['sort' => 'date_allocution', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}'">
                             Date {!! request('sort') == 'date_allocution' ? (request('direction') == 'asc' ? '<i class="fas fa-sort-up ms-1"></i>' : '<i class="fas fa-sort-down ms-1"></i>') : '<i class="fas fa-sort ms-1 opacity-25"></i>' !!}
                         </th>
                         <th style="cursor:pointer" onclick="window.location.href='{{ request()->fullUrlWithQuery(['sort' => 'titre', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}'">
@@ -23,8 +23,13 @@
                 <tbody>
                     @forelse ($allocutions as $allocution)
                         <tr>
-                            <td>{{ \Carbon\Carbon::parse($allocution->date_allocution)->translatedFormat('d M Y') }}</td>
-                            <td class="fw-bold text-dark">{{ $allocution->titre }}</td>
+                            <td class="d-none d-md-table-cell">{{ \Carbon\Carbon::parse($allocution->date_allocution)->translatedFormat('d M Y') }}</td>
+                            <td>
+                                <div class="d-md-none text-muted small mb-1">
+                                    <i class="far fa-calendar-alt me-1"></i> {{ \Carbon\Carbon::parse($allocution->date_allocution)->translatedFormat('d M Y') }}
+                                </div>
+                                <div class="fw-bold text-dark" style="line-height: 1.3;">{{ $allocution->titre }}</div>
+                            </td>
                             <td class="text-end">
                                 <div class="dropdown">
                                     <button class="btn btn-link text-muted p-0" type="button" data-bs-toggle="dropdown">
