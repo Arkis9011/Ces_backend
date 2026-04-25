@@ -51,7 +51,7 @@
           </a>
           <ul class="site-dropdown" role="region" aria-label="Sous-menu Travaux">
             <li><a href="{{ url('avis') }}"><i class="fas fa-balance-scale" aria-hidden="true"></i> Nos Avis</a></li>
-            <li><a href="{{ url('publications') }}"><i class="fas fa-book-open" aria-hidden="true"></i> Publications</a></li>
+            <!-- <li><a href="{{ url('publications') }}"><i class="fas fa-book-open" aria-hidden="true"></i> Publications</a></li> -->
           </ul>
         </li>
 

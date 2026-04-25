@@ -38,7 +38,7 @@
                     <label for="commission">Commission</label>
                     <select name="commission" id="commission" class="filter-control">
                         <option value="all">Toutes les commissions</option>
-                        @foreach(['ECOFIN', 'CERNAT', 'CSAC', 'CEFE', 'CIAT', 'REX', 'AGRIDEV', 'AD-HOC'] as $comm)
+                        @foreach(['ECOFIN', 'CERNAT', 'SASC', 'CEFE', 'CIAT', 'REX', 'AGRIDEV', 'AD HOC','Communiqué','Note technique','Autre Document'] as $comm)
                             <option value="{{ $comm }}" {{ request('commission') == $comm ? 'selected' : '' }}>{{ $comm }}</option>
                         @endforeach
                     </select>

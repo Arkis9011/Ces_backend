@@ -115,15 +115,17 @@
                 <div class="col-md-3">
                     <label class="form-label">Commission</label>
                     <select name="commission" class="form-select">
-                        <option value="CERNAT" {{ old('commission') == 'CERNAT' ? 'selected' : '' }}>CERNAT</option>
                         <option value="ECOFIN" {{ old('commission') == 'ECOFIN' ? 'selected' : '' }}>ECOFIN</option>
-                        <option value="REX" {{ old('commission') == 'REX' ? 'selected' : '' }}>REX</option>
-                        <option value="CSAC" {{ old('commission') == 'CSAC' ? 'selected' : '' }}>CSAC</option>
+                        <option value="CERNAT" {{ old('commission') == 'CERNAT' ? 'selected' : '' }}>CERNAT</option>
+                        <option value="SASC" {{ old('commission') == 'SASC' ? 'selected' : '' }}>SASC</option>
                         <option value="CEFE" {{ old('commission') == 'CEFE' ? 'selected' : '' }}>CEFE</option>
-                        <option value="AGRIDEV" {{ old('commission') == 'AGRIDEV' ? 'selected' : '' }}>AGRIDEV</option>
                         <option value="CIAT" {{ old('commission') == 'CIAT' ? 'selected' : '' }}>CIAT</option>
-                        <option value="AD-HOC" {{ old('commission') == 'AD-HOC' ? 'selected' : '' }}>AD-HOC</option>
-
+                        <option value="REX" {{ old('commission') == 'REX' ? 'selected' : '' }}>REX</option>
+                        <option value="AGRIDEV" {{ old('commission') == 'AGRIDEV' ? 'selected' : '' }}>AGRIDEV</option>
+                        <option value="AD HOC" {{ old('commission') == 'AD HOC' ? 'selected' : '' }}>AD HOC</option>
+                        <option value="Communiqué" {{ old('commission') == 'Communiqué' ? 'selected' : '' }}>Communiqué</option>
+                        <option value="Note technique" {{ old('commission') == 'Note technique' ? 'selected' : '' }}>Note technique</option>
+                        <option value="Autre Document" {{ old('commission') == 'Autre Document' ? 'selected' : '' }}>Autre Document</option>
                     </select>
                 </div>
                 <div class="col-md-3">
