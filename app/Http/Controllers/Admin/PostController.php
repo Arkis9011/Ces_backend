@@ -59,7 +59,29 @@ class PostController extends Controller
         $avis = \App\Models\Avis::latest()->paginate(5, ['*'], 'avis');
         $allocutions = \App\Models\Allocution::latest()->paginate(5, ['*'], 'allocutions');
 
-        return view('dashboard', compact('posts', 'agendas', 'videos', 'avis', 'allocutions'));
+        $searchResults = null;
+        if ($request->has('q')) {
+            $q = $request->get('q');
+            if (mb_strlen($q, 'UTF-8') >= 2) {
+                $qL = mb_strtolower($q, 'UTF-8');
+                $searchResults = [
+                    'posts' => \App\Models\Post::whereRaw('LOWER(titre) LIKE ?', ["%$qL%"])
+                        ->orWhereRaw('LOWER(resume) LIKE ?', ["%$qL%"])
+                        ->orWhereRaw('LOWER(contenu) LIKE ?', ["%$qL%"])->get(),
+                    'avis' => \App\Models\Avis::whereRaw('LOWER(titre) LIKE ?', ["%$qL%"])
+                        ->orWhereRaw('LOWER(resume) LIKE ?', ["%$qL%"])
+                        ->orWhereRaw('LOWER(commission) LIKE ?', ["%$qL%"])->get(),
+                    'agendas' => \App\Models\Agenda::whereRaw('LOWER(title) LIKE ?', ["%$qL%"])
+                        ->orWhereRaw('LOWER(summary) LIKE ?', ["%$qL%"])
+                        ->orWhereRaw('LOWER(lieu) LIKE ?', ["%$qL%"])->get(),
+                    'videos' => \App\Models\Video::whereRaw('LOWER(title) LIKE ?', ["%$qL%"])
+                        ->orWhereRaw('LOWER(description) LIKE ?', ["%$qL%"])->get(),
+                    'allocutions' => \App\Models\Allocution::whereRaw('LOWER(titre) LIKE ?', ["%$qL%"])->get(),
+                ];
+            }
+        }
+
+        return view('dashboard', compact('posts', 'agendas', 'videos', 'avis', 'allocutions', 'searchResults'));
     }
 
     /**
@@ -199,5 +221,61 @@ class PostController extends Controller
         $perPage = max(1, min($perPage, 100));
 
         return response()->json(Post::latest()->paginate($perPage));
+    }
+
+    /**
+     * Recherche globale et insensible à la casse pour le Dashboard
+     */
+    public function adminSearch(Request $request)
+    {
+        $q = $request->get('q');
+        if (!$q || mb_strlen($q, 'UTF-8') < 2) return response()->json([]);
+        
+        $qL = mb_strtolower($q, 'UTF-8');
+        $results = [];
+
+        // Posts
+        $posts = \App\Models\Post::whereRaw('LOWER(titre) LIKE ?', ["%$qL%"])
+            ->orWhereRaw('LOWER(resume) LIKE ?', ["%$qL%"])
+            ->orWhereRaw('LOWER(contenu) LIKE ?', ["%$qL%"])
+            ->latest()->take(6)->get();
+        foreach ($posts as $item) {
+            $results[] = ['id' => $item->id, 'title' => $item->titre, 'type' => 'post', 'label' => 'Actualité'];
+        }
+
+        // Avis
+        $avis = \App\Models\Avis::whereRaw('LOWER(titre) LIKE ?', ["%$qL%"])
+            ->orWhereRaw('LOWER(resume) LIKE ?', ["%$qL%"])
+            ->orWhereRaw('LOWER(commission) LIKE ?', ["%$qL%"])
+            ->latest()->take(6)->get();
+        foreach ($avis as $item) {
+            $results[] = ['id' => $item->id, 'title' => $item->titre, 'type' => 'avi', 'label' => 'Avis'];
+        }
+
+        // Agenda
+        $agendas = \App\Models\Agenda::whereRaw('LOWER(title) LIKE ?', ["%$qL%"])
+            ->orWhereRaw('LOWER(summary) LIKE ?', ["%$qL%"])
+            ->orWhereRaw('LOWER(lieu) LIKE ?', ["%$qL%"])
+            ->latest()->take(6)->get();
+        foreach ($agendas as $item) {
+            $results[] = ['id' => $item->id, 'title' => $item->title, 'type' => 'agenda', 'label' => 'Événement'];
+        }
+
+        // Video
+        $videos = \App\Models\Video::whereRaw('LOWER(title) LIKE ?', ["%$qL%"])
+            ->orWhereRaw('LOWER(description) LIKE ?', ["%$qL%"])
+            ->latest()->take(6)->get();
+        foreach ($videos as $item) {
+            $results[] = ['id' => $item->id, 'title' => $item->title, 'type' => 'video', 'label' => 'Vidéo'];
+        }
+
+        // Allocution
+        $allocutions = \App\Models\Allocution::whereRaw('LOWER(titre) LIKE ?', ["%$qL%"])
+            ->latest()->take(6)->get();
+        foreach ($allocutions as $item) {
+            $results[] = ['id' => $item->id, 'title' => $item->titre, 'type' => 'allocution', 'label' => 'Allocution'];
+        }
+
+        return response()->json($results);
     }
 }

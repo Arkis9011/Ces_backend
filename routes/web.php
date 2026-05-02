@@ -63,6 +63,7 @@ Route::prefix('api')->name('api.')->group(function () {
 Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     
     Route::get('/dashboard', [PostController::class, 'index'])->name('dashboard');
+    Route::get('/search', [PostController::class, 'adminSearch'])->name('admin.search');
 
     // CRUD complets
     Route::resource('posts', PostController::class)->except(['index']);

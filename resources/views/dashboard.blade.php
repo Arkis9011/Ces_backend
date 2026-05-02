@@ -125,7 +125,8 @@
     <nav class="admin-nav">
       @php
           $activeTab = 'section-actus';
-          if(request()->has('agendas')) $activeTab = 'section-events';
+          if(request()->has('q') && mb_strlen(request()->get('q'), 'UTF-8') >= 2) $activeTab = 'section-search';
+          elseif(request()->has('agendas')) $activeTab = 'section-events';
           elseif(request()->has('videos')) $activeTab = 'section-videos';
           elseif(request()->has('avis')) $activeTab = 'section-avis';
           elseif(request()->has('allocutions')) $activeTab = 'section-allocutions';
@@ -150,6 +151,13 @@
 
   <main class="admin-main">
     <header class="admin-topbar">
+      <!-- Admin Search Bar -->
+      <form action="{{ route('dashboard') }}" method="GET" class="position-relative flex-grow-1 mx-3 d-none d-md-block" style="max-width: 400px;">
+          <input type="text" name="q" value="{{ request('q') }}" id="adminGlobalSearch" class="form-control rounded-pill bg-light border-0 px-4 py-2" placeholder="Rechercher (Actualités, Avis, Événement...)" autocomplete="off">
+          <button type="submit" class="border-0 bg-transparent position-absolute text-muted" style="right: 15px; top: 50%; transform: translateY(-50%); padding: 0;"><i class="fas fa-search"></i></button>
+          <div id="adminSearchResults" class="dropdown-menu w-100 shadow-lg border-0 mt-2 position-absolute" style="display:none; max-height: 400px; overflow-y:auto; z-index:1000; border-radius: 12px;"></div>
+      </form>
+      
       <div class="ms-auto admin-user me-3">
         <i class="fas fa-user-circle fs-4" style="color:#007fff"></i>
         <span>{{ Auth::user()->name }}</span>
@@ -408,6 +416,143 @@
       @include('admin.sections.videos')
       @include('admin.sections.avis')
       @include('admin.sections.allocutions')
+
+      @if(isset($searchResults))
+      <section id="section-search" class="admin-section {{ $activeTab == 'section-search' ? 'active' : '' }}">
+        <div class="mb-4 d-flex align-items-center justify-content-between">
+            <h2 class="h4 mb-0 fw-bold" style="color:#003366">Résultats pour la recherche <span style="color:#007fff">"{{ request('q') }}"</span></h2>
+            <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary btn-sm"><i class="fas fa-times me-2"></i>Effacer</a>
+        </div>
+
+        @php
+            $hasResults = $searchResults['posts']->isNotEmpty() || $searchResults['avis']->isNotEmpty() || $searchResults['agendas']->isNotEmpty() || $searchResults['videos']->isNotEmpty() || $searchResults['allocutions']->isNotEmpty();
+        @endphp
+
+        @if(!$hasResults)
+        <div class="alert alert-info py-4 text-center">
+            <i class="fas fa-search fa-2x mb-3 text-muted"></i>
+            <h5>Aucun résultat trouvé</h5>
+            <p class="mb-0 text-muted">Aucun élément ne correspond à votre recherche "{{ request('q') }}".</p>
+        </div>
+        @else
+        <div class="row">
+           <!-- Actualités -->
+           @if($searchResults['posts']->isNotEmpty())
+           <div class="col-12 mb-4">
+              <div class="admin-card">
+                 <div class="admin-card-header bg-light mb-0 border-bottom p-3">
+                     <h4 class="h5 mb-0 fw-bold"><i class="fas fa-newspaper me-2 text-primary"></i>Actualités ({{ $searchResults['posts']->count() }})</h4>
+                 </div>
+                 <div class="p-3">
+                    <ul class="list-group list-group-flush">
+                       @foreach($searchResults['posts'] as $item)
+                       <li class="list-group-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                           <div>
+                               <span class="badge bg-primary me-2">{{ $item->categorie }}</span>
+                               <span class="fw-bold">{{ $item->titre }}</span>
+                           </div>
+                           <button onclick="openEditModal('post', {{ $item->id }})" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit me-1"></i> Modifier</button>
+                       </li>
+                       @endforeach
+                    </ul>
+                 </div>
+              </div>
+           </div>
+           @endif
+
+           <!-- Avis -->
+           @if($searchResults['avis']->isNotEmpty())
+           <div class="col-12 mb-4">
+              <div class="admin-card">
+                 <div class="admin-card-header bg-light mb-0 border-bottom p-3">
+                     <h4 class="h5 mb-0 fw-bold"><i class="fas fa-balance-scale me-2 text-primary"></i>Avis ({{ $searchResults['avis']->count() }})</h4>
+                 </div>
+                 <div class="p-3">
+                    <ul class="list-group list-group-flush">
+                       @foreach($searchResults['avis'] as $item)
+                       <li class="list-group-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                           <div>
+                               <span class="fw-bold">{{ $item->titre }}</span>
+                               <div class="text-muted small mt-1">Commission: {{ $item->commission }}</div>
+                           </div>
+                           <button onclick="openEditModal('avi', {{ $item->id }})" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit me-1"></i> Modifier</button>
+                       </li>
+                       @endforeach
+                    </ul>
+                 </div>
+              </div>
+           </div>
+           @endif
+
+           <!-- Agenda -->
+           @if($searchResults['agendas']->isNotEmpty())
+           <div class="col-12 mb-4">
+              <div class="admin-card">
+                 <div class="admin-card-header bg-light mb-0 border-bottom p-3">
+                     <h4 class="h5 mb-0 fw-bold"><i class="fas fa-calendar-alt me-2 text-primary"></i>Agenda ({{ $searchResults['agendas']->count() }})</h4>
+                 </div>
+                 <div class="p-3">
+                    <ul class="list-group list-group-flush">
+                       @foreach($searchResults['agendas'] as $item)
+                       <li class="list-group-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                           <div>
+                               <span class="fw-bold">{{ $item->title }}</span>
+                               <div class="text-muted small mt-1"><i class="fas fa-map-marker-alt me-1"></i> {{ $item->lieu }}</div>
+                           </div>
+                           <button onclick="openEditModal('agenda', {{ $item->id }})" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit me-1"></i> Modifier</button>
+                       </li>
+                       @endforeach
+                    </ul>
+                 </div>
+              </div>
+           </div>
+           @endif
+
+           <!-- Vidéos -->
+           @if($searchResults['videos']->isNotEmpty())
+           <div class="col-12 mb-4">
+              <div class="admin-card">
+                 <div class="admin-card-header bg-light mb-0 border-bottom p-3">
+                     <h4 class="h5 mb-0 fw-bold"><i class="fas fa-video me-2 text-primary"></i>Vidéos ({{ $searchResults['videos']->count() }})</h4>
+                 </div>
+                 <div class="p-3">
+                    <ul class="list-group list-group-flush">
+                       @foreach($searchResults['videos'] as $item)
+                       <li class="list-group-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                           <span class="fw-bold">{{ $item->title }}</span>
+                           <button onclick="openEditModal('video', {{ $item->id }})" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit me-1"></i> Modifier</button>
+                       </li>
+                       @endforeach
+                    </ul>
+                 </div>
+              </div>
+           </div>
+           @endif
+
+           <!-- Allocutions -->
+           @if($searchResults['allocutions']->isNotEmpty())
+           <div class="col-12 mb-4">
+              <div class="admin-card">
+                 <div class="admin-card-header bg-light mb-0 border-bottom p-3">
+                     <h4 class="h5 mb-0 fw-bold"><i class="fas fa-microphone-alt me-2 text-primary"></i>Allocutions ({{ $searchResults['allocutions']->count() }})</h4>
+                 </div>
+                 <div class="p-3">
+                    <ul class="list-group list-group-flush">
+                       @foreach($searchResults['allocutions'] as $item)
+                       <li class="list-group-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                           <span class="fw-bold">{{ $item->titre }}</span>
+                           <button onclick="openEditModal('allocution', {{ $item->id }})" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit me-1"></i> Modifier</button>
+                       </li>
+                       @endforeach
+                    </ul>
+                 </div>
+              </div>
+           </div>
+           @endif
+        </div>
+        @endif
+      </section>
+      @endif
 
     </div>
   </main>
@@ -818,6 +963,53 @@
             body.innerHTML = '<div class="alert alert-danger">Une erreur est survenue lors du chargement des données.</div>';
         });
 }
+
+    // --- Global Admin Search JS ---
+    const adminSearchInput = document.getElementById('adminGlobalSearch');
+    const adminSearchResults = document.getElementById('adminSearchResults');
+
+    if (adminSearchInput) {
+        adminSearchInput.addEventListener('input', function(e) {
+            const q = e.target.value.trim();
+            if (q.length < 2) {
+                adminSearchResults.style.display = 'none';
+                return;
+            }
+            
+            fetch(`/admin/search?q=${encodeURIComponent(q)}`)
+                .then(res => res.json())
+                .then(data => {
+                    adminSearchResults.innerHTML = '';
+                    if(data.length === 0) {
+                        adminSearchResults.innerHTML = '<div class="px-4 py-3 text-muted small">Aucun résultat trouvé pour "'+ q +'"</div>';
+                    } else {
+                        data.forEach(item => {
+                            const btn = document.createElement('a');
+                            btn.className = 'dropdown-item d-flex align-items-center py-2 px-3 border-bottom';
+                            btn.href = 'javascript:void(0)';
+                            btn.style.cursor = 'pointer';
+                            btn.innerHTML = `<span class="badge bg-primary me-3 px-2 py-1" style="font-size:0.7rem; min-width: 80px; text-align:center;">${item.label}</span> <span class="text-truncate fw-medium" style="max-width:250px;" title="${item.title}">${item.title}</span>`;
+                            btn.onclick = () => {
+                                adminSearchResults.style.display = 'none';
+                                adminSearchInput.value = '';
+                                // directly open the edit modal
+                                openEditModal(item.type, item.id);
+                            };
+                            adminSearchResults.appendChild(btn);
+                        });
+                    }
+                    adminSearchResults.style.display = 'block';
+                })
+                .catch(err => console.error('Search error:', err));
+        });
+
+        // Close search dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if(!adminSearchInput.contains(e.target) && !adminSearchResults.contains(e.target)) {
+                adminSearchResults.style.display = 'none';
+            }
+        });
+    }
     
   </script>
 
