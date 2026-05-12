@@ -217,4 +217,80 @@ class PublicController extends Controller
 
         return response()->json($results);
     }
+
+public function rssFeed()
+{
+    $posts = Post::orderBy('date_publication', 'desc')
+        ->orderBy('created_at', 'desc')
+        ->take(20)
+        ->get();
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+    $xml .= '<?xml-stylesheet type="text/xsl" href="/rss-style.xsl"?>' . "\n";
+    $xml .= '<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+     xmlns:media="http://search.yahoo.com/mrss/">' . "\n";
+    $xml .= '    <channel>' . "\n";
+    $xml .= '        <title><![CDATA[' . config('app.name', 'Conseil Économique et Social') . ' - Actualités]]></title>' . "\n";
+    $xml .= '        <atom:link href="' . url('/feed') . '" rel="self" type="application/rss+xml"/>' . "\n";
+    $xml .= '        <link>' . url('/') . '</link>' . "\n";
+    $xml .= '        <description><![CDATA[Les dernières actualités du Conseil Économique et Social]]></description>' . "\n";
+    $xml .= '        <lastBuildDate>' . now()->toRfc2822String() . '</lastBuildDate>' . "\n";
+    $xml .= '        <language>fr</language>' . "\n";
+    $xml .= '        <copyright>Conseil Économique et Social</copyright>' . "\n";
+    $xml .= '        <sy:updatePeriod>hourly</sy:updatePeriod>' . "\n";
+    $xml .= '        <sy:updateFrequency>1</sy:updateFrequency>' . "\n";
+
+    foreach ($posts as $post) {
+        $titre = strip_tags($post->titre);
+        $titre = str_replace(']]>', ']]&gt;', $titre);
+        
+        $resume = strip_tags($post->resume ?: \Illuminate\Support\Str::limit(strip_tags($post->contenu), 250));
+        $resume = str_replace([']]>', '&nbsp;'], [']]&gt;', ' '], $resume);
+        
+        $contenu = str_replace([']]>', '&nbsp;'], [']]&gt;', '&#160;'], $post->contenu);
+        
+        $xml .= '        <item>' . "\n";
+        $xml .= '            <title><![CDATA[' . $titre . ']]></title>' . "\n";
+        $xml .= '            <link>' . route('actualites.show', $post->id) . '</link>' . "\n";
+        $xml .= '            <pubDate>' . \Carbon\Carbon::parse($post->date_publication ?? $post->created_at)->toRfc2822String() . '</pubDate>' . "\n";
+        $xml .= '            <dc:creator><![CDATA[Service Communication CES]]></dc:creator>' . "\n";
+        
+        if ($post->categorie) {
+            $cat = strip_tags($post->categorie);
+            $cat = str_replace(']]>', ']]&gt;', $cat);
+            $xml .= '            <category><![CDATA[' . $cat . ']]></category>' . "\n";
+        }
+        
+        $xml .= '            <guid isPermaLink="true">' . route('actualites.show', $post->id) . '</guid>' . "\n";
+        $xml .= '            <description><![CDATA[' . $resume . ']]></description>' . "\n";
+        
+        $xml .= '            <content:encoded><![CDATA[';
+        if ($post->image_url) {
+            $xml .= '<div style="margin-bottom: 20px;"><img src="' . url($post->image_url) . '" alt="' . $titre . '" style="max-width: 100%; height: auto;"/></div>';
+        }
+        $xml .= $contenu;
+        $xml .= ']]></content:encoded>' . "\n";
+        
+        if ($post->image_url) {
+            $xml .= '            <enclosure url="' . url($post->image_url) . '" length="0" type="image/jpeg" />' . "\n";
+            $xml .= '            <media:content url="' . url($post->image_url) . '" medium="image" />' . "\n";
+            $xml .= '            <media:thumbnail url="' . url($post->image_url) . '" />' . "\n";
+        }
+        
+        $xml .= '        </item>' . "\n";
+    }
+
+    $xml .= '    </channel>' . "\n";
+    $xml .= '</rss>';
+
+    return response($xml, 200, [
+        'Content-Type' => 'application/xml; charset=utf-8',
+    ]);
+}
 } // Fin de la classe

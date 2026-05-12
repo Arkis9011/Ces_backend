@@ -41,7 +41,7 @@ Route::get('/agenda/{id}', [PublicController::class, 'showAgenda'])->name('agend
 Route::get('/president', [PublicController::class, 'president'])->name('president');
 Route::get('/mediatheque', [PublicController::class, 'mediatheque'])->name('mediatheque');
 Route::get('/recherche', [PublicController::class, 'recherche'])->name('recherche');
-
+Route::get('/feed', [PublicController::class, 'rssFeed'])->name('feed');
 
 /**
  * ROUTES API PUBLIQUES

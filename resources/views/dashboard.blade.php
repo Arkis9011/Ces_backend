@@ -326,6 +326,7 @@
                     <option value="Communiqué">Communiqué</option>
                     <option value="Partenariat">Partenariat</option>
                     <option value="Séance académique">Séance académique</option>
+                    <option value="Atelier">Atelier</option>
                     <option value="Forum">Forum</option>
                     <option value="autre">autre</option>
                 </select>
@@ -757,9 +758,10 @@
                              <select name="categorie" class="form-select">
                                 <option value="Séance plénière" ${item.categorie == 'Séance plénière' ? 'selected' : ''}>Séance plénière</option>
                                 <option value="Audience" ${item.categorie == 'Audience' ? 'selected' : ''}>Audience</option>
-                                <option value="Communiqué" ${item.categorie == 'Communiqué' ? 'selected' : ''}>Communiqué</option>
+                                <option value="Communiqué" ${item.categorie == 'Communiqué' ? 'seled cted' : ''}>Communiqué</option>
                                 <option value="Partenariat" ${item.categorie == 'Partenariat' ? 'selected' : ''}>Partenariat</option>
                                 <option value="Séance académique" ${item.categorie == 'Séance académique' ? 'selected' : ''}>Séance académique</option>
+                                <option value="Atelier" ${item.categorie == 'Atelier' ? 'selected' : ''}>Atelier</option>
                                 <option value="Forum" ${item.categorie == 'Forum' ? 'selected' : ''}>Forum</option>
                                 <option value="autre" ${item.categorie == 'autre' ? 'selected' : ''}>autre</option>
                             </select>
