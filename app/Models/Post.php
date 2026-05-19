@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    // On autorise l'écriture sur ces colonnes (Mass Assignment)
     protected $fillable = [
         'titre',
         'slug',
@@ -14,14 +13,19 @@ class Post extends Model
         'categorie',
         'resume',
         'contenu',
-        // Colonnes d'images supplémentaires
+        // Images (1 à 6)
         'image_url',
         'image_url_2',
         'image_url_3',
         'image_url_4',
-        // Zones de texte supplémentaires
+        'image_url_5',
+        'image_url_6',
+        // Sections (1 à 6)
         'section_1',
         'section_2',
         'section_3',
+        'section_4',
+        'section_5',
+        'section_6',
     ];
 }

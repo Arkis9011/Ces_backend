@@ -47,7 +47,7 @@
         <!-- Menu simple dropdown -->
         <li class="site-nav-item has-dropdown">
           <a href="{{ url('avis') }}" class="site-nav-link {{ Request::is('avis*') || Request::is('publications*') ? 'active' : '' }}" aria-expanded="false" aria-haspopup="true">
-            Travaux & Avis <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            Avis & Documents <i class="fas fa-chevron-down" aria-hidden="true"></i>
           </a>
           <ul class="site-dropdown" role="region" aria-label="Sous-menu Travaux">
             <li><a href="{{ url('avis') }}"><i class="fas fa-balance-scale" aria-hidden="true"></i> Nos Avis</a></li>

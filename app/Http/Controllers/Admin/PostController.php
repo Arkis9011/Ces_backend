@@ -12,8 +12,7 @@ use Exception;
 class PostController extends Controller
 {
     /**
-     * Méthode privée pour l'upload vers ImageKit
-     * INDISPENSABLE sur Laragon pour éviter le rejet SSL
+     * Upload vers ImageKit (compatible Laragon SSL)
      */
     private function uploadToImageKit($file, $title, $folder)
     {
@@ -27,8 +26,8 @@ class PostController extends Controller
 
         $response = $http
             ->attach(
-                'file', 
-                file_get_contents($file->getRealPath()), 
+                'file',
+                file_get_contents($file->getRealPath()),
                 Str::slug($title) . '.' . $file->getClientOriginalExtension()
             )
             ->post('https://upload.imagekit.io/api/v1/files/upload', [
@@ -44,11 +43,11 @@ class PostController extends Controller
     }
 
     /**
-     * Affiche le Dashboard avec toutes les données
+     * Dashboard
      */
     public function index(Request $request)
     {
-        $sort = $request->get('sort', 'date_publication'); 
+        $sort = $request->get('sort', 'date_publication');
         $direction = $request->get('direction', 'desc') === 'asc' ? 'asc' : 'desc';
 
         $postSort = in_array($sort, ['titre', 'date_publication', 'created_at']) ? $sort : 'date_publication';
@@ -85,7 +84,7 @@ class PostController extends Controller
     }
 
     /**
-     * Enregistre une actualité
+     * Créer une actualité
      */
     public function store(Request $request)
     {
@@ -99,9 +98,14 @@ class PostController extends Controller
             'image_url_2'      => 'nullable|image|max:2048',
             'image_url_3'      => 'nullable|image|max:2048',
             'image_url_4'      => 'nullable|image|max:2048',
+            'image_url_5'      => 'nullable|image|max:2048',
+            'image_url_6'      => 'nullable|image|max:2048',
             'section_1'        => 'nullable',
             'section_2'        => 'nullable',
             'section_3'        => 'nullable',
+            'section_4'        => 'nullable',
+            'section_5'        => 'nullable',
+            'section_6'        => 'nullable',
         ]);
 
         try {
@@ -115,15 +119,18 @@ class PostController extends Controller
                 'section_1'        => $request->section_1,
                 'section_2'        => $request->section_2,
                 'section_3'        => $request->section_3,
+                'section_4'        => $request->section_4,
+                'section_5'        => $request->section_5,
+                'section_6'        => $request->section_6,
             ];
 
-            // Image principale
+            // Image principale (image_url)
             if ($request->hasFile('image')) {
                 $data['image_url'] = $this->uploadToImageKit($request->file('image'), $request->titre, '/posts/images');
             }
 
-            // Images supplémentaires (2, 3 et 4)
-            for ($i = 2; $i <= 4; $i++) {
+            // Images supplémentaires (2 à 6)
+            for ($i = 2; $i <= 6; $i++) {
                 $key = "image_url_$i";
                 if ($request->hasFile($key)) {
                     $data[$key] = $this->uploadToImageKit($request->file($key), $request->titre . "_$i", '/posts/images');
@@ -158,9 +165,14 @@ class PostController extends Controller
             'image_url_2'      => 'nullable|image|max:2048',
             'image_url_3'      => 'nullable|image|max:2048',
             'image_url_4'      => 'nullable|image|max:2048',
+            'image_url_5'      => 'nullable|image|max:2048',
+            'image_url_6'      => 'nullable|image|max:2048',
             'section_1'        => 'nullable',
             'section_2'        => 'nullable',
             'section_3'        => 'nullable',
+            'section_4'        => 'nullable',
+            'section_5'        => 'nullable',
+            'section_6'        => 'nullable',
         ]);
 
         try {
@@ -173,6 +185,9 @@ class PostController extends Controller
                 'section_1'        => $request->section_1,
                 'section_2'        => $request->section_2,
                 'section_3'        => $request->section_3,
+                'section_4'        => $request->section_4,
+                'section_5'        => $request->section_5,
+                'section_6'        => $request->section_6,
             ];
 
             // Mise à jour image principale
@@ -180,8 +195,8 @@ class PostController extends Controller
                 $data['image_url'] = $this->uploadToImageKit($request->file('image'), $request->titre, '/posts/images');
             }
 
-            // Mise à jour images supplémentaires
-            for ($i = 2; $i <= 4; $i++) {
+            // Mise à jour images supplémentaires (2 à 6)
+            for ($i = 2; $i <= 6; $i++) {
                 $key = "image_url_$i";
                 if ($request->hasFile($key)) {
                     $data[$key] = $this->uploadToImageKit($request->file($key), $request->titre . "_$i", '/posts/images');
@@ -209,7 +224,7 @@ class PostController extends Controller
     }
 
     /**
-     * API - Pour ton site côté visiteur
+     * API - Site visiteur
      */
     public function apiIndex(Request $request)
     {
@@ -224,17 +239,16 @@ class PostController extends Controller
     }
 
     /**
-     * Recherche globale et insensible à la casse pour le Dashboard
+     * Recherche globale Dashboard
      */
     public function adminSearch(Request $request)
     {
         $q = $request->get('q');
         if (!$q || mb_strlen($q, 'UTF-8') < 2) return response()->json([]);
-        
+
         $qL = mb_strtolower($q, 'UTF-8');
         $results = [];
 
-        // Posts
         $posts = \App\Models\Post::whereRaw('LOWER(titre) LIKE ?', ["%$qL%"])
             ->orWhereRaw('LOWER(resume) LIKE ?', ["%$qL%"])
             ->orWhereRaw('LOWER(contenu) LIKE ?', ["%$qL%"])
@@ -243,7 +257,6 @@ class PostController extends Controller
             $results[] = ['id' => $item->id, 'title' => $item->titre, 'type' => 'post', 'label' => 'Actualité'];
         }
 
-        // Avis
         $avis = \App\Models\Avis::whereRaw('LOWER(titre) LIKE ?', ["%$qL%"])
             ->orWhereRaw('LOWER(resume) LIKE ?', ["%$qL%"])
             ->orWhereRaw('LOWER(commission) LIKE ?', ["%$qL%"])
@@ -252,7 +265,6 @@ class PostController extends Controller
             $results[] = ['id' => $item->id, 'title' => $item->titre, 'type' => 'avi', 'label' => 'Avis'];
         }
 
-        // Agenda
         $agendas = \App\Models\Agenda::whereRaw('LOWER(title) LIKE ?', ["%$qL%"])
             ->orWhereRaw('LOWER(summary) LIKE ?', ["%$qL%"])
             ->orWhereRaw('LOWER(lieu) LIKE ?', ["%$qL%"])
@@ -261,7 +273,6 @@ class PostController extends Controller
             $results[] = ['id' => $item->id, 'title' => $item->title, 'type' => 'agenda', 'label' => 'Événement'];
         }
 
-        // Video
         $videos = \App\Models\Video::whereRaw('LOWER(title) LIKE ?', ["%$qL%"])
             ->orWhereRaw('LOWER(description) LIKE ?', ["%$qL%"])
             ->latest()->take(6)->get();
@@ -269,7 +280,6 @@ class PostController extends Controller
             $results[] = ['id' => $item->id, 'title' => $item->title, 'type' => 'video', 'label' => 'Vidéo'];
         }
 
-        // Allocution
         $allocutions = \App\Models\Allocution::whereRaw('LOWER(titre) LIKE ?', ["%$qL%"])
             ->latest()->take(6)->get();
         foreach ($allocutions as $item) {

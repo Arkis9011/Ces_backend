@@ -35,10 +35,10 @@
                     </div>
                 </div>
                 <div class="filter-group">
-                    <label for="commission">Commission</label>
+                    <label for="commission">Document</label>
                     <select name="commission" id="commission" class="filter-control">
-                        <option value="all">Toutes les commissions</option>
-                        @foreach(['ECOFIN', 'CERNAT', 'SASC', 'CEFE', 'CIAT', 'REX', 'AGRIDEV', 'AD HOC','Communiqué','Note technique','Autre Document'] as $comm)
+                        <option value="all">Tous les documents</option>
+                        @foreach(['ECOFIN', 'CERNAT', 'SASC', 'CEFE', 'CIAT', 'REX', 'AGRIDEV', 'AD HOC','Communiqué','Discours ','Autre Document'] as $comm)
                             <option value="{{ $comm }}" {{ request('commission') == $comm ? 'selected' : '' }}>{{ $comm }}</option>
                         @endforeach
                     </select>
@@ -71,11 +71,11 @@
         <div class="sidebar-box p-4 bg-white shadow-sm rounded-4 mb-4">
           <h4 class="h5 fw-bold mb-4 border-bottom pb-2"><i class="fas fa-filter text-primary me-2"></i>Rôle consultatif</h4>
           <p class="small text-muted">Les avis du CES sont le fruit de délibérations rigoureuses au sein des commissions spécialisées, visant à éclairer les décisions publiques.</p>
-          <ul class="list-unstyled mt-3">
+          <!-- <ul class="list-unstyled mt-3">
             <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Études d'impact</li>
             <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Rapports annuels</li>
             <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Recommandations stratégiques</li>
-          </ul>
+          </ul> -->
         </div>
         
         <div class="sidebar-highlight p-4 text-white rounded-4 shadow-lg" style="background: linear-gradient(135deg, var(--bleu), #003366);">

@@ -34,9 +34,29 @@
             
             <div class="s-tag mt-5">Historique</div>
             <h2 class="s-title">Historique du <span>CES</span></h2>
-            <p>La volonté politique de créer le CES en République Démocratique du Congo (RDC) remonte à quelques années seulement après l'accession du pays à l'indépendance. La première tentative formelle en ce sens date en effet de l'année 1964 avec la Constitution du 1er août 1964, dite "Constitution de Luluabourg", qui avait prévu, en ses articles 131 à 135, la mise en place des conseils économiques et sociaux au niveau national et dans les provinces.</p>
-            <p>Plus tard, il y a eu l'Ordonnance n° 89-029 du 26 janvier 1989 portant création d'un Conseil Consultatif Permanent pour le Développement (CCPD) et puis le Décret n° 008/01 du 23 février 2001 portant création et organisation du cadre Permanent de Concertation Économique, en sigle CPCE.</p>
-            <p>Depuis lors, il a fallu attendre l'année 2006 pour voir le CES être de nouveau institué par la Constitution du 18 février 2006. Et cette volonté du Constituant a été matérialisée par la promulgation de la Loi organique n°13/027 du 30 octobre 2013 portant organisation et fonctionnement du Conseil Économique et Social.</p>
+            <p>La volonté politique de créer le CES en République Démocratique du Congo (RDC) remonte à quelques années seulement après l'accession du pays à l'indépendance.
+
+La première tentative formelle en ce sens date en effet de l'année 1964 avec la Constitution du 1er août 1964, dite « Constitution de Luluabourg », qui avait prévu, en ses articles 131 à 135, la mise en place des conseils économiques et sociaux au niveau national et dans les provinces. Mais ceux-ci n'avaient malheureusement pas fonctionné suite à l'instabilité politique de l'époque.
+</p>
+
+            <p>
+Plus tard, il y a eu l'Ordonnance n° 89-029 du 26 janvier 1989 portant création d'un Conseil Consultatif Permanent pour le Développement (CCPD et puis le Décret n° 008/01 du 23 février 2001 portant création et organisation du Cadre Permanent de Concertation Economique, en sigle CPCE. Ces structures n'avaient pas non plus produit les résultats escomptés.
+</p>
+                
+            <p>Depuis lors, il a fallu attendre l'année 2006 pour voir le CES être de nouveau institué par la Constitution du 18 février 2006, adoptée par référendum, en ses articles 208 à 210. Et cette volonté du Constituant a été matérialisée par la promulgation de la Loi organique n'13/027 du 30 octobre 2013 portant organisation et fonctionnement du Conseil Economique et Social.
+
+</p>
+<p>
+  
+Dans sa configuration actuelle, le CES a commencé de fonctionner effectivement par la tenue d'une session inaugurale convoquée le 16 décembre 2014 à la suite de l'Ordonnance n 14/065 du 20 septembre 2014 portant investiture des membres du Conseil Economique et Social.
+
+</p>
+<p>
+  
+L'année 2014 marque le début de la première mandature du CES laquelle a pris fin en décembre 2019, donnant ainsi lieu à l'ouverture de la deuxième mandature qui est consacrée par la publication de l'Ordonnance n° 20/031 du 25 avril 2020 portant investiture des membres du Conseil Economique et Social.
+
+</p>
+                
           </div>
         </div>
 

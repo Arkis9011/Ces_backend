@@ -337,7 +337,7 @@
       <div class="col-md-3">
         <a href="{{ url('commissions') }}" class="commission-card d-block text-center p-4">
           <div class="commission-icon mx-auto mb-3"><i class="fas fa-chart-line"></i></div>
-          <h4 class="h6 fw-semibold">Commission économique et financière</h4>
+          <h4 class="h6 fw-semibold">Commission économique et financière (ECOFIN)</h4>
         </a>
       </div>
 
@@ -345,7 +345,7 @@
       <div class="col-md-3">
         <a href="{{ url('commissions') }}" class="commission-card d-block text-center p-4">
           <div class="commission-icon mx-auto mb-3"><i class="fas fa-tractor"></i></div>
-          <h4 class="h6 fw-semibold">Agriculture et développement rural</h4>
+          <h4 class="h6 fw-semibold">Agriculture et Développement Rural (AGRIDEV)</h4>
         </a>
       </div>
 
@@ -353,7 +353,7 @@
       <div class="col-md-3">
         <a href="{{ url('commissions') }}" class="commission-card d-block text-center p-4">
           <div class="commission-icon mx-auto mb-3"><i class="fas fa-heart-pulse"></i></div>
-          <h4 class="h6 fw-semibold">Santé, affaires sociales et culturelles</h4>
+          <h4 class="h6 fw-semibold">Santé, Affaires sociales et Culturelles (SASC)</h4>
         </a>
       </div>
 
@@ -361,7 +361,7 @@
       <div class="col-md-3">
         <a href="{{ url('commissions') }}" class="commission-card d-block text-center p-4">
           <div class="commission-icon mx-auto mb-3"><i class="fas fa-scale-balanced"></i></div>
-          <h4 class="h6 fw-semibold">Relations extérieures, intégrations, questions juridiques et administratives</h4>
+          <h4 class="h6 fw-semibold">Relations Extérieures et Integrations (Nationales et Régionales), Questions juridiques et administratives (REX)</h4>
         </a>
       </div>
 
@@ -369,7 +369,7 @@
       <div class="col-md-3">
         <a href="{{ url('commissions') }}" class="commission-card d-block text-center p-4">
           <div class="commission-icon mx-auto mb-3"><i class="fas fa-leaf"></i></div>
-          <h4 class="h6 fw-semibold">Environnement et ressources naturelles</h4>
+          <h4 class="h6 fw-semibold">Environment, Ressources Naturelles et Tourisme (CERNAT)</h4>
         </a>
       </div>
 
@@ -377,7 +377,7 @@
       <div class="col-md-3">
         <a href="{{ url('commissions') }}" class="commission-card d-block text-center p-4">
           <div class="commission-icon mx-auto mb-3"><i class="fas fa-road"></i></div>
-          <h4 class="h6 fw-semibold">Infrastructures et aménagement du territoire</h4>
+          <h4 class="h6 fw-semibold">Infrastructures et Aménagement du Territoire (CIAT)</h4>
         </a>
       </div>
 
@@ -385,7 +385,7 @@
       <div class="col-md-3">
         <a href="{{ url('commissions') }}" class="commission-card d-block text-center p-4">
           <div class="commission-icon mx-auto mb-3"><i class="fas fa-graduation-cap"></i></div>
-          <h4 class="h6 fw-semibold">Éducation, Formation et Emploi</h4>
+          <h4 class="h6 fw-semibold">Education, Formation, Travail et Emploi (CEFE)</h4>
         </a>
       </div>
 
@@ -494,16 +494,16 @@
       </div>
       <div class="row g-3">
         <div class="col-md col-6">
-          <a href="https://presidence.cd/" class="inst-item d-block p-3 text-center fw-semibold"><i class="fas fa-star me-1"></i> Présidence</a>
+          <a href="https://presidence.cd/" class="inst-item d-block p-3 text-center fw-semibold"><i class="fas fa-star me-1"></i> Le Président de la République</a>
         </div>
         <div class="col-md col-6">
-          <a href="https://www.senat.cd/" class="inst-item d-block p-3 text-center fw-semibold"><i class="fas fa-landmark me-1"></i> Sénat</a>
+          <a href="https://www.senat.cd/" class="inst-item d-block p-3 text-center fw-semibold"><i class="fas fa-landmark me-1"></i> Le Sénat</a>
         </div>
         <div class="col-md col-6">
-          <a href="https://assembleenationale.cd/" class="inst-item d-block p-3 text-center fw-semibold"><i class="fas fa-building-columns me-1"></i> Assemblée Nationale</a>
+          <a href="https://assembleenationale.cd/" class="inst-item d-block p-3 text-center fw-semibold"><i class="fas fa-building-columns me-1"></i> L'Assemblée Nationale</a>
         </div>
         <div class="col-md col-6">
-          <a href="https://www.primature.gouv.cd/" class="inst-item d-block p-3 text-center fw-semibold"><i class="fas fa-flag me-1"></i> Primature</a>
+          <a href="https://www.primature.gouv.cd/" class="inst-item d-block p-3 text-center fw-semibold"><i class="fas fa-flag me-1"></i> Le Gouvernement</a>
         </div>
       </div>
     </div>

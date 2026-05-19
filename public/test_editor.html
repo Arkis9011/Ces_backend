@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+</head>
+<body>
+    <div id="container"></div>
+    <script>
+        const content = "<p>Hello <b>World</b></p>";
+        document.getElementById('container').innerHTML = `<textarea id="editor">${content}</textarea>`;
+        ClassicEditor.create(document.getElementById('editor'));
+    </script>
+</body>
+</html>

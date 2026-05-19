@@ -24,8 +24,10 @@
     <div class="row justify-content-center">
       <div class="col-lg-10">
         <div class="prose">
+          {{-- Image principale --}}
           <img src="{{ $actualite->image_url ?? 'https://via.placeholder.com/1200x600?text=CES+RDC' }}" alt="{{ $actualite->titre }}" class="w-100 mb-4 rounded shadow-sm img-contain" style="max-height:600px;">
           
+          {{-- Métadonnées --}}
           <div class="d-flex align-items-center mb-4 gap-4 text-muted small border-bottom pb-3">
               <span><i class="far fa-calendar-alt text-primary"></i> {{ \Carbon\Carbon::parse($actualite->date_publication ?? $actualite->created_at)->translatedFormat('d F Y') }}</span>
               @if($actualite->categorie) 
@@ -33,50 +35,90 @@
               @endif
           </div>
 
+          {{-- Contenu principal --}}
           <div class="texte_justifie mb-5" style="font-size: 1.1rem; line-height: 1.8; color: #333;">
               {!! $actualite->contenu !!}
           </div>
 
+          {{-- Section 1 --}}
           @if($actualite->section_1)
               <div class="texte_justifie mb-4">
                   {!! $actualite->section_1 !!}
               </div>
           @endif
 
-          @if($actualite->image_url_2 || $actualite->image_url_3)
-              <div class="row g-4 mb-4">
-                  @if($actualite->image_url_2)
-                      <div class="">
-                        <img src="{{ $actualite->image_url_2 }}" class="img-fluid rounded shadow-sm w-100" alt="Illustration additionnelle">
-                      </div>
-                  @endif
-                  @if($actualite->image_url_3)
-                      <div class="">
-                        <img src="{{ $actualite->image_url_3 }}" class="img-fluid rounded shadow-sm w-100" alt="Illustration additionnelle">
-                      </div>
-                  @endif
+          {{-- Image 2 --}}
+          @if($actualite->image_url_2)
+              <div class="mb-4">
+                  <img src="{{ $actualite->image_url_2 }}" class="img-fluid rounded shadow-sm w-100 img-contain" style="max-height: 500px;" alt="Illustration 2">
               </div>
           @endif
 
+          {{-- Section 2 --}}
           @if($actualite->section_2)
               <div class="texte_justifie mb-4">
                   {!! $actualite->section_2 !!}
               </div>
           @endif
 
-          @if($actualite->image_url_4)
-              <div class="mb-4 text-center">
-                  <img src="{{ $actualite->image_url_4 }}" class="img-fluid rounded shadow-sm w-100 img-contain" style="max-height: 500px;" alt="Illustration finale">
+          {{-- Image 3 --}}
+          @if($actualite->image_url_3)
+              <div class="mb-4">
+                  <img src="{{ $actualite->image_url_3 }}" class="img-fluid rounded shadow-sm w-100 img-contain" style="max-height: 500px;" alt="Illustration 3">
               </div>
           @endif
 
+          {{-- Section 3 --}}
           @if($actualite->section_3)
-              <div class="texte_justifie mb-5">
+              <div class="texte_justifie mb-4">
                   {!! $actualite->section_3 !!}
+              </div>
+          @endif
+
+          {{-- Image 4 --}}
+          @if($actualite->image_url_4)
+              <div class="mb-4">
+                  <img src="{{ $actualite->image_url_4 }}" class="img-fluid rounded shadow-sm w-100 img-contain" style="max-height: 500px;" alt="Illustration 4">
+              </div>
+          @endif
+
+          {{-- Section 4 --}}
+          @if($actualite->section_4)
+              <div class="texte_justifie mb-4">
+                  {!! $actualite->section_4 !!}
+              </div>
+          @endif
+
+          {{-- Image 5 --}}
+          @if($actualite->image_url_5)
+              <div class="mb-4">
+                  <img src="{{ $actualite->image_url_5 }}" class="img-fluid rounded shadow-sm w-100 img-contain" style="max-height: 500px;" alt="Illustration 5">
+              </div>
+          @endif
+
+          {{-- Section 5 --}}
+          @if($actualite->section_5)
+              <div class="texte_justifie mb-4">
+                  {!! $actualite->section_5 !!}
+              </div>
+          @endif
+
+          {{-- Image 6 --}}
+          @if($actualite->image_url_6)
+              <div class="mb-4">
+                  <img src="{{ $actualite->image_url_6 }}" class="img-fluid rounded shadow-sm w-100 img-contain" style="max-height: 500px;" alt="Illustration 6">
+              </div>
+          @endif
+
+          {{-- Section 6 (conclusion) --}}
+          @if($actualite->section_6)
+              <div class="texte_justifie mb-5">
+                  {!! $actualite->section_6 !!}
               </div>
           @endif
         </div>
 
+        {{-- Bouton retour --}}
         <div class="mt-5 pt-4 border-top">
           <a href="{{ url('actualites') }}" class="btn btn-outline-primary px-4"><i class="fas fa-arrow-left me-2"></i> Retour aux actualités</a>
         </div>
@@ -93,7 +135,6 @@
             @foreach($suggestions as $item)
                 <div class="col-md-4">
                     <div class="card h-100 border-0 shadow-sm transition-hover">
-                        <!-- Wrapper pour remplissage parfait -->
                         <div style="height: 200px; overflow: hidden; background: #f0f0f0;">
                             @if($item->image_url)
                                 <img src="{{ $item->image_url }}" class="w-100 h-100 img-cover" alt="{{ $item->titre }}">
